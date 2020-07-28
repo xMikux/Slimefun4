@@ -19,7 +19,7 @@ public final class LoreBuilder {
     }
 
     public static String machine(MachineTier tier, MachineType type) {
-        return tier + "" + type;
+        return tier + " " + type;
     }
 
     public static String speed(float speed) {
