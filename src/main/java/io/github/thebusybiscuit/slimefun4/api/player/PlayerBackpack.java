@@ -72,7 +72,7 @@ public class PlayerBackpack {
         cfg.setValue("backpacks." + id + ".size", size);
         markDirty();
 
-        inventory = Bukkit.createInventory(null, size, "Backpack [" + size + " Slots]");
+        inventory = Bukkit.createInventory(null, size, "背包 [" + size + "格]");
     }
 
     /**

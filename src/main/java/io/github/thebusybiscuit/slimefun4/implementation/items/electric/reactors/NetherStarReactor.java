@@ -33,7 +33,7 @@ public abstract class NetherStarReactor extends Reactor {
 
     @Override
     public String getInventoryTitle() {
-        return "Nether Star Reactor";
+        return "地獄之星反應堆";
     }
 
     @Override

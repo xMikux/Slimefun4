@@ -27,7 +27,7 @@ public abstract class AutoAnvil extends AContainer {
 
     @Override
     public String getInventoryTitle() {
-        return "Auto-Anvil";
+        return "自動鐵砧";
     }
 
     @Override

@@ -43,7 +43,7 @@ public abstract class ElectricGoldPan extends AContainer implements RecipeDispla
 
     @Override
     public String getInventoryTitle() {
-        return "&6Electric Gold Pan";
+        return "&6電動掏金機";
     }
 
     @Override

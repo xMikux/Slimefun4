@@ -27,7 +27,7 @@ public abstract class ElectricOreGrinder extends AContainer implements RecipeDis
 
     @Override
     public String getInventoryTitle() {
-        return "&bElectric Ore Grinder";
+        return "&b電動粉碎機";
     }
 
 }

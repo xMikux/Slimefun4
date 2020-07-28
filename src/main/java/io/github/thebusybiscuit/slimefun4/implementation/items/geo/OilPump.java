@@ -83,7 +83,7 @@ public abstract class OilPump extends AContainer implements RecipeDisplayItem {
 
     @Override
     public String getInventoryTitle() {
-        return "&4Oil Pump";
+        return "&4石油泵";
     }
 
     @Override

@@ -22,7 +22,7 @@ public class ChargingBench extends AContainer {
 
     @Override
     public String getInventoryTitle() {
-        return "&3Charging Bench";
+        return "&3充電台";
     }
 
     @Override

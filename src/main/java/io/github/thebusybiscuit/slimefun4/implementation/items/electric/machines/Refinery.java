@@ -23,7 +23,7 @@ public abstract class Refinery extends AContainer implements RecipeDisplayItem {
 
     @Override
     public String getInventoryTitle() {
-        return "&cRefinery";
+        return "&c煉油廠";
     }
 
     @Override

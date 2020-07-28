@@ -2,9 +2,9 @@ package io.github.thebusybiscuit.slimefun4.core.attributes;
 
 public enum MachineType {
 
-    CAPACITOR("Capacitor"), 
-    GENERATOR("Generator"), 
-    MACHINE("Machine");
+    CAPACITOR("電容"),
+    GENERATOR("發電機"),
+    MACHINE("機器");
 
     private final String suffix;
 

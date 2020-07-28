@@ -6,11 +6,11 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.Radioactivity;
 
 public final class LoreBuilder {
 
-    public static final String HAZMAT_SUIT_REQUIRED = "&8\u21E8 &4Hazmat Suit required!";
+    public static final String HAZMAT_SUIT_REQUIRED = "&8\u21E8 &4需要穿上防護套裝!";
 
-    public static final String RIGHT_CLICK_TO_USE = "&eRight Click&7 to use";
-    public static final String RIGHT_CLICK_TO_OPEN = "&eRight Click&7 to open";
-    public static final String CROUCH_TO_USE = "&eCrouch&7 to use";
+    public static final String RIGHT_CLICK_TO_USE = "&e右鍵點擊&7 使用";
+    public static final String RIGHT_CLICK_TO_OPEN = "&e右鍵點擊&7 打開";
+    public static final String CROUCH_TO_USE = "&e蹲下&7 使用";
 
     private LoreBuilder() {}
 
@@ -19,15 +19,15 @@ public final class LoreBuilder {
     }
 
     public static String machine(MachineTier tier, MachineType type) {
-        return tier + " " + type;
+        return tier + "" + type;
     }
 
     public static String speed(float speed) {
-        return "&8\u21E8 &b\u26A1 &7Speed: &b" + speed + 'x';
+        return "&8\u21E8 &b\u26A1 &7速度: &b" + speed + 'x';
     }
 
     public static String powerBuffer(int power) {
-        return power(power, " Buffer");
+        return power(power, " 緩衝");
     }
 
     public static String powerPerSecond(int power) {
@@ -43,7 +43,7 @@ public final class LoreBuilder {
     }
 
     public static String material(String material) {
-        return "&8\u21E8 &7Material: &b" + material;
+        return "&8\u21E8 &7材料: &b" + material;
     }
 
 }
