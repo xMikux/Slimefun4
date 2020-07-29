@@ -4,6 +4,7 @@ Looking for English Version? [**Click here!**](#download-slimefun-4-original)
 
 下載此翻譯版? [**點此**]()
 
+**此插件還正在翻譯中!**
 此為業餘翻譯,有甚麼錯誤的歡迎糾正。 <br>
 以及貢獻者們都是第一次接觸Git與Github,所以有可能會出現一些錯誤的操作
 
