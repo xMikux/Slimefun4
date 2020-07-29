@@ -1,4 +1,4 @@
-# Slimefun 4
+# 黏液科技4
 Looking for the download link? [**Click here**](https://github.com/TheBusyBiscuit/Slimefun4/blob/master/README.md#download-slimefun-4)
 
 Slimefun is a plugin which aims to turn your Spigot Server into a modpack without ever installing a single mod. It offers everything you could possibly imagine. From Backpacks to Jetpacks! Slimefun lets every player decide on their own how much they want to dive into Magic or Tech.<br>
