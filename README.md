@@ -56,54 +56,6 @@ Looking for English Version? [**Click here!**](#download-slimefun-4-original)
 | ![](https://raw.githubusercontent.com/Slimefun/Slimefun-Wiki/master/images/showcase4.png) | ![](https://raw.githubusercontent.com/Slimefun/Slimefun-Wiki/master/images/showcase3.png) | ![](https://raw.githubusercontent.com/Slimefun/Slimefun-Wiki/master/images/showcase2.png) |
 | *截圖提供者 GalaxyKat11#3816* | *截圖提供者 TamThan#7987* | *截圖提供者 Kilaruna#4981* |
 
-
-## Contributing to this project
-Slimefun 4 is an Open-Source project and licensed under
-[GNU GPLv3](https://github.com/TheBusyBiscuit/Slimefun4/blob/master/LICENSE).<br>
-Over 100 people have already contributed to this amazing project. You guys are awesome.<br>
-Please consider helping us maintain this project too, your engagement keeps the project alive <3.
-
-### Translations
-Slimefun4 has recently added suport for translations, note that translations are still _work in progress_.<br>
-So not everything may be available for translation yet.<br>
-[Read more...](https://github.com/TheBusyBiscuit/Slimefun4/wiki/Translating-Slimefun)
-
-### Pull requests
-This is an open-source community project, so **your contributions keep this plugin alive!**<br>
-Pull Requests can be fixes, changes or even additions, but please keep in mind that if you add too much content to Slimefun 4, you should maybe consider making an Addon for it instead ([Developer Guide](https://github.com/TheBusyBiscuit/Slimefun4/wiki/Developer-Guide)).
-
-#### Compiling
-Slimefun is written in Java and uses [Maven](https://maven.apache.org/) for compilation.<br>
-To compile Slimefun yourself, follow these steps:
-
-1. Clone the project via git<br>
-`$ git clone https://github.com/TheBusyBiscuit/Slimefun4/`
-2. Compile the project using Maven<br>
-`$ mvn clean package`
-
-If you are already using an IDE, make sure to import the project via git and set it as a *Maven project*. Then you should be able build it via Maven using the goals `clean package`.
-
-If you have any further questions, then please join our [Discord Support Server](#discord) and ask your questions in the `#programming-help` channel. Note that we will not accept any bug reports from custom-compiled versions of Slimefun.
-
-### Code Quality
-Slimefun uses [Sonarcloud.io](https://sonarcloud.io/dashboard?id=TheBusyBiscuit_Slimefun4) to monitor Code Quality.
-
-| [Overall Maintainability](https://sonarcloud.io/documentation/user-guide/metric-definitions/#maintainability) | "Code Smells" | "Technical Debt" | Test Coverage |
-| ---- | ---- | ---- | ---- |
-| [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=TheBusyBiscuit_Slimefun4&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=TheBusyBiscuit_Slimefun4) | [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=TheBusyBiscuit_Slimefun4&metric=code_smells)](https://sonarcloud.io/dashboard?id=TheBusyBiscuit_Slimefun4) | [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=TheBusyBiscuit_Slimefun4&metric=sqale_index)](https://sonarcloud.io/dashboard?id=TheBusyBiscuit_Slimefun4) | [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=TheBusyBiscuit_Slimefun4&metric=coverage)](https://sonarcloud.io/dashboard?id=TheBusyBiscuit_Slimefun4) |
-
-##### "Code Smells"
-Code Smells are portions of the source code that are confusing, lack documentation or are just done very badly in general. These code smells should be held to a bare minimum.
-
-_Please contact us on [Discord](#discord) before working on any code smells. Some design patterns may not be changed abruptly because an addon might depend on them._
-
-##### "Technical Debt"
-Technical Debt is basically an estimate for how long it would take to fix all issues and code smells.
-
-##### Test Coverage
-Slimefun now also uses Automated Tests to determine whether an update could break something. The coverage shows how much these tests cover. Higher coverage means less breaking changes and as a result also better and more reliable builds.
-Due to this being a very huge project though, getting to `100% coverage` is probably close to impossible. But increasing that number even slightly still helps. So feel free to write Unit Tests for Slimefun and place them in the [/src/test/java/](https://github.com/TheBusyBiscuit/Slimefun4/tree/master/src/test/java) folder.
-
 ## 免責聲明
 Slimefun4 使用各種系統來收集使用情況資訊或自動下載更新有關該專案的最新消息.我們不會從您那裡收集任何個人系尋,但有一些服務可能會收集或下載某種形式的資訊. <br>
 
