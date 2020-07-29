@@ -51,7 +51,7 @@ public class CargoOutputNode extends AbstractCargoNode {
 
     @Override
     protected void updateBlockMenu(BlockMenu menu, Block b) {
-        menu.replaceExistingItem(12, new CustomItem(SlimefunUtils.getCustomHead("f2599bd986659b8ce2c4988525c94e19ddd39fad08a38284a197f1b70675acc"), "&bChannel", "", "&e> Click to decrease the Channel ID by 1"));
+        menu.replaceExistingItem(12, new CustomItem(SlimefunUtils.getCustomHead("f2599bd986659b8ce2c4988525c94e19ddd39fad08a38284a197f1b70675acc"), "&b頻道", "", "&e> 點擊以減少1個頻道ID"));
         menu.addMenuClickHandler(12, (p, slot, item, action) -> {
             int channel = Integer.parseInt(BlockStorage.getLocationInfo(b.getLocation(), FREQUENCY)) - 1;
 
@@ -68,15 +68,15 @@ public class CargoOutputNode extends AbstractCargoNode {
         int channel = ((!BlockStorage.hasBlockInfo(b) || BlockStorage.getLocationInfo(b.getLocation(), FREQUENCY) == null) ? 0 : (Integer.parseInt(BlockStorage.getLocationInfo(b.getLocation(), FREQUENCY))));
 
         if (channel == 16) {
-            menu.replaceExistingItem(13, new CustomItem(SlimefunUtils.getCustomHead("7a44ff3a5f49c69cab676bad8d98a063fa78cfa61916fdef3e267557fec18283"), "&bChannel ID: &3" + (channel + 1)));
+            menu.replaceExistingItem(13, new CustomItem(SlimefunUtils.getCustomHead("7a44ff3a5f49c69cab676bad8d98a063fa78cfa61916fdef3e267557fec18283"), "&b頻道 ID: &3" + (channel + 1)));
             menu.addMenuClickHandler(13, ChestMenuUtils.getEmptyClickHandler());
         }
         else {
-            menu.replaceExistingItem(13, new CustomItem(MaterialCollections.getAllWoolColors().get(channel), "&bChannel ID: &3" + (channel + 1)));
+            menu.replaceExistingItem(13, new CustomItem(MaterialCollections.getAllWoolColors().get(channel), "&b頻道 ID: &3" + (channel + 1)));
             menu.addMenuClickHandler(13, ChestMenuUtils.getEmptyClickHandler());
         }
 
-        menu.replaceExistingItem(14, new CustomItem(SlimefunUtils.getCustomHead("c2f910c47da042e4aa28af6cc81cf48ac6caf37dab35f88db993accb9dfe516"), "&bChannel", "", "&e> Click to increase the Channel ID by 1"));
+        menu.replaceExistingItem(14, new CustomItem(SlimefunUtils.getCustomHead("c2f910c47da042e4aa28af6cc81cf48ac6caf37dab35f88db993accb9dfe516"), "&b頻道", "", "&e> 點擊以增加1個頻道ID"));
         menu.addMenuClickHandler(14, (p, slot, item, action) -> {
             int channeln = Integer.parseInt(BlockStorage.getLocationInfo(b.getLocation(), FREQUENCY)) + 1;
 
