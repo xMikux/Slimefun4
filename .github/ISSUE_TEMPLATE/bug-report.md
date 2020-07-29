@@ -1,13 +1,13 @@
 ---
-name: Bug Report
-about: Report a Bug or an Issue with Slimefun 4.
+name: Bug 回報
+about: 回報黏液科技的問題或建議.
 title: ''
-labels: Bug Report
+labels: Bug-Report
 assignees: ''
 
 ---
 
-<!-- FILL IN THE FORM BELOW -->
+<!-- 請填寫以下表格 -->
 
 ## Description (REQUIRED)
 <!-- A clear and detailed description of what went wrong. -->
