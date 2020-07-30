@@ -4,7 +4,7 @@ options:
   # Note: When running a stable build auto-updates ONLY update to other stable builds! Perfect eh?
   # You can download the latest stable build here: https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun4/stable/
 
-  auto-update: true
+  auto-update: false
   backwards-compatibility: true
   chat-prefix: '&a&lSlimefun 4&7> '
   armor-update-interval: 10
