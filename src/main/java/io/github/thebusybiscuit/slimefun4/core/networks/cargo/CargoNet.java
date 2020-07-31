@@ -152,7 +152,7 @@ public class CargoNet extends ChestTerminalNetwork {
             SimpleHologram.update(b, "&c找不到物流節點");
         }
         else {
-            SimpleHologram.update(b, "&7狀態: &a&l線上");
+            SimpleHologram.update(b, "&7狀態: &a&l在線");
 
             // Skip ticking if the threshold is not reached. The delay is not same as minecraft tick,
             // but it's based on 'custom-ticker-delay' config.

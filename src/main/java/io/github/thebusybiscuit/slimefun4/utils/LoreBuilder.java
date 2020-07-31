@@ -64,7 +64,7 @@ public final class LoreBuilder {
     }
 
     public static String hunger(double value) {
-        return "&7&oRestores &b&o" + hungerFormat.format(value) + " &7&oHunger";
+        return "&7&o恢復 &b&o" + hungerFormat.format(value) + " &7&o飽食度";
     }
 
 }

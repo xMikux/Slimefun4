@@ -141,7 +141,7 @@ public abstract class Reactor extends AbstractEnergyProvider {
 
         switch (mode) {
         case GENERATOR:
-            menu.replaceExistingItem(4, new CustomItem(SlimefunItems.NUCLEAR_REACTOR, "&7Focus: &eElectricity", "", "&6Your Reactor will focus on Power Generation", "&6If your Energy Network doesn't need Power", "&6it will not produce any either", "", "&7\u21E8 Click to change the Focus to &eProduction"));
+            menu.replaceExistingItem(4, new CustomItem(SlimefunItems.NUCLEAR_REACTOR, "&7模式: &e發電", "", "&6你的反應堆將專注在發電", "&6如果你的能量網路不需要更多電力", "&6它將停止發電", "", "&7\u21E8 點擊更改到 &e生產 &7模式"));
             menu.addMenuClickHandler(4, (p, slot, item, action) -> {
                 BlockStorage.addBlockInfo(b, MODE, ReactorMode.PRODUCTION.toString());
                 updateInventory(menu, b);
@@ -149,7 +149,7 @@ public abstract class Reactor extends AbstractEnergyProvider {
             });
             break;
         case PRODUCTION:
-            menu.replaceExistingItem(4, new CustomItem(SlimefunItems.PLUTONIUM, "&7Focus: &eProduction", "", "&6Your Reactor will focus on producing goods", "&6If your Energy Network doesn't need Power", "&6it will continue to run and simply will", "&6not generate any Power in the mean time", "", "&7\u21E8 Click to change the Focus to &ePower Generation"));
+            menu.replaceExistingItem(4, new CustomItem(SlimefunItems.PLUTONIUM, "&7模式: &e生產", "", "&6你的反應堆將專注在生產衰變後的產物", "&6如果你的能量網路不需要更多電力", "&6它將繼續運作並生產", "&6產生多餘電力將直接銷毀", "", "&7\u21E8 點擊更改到 &e發電 &7模式"));
             menu.addMenuClickHandler(4, (p, slot, item, action) -> {
                 BlockStorage.addBlockInfo(b, MODE, ReactorMode.GENERATOR.toString());
                 updateInventory(menu, b);
@@ -163,7 +163,7 @@ public abstract class Reactor extends AbstractEnergyProvider {
         BlockMenu port = getAccessPort(b.getLocation());
 
         if (port != null) {
-            menu.replaceExistingItem(INFO_SLOT, new CustomItem(Material.GREEN_WOOL, "&7Access Port", "", "&6Detected", "", "&7> Click to view Access Port"));
+            menu.replaceExistingItem(INFO_SLOT, new CustomItem(Material.GREEN_WOOL, "&7反應堆端口", "", "&6已檢測到", "", "&7> 點擊查看反應堆端口"));
             menu.addMenuClickHandler(INFO_SLOT, (p, slot, item, action) -> {
                 port.open(p);
                 updateInventory(menu, b);
@@ -172,7 +172,7 @@ public abstract class Reactor extends AbstractEnergyProvider {
             });
         }
         else {
-            menu.replaceExistingItem(INFO_SLOT, new CustomItem(Material.RED_WOOL, "&7Access Port", "", "&cNot detected", "", "&7Access Port must be", "&7placed 3 blocks above", "&7a reactor!"));
+            menu.replaceExistingItem(INFO_SLOT, new CustomItem(Material.RED_WOOL, "&7反應堆端口", "", "&c未檢測到", "", "&7反應堆端口必須放置在反應堆上方的第3格處!"));
             menu.addMenuClickHandler(INFO_SLOT, (p, slot, item, action) -> {
                 updateInventory(menu, b);
                 menu.open(p);
@@ -196,7 +196,7 @@ public abstract class Reactor extends AbstractEnergyProvider {
 
         preset.addItem(22, new CustomItem(new ItemStack(Material.BLACK_STAINED_GLASS_PANE), " "), ChestMenuUtils.getEmptyClickHandler());
 
-        preset.addItem(1, new CustomItem(getFuelIcon(), "&7燃料槽", "", "&r可以放入放射性燃料", "例如: &2鈾&r、&a錼&r、&e地獄之星"), ChestMenuUtils.getEmptyClickHandler());
+        preset.addItem(1, new CustomItem(getFuelIcon(), "&7燃料槽", "", "&r可以放入燃料", "例如: &2鈾&r、&a錼&r、&e地獄之星"), ChestMenuUtils.getEmptyClickHandler());
 
         for (int i : border_2) {
             preset.addItem(i, new CustomItem(new ItemStack(Material.CYAN_STAINED_GLASS_PANE), " "), ChestMenuUtils.getEmptyClickHandler());
@@ -209,7 +209,7 @@ public abstract class Reactor extends AbstractEnergyProvider {
             preset.addItem(7, new CustomItem(new ItemStack(Material.BARRIER), "&b冷卻劑槽", "", "&r可以放入冷卻劑"));
 
             for (int i : border_4) {
-                preset.addItem(i, new CustomItem(new ItemStack(Material.BARRIER), "&cNo Coolant Required"), ChestMenuUtils.getEmptyClickHandler());
+                preset.addItem(i, new CustomItem(new ItemStack(Material.BARRIER), "&c沒有冷卻劑"), ChestMenuUtils.getEmptyClickHandler());
             }
         }
     }
