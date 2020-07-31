@@ -172,7 +172,7 @@ machines:
     cancelled: "&4傳送中止!"
     invulnerability: "&b&l你得到了30秒的無敵!"
     gui:
-      title: 你的標記點
+      title: 你的傳送點
       tooltip: 點擊以傳送
       time: 估計時間
   CARGO_NODES:
@@ -204,9 +204,9 @@ gps:
     added: "&a成功新增傳送點"
     max: "&4傳送點已達上限"
   insufficient-complexity:
-  - "&4GPS信號不足 &c%complexity%"
+  - "&4GPS訊號不足 &c%complexity%"
   - "&4a) GPS基礎設施未放置"
-  - "&4b)GPS信號不足"
+  - "&4b)GPS訊號不足"
   geo:
     scan-required: "&4請先做地質掃描"
 inventory:

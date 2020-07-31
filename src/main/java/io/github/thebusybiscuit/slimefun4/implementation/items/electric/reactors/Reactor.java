@@ -141,7 +141,7 @@ public abstract class Reactor extends AbstractEnergyProvider {
 
         switch (mode) {
         case GENERATOR:
-            menu.replaceExistingItem(4, new CustomItem(SlimefunItems.NUCLEAR_REACTOR, "&7模式: &e發電", "", "&6你的反應堆將專注在發電", "&6如果你的能量網路不需要更多電力", "&6它將停止發電", "", "&7\u21E8 點擊更改到 &e生產 &7模式"));
+            menu.replaceExistingItem(4, new CustomItem(SlimefunItems.NUCLEAR_REACTOR, "&7模式: &e發電", "", "&6你的反應爐將專注在發電", "&6如果你的能量網路不需要更多電力", "&6它將停止發電", "", "&7\u21E8 點擊更改到 &e生產 &7模式"));
             menu.addMenuClickHandler(4, (p, slot, item, action) -> {
                 BlockStorage.addBlockInfo(b, MODE, ReactorMode.PRODUCTION.toString());
                 updateInventory(menu, b);
@@ -149,7 +149,7 @@ public abstract class Reactor extends AbstractEnergyProvider {
             });
             break;
         case PRODUCTION:
-            menu.replaceExistingItem(4, new CustomItem(SlimefunItems.PLUTONIUM, "&7模式: &e生產", "", "&6你的反應堆將專注在生產衰變後的產物", "&6如果你的能量網路不需要更多電力", "&6它將繼續運作並生產", "&6產生多餘電力將直接銷毀", "", "&7\u21E8 點擊更改到 &e發電 &7模式"));
+            menu.replaceExistingItem(4, new CustomItem(SlimefunItems.PLUTONIUM, "&7模式: &e生產", "", "&6你的反應爐將專注在生產衰變後的產物", "&6如果你的能量網路不需要更多電力", "&6它將繼續運作並生產", "&6產生多餘電力將直接銷毀", "", "&7\u21E8 點擊更改到 &e發電 &7模式"));
             menu.addMenuClickHandler(4, (p, slot, item, action) -> {
                 BlockStorage.addBlockInfo(b, MODE, ReactorMode.GENERATOR.toString());
                 updateInventory(menu, b);
@@ -163,7 +163,7 @@ public abstract class Reactor extends AbstractEnergyProvider {
         BlockMenu port = getAccessPort(b.getLocation());
 
         if (port != null) {
-            menu.replaceExistingItem(INFO_SLOT, new CustomItem(Material.GREEN_WOOL, "&7反應堆端口", "", "&6已檢測到", "", "&7> 點擊查看反應堆端口"));
+            menu.replaceExistingItem(INFO_SLOT, new CustomItem(Material.GREEN_WOOL, "&7反應爐端口", "", "&6已檢測到", "", "&7> 點擊查看反應爐端口"));
             menu.addMenuClickHandler(INFO_SLOT, (p, slot, item, action) -> {
                 port.open(p);
                 updateInventory(menu, b);
@@ -172,7 +172,7 @@ public abstract class Reactor extends AbstractEnergyProvider {
             });
         }
         else {
-            menu.replaceExistingItem(INFO_SLOT, new CustomItem(Material.RED_WOOL, "&7反應堆端口", "", "&c未檢測到", "", "&7反應堆端口必須放置在反應堆上方的第3格處!"));
+            menu.replaceExistingItem(INFO_SLOT, new CustomItem(Material.RED_WOOL, "&7反應爐端口", "", "&c未檢測到", "", "&7反應爐端口必須放置在反應爐上方的第3格處!"));
             menu.addMenuClickHandler(INFO_SLOT, (p, slot, item, action) -> {
                 updateInventory(menu, b);
                 menu.open(p);
@@ -203,7 +203,7 @@ public abstract class Reactor extends AbstractEnergyProvider {
         }
 
         if (needsCooling()) {
-            preset.addItem(7, new CustomItem(getCoolant(), "&b冷卻劑槽", "", "&r可以放入冷卻劑", "&4如果沒有冷卻劑", "&4你的反應堆將會爆炸"));
+            preset.addItem(7, new CustomItem(getCoolant(), "&b冷卻劑槽", "", "&r可以放入冷卻劑", "&4如果沒有冷卻劑", "&4你的反應爐將會爆炸"));
         }
         else {
             preset.addItem(7, new CustomItem(new ItemStack(Material.BARRIER), "&b冷卻劑槽", "", "&r可以放入冷卻劑"));

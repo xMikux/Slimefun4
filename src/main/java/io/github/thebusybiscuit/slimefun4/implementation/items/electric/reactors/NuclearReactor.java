@@ -28,7 +28,7 @@ public abstract class NuclearReactor extends Reactor {
 
     @Override
     public String getInventoryTitle() {
-        return "&2核能反應堆";
+        return "&2核能反應爐";
     }
 
     @Override
