@@ -196,7 +196,7 @@ backpack:
   already-open: "&c別人正在使用這個背包!"
   no-stack: "&c背包不能疊!"
 workbench:
-  not-enhanced: "&4科技物品不可在普通合成檯使用"
+  not-enhanced: "&4科技物品不可在普通合成台使用"
 gps:
   deathpoint: "&4死亡點&7%date%"
   waypoint:

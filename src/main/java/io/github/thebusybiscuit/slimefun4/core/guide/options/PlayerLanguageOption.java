@@ -37,7 +37,7 @@ class PlayerLanguageOption implements SlimefunGuideOption<String> {
             Language language = SlimefunPlugin.getLocalization().getLanguage(p);
             String languageName = language.isDefault() ? (SlimefunPlugin.getLocalization().getMessage(p, "languages.default") + ChatColor.DARK_GRAY + " (" + language.getName(p) + ")") : SlimefunPlugin.getLocalization().getMessage(p, "languages." + language.getId());
 
-            return Optional.of(new CustomItem(language.getItem(), "&7" + SlimefunPlugin.getLocalization().getMessage(p, "guide.languages.selected-language") + " &a" + languageName, "", "&7You now have the option to change", "&7the language in which Slimefun", "&7will send you messages.", "&7Note that this only translates", "&7some messages, not items.", "&7&oThis feature is still being worked on", "", "&7\u21E8 &eClick to change your language"));
+            return Optional.of(new CustomItem(language.getItem(), "&7" + SlimefunPlugin.getLocalization().getMessage(p, "guide.languages.selected-language") + " &a" + languageName, "", "&7你可以更改系統訊息的語言", "&7翻譯僅有一部分而不是全部", "&7此功能仍在開發中", "", "&7\u21E8 &e點擊更改語言"));
         }
         else {
             return Optional.empty();

@@ -320,10 +320,10 @@ abstract class ChestTerminalNetwork extends Network {
 
             if (stack.getMaxStackSize() > 1) {
                 int amount = item.getInt() > stack.getMaxStackSize() ? stack.getMaxStackSize() : item.getInt();
-                lore.add(ChatColors.color("&7<左鍵單擊: 拿取 1 | 右鍵單擊: 拿取 " + amount + ">"));
+                lore.add(ChatColors.color("&7<左鍵點擊: 拿取 1 | 右鍵點擊: 拿取 " + amount + ">"));
             }
             else {
-                lore.add(ChatColors.color("&7<左鍵單擊: 拿取 1>"));
+                lore.add(ChatColors.color("&7<左鍵點擊: 拿取 1>"));
             }
 
             lore.add("");

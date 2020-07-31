@@ -39,19 +39,19 @@ public final class SlimefunGuide {
         ItemStack item = new ItemStack(Material.ENCHANTED_BOOK);
         ItemMeta meta = item.getItemMeta();
         List<String> lore = new LinkedList<>();
-        lore.addAll(Arrays.asList("", ChatColors.color("&eRight Click &8\u21E8 &7Browse Items"), ChatColors.color("&eShift + Right Click &8\u21E8 &7Open Settings / Credits")));
+        lore.addAll(Arrays.asList("", ChatColors.color("&e右鍵點擊 &8\u21E8 &7打開指南"), ChatColors.color("&e蹲下+右鍵點擊 &8\u21E8 &7打開設置及資訊")));
 
         switch (design) {
         case BOOK:
-            meta.setDisplayName(ChatColors.color("&aSlimefun Guide &7(Book GUI)"));
+            meta.setDisplayName(ChatColors.color("&aSlimefun指南 &7(書本介面)"));
             break;
         case CHEAT_SHEET:
-            meta.setDisplayName(ChatColors.color("&cSlimefun Guide &4(Cheat Sheet)"));
+            meta.setDisplayName(ChatColors.color("&cSlimefun指南 &4(作弊介面)"));
             lore.add(0, ChatColors.color("&4&lOnly openable by Admins"));
             lore.add(0, "");
             break;
         case CHEST:
-            meta.setDisplayName(ChatColors.color("&aSlimefun Guide &7(Chest GUI)"));
+            meta.setDisplayName(ChatColors.color("&aSlimefun指南 &7(箱子介面)"));
             break;
         default:
             return null;

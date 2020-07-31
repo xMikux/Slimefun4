@@ -178,7 +178,7 @@ public abstract class GEOMiner extends AContainer implements InventoryBlock, Rec
             }
         }
         else if (!BlockStorage.hasChunkInfo(b.getWorld(), b.getX() >> 4, b.getZ() >> 4)) {
-            SimpleHologram.update(b, "&4需要先進行地理掃描!");
+            SimpleHologram.update(b, "&4需要先進行地質掃描!");
         }
         else {
             start(b, inv);
@@ -191,7 +191,7 @@ public abstract class GEOMiner extends AContainer implements InventoryBlock, Rec
                 OptionalInt optional = SlimefunPlugin.getGPSNetwork().getResourceManager().getSupplies(resource, b.getWorld(), b.getX() >> 4, b.getZ() >> 4);
 
                 if (!optional.isPresent()) {
-                    SimpleHologram.update(b, "&4需要先進行地理掃描!");
+                    SimpleHologram.update(b, "&4需要先進行地質掃描!");
                     return;
                 }
 

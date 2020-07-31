@@ -158,7 +158,7 @@ public abstract class AbstractEntityAssembler<T extends Entity> extends SimpleSl
 
         double offset = (!BlockStorage.hasBlockInfo(b) || BlockStorage.getLocationInfo(b.getLocation(), KEY_OFFSET) == null) ? 3.0F : Double.valueOf(BlockStorage.getLocationInfo(b.getLocation(), KEY_OFFSET));
 
-        menu.replaceExistingItem(31, new CustomItem(Material.PISTON, "&7生成位置(上方): &3" + offset + " 格", "", "&f左鍵單擊: &7+0.1", "&f右鍵單擊。: &7-0.1"));
+        menu.replaceExistingItem(31, new CustomItem(Material.PISTON, "&7生成位置(上方): &3" + offset + " 格", "", "&f左鍵點擊: &7+0.1", "&f右鍵點擊。: &7-0.1"));
         menu.addMenuClickHandler(31, (p, slot, item, action) -> {
             double offsetv = DoubleHandler.fixDouble(Double.valueOf(BlockStorage.getLocationInfo(b.getLocation(), KEY_OFFSET)) + (action.isRightClicked() ? -0.1F : 0.1F));
             BlockStorage.addBlockInfo(b, KEY_OFFSET, String.valueOf(offsetv));
