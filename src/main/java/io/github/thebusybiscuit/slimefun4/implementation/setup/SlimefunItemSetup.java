@@ -875,8 +875,8 @@ public final class SlimefunItemSetup {
 		.register(plugin);
 
 		registerArmorSet(categories.armor, SlimefunItems.CHAIN, new ItemStack[] {
-		    new ItemStack(Material.CHAINMAIL_HELMET), new ItemStack(Material.CHAINMAIL_CHESTPLATE), new ItemStack(Material.CHAINMAIL_LEGGINGS), new ItemStack(Material.CHAINMAIL_BOOTS)
-		}, "CHAIN", true, plugin);
+				SlimefunItems.CHAINMAIL_HELMET, SlimefunItems.CHAINMAIL_CHESTPLATE, SlimefunItems.CHAINMAIL_LEGGINGS, SlimefunItems.CHAINMAIL_BOOTS
+		}, "CHAINMAIL", true, plugin);
 
 		new Talisman(SlimefunItems.TALISMAN_WHIRLWIND,
 		new ItemStack[] {SlimefunItems.MAGIC_LUMP_3, null, SlimefunItems.MAGIC_LUMP_3, SlimefunItems.STAFF_WIND, SlimefunItems.TALISMAN_TRAVELLER, SlimefunItems.STAFF_WIND, SlimefunItems.MAGIC_LUMP_3, null, SlimefunItems.MAGIC_LUMP_3}

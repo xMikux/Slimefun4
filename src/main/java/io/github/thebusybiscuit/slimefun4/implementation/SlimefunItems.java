@@ -245,6 +245,11 @@ public final class SlimefunItems {
     public static final SlimefunItemStack DAMASCUS_STEEL_LEGGINGS = new SlimefunItemStack("DAMASCUS_STEEL_LEGGINGS", Material.IRON_LEGGINGS, "&7大馬士革鋼護腿");
     public static final SlimefunItemStack DAMASCUS_STEEL_BOOTS = new SlimefunItemStack("DAMASCUS_STEEL_BOOTS", Material.IRON_BOOTS, "&7大馬士革鋼靴子");
 
+    public static final SlimefunItemStack CHAINMAIL_HELMET = new SlimefunItemStack("CHAINMAIL_HELMET", Material.CHAINMAIL_HELMET, "&f鎖鏈頭盔");
+    public static final SlimefunItemStack CHAINMAIL_CHESTPLATE = new SlimefunItemStack("CHAINMAIL_CHESTPLATE", Material.CHAINMAIL_CHESTPLATE, "&f鎖鏈胸甲");
+    public static final SlimefunItemStack CHAINMAIL_LEGGINGS = new SlimefunItemStack("CHAINMAIL_LEGGINGS", Material.CHAINMAIL_LEGGINGS, "&f鎖鏈護腿");
+    public static final SlimefunItemStack CHAINMAIL_BOOTS = new SlimefunItemStack("CHAINMAIL_BOOTS", Material.CHAINMAIL_BOOTS, "&f鎖鏈靴子");
+
     public static final SlimefunItemStack REINFORCED_ALLOY_HELMET = new SlimefunItemStack("REINFORCED_ALLOY_HELMET", Material.IRON_HELMET, "&b強化合金頭盔");
     public static final SlimefunItemStack REINFORCED_ALLOY_CHESTPLATE = new SlimefunItemStack("REINFORCED_ALLOY_CHESTPLATE", Material.IRON_CHESTPLATE, "&b強化合金胸甲");
     public static final SlimefunItemStack REINFORCED_ALLOY_LEGGINGS = new SlimefunItemStack("REINFORCED_ALLOY_LEGGINGS", Material.IRON_LEGGINGS, "&b強化合金護腿");

@@ -100,7 +100,7 @@ public final class ResearchSetup {
         register("knight_talisman", 71, "Talisman of the Knight", 20, SlimefunItems.TALISMAN_KNIGHT);
         register("gilded_iron", 72, "Shiny Iron", 11, SlimefunItems.GILDED_IRON);
         register("synthetic_emerald", 73, "Fake Gem", 17, SlimefunItems.SYNTHETIC_EMERALD);
-        register("chainmail_armor", 74, "Chainmail Armor", 8, new ItemStack(Material.CHAINMAIL_HELMET), new ItemStack(Material.CHAINMAIL_CHESTPLATE), new ItemStack(Material.CHAINMAIL_LEGGINGS), new ItemStack(Material.CHAINMAIL_BOOTS));
+        register("chainmail_armor", 74, "Chainmail Armor", 8, SlimefunItems.CHAINMAIL_HELMET, SlimefunItems.CHAINMAIL_CHESTPLATE, SlimefunItems.CHAINMAIL_LEGGINGS, SlimefunItems.CHAINMAIL_BOOTS);
         register("whirlwind_talisman", 75, "Talisman of the Whirlwind", 19, SlimefunItems.TALISMAN_WHIRLWIND);
         register("wizard_talisman", 76, "Talisman of the Wizard", 22, SlimefunItems.TALISMAN_WIZARD);
         register("lumber_axe", 77, "Lumber Axe", 21, SlimefunItems.LUMBER_AXE);
