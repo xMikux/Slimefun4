@@ -73,27 +73,27 @@ public final class SlimefunGuideSettings {
             return false;
         });
 
-        menu.addItem(2, new CustomItem(SlimefunUtils.getCustomHead("e952d2b3f351a6b0487cc59db31bf5f2641133e5ba0006b18576e996a0293e52"), "&c" + SlimefunPlugin.getLocalization().getMessage(p, "guide.title.credits"), "", "&7Contributors: &e" + SlimefunPlugin.getGitHubService().getContributors().size(), "", "&7Slimefun is an open-source project", "&7and maintained by a large community of people.", "&7Here you can see who helped shape the project.", "", "&7\u21E8 &eClick to see our contributors"), (pl, slot, action, item) -> {
+        menu.addItem(2, new CustomItem(SlimefunUtils.getCustomHead("e952d2b3f351a6b0487cc59db31bf5f2641133e5ba0006b18576e996a0293e52"), "&c" + SlimefunPlugin.getLocalization().getMessage(p, "guide.title.credits"), "", "&7貢獻者人數: &e" + SlimefunPlugin.getGitHubService().getContributors().size(), "", "&7Slimefun是一個開放原始碼", "&7由一群人負責維護或翻譯", "&7在這裡你可以知道誰負責那些項目", "", "&7\u21E8 &e點擊查看Slimefun的貢獻者"), (pl, slot, action, item) -> {
             ContributorsMenu.open(pl, 0);
             return false;
         });
 
-        menu.addItem(4, new CustomItem(Material.WRITABLE_BOOK, "&aSlimefun Version", "&7&o" + SlimefunPlugin.getLocalization().getMessage(p, "guide.tooltips.versions-notice"), "", "&fMinecraft Version: &a" + Bukkit.getBukkitVersion(), "&fSlimefun Version: &a" + SlimefunPlugin.getVersion(), "&fCS-CoreLib Version: &a" + SlimefunPlugin.getCSCoreLibVersion()), ChestMenuUtils.getEmptyClickHandler());
+        menu.addItem(4, new CustomItem(Material.WRITABLE_BOOK, "&aSlimefun版本資訊", "&7&o" + SlimefunPlugin.getLocalization().getMessage(p, "guide.tooltips.versions-notice"), "", "&fMinecraft版本: &a" + Bukkit.getBukkitVersion(), "&fSlimefun版本: &a" + SlimefunPlugin.getVersion(), "&fCS-CoreLib版本: &a" + SlimefunPlugin.getCSCoreLibVersion()), ChestMenuUtils.getEmptyClickHandler());
 
-        menu.addItem(6, new CustomItem(Material.COMPARATOR, "&e" + SlimefunPlugin.getLocalization().getMessage(p, "guide.title.source"), "", "&7Last Activity: &a" + NumberUtils.getElapsedTime(SlimefunPlugin.getGitHubService().getLastUpdate()) + " ago", "&7Forks: &e" + SlimefunPlugin.getGitHubService().getForks(), "&7Stars: &e" + SlimefunPlugin.getGitHubService().getStars(), "", "&7&oSlimefun 4 is a community project,", "&7&othe source code is available on GitHub", "&7&oand if you want to keep this Plugin alive,", "&7&othen please consider contributing to it", "", "&7\u21E8 &eClick to go to GitHub"));
+        menu.addItem(6, new CustomItem(Material.COMPARATOR, "&e" + SlimefunPlugin.getLocalization().getMessage(p, "guide.title.source"), "", "&7最後修改: &a" + NumberUtils.getElapsedTime(SlimefunPlugin.getGitHubService().getLastUpdate()) + " ago", "&7Forks: &e" + SlimefunPlugin.getGitHubService().getForks(), "&7Stars: &e" + SlimefunPlugin.getGitHubService().getStars(), "", "&7&oSlimefun 4 is a community project,", "&7&othe source code is available on GitHub", "&7&oand if you want to keep this Plugin alive,", "&7&othen please consider contributing to it", "", "&7\u21E8 &eClick to go to GitHub"));
         menu.addMenuClickHandler(6, (pl, slot, item, action) -> {
             pl.closeInventory();
             ChatUtils.sendURL(pl, "https://github.com/TheBusyBiscuit/Slimefun4");
             return false;
         });
 
-        menu.addItem(8, new CustomItem(Material.KNOWLEDGE_BOOK, "&3" + SlimefunPlugin.getLocalization().getMessage(p, "guide.title.wiki"), "", "&7Do you need help with an Item or machine?", "&7You cannot figure out what to do?", "&7Check out our community-maintained Wiki", "&7and become one of our Editors!", "", "&7\u21E8 &eClick to go to the official Slimefun Wiki"), (pl, slot, item, action) -> {
+        menu.addItem(8, new CustomItem(Material.KNOWLEDGE_BOOK, "&3" + SlimefunPlugin.getLocalization().getMessage(p, "guide.title.wiki"), "", "&7你需要有關物品或機器的幫助嗎？", "&7你不知道該怎麼辦？", "&7查看我們由社群維護的Wiki", "&7並成為我們的編輯之一!", "", "&7\u21E8 &e點擊進入官方Slimefun Wiki"), (pl, slot, item, action) -> {
             pl.closeInventory();
             ChatUtils.sendURL(pl, "https://github.com/TheBusyBiscuit/Slimefun4/wiki");
             return false;
         });
 
-        menu.addItem(47, new CustomItem(Material.BOOKSHELF, "&3" + SlimefunPlugin.getLocalization().getMessage(p, "guide.title.addons"), "", "&7Slimefun is huge. But its addons are what makes", "&7this plugin truly shine. Go check them out, some", "&7of them may be exactly what you were missing out on!", "", "&7Installed on this Server: &b" + SlimefunPlugin.getInstalledAddons().size(), "", "&7\u21E8 &eClick to see all available Addons for Slimefun4"), (pl, slot, item, action) -> {
+        menu.addItem(47, new CustomItem(Material.BOOKSHELF, "&3" + SlimefunPlugin.getLocalization().getMessage(p, "guide.title.addons"), "", "&7附加插件才是使Slimefun發揮到極致的方法", "&7去看看吧,其中可能有你錯過的!", "", "&7安裝在伺服器上的數量: &b" + SlimefunPlugin.getInstalledAddons().size(), "", "&7\u21E8 &e點擊查看所有Slimefun4的附加插件"), (pl, slot, item, action) -> {
             pl.closeInventory();
             ChatUtils.sendURL(pl, "https://github.com/TheBusyBiscuit/Slimefun4/wiki/Addons");
             return false;
@@ -110,7 +110,7 @@ public final class SlimefunGuideSettings {
             menu.addItem(49, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
         }
 
-        menu.addItem(51, new CustomItem(Material.TOTEM_OF_UNDYING, "&cSoon", "", "&7Something will be added here later..."), (pl, slot, item, action) -> {
+        menu.addItem(51, new CustomItem(Material.TOTEM_OF_UNDYING, "&c開發中", "", "&7將來會在此處增加一些內容..."), (pl, slot, item, action) -> {
             // Add something here
             return false;
         });
