@@ -75,7 +75,7 @@ Slimefun4 繁體翻譯版使用GitHub API以檢查和下載更新<br>
   
 Slimefun4 使用[bStats](https://bstats.org/plugin/bukkit/Slimefun/4574)來收集關此插件的匿名訊息.<br>
 這僅出於統計目的,因為我們對伺服器/玩家如何使用此插件感到興趣.<br>
-所有可用數據都是匿名和匯總..我們絕對不會看到單個伺服器訊息或玩家訊息.<br>
+所有可用數據都是匿名和匯總,我們絕對不會看到單個伺服器訊息或玩家訊息.<br>
 所有收集的均可公開訪問: https://bstats.org/plugin/bukkit/Slimefun/4574
 
 您可以在此位置關閉統計 `/plugins/bStats/config.yml`.<br>
