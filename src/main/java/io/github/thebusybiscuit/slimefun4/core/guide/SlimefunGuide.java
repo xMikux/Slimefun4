@@ -47,7 +47,7 @@ public final class SlimefunGuide {
             break;
         case CHEAT_SHEET:
             meta.setDisplayName(ChatColors.color("&cSlimefun指南 &4(作弊介面)"));
-            lore.add(0, ChatColors.color("&4&lOnly openable by Admins"));
+            lore.add(0, ChatColors.color("&4&l只能由管理員打開"));
             lore.add(0, "");
             break;
         case CHEST:

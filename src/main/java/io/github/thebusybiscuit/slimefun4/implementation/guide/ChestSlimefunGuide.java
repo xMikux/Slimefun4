@@ -72,7 +72,7 @@ public class ChestSlimefunGuide implements SlimefunGuideImplementation {
 
     @Override
     public ItemStack getItem() {
-        return new CustomItem(new ItemStack(Material.ENCHANTED_BOOK), "&aSlimefun Guide &7(Chest GUI)", "", "&eRight Click &8\u21E8 &7Browse Items", "&eShift + Right Click &8\u21E8 &7Open Settings / Credits");
+        return new CustomItem(new ItemStack(Material.ENCHANTED_BOOK), "&aSlimefun指南 &7(箱子介面)", "", "&e右鍵點擊 &8\u21E8 &7打開指南", "&e蹲下+右鍵點擊 &8\u21E8 &7打開設置及資訊");
     }
 
     @Override
@@ -575,7 +575,7 @@ public class ChestSlimefunGuide implements SlimefunGuideImplementation {
         GuideHistory history = profile.getGuideHistory();
 
         if (isSurvivalMode() && history.size() > 1) {
-            menu.addItem(slot, new CustomItem(ChestMenuUtils.getBackButton(p, "", "&fLeft Click: &7Go back to previous Page", "&fShift + left Click: &7Go back to Main Menu")));
+            menu.addItem(slot, new CustomItem(ChestMenuUtils.getBackButton(p, "", "&f左鍵點擊: &7返回上一頁", "&fShift + 左鍵點擊: &7返回主選單")));
 
             menu.addMenuClickHandler(slot, (pl, s, is, action) -> {
                 if (action.isShiftClicked()) {
@@ -605,7 +605,7 @@ public class ChestSlimefunGuide implements SlimefunGuideImplementation {
                 return item;
             }
 
-            String lore = Slimefun.hasPermission(p, slimefunItem, false) ? "&fNeeds to be unlocked elsewhere" : "&fNo Permission";
+            String lore = Slimefun.hasPermission(p, slimefunItem, false) ? "&f需要在其他地方解鎖" : "&f沒有權限";
             return Slimefun.hasUnlocked(p, slimefunItem, false) ? item : new CustomItem(Material.BARRIER, ItemUtils.getItemName(item), "&4&l" + SlimefunPlugin.getLocalization().getMessage(p, "guide.locked"), "", lore);
         }
         else {
