@@ -9,7 +9,7 @@
 
     <!-- Our default version will be UNOFFICIAL, this will prevent auto updates -->
     <!-- from overriding our local test file -->
-    <version>4.3 繁化by芒果綠茶(V5.1)</version>
+    <version>4.3 繁化by芒果綠茶(V6.1)</version>
     <inceptionYear>2013</inceptionYear>
     <packaging>jar</packaging>
 
@@ -330,7 +330,7 @@
         <dependency>
             <groupId>com.konghq</groupId>
             <artifactId>unirest-java</artifactId>
-            <version>3.8.06</version>
+            <version>3.9.00</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.google.code.gson</groupId>
