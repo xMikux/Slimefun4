@@ -63,7 +63,7 @@ public abstract class GEOMiner extends AContainer implements InventoryBlock, Rec
 
             @Override
             public void onPlayerPlace(BlockPlaceEvent e) {
-                SimpleHologram.update(e.getBlock(), "&7Idling...");
+                SimpleHologram.update(e.getBlock(), "&7待機中...");
             }
         };
     }
