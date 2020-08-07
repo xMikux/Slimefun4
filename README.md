@@ -102,5 +102,5 @@ Slimefun4 使用[bStats](https://bstats.org/plugin/bukkit/Slimefun/4574)來收�
 * 對該儲存庫的最後一次提交日期
 </details>
 
-此外,該插件會連接至 https://mojang.com/ 來獲取我們的貢獻者Minecraft外觀(如果可以).<br>
-請注意 Slimefun 與 `Mojang Studios`或Minecraft沒有任何關聯
+此外,該插件會連接至 [textures.minecraft.net](https://www.minecraft.net/en-us) 來獲取我們的貢獻者Minecraft外觀(如果可以).<br>
+請注意 Slimefun 與 `Mojang Studios`或Minecraft沒有任何關聯.
