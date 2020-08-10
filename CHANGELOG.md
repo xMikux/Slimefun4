@@ -29,6 +29,9 @@
 * (API) Added support for adding custom Piglin Barter drops
 * (API) Added BlockPlacerPlaceEvent
 * (API) Added ToolUseHandler
+* Added "Sand -> Sandstone" recipe to the Electric Press
+* Added "Red Sand -> Red Sandstone" recipe to the Electric Press
+* Industrial Miners can now also mine Gilded Blackstone
 
 #### Changes
 * Performance improvement for Programmable Android rotations
@@ -53,6 +56,9 @@
 * Fixed #2180
 * Fixed #2122
 * Fixed #2168
+* Fixed #2203
+* Fixed #2205
+* Fixed #2209
 
 ## Release Candidate 15 (01 Aug 2020)
 
