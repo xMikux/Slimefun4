@@ -187,12 +187,12 @@ public final class SlimefunPlugin extends JavaPlugin implements SlimefunAddon {
             }
 
             // Creating all necessary Folders
-            getLogger().log(Level.INFO, "Creating directories...");
+            getLogger().log(Level.INFO, "創建資料夾...");
             createDirectories();
             registry.load(config);
 
             // Set up localization
-            getLogger().log(Level.INFO, "Loading language files...");
+            getLogger().log(Level.INFO, "載入語言檔案...");
             local = new LocalizationService(this, config.getString("options.chat-prefix"), config.getString("options.language"));
 
             // Setting up Networks
@@ -201,7 +201,7 @@ public final class SlimefunPlugin extends JavaPlugin implements SlimefunAddon {
             int networkSize = config.getInt("networks.max-size");
 
             if (networkSize < 1) {
-                getLogger().log(Level.WARNING, "Your 'networks.max-size' setting is misconfigured! It must be at least 1, it was set to: {0}", networkSize);
+                getLogger().log(Level.WARNING, "你 'networks.max-size' 設置配置錯誤! 必須大於1, 目前設置: {0}", networkSize);
                 networkSize = 1;
             }
 
@@ -220,19 +220,19 @@ public final class SlimefunPlugin extends JavaPlugin implements SlimefunAddon {
             }
 
             // Registering all GEO Resources
-            getLogger().log(Level.INFO, "Loading GEO-Resources...");
+            getLogger().log(Level.INFO, "載入 GEO-資源...");
             GEOResourcesSetup.setup();
 
-            getLogger().log(Level.INFO, "Loading items...");
+            getLogger().log(Level.INFO, "載入物品...");
             loadItems();
 
-            getLogger().log(Level.INFO, "Loading researches...");
+            getLogger().log(Level.INFO, "載入研究...");
             loadResearches();
 
             registry.setResearchingEnabled(getResearchCfg().getBoolean("enable-researching"));
             PostSetup.setupWiki();
 
-            getLogger().log(Level.INFO, "Registering listeners...");
+            getLogger().log(Level.INFO, "註冊監聽器...");
             registerListeners();
 
             // Initiating various Stuff and all items with a slight delay (0ms after the Server finished loading)
@@ -265,20 +265,20 @@ public final class SlimefunPlugin extends JavaPlugin implements SlimefunAddon {
             gitHubService.start(this);
 
             // Hooray!
-            getLogger().log(Level.INFO, "Slimefun has finished loading in {0}", getStartupTime(timestamp));
+            getLogger().log(Level.INFO, "Slimefun 完成載入在 {0}", getStartupTime(timestamp));
         }
         else {
             instance = null;
 
             getLogger().log(Level.INFO, "#################### - INFO - ####################");
             getLogger().log(Level.INFO, " ");
-            getLogger().log(Level.INFO, "Slimefun could not be loaded (yet).");
-            getLogger().log(Level.INFO, "It appears that you have not installed CS-CoreLib.");
-            getLogger().log(Level.INFO, "Please download and install CS-CoreLib manually:");
+            getLogger().log(Level.INFO, "Slimefun 未載入.");
+            getLogger().log(Level.INFO, "似乎尚未安裝 CS-CoreLib.");
+            getLogger().log(Level.INFO, "請你手動下載並安裝 CS-CoreLib:");
             getLogger().log(Level.INFO, "https://thebusybiscuit.github.io/builds/TheBusyBiscuit/CS-CoreLib/master/");
 
             getCommand("slimefun").setExecutor((sender, cmd, label, args) -> {
-                sender.sendMessage("You have forgotten to install CS-CoreLib! Slimefun is disabled.");
+                sender.sendMessage("你忘記安裝 CS-CoreLib! Slimefun 已被禁用.");
                 sender.sendMessage("https://thebusybiscuit.github.io/builds/TheBusyBiscuit/CS-CoreLib/master/");
                 return true;
             });
@@ -315,11 +315,11 @@ public final class SlimefunPlugin extends JavaPlugin implements SlimefunAddon {
 
             // Looks like you are using an unsupported Minecraft Version
             getLogger().log(Level.SEVERE, "#############################################");
-            getLogger().log(Level.SEVERE, "### Slimefun was not installed correctly!");
-            getLogger().log(Level.SEVERE, "### You are using the wrong version of Minecraft!");
+            getLogger().log(Level.SEVERE, "### Slimefun 並未被正確安裝!");
+            getLogger().log(Level.SEVERE, "### 你正在使用不支持的Minecraft版本!");
             getLogger().log(Level.SEVERE, "###");
-            getLogger().log(Level.SEVERE, "### You are using Minecraft {0}", ReflectionUtils.getVersion());
-            getLogger().log(Level.SEVERE, "### but Slimefun v{0} requires you to be using", getDescription().getVersion());
+            getLogger().log(Level.SEVERE, "### 你正在使用 Minecraft {0}", ReflectionUtils.getVersion());
+            getLogger().log(Level.SEVERE, "### 但 Slimefun v{0} 只支持", getDescription().getVersion());
             getLogger().log(Level.SEVERE, "### Minecraft {0}", String.join(" / ", getSupportedVersions()));
             getLogger().log(Level.SEVERE, "#############################################");
             return true;

@@ -110,9 +110,10 @@ public class UpdaterService {
         }
         else {
             printBorder();
-            plugin.getLogger().log(Level.WARNING, "It looks like you are using an unofficially modified build of Slimefun!");
-            plugin.getLogger().log(Level.WARNING, "Auto-Updates have been disabled, this build is not considered safe.");
-            plugin.getLogger().log(Level.WARNING, "Do not report bugs encountered in this Version of Slimefun to any official sources.");
+            plugin.getLogger().log(Level.WARNING, "此版本為黏液科技繁體翻譯版!");
+            plugin.getLogger().log(Level.WARNING, "因為非官方,自動更新已被禁用.");
+            plugin.getLogger().log(Level.WARNING, "請勿回報此黏液科技版本遇到的任何錯誤給黏液科技官方!");
+            plugin.getLogger().log(Level.WARNING, "有問題請回報在 https://github.com/xMikux/Slimefun4/issues");
             printBorder();
         }
     }
@@ -133,11 +134,13 @@ public class UpdaterService {
      */
     public void disable() {
         printBorder();
-        plugin.getLogger().log(Level.WARNING, "It looks like you have disabled auto-updates for Slimefun!");
-        plugin.getLogger().log(Level.WARNING, "Auto-Updates keep your server safe, performant and bug-free.");
-        plugin.getLogger().log(Level.WARNING, "We respect your decision.");
+        plugin.getLogger().log(Level.WARNING, "此版本為黏液科技繁體翻譯版!");
+        plugin.getLogger().log(Level.WARNING, "自動更新已關閉.");
+        plugin.getLogger().log(Level.WARNING, "請勿回報此黏液科技版本遇到的任何錯誤給黏液科技官方!");
+        plugin.getLogger().log(Level.WARNING, "有問題請回報在 https://github.com/xMikux/Slimefun4/issues");
 
         if (branch != SlimefunBranch.STABLE) {
+            plugin.getLogger().log(Level.WARNING, "此訊息可忽略!");
             plugin.getLogger().log(Level.WARNING, "If you are just scared of Slimefun breaking, then please consider using a \"stable\" build instead of disabling auto-updates.");
         }
 

@@ -44,7 +44,7 @@ public final class PostSetup {
     private PostSetup() {}
 
     public static void setupWiki() {
-        Slimefun.getLogger().log(Level.INFO, "Loading Wiki pages...");
+        Slimefun.getLogger().log(Level.INFO, "載入 Wiki 頁...");
 
         JsonParser parser = new JsonParser();
 
@@ -61,7 +61,7 @@ public final class PostSetup {
             }
         }
         catch (IOException e) {
-            Slimefun.getLogger().log(Level.SEVERE, "Failed to load wiki.json file", e);
+            Slimefun.getLogger().log(Level.SEVERE, "加載失敗 wiki.json 檔", e);
         }
     }
 
@@ -92,11 +92,11 @@ public final class PostSetup {
         sender.sendMessage("");
         sender.sendMessage(ChatColor.GREEN + "######################### - Slimefun v" + SlimefunPlugin.getVersion() + " - #########################");
         sender.sendMessage("");
-        sender.sendMessage(ChatColor.GREEN + "Successfully loaded " + total + " Items and " + SlimefunPlugin.getRegistry().getResearches().size() + " Researches");
-        sender.sendMessage(ChatColor.GREEN + "( " + slimefunOnly + " Items from Slimefun, " + (total - slimefunOnly) + " Items from " + SlimefunPlugin.getInstalledAddons().size() + " Addons )");
+        sender.sendMessage(ChatColor.GREEN + "成功載入 " + total + " 個物品和 " + SlimefunPlugin.getRegistry().getResearches().size() + " 個研究");
+        sender.sendMessage(ChatColor.GREEN + "( " + slimefunOnly + " 物品來自Slimefun, " + (total - slimefunOnly) + " 個物品來自 " + SlimefunPlugin.getInstalledAddons().size() + " 附加 )");
         sender.sendMessage("");
-        sender.sendMessage(ChatColor.GREEN + "Slimefun is an Open-Source project that is kept alive by a large community.");
-        sender.sendMessage(ChatColor.GREEN + "Consider helping us maintain this project by contributing on GitHub!");
+        sender.sendMessage(ChatColor.GREEN + "Slimefun 是一個開源專案,由活躍的大型社區.");
+        sender.sendMessage(ChatColor.GREEN + "通過GitHub上進行貢獻來維護此專案!");
 
         if (SlimefunPlugin.getUpdater().getBranch().isOfficial()) {
             sender.sendMessage("");
@@ -107,7 +107,9 @@ public final class PostSetup {
             sender.sendMessage(ChatColor.GREEN + " - Discord:      https://discord.gg/fsD4Bkh");
         }
         else {
-            sender.sendMessage(ChatColor.GREEN + " - UNOFFICIALLY MODIFIED BUILD - NO OFFICIAL SUPPORT GIVEN");
+            sender.sendMessage("");
+            sender.sendMessage(ChatColor.GREEN + " - 源代碼:  https://github.com/xMikux/Slimefun4");
+            sender.sendMessage(ChatColor.GREEN + " - 此為繁體翻譯版- 無官方支持");
         }
 
         sender.sendMessage("");
