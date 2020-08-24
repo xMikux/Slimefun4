@@ -27,7 +27,7 @@ public abstract class LavaGenerator extends AGenerator {
 
     @Override
     public String getInventoryTitle() {
-        return "&4Lava Generator";
+        return "&4岩漿發電機";
     }
 
 }
