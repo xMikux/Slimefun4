@@ -38,11 +38,6 @@ public abstract class ElectricDustWasher extends AContainer {
     }
 
     @Override
-    public String getInventoryTitle() {
-        return "&b電動礦物洗滌機";
-    }
-
-    @Override
     public ItemStack getProgressBar() {
         return new ItemStack(Material.GOLDEN_SHOVEL);
     }

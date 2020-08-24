@@ -38,11 +38,6 @@ public class AutoEnchanter extends AContainer {
     }
 
     @Override
-    public String getInventoryTitle() {
-        return "&5自動附魔器";
-    }
-
-    @Override
     public ItemStack getProgressBar() {
         return new ItemStack(Material.GOLDEN_CHESTPLATE);
     }

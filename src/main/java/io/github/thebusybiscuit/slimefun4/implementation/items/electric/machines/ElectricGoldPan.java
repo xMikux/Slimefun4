@@ -42,11 +42,6 @@ public abstract class ElectricGoldPan extends AContainer implements RecipeDispla
     }
 
     @Override
-    public String getInventoryTitle() {
-        return "&6電動掏金機";
-    }
-
-    @Override
     public ItemStack getProgressBar() {
         return new ItemStack(Material.DIAMOND_SHOVEL);
     }
