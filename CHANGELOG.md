@@ -33,6 +33,7 @@
 * Added "Red Sand -> Red Sandstone" recipe to the Electric Press
 * Industrial Miners can now also mine Gilded Blackstone
 * Added a config option to disable Players from burning when exposed to radiation
+* Added a config option to drop excess items when using /sf give
 
 #### Changes
 * Performance improvement for Programmable Android rotations
@@ -79,6 +80,7 @@
 * Fixed #1951 (again)
 * Fixed Electric Press not working
 * Fixed #2240
+* Fixed #2243
 
 ## Release Candidate 15 (01 Aug 2020)
 
