@@ -58,7 +58,7 @@ public class ChestSlimefunGuide implements SlimefunGuideImplementation {
 
     public ChestSlimefunGuide(boolean vanillaRecipes) {
         showVanillaRecipes = vanillaRecipes;
-        item = new SlimefunGuideItem(this, "&aSlimefun Guide &7(Chest GUI)");
+        item = new SlimefunGuideItem(this, "&aSlimefun指南 &7(箱子介面)");
 
         if (SlimefunPlugin.getMinecraftVersion().isAtLeast(MinecraftVersion.MINECRAFT_1_14)) {
             sound = Sound.ITEM_BOOK_PAGE_TURN;

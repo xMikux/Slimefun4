@@ -38,7 +38,7 @@ public class BookSlimefunGuide implements SlimefunGuideImplementation {
     private final ItemStack item;
 
     public BookSlimefunGuide() {
-        item = new SlimefunGuideItem(this, "&aSlimefun Guide &7(Book GUI)");
+        item = new SlimefunGuideItem(this, "&aSlimefun指南 &7(書本介面)");
     }
 
     @Override

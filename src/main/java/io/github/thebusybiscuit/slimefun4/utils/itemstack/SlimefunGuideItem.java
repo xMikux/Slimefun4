@@ -33,9 +33,9 @@ public class SlimefunGuideItem extends ItemStack {
 
         List<String> lore = new LinkedList<>();
 
-        lore.add(implementation instanceof CheatSheetSlimefunGuide ? "&4&lOnly openable by Admins" : "");
-        lore.add(ChatColors.color("&eRight Click &8\u21E8 &7Browse Items"));
-        lore.add(ChatColors.color("&eShift + Right Click &8\u21E8 &7Open Settings / Credits"));
+        lore.add(implementation instanceof CheatSheetSlimefunGuide ? "&4&l只能由管理員打開" : "");
+        lore.add(ChatColors.color("&e右鍵點擊 &8\u21E8 &7打開指南"));
+        lore.add(ChatColors.color("&e蹲下+右鍵點擊 &8\u21E8 &7打開設置及資訊"));
 
         meta.setLore(lore);
         SlimefunPlugin.getItemTextureService().setTexture(meta, "SLIMEFUN_GUIDE");
