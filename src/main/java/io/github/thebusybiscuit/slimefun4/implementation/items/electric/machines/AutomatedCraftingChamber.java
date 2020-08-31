@@ -31,7 +31,6 @@ import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
-import me.mrCookieSlime.Slimefun.api.energy.ChargableBlock;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.inventory.DirtyChestMenu;
@@ -56,7 +55,7 @@ public abstract class AutomatedCraftingChamber extends SlimefunItem implements I
             @Override
             public void newInstance(BlockMenu menu, Block b) {
                 if (!BlockStorage.hasBlockInfo(b) || BlockStorage.getLocationInfo(b.getLocation(), "enabled") == null || BlockStorage.getLocationInfo(b.getLocation(), "enabled").equals(String.valueOf(false))) {
-                    menu.replaceExistingItem(6, new CustomItem(new ItemStack(Material.GUNPOWDER), "&7是否啟用: &4\u2718", "", "&e> 點擊啟動機器"));
+                    menu.replaceExistingItem(6, new CustomItem(Material.GUNPOWDER, "&7是否啟用: &4\u2718", "", "&e> 點擊啟動機器"));
                     menu.addMenuClickHandler(6, (p, slot, item, action) -> {
                         BlockStorage.addBlockInfo(b, "enabled", String.valueOf(true));
                         newInstance(menu, b);
@@ -64,7 +63,7 @@ public abstract class AutomatedCraftingChamber extends SlimefunItem implements I
                     });
                 }
                 else {
-                    menu.replaceExistingItem(6, new CustomItem(new ItemStack(Material.REDSTONE), "&7是否啟用: &2\u2714", "", "&e> 點擊關閉機器"));
+                    menu.replaceExistingItem(6, new CustomItem(Material.REDSTONE, "&7是否啟用: &2\u2714", "", "&e> 點擊關閉機器"));
                     menu.addMenuClickHandler(6, (p, slot, item, action) -> {
                         BlockStorage.addBlockInfo(b, "enabled", String.valueOf(false));
                         newInstance(menu, b);
@@ -72,7 +71,7 @@ public abstract class AutomatedCraftingChamber extends SlimefunItem implements I
                     });
                 }
 
-                menu.replaceExistingItem(7, new CustomItem(new ItemStack(Material.CRAFTING_TABLE), "&7保留最後一份材料", "", "&e> 點擊保留最後一份材料", "&c僅適用最後的合成配方"));
+                menu.replaceExistingItem(7, new CustomItem(Material.CRAFTING_TABLE, "&7保留最後一份材料", "", "&e> 點擊保留最後一份材料", "&c僅適用最後的合成配方"));
                 menu.addMenuClickHandler(7, (p, slot, item, action) -> {
                     tick(b, true);
                     return false;
@@ -215,7 +214,7 @@ public abstract class AutomatedCraftingChamber extends SlimefunItem implements I
             return;
         }
 
-        if (ChargableBlock.getCharge(block) < getEnergyConsumption()) {
+        if (getCharge(block.getLocation()) < getEnergyConsumption()) {
             return;
         }
 
@@ -259,7 +258,7 @@ public abstract class AutomatedCraftingChamber extends SlimefunItem implements I
         ItemStack output = SlimefunPlugin.getRegistry().getAutomatedCraftingChamberRecipes().get(input);
         if (output != null && menu.fits(output, getOutputSlots())) {
             menu.pushItem(output.clone(), getOutputSlots());
-            ChargableBlock.addCharge(block, -getEnergyConsumption());
+            removeCharge(block.getLocation(), getEnergyConsumption());
 
             for (int j = 0; j < 9; j++) {
                 if (menu.getItemInSlot(getInputSlots()[j]) != null) {

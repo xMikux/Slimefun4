@@ -706,8 +706,8 @@ public final class SlimefunItems {
 
     public static final SlimefunItemStack GPS_GEO_SCANNER = new SlimefunItemStack("GPS_GEO_SCANNER", HeadTexture.GEO_SCANNER, "&bGPS地質掃描儀", "", "&f掃描區塊(Chunk)中的自然資源", "&f例如: &8石油");
     public static final SlimefunItemStack PORTABLE_GEO_SCANNER = new SlimefunItemStack("PORTABLE_GEO_SCANNER", Material.CLOCK, "&b隨身地質掃描儀", "", "&f掃描區塊(Chunk)中的自然資源", "", "&e右鍵點擊&7 掃描");
-    public static final SlimefunItemStack GEO_MINER = new SlimefunItemStack("GEO_MINER", HeadTexture.GEO_MINER, "&6GEO挖礦機", "", "&e從區塊(Chunk)中開採資源", "&e不能開採石油", "", LoreBuilder.machine(MachineTier.ADVANCED, MachineType.MACHINE), LoreBuilder.speed(1), LoreBuilder.powerPerSecond(48), "", "&c&l! &c只能在有地質掃描過的區塊(Chunk)運作");
-    public static final SlimefunItemStack OIL_PUMP = new SlimefunItemStack("OIL_PUMP", HeadTexture.OIL_PUMP, "&f石油泵", "", "&7放入「鐵桶」將石油抽到鐵桶中", "", "&c&l! &c只能在有地質掃描過的區塊(Chunk)運作");
+    public static final SlimefunItemStack GEO_MINER = new SlimefunItemStack("GEO_MINER", HeadTexture.GEO_MINER, "&6GEO挖礦機", "", "&e從區塊(Chunk)中開採資源", "&e這些資源無法用鎬開採", "", LoreBuilder.machine(MachineTier.ADVANCED, MachineType.MACHINE), LoreBuilder.speed(1), LoreBuilder.powerPerSecond(48), "", "&c&l! &c只能在有地質掃描過的區塊(Chunk)運作");
+    public static final SlimefunItemStack OIL_PUMP = new SlimefunItemStack("OIL_PUMP", HeadTexture.OIL_PUMP, "&4石油泵", "", "&7放入「鐵桶」將石油抽到鐵桶中", "", "&c&l! &c只能在有地質掃描過的區塊(Chunk)運作");
     public static final SlimefunItemStack OIL_BUCKET = new SlimefunItemStack("BUCKET_OF_OIL", HeadTexture.OIL_BUCKET, "&f石油桶");
     public static final SlimefunItemStack FUEL_BUCKET = new SlimefunItemStack("BUCKET_OF_FUEL", HeadTexture.FUEL_BUCKET, "&f燃油桶");
 

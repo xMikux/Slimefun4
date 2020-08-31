@@ -320,7 +320,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>3.5.5</version>
+            <version>3.5.7</version>
             <scope>test</scope>
         </dependency>
 
@@ -328,7 +328,7 @@
         <dependency>
             <groupId>com.github.TheBusyBiscuit</groupId>
             <artifactId>CS-CoreLib2</artifactId>
-            <version>0.25</version>
+            <version>0.25.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

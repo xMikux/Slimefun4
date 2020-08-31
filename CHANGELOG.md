@@ -51,6 +51,8 @@
 * Small performance improvements for Reactors
 * Electric machines now show their tier in the Inventory name too
 * Removed "Fuel efficiency" attribute for androids, since that was pretty much always at 1.0 anyway...
+* Performance improvements for energy networks
+* (API) Rewritten Block-Energy API
 
 #### Fixes
 * Fixed Programmable Androids rotating in the wrong direction
@@ -81,6 +83,16 @@
 * Fixed Electric Press not working
 * Fixed #2240
 * Fixed #2243
+* Fixed #2249
+* Fixed #1022
+* Fixed #2208
+* Fixed Fluid Pump treating low-level fluids like stationary fluids
+* Fixed Fluid Pump not working on Bubble Columns
+* Fixed #2251
+* Fixed #2257
+* Fixed #2260
+* Fixed #2263
+* Fixed #2269
 
 ## Release Candidate 15 (01 Aug 2020)
 
