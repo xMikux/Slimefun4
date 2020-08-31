@@ -53,6 +53,7 @@
 * Removed "Fuel efficiency" attribute for androids, since that was pretty much always at 1.0 anyway...
 * Performance improvements for energy networks
 * (API) Rewritten Block-Energy API
+* Removed "durability" setting from cargo nodes
 
 #### Fixes
 * Fixed Programmable Androids rotating in the wrong direction
@@ -92,7 +93,9 @@
 * Fixed #2257
 * Fixed #2260
 * Fixed #2263
+* Fixed #2265
 * Fixed #2269
+* Fixed #2266
 
 ## Release Candidate 15 (01 Aug 2020)
 
