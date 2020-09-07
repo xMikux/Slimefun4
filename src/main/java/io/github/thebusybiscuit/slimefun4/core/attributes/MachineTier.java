@@ -1,5 +1,7 @@
 package io.github.thebusybiscuit.slimefun4.core.attributes;
 
+import javax.annotation.Nonnull;
+
 public enum MachineTier {
 
     BASIC("&e基礎"),
@@ -11,7 +13,7 @@ public enum MachineTier {
 
     private final String prefix;
 
-    MachineTier(String prefix) {
+    MachineTier(@Nonnull String prefix) {
         this.prefix = prefix;
     }
 

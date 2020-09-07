@@ -91,26 +91,26 @@ public final class SlimefunGuideSettings {
                 new CustomItem(Material.COMPARATOR, "&e" + SlimefunPlugin.getLocalization().getMessage(p, "guide.title.source"), "", "&7最後修改: &a" + NumberUtils.getElapsedTime(SlimefunPlugin.getGitHubService().getLastUpdate()) + " ago", "&7專案分支數(Forks): &e" + SlimefunPlugin.getGitHubService().getForks(), "&7星星數: &e" + SlimefunPlugin.getGitHubService().getStars(), "", "&7&oSlimefun4是一個社群專案,", "&7&o原始碼可以在GitHub上取得", "&7&o如果你想保持此插件的生命力,", "&7&o可以考慮對其進行貢獻", "", "&7\u21E8 &e點擊進入GitHub"));
         menu.addMenuClickHandler(6, (pl, slot, item, action) -> {
             pl.closeInventory();
-            ChatUtils.sendURL(pl, "https://github.com/TheBusyBiscuit/Slimefun4");
+            ChatUtils.sendURL(pl, "https://github.com/Slimefun/Slimefun4");
             return false;
         });
 
         menu.addItem(8, new CustomItem(Material.KNOWLEDGE_BOOK, "&3" + SlimefunPlugin.getLocalization().getMessage(p, "guide.title.wiki"), "", "&7你需要有關物品或機器的幫助嗎？", "&7你不知道該怎麼辦？", "&7查看我們由社群維護的Wiki", "&7並成為我們的編輯之一!", "", "&7\u21E8 &e點擊進入官方Slimefun Wiki"), (pl, slot, item, action) -> {
             pl.closeInventory();
-            ChatUtils.sendURL(pl, "https://github.com/TheBusyBiscuit/Slimefun4/wiki");
+            ChatUtils.sendURL(pl, "https://github.com/Slimefun/Slimefun4/wiki");
             return false;
         });
 
         menu.addItem(47, new CustomItem(Material.BOOKSHELF, "&3" + SlimefunPlugin.getLocalization().getMessage(p, "guide.title.addons"), "", "&7附加插件才是使Slimefun發揮到極致的方法", "&7去看看吧,其中可能有你錯過的!", "", "&7安裝在伺服器上的數量: &b" + SlimefunPlugin.getInstalledAddons().size(), "", "&7\u21E8 &e點擊查看所有Slimefun4的附加插件"), (pl, slot, item, action) -> {
             pl.closeInventory();
-            ChatUtils.sendURL(pl, "https://github.com/TheBusyBiscuit/Slimefun4/wiki/Addons");
+            ChatUtils.sendURL(pl, "https://github.com/Slimefun/Slimefun4/wiki/Addons");
             return false;
         });
 
         if (SlimefunPlugin.getUpdater().getBranch().isOfficial()) {
-            menu.addItem(49, new CustomItem(Material.REDSTONE_TORCH, "&4" + SlimefunPlugin.getLocalization().getMessage(p, "guide.title.bugs"), "", "&7&oBug reports have to be made in English!", "", "&7Open Issues: &a" + SlimefunPlugin.getGitHubService().getOpenissues(), "&7Pending Pull Requests: &a" + SlimefunPlugin.getGitHubService().getPendingPullRequests(), "", "&7\u21E8 &eClick to go to the Slimefun4 Bug Tracker"), (pl, slot, item, action) -> {
+            menu.addItem(49, new CustomItem(Material.REDSTONE_TORCH, "&4" + SlimefunPlugin.getLocalization().getMessage(p, "guide.title.bugs"), "", "&7&oBug reports have to be made in English!", "", "&7Open Issues: &a" + SlimefunPlugin.getGitHubService().getOpenIssues(), "&7Pending Pull Requests: &a" + SlimefunPlugin.getGitHubService().getPendingPullRequests(), "", "&7\u21E8 &eClick to go to the Slimefun4 Bug Tracker"), (pl, slot, item, action) -> {
                 pl.closeInventory();
-                ChatUtils.sendURL(pl, "https://github.com/TheBusyBiscuit/Slimefun4/issues");
+                ChatUtils.sendURL(pl, "https://github.com/Slimefun/Slimefun4/issues");
                 return false;
             });
         }

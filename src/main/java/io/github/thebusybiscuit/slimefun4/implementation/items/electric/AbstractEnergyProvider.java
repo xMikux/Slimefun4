@@ -5,6 +5,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -38,19 +41,23 @@ public abstract class AbstractEnergyProvider extends SlimefunItem implements Inv
 
     protected final Set<MachineFuel> fuelTypes = new HashSet<>();
 
+    @ParametersAreNonnullByDefault
     protected AbstractEnergyProvider(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(category, item, recipeType, recipe);
     }
 
     /**
      * This method returns the title that is used for the {@link Inventory} of an
-     * {@link AGenerator} that has been opened by a Player.
+     * {@link AbstractEnergyProvider} that has been opened by a Player.
      * 
      * Override this method to set the title.
      * 
-     * @return The title of the {@link Inventory} of this {@link AGenerator}
+     * @return The title of the {@link Inventory} of this {@link AbstractEnergyProvider}
      */
-    public abstract String getInventoryTitle();
+    @Nonnull
+    public String getInventoryTitle() {
+        return getItemName();
+    }
 
     /**
      * This method returns the {@link ItemStack} that this {@link AGenerator} will
@@ -60,6 +67,7 @@ public abstract class AbstractEnergyProvider extends SlimefunItem implements Inv
      * 
      * @return The {@link ItemStack} to use as the progress bar
      */
+    @Nonnull
     public abstract ItemStack getProgressBar();
 
     /**
@@ -75,14 +83,16 @@ public abstract class AbstractEnergyProvider extends SlimefunItem implements Inv
     protected abstract void registerDefaultFuelTypes();
 
     @Override
+    @Nonnull
     public EnergyNetComponentType getEnergyComponentType() {
         return EnergyNetComponentType.GENERATOR;
     }
 
-    public void registerFuel(MachineFuel fuel) {
+    public void registerFuel(@Nonnull MachineFuel fuel) {
         fuelTypes.add(fuel);
     }
 
+    @Nonnull
     public Set<MachineFuel> getFuelTypes() {
         return fuelTypes;
     }

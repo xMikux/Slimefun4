@@ -47,7 +47,7 @@ public final class SlimefunItems {
     public static final SlimefunItemStack TAPE_MEASURE = new SlimefunItemStack("TAPE_MEASURE", "180d5c43a6cf5bb7769fd0c8240e1e70d2ae38ef9d78a1db401aca6a2cb36f65", "&6捲尺", "", "&e蹲下&右鍵點擊 &7設置起始點", "&e右鍵點擊 &7進行測量");
 
     /* Gadgets */
-    public static final SlimefunItemStack GOLD_PAN = new SlimefunItemStack("GOLD_PAN", Material.BOWL, "&6掏金盤", "&a&o可以給你各式各樣的好東西...", "", "&7&e右鍵點擊&7 從「礫石」中取出各種東西");
+    public static final SlimefunItemStack GOLD_PAN = new SlimefunItemStack("GOLD_PAN", Material.BOWL, "&6金盤", "&a&o可以給你各式各樣的好東西...", "", "&7&e右鍵點擊&7 從「礫石」中取出各種東西");
     public static final SlimefunItemStack NETHER_GOLD_PAN = new SlimefunItemStack("NETHER_GOLD_PAN", Material.BOWL, "&4地獄掏金盤", "", "&7&e右鍵點擊&7 從「靈魂沙」中挑出各種東西");
     public static final SlimefunItemStack PARACHUTE = new SlimefunItemStack("PARACHUTE", Material.LEATHER_CHESTPLATE, Color.WHITE, "&f&l降落傘", "", LoreBuilder.CROUCH_TO_USE);
     public static final SlimefunItemStack GRAPPLING_HOOK = new SlimefunItemStack("GRAPPLING_HOOK", Material.LEAD, "&6鉤爪", "", LoreBuilder.RIGHT_CLICK_TO_USE);
@@ -61,8 +61,9 @@ public final class SlimefunItems {
     public static final SlimefunItemStack RAG = new SlimefunItemStack("RAG", Material.PAPER, "&c紗布", "", "&a一級醫療用品", "", "&f恢復2顆心", "&f滅火", "", LoreBuilder.RIGHT_CLICK_TO_USE);
     public static final SlimefunItemStack BANDAGE = new SlimefunItemStack("BANDAGE", Material.PAPER, "&c繃帶", "", "&a二級醫療用品", "", "&f恢復4顆心", "&f滅火", "", LoreBuilder.RIGHT_CLICK_TO_USE);
     public static final SlimefunItemStack SPLINT = new SlimefunItemStack("SPLINT", Material.STICK, "&c夾板", "", "&a一級醫療用品", "", "&f恢復2顆心", "", LoreBuilder.RIGHT_CLICK_TO_USE);
-    public static final SlimefunItemStack VITAMINS = new SlimefunItemStack("VITAMINS", Material.NETHER_WART, "&c維生素", "", "&a三級醫療用品", "", "&f恢復4顆心", "&f治愈中毒/凋零/放射", "", LoreBuilder.RIGHT_CLICK_TO_USE);
+    public static final SlimefunItemStack VITAMINS = new SlimefunItemStack("VITAMINS", Material.NETHER_WART, "&c維生素", "", "&a三級醫療用品", "", "&f恢復4顆心", "&f滅火", "&f治愈中毒/凋零/放射", "", LoreBuilder.RIGHT_CLICK_TO_USE);
     public static final SlimefunItemStack MEDICINE = new SlimefunItemStack("MEDICINE", Material.POTION, Color.RED, "&c醫療品", "", "&a三級醫療用品", "", "&f恢復4顆心", "&f滅火", "&f治愈中毒/凋零/放射");
+    public static final SlimefunItemStack MAGICAL_ZOMBIE_PILLS = new SlimefunItemStack("MAGICAL_ZOMBIE_PILLS", Material.NETHER_WART, "&6神奇的殭屍藥丸", "", "&e右鍵點擊 &7殭屍村民", "&7將立即從詛咒中治愈");
 
     public static final SlimefunItemStack FLASK_OF_KNOWLEDGE = new SlimefunItemStack("FLASK_OF_KNOWLEDGE", Material.GLASS_BOTTLE, "&c學識之瓶", "", "&f你可以把一些經驗", "&f存在瓶子裡", "&7消耗: &a1 個等級");
     public static final SlimefunItemStack FILLED_FLASK_OF_KNOWLEDGE = new SlimefunItemStack("FILLED_FLASK_OF_KNOWLEDGE", Material.EXPERIENCE_BOTTLE, "&a學識之瓶");
@@ -210,6 +211,7 @@ public final class SlimefunItems {
     public static final SlimefunItemStack PICKAXE_OF_THE_SEEKER = new SlimefunItemStack("PICKAXE_OF_THE_SEEKER", Material.DIAMOND_PICKAXE, "&a尋礦鎬", "&f總是將你指向最近的礦石", "&f但會消耗耐久度", "", "&7&e右鍵點擊&7 指向最近的礦石");
     public static final SlimefunItemStack COBALT_PICKAXE = new SlimefunItemStack("COBALT_PICKAXE", Material.IRON_PICKAXE, "&9鈷鎬");
     public static final SlimefunItemStack PICKAXE_OF_VEIN_MINING = new SlimefunItemStack("PICKAXE_OF_VEIN_MINING", Material.DIAMOND_PICKAXE, "&e連鎖鎬", "", "&f可以一次挖整個礦脈...", "&f(類似連鎖挖礦)");
+    public static final SlimefunItemStack CLIMBING_PICK = new SlimefunItemStack("CLIMBING_PICK", Material.IRON_PICKAXE, "&b攀岩鎬", "", "&f讓你在右鍵時", "&f攀爬在特定平面上.", "&f附魔效率可讓攀爬速度提升");
 
     static {
         HERCULES_PICKAXE.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
@@ -355,7 +357,7 @@ public final class SlimefunItems {
         SLIME_BOOTS_STEEL.addUnsafeEnchantments(slime);
     }
 
-    /* Misc */
+    /* Magical components */
     public static final SlimefunItemStack MAGIC_LUMP_1 = new SlimefunItemStack("MAGIC_LUMP_1", Material.GOLD_NUGGET, "&6魔法顆粒 &7- &eI", "", "&c&o等級: I");
     public static final SlimefunItemStack MAGIC_LUMP_2 = new SlimefunItemStack("MAGIC_LUMP_2", Material.GOLD_NUGGET, "&6魔法顆粒 &7- &eII", "", "&c&o等級: II");
     public static final SlimefunItemStack MAGIC_LUMP_3 = new SlimefunItemStack("MAGIC_LUMP_3", Material.GOLD_NUGGET, "&6魔法顆粒 &7- &eIII", "", "&c&o等級: III");
@@ -363,8 +365,10 @@ public final class SlimefunItems {
     public static final SlimefunItemStack ENDER_LUMP_2 = new SlimefunItemStack("ENDER_LUMP_2", Material.GOLD_NUGGET, "&5終界顆粒 &7- &eII", "", "&c&o等級: II");
     public static final SlimefunItemStack ENDER_LUMP_3 = new SlimefunItemStack("ENDER_LUMP_3", Material.GOLD_NUGGET, "&5終界顆粒 &7- &eIII", "", "&c&o等級: III");
     public static final SlimefunItemStack MAGICAL_BOOK_COVER = new SlimefunItemStack("MAGICAL_BOOK_COVER", Material.PAPER, "&6魔法書皮", "", "&a&o用於各種魔法書");
-    public static final SlimefunItemStack MAGICAL_ZOMBIE_PILLS = new SlimefunItemStack("MAGICAL_ZOMBIE_PILLS", Material.NETHER_WART, "&6神奇的殭屍藥丸", "", "&e右鍵點擊 &7殭屍村民", "&7將立即從詛咒中治愈");
     public static final SlimefunItemStack MAGICAL_GLASS = new SlimefunItemStack("MAGICAL_GLASS", Material.GLASS_PANE, "&6魔法玻璃", "", "&a&o用於各種魔法配件");
+    public static final SlimefunItemStack SYNTHETIC_SHULKER_SHELL = new SlimefunItemStack("SYNTHETIC_SHULKER_SHELL", Material.SHULKER_SHELL, "&d人造界伏殼", "", "&f此物品可以用在普通工作台", "&f就像是個普通界伏殼一樣");
+
+    /* Technical components */
     public static final SlimefunItemStack BASIC_CIRCUIT_BOARD = new SlimefunItemStack("BASIC_CIRCUIT_BOARD", Material.ACTIVATOR_RAIL, "&b基礎電路板");
     public static final SlimefunItemStack ADVANCED_CIRCUIT_BOARD = new SlimefunItemStack("ADVANCED_CIRCUIT_BOARD", Material.POWERED_RAIL, "&b高級電路板");
     public static final SlimefunItemStack WHEAT_FLOUR = new SlimefunItemStack("WHEAT_FLOUR", Material.SUGAR, "&f麵粉");
@@ -396,13 +400,14 @@ public final class SlimefunItems {
     public static final SlimefunItemStack MAGNET = new SlimefunItemStack("MAGNET", HeadTexture.MAGNET, "&c磁鐵");
     public static final SlimefunItemStack NECROTIC_SKULL = new SlimefunItemStack("NECROTIC_SKULL", Material.WITHER_SKELETON_SKULL, "&c壞死的頭顱");
     public static final SlimefunItemStack ESSENCE_OF_AFTERLIFE = new SlimefunItemStack("ESSENCE_OF_AFTERLIFE", Material.GUNPOWDER, "&4重生精華");
+    public static final SlimefunItemStack STRANGE_NETHER_GOO = new SlimefunItemStack("STRANGE_NETHER_GOO", Material.PURPLE_DYE, "&5奇怪的地獄黏液", "", "&f一種奇怪的物質", "&f可以與豬布林以物換物的方式獲得");
     public static final SlimefunItemStack ELECTRO_MAGNET = new SlimefunItemStack("ELECTRO_MAGNET", HeadTexture.MAGNET, "&c電磁鐵");
     public static final SlimefunItemStack HEATING_COIL = new SlimefunItemStack("HEATING_COIL", HeadTexture.HEATING_COIL, "&c加熱線圈");
     public static final SlimefunItemStack COOLING_UNIT = new SlimefunItemStack("COOLING_UNIT", HeadTexture.COOLING_UNIT, "&b冷卻單元");
     public static final SlimefunItemStack ELECTRIC_MOTOR = new SlimefunItemStack("ELECTRIC_MOTOR", HeadTexture.MOTOR, "&c電動馬達");
     public static final SlimefunItemStack CARGO_MOTOR = new SlimefunItemStack("CARGO_MOTOR", HeadTexture.MOTOR, "&3物流機械");
     public static final SlimefunItemStack SCROLL_OF_DIMENSIONAL_TELEPOSITION = new SlimefunItemStack("SCROLL_OF_DIMENSIONAL_TELEPOSITION", Material.PAPER, "&6空間傳送卷軸", "", "&c這個卷軸能夠創造出一個臨時的黑洞", "&c將附近的實體拉入並傳送至另一個維度", "&c在那裡所有的東西都是被旋轉的", "", "&f換句話說:使實體旋轉180度");
-    public static final SlimefunItemStack TOME_OF_KNOWLEDGE_SHARING = new SlimefunItemStack("TOME_OF_KNOWLEDGE_SHARING", Material.BOOK, "&6知識共享之書", "&7作者: &bNone", "", "&e右鍵點擊&7 將此書與自己綁定", "", "&e右鍵點擊&7 獲取本書作者的研究");
+    public static final SlimefunItemStack TOME_OF_KNOWLEDGE_SHARING = new SlimefunItemStack("TOME_OF_KNOWLEDGE_SHARING", Material.BOOK, "&6知識共享之書", "&7作者: &bNone", "", "&e右鍵點擊&7 將此書與自己綁定", "&e右鍵點擊&7 獲取本書作者的研究");
     public static final SlimefunItemStack HARDENED_GLASS = new SlimefunItemStack("HARDENED_GLASS", Material.LIGHT_GRAY_STAINED_GLASS, "&7硬化玻璃", "", "&f可以承受爆炸");
     public static final SlimefunItemStack WITHER_PROOF_OBSIDIAN = new SlimefunItemStack("WITHER_PROOF_OBSIDIAN", Material.OBSIDIAN, "&5抗凋零黑曜石", "", "&f可以承受爆炸", "&f可以承受凋零王的爆炸");
     public static final SlimefunItemStack WITHER_PROOF_GLASS = new SlimefunItemStack("WITHER_PROOF_GLASS", Material.PURPLE_STAINED_GLASS, "&5抗凋零玻璃", "", "&f可以承受爆炸", "&f可以承受凋零王的爆炸");
@@ -411,6 +416,7 @@ public final class SlimefunItems {
     public static final SlimefunItemStack ANCIENT_ALTAR = new SlimefunItemStack("ANCIENT_ALTAR", Material.ENCHANTING_TABLE, "&d古代祭壇", "", "&5多重方塊結構", "&5需要 古代祭壇基座×8", "&5用來製作魔法物品");
     public static final SlimefunItemStack COPPER_WIRE = new SlimefunItemStack("COPPER_WIRE", Material.STRING, "&6銅線", "", "&6電力機械中的關鍵材料");
 
+    /* Rainbow blocks */
     private static final String RAINBOW = "&d永遠循環彩虹的所有顏色!";
     public static final SlimefunItemStack RAINBOW_WOOL = new SlimefunItemStack("RAINBOW_WOOL", Material.WHITE_WOOL, "&5彩虹羊毛", "", RAINBOW);
     public static final SlimefunItemStack RAINBOW_GLASS = new SlimefunItemStack("RAINBOW_GLASS", Material.WHITE_STAINED_GLASS, "&5彩虹玻璃", "", RAINBOW);
@@ -420,7 +426,7 @@ public final class SlimefunItems {
     public static final SlimefunItemStack RAINBOW_GLAZED_TERRACOTTA = new SlimefunItemStack("RAINBOW_GLAZED_TERRACOTTA", Material.WHITE_GLAZED_TERRACOTTA, "&5彩虹釉陶", "", RAINBOW);
 
     /* Seasonal */
-    private static final String CHRISTMAS = ChatUtils.christmas("[Christmas Edition]");
+    private static final String CHRISTMAS = ChatUtils.christmas("[聖誕節版]");
     public static final SlimefunItemStack RAINBOW_WOOL_XMAS = new SlimefunItemStack("RAINBOW_WOOL_XMAS", Material.WHITE_WOOL, "&5彩虹羊毛 &7(聖誕節)", "", CHRISTMAS);
     public static final SlimefunItemStack RAINBOW_GLASS_XMAS = new SlimefunItemStack("RAINBOW_GLASS_XMAS", Material.WHITE_STAINED_GLASS, "&5彩虹玻璃 &7(聖誕節)", "", CHRISTMAS);
     public static final SlimefunItemStack RAINBOW_CLAY_XMAS = new SlimefunItemStack("RAINBOW_CLAY_XMAS", Material.WHITE_TERRACOTTA, "&5彩虹黏土塊 &7(聖誕節)", "", CHRISTMAS);
@@ -428,7 +434,7 @@ public final class SlimefunItems {
     public static final SlimefunItemStack RAINBOW_CONCRETE_XMAS = new SlimefunItemStack("RAINBOW_CONCRETE_XMAS", Material.WHITE_CONCRETE, "&5彩虹混凝土 &7(聖誕節)", "", CHRISTMAS);
     public static final SlimefunItemStack RAINBOW_GLAZED_TERRACOTTA_XMAS = new SlimefunItemStack("RAINBOW_GLAZED_TERRACOTTA_XMAS", Material.WHITE_GLAZED_TERRACOTTA, "&5彩虹釉陶 &7(聖誕節)", "", CHRISTMAS);
 
-    private static final String VALENTINES_DAY = "&5[&dValentine's Day Edition&5]";
+    private static final String VALENTINES_DAY = "&5[&d情人節版&5]";
     public static final SlimefunItemStack RAINBOW_WOOL_VALENTINE = new SlimefunItemStack("RAINBOW_WOOL_VALENTINE", Material.PINK_WOOL, "&5彩虹羊毛 &7(情人節)", "", VALENTINES_DAY);
     public static final SlimefunItemStack RAINBOW_GLASS_VALENTINE = new SlimefunItemStack("RAINBOW_GLASS_VALENTINE", Material.PINK_STAINED_GLASS, "&5彩虹玻璃 &7(情人節)", "", VALENTINES_DAY);
     public static final SlimefunItemStack RAINBOW_CLAY_VALENTINE = new SlimefunItemStack("RAINBOW_CLAY_VALENTINE", Material.PINK_TERRACOTTA, "&5彩虹黏土塊 &7(情人節)", "", VALENTINES_DAY);
@@ -436,7 +442,7 @@ public final class SlimefunItems {
     public static final SlimefunItemStack RAINBOW_CONCRETE_VALENTINE = new SlimefunItemStack("RAINBOW_CONCRETE_VALENTINE", Material.PINK_CONCRETE, "&5彩虹混凝土 &7(情人節)", "", VALENTINES_DAY);
     public static final SlimefunItemStack RAINBOW_GLAZED_TERRACOTTA_VALENTINE = new SlimefunItemStack("RAINBOW_GLAZED_TERRACOTTA_VALENTINE", Material.PINK_GLAZED_TERRACOTTA, "&5彩虹釉陶 &7(情人節)", "", VALENTINES_DAY);
 
-    private static final String HALLOWEEN = "&c[&6Halloween Edition&c]";
+    private static final String HALLOWEEN = "&c[&6萬聖節版&c]";
     public static final SlimefunItemStack RAINBOW_WOOL_HALLOWEEN = new SlimefunItemStack("RAINBOW_WOOL_HALLOWEEN", Material.ORANGE_WOOL, "&5彩虹羊毛 &7(萬聖節)", "", HALLOWEEN);
     public static final SlimefunItemStack RAINBOW_GLASS_HALLOWEEN = new SlimefunItemStack("RAINBOW_GLASS_HALLOWEEN", Material.ORANGE_STAINED_GLASS, "&5彩虹玻璃 &7(萬聖節)", "", HALLOWEEN);
     public static final SlimefunItemStack RAINBOW_CLAY_HALLOWEEN = new SlimefunItemStack("RAINBOW_CLAY_HALLOWEEN", Material.ORANGE_TERRACOTTA, "&5彩虹黏土塊 &7(萬聖節)", "", HALLOWEEN);
@@ -460,7 +466,7 @@ public final class SlimefunItems {
     /* Alloy (Copper + Aluminum) */
     public static final SlimefunItemStack DURALUMIN_INGOT = new SlimefunItemStack("DURALUMIN_INGOT", Material.IRON_INGOT, "&b硬鋁錠");
     /* Alloy (Copper + Silver) */
-    public static final SlimefunItemStack BILLON_INGOT = new SlimefunItemStack("BILLON_INGOT", Material.IRON_INGOT, "&銀銅合金");
+    public static final SlimefunItemStack BILLON_INGOT = new SlimefunItemStack("BILLON_INGOT", Material.IRON_INGOT, "&b銀銅合金");
     /* Alloy (Copper + Zinc) */
     public static final SlimefunItemStack BRASS_INGOT = new SlimefunItemStack("BRASS_INGOT", Material.GOLD_INGOT, "&b黃銅錠");
     /* Alloy (Aluminum + Brass) */
@@ -636,8 +642,9 @@ public final class SlimefunItems {
 
     public static final SlimefunItemStack RAINBOW_RUNE = new SlimefunItemStack("ANCIENT_RUNE_RAINBOW", new ColoredFireworkStar(Color.FUCHSIA, "&7古代魔法符文 &8&l[&d&l虹&8&l]"));
     public static final SlimefunItemStack LIGHTNING_RUNE = new SlimefunItemStack("ANCIENT_RUNE_LIGHTNING", new ColoredFireworkStar(Color.fromRGB(255, 255, 95), "&7古代魔法符文 &8&l[&e&l電&8&l]"));
-    public static final SlimefunItemStack SOULBOUND_RUNE = new SlimefunItemStack("ANCIENT_RUNE_SOULBOUND", new ColoredFireworkStar(Color.fromRGB(47, 0, 117), "&7古代魔法符文 &8&l[&5&l魂&8&l]", "&e將此符文放在掉落的物品上", "&e該物品將附上&5靈魂綁定", "", "&e建議僅在&6重要物品&e上使用此符文", "", "&e靈魂綁定的物品不會在死亡時掉落"));
-    public static final SlimefunItemStack ENCHANTMENT_RUNE = new SlimefunItemStack("ANCIENT_RUNE_ENCHANTMENT", new ColoredFireworkStar(Color.fromRGB(255, 217, 25), "&7古代魔法符文 &8&l[&6&l魅&8&l]", "&e將此符文放在掉落的物品上", "&e該物品將隨機附上一項&6附魔"));
+    public static final SlimefunItemStack SOULBOUND_RUNE = new SlimefunItemStack("ANCIENT_RUNE_SOULBOUND", new ColoredFireworkStar(Color.fromRGB(47, 0, 117), "&7古代魔法符文 &8&l[&5&l魂&8&l]", "&e將此符文放在掉落的物品上", "&e該物品將附上&5靈魂綁定.", "", "&e建議僅在&6重要物品&e上使用此符文", "&e靈魂綁定的物品不會在死亡時掉落."));
+    public static final SlimefunItemStack ENCHANTMENT_RUNE = new SlimefunItemStack("ANCIENT_RUNE_ENCHANTMENT", new ColoredFireworkStar(Color.fromRGB(255, 217, 25), "&7古代魔法符文 &8&l[&6&l魅&8&l]", "&e將此符文放在掉落的物品上", "&e該物品將隨機附上一項&6附魔."));
+    public static final SlimefunItemStack VILLAGER_RUNE = new SlimefunItemStack("ANCIENT_RUNE_VILLAGERS", new ColoredFireworkStar(Color.fromRGB(160, 20, 5), "&7古代魔法符文 &8&l[&4&l村民&8&l]", "&e右鍵村民來清除", "&e當前職業與交易選項.", "&e村民會在一段時間過後", "&e自己去尋找新的工作."));
 
     /* Electricity */
     public static final SlimefunItemStack SOLAR_GENERATOR = new SlimefunItemStack("SOLAR_GENERATOR", Material.DAYLIGHT_DETECTOR, "&b太陽能發電機", "", LoreBuilder.machine(MachineTier.BASIC, MachineType.GENERATOR), LoreBuilder.powerBuffer(0), LoreBuilder.powerPerSecond(4));

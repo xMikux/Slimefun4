@@ -2,7 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of contents**
 
-- [Release Candidate 16 (TBD)](#release-candidate-16-tbd)
+- [Release Candidate 16 (07 Sep 2020)](#release-candidate-16-07-sep-2020)
 - [Release Candidate 15 (01 Aug 2020)](#release-candidate-15-01-aug-2020)
 - [Release Candidate 14 (12 Jul 2020)](#release-candidate-14-12-jul-2020)
 - [Release Candidate 13 (16 Jun 2020)](#release-candidate-13-16-jun-2020)
@@ -21,7 +21,8 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## Release Candidate 16 (TBD)
+## Release Candidate 16 (07 Sep 2020)
+https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun4/stable/#16
 
 #### Additions
 * Added an option for Industrial Miners to mine Ancient Debris
@@ -34,6 +35,11 @@
 * Industrial Miners can now also mine Gilded Blackstone
 * Added a config option to disable Players from burning when exposed to radiation
 * Added a config option to drop excess items when using /sf give
+* Added Strange Nether Goo
+* Added Villager Rune
+* Added Synthetic Shulker Shells
+* Added Climbing Pick
+* Added item breaking sounds to some slimefun tools
 
 #### Changes
 * Performance improvement for Programmable Android rotations
@@ -54,6 +60,9 @@
 * Performance improvements for energy networks
 * (API) Rewritten Block-Energy API
 * Removed "durability" setting from cargo nodes
+* Small performance improvements for radiation
+* Small performance improvements for Auto Disenchanters
+* Magnesium Salt in Magnesium-Salt generators now lasts longer
 
 #### Fixes
 * Fixed Programmable Androids rotating in the wrong direction
@@ -97,8 +106,10 @@
 * Fixed #2269
 * Fixed #2266
 * Fixed #2275
+* Fixed Multi Tools consuming hunger points when holding a Wind Staff in your off hand
 
 ## Release Candidate 15 (01 Aug 2020)
+https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun4/stable/#15
 
 #### Additions
 * Added "Bone Block -> Bone meal" recipe to the Grind Stone
@@ -153,6 +164,7 @@
 * Fixed #2166
 
 ## Release Candidate 14 (12 Jul 2020)
+https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun4/stable/#14
 
 #### Additions
 * Added support for Minecraft 1.16
