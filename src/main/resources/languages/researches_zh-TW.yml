@@ -14,7 +14,7 @@ slimefun:
   magic_sugar: 魔法糖
   monster_jerky: 腐肉乾
   slime_armor: 史萊姆套裝
-  sword_of_beheading: 斬首劍
+  sword_of_beheading: 斬首巨劍
   basic_circuit_board: 基礎電路板
   advanced_circuit_board: 高級電路板
   smeltery: 冶煉爐
@@ -78,14 +78,14 @@ slimefun:
   crushed_ore: 礦石純化
   redstone_alloy: 紅石合金
   carbonado_tools: 頂級機器
-  first_aid: 急救包
+  first_aid: 急救套組
   gold_armor: 比較強的黃金套裝
   night_vision_googles: 夜視鏡
   pickaxe_of_containment: 生怪磚之鎬
   hercules_pickaxe: 粉碎鎬
   table_saw: 鋸木機
   slime_steel_armor: 鋼鐵史萊姆套裝
-  blade_of_vampires: 吸血之刃
+  blade_of_vampires: 吸血之劍
   water_staff: 元素法杖—水
   24k_gold_block: 我就有錢
   composter: 堆肥桶
@@ -93,7 +93,7 @@ slimefun:
   explosive_tools: 爆炸性的突破
   automated_panning_machine: 自動掏金機
   boots_of_the_stomper: 踐踏之靴
-  pickaxe_of_the_seeker: 合法X-ray
+  pickaxe_of_the_seeker: 尋礦鎬
   backpacks: 背包
   woven_backpack: 編織背包
   crucible: 坩鍋
@@ -140,8 +140,8 @@ slimefun:
   duct_tape: FLEX TAPE
   plastic_sheet: 塑膠
   android_memory_core: 機器人記憶體
-  oil: 美國的最愛
-  fuel: 石油燃料
+  oil: 石油
+  fuel: 燃油
   hologram_projector: 投影文字
   capacitors: 初階電容器
   high_tier_capacitors: 高階電容器
