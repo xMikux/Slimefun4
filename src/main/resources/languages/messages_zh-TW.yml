@@ -22,6 +22,12 @@ commands:
     player-never-joined: "&4找不到該ID的玩家"
     backpack-does-not-exist: "&4該背包不存在!"
     restored-backpack-given: "&a你的背包已被修復並放到你的物品欄中!"
+
+  charge:
+    description: 對手持物品進行充電
+    charge-success: 此物品已充電!
+    not-rechargeable: 此物品無法被充電!
+
 guide:
   search:
     message: "&c你要搜尋什麼?"
