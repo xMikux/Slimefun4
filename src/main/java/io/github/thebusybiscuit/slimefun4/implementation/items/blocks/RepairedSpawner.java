@@ -71,8 +71,8 @@ public class RepairedSpawner extends SimpleSlimefunItem<BlockPlaceHandler> {
      */
     public Optional<EntityType> getEntityType(ItemStack item) {
         for (String line : item.getItemMeta().getLore()) {
-            if (ChatColor.stripColor(line).startsWith("Type: ") && !line.contains("<Type>")) {
-                EntityType type = EntityType.valueOf(ChatColor.stripColor(line).replace("Type: ", "").replace(' ', '_').toUpperCase(Locale.ROOT));
+            if (ChatColor.stripColor(line).startsWith("類型: ") && !line.contains("<Type>")) {
+                EntityType type = EntityType.valueOf(ChatColor.stripColor(line).replace("類型: ", "").replace(' ', '_').toUpperCase(Locale.ROOT));
                 return Optional.of(type);
             }
         }

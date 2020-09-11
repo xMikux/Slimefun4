@@ -51,7 +51,7 @@ public class IndustrialMiner extends MultiBlockMachine {
     private final ItemSetting<Boolean> canMineAncientDebris = new ItemSetting<>("can-mine-ancient-debris", false);
 
     public IndustrialMiner(Category category, SlimefunItemStack item, Material baseMaterial, boolean silkTouch, int range) {
-        super(category, item, new ItemStack[] { null, null, null, new CustomItem(Material.PISTON, "Piston (facing up)"), new ItemStack(Material.CHEST), new CustomItem(Material.PISTON, "Piston (facing up)"), new ItemStack(baseMaterial), new ItemStack(SlimefunPlugin.getMinecraftVersion().isAtLeast(MinecraftVersion.MINECRAFT_1_14) ? Material.BLAST_FURNACE : Material.FURNACE), new ItemStack(baseMaterial) }, BlockFace.UP);
+        super(category, item, new ItemStack[] { null, null, null, new CustomItem(Material.PISTON, "活塞 (朝上)"), new ItemStack(Material.CHEST), new CustomItem(Material.PISTON, "活塞 (朝上)"), new ItemStack(baseMaterial), new ItemStack(SlimefunPlugin.getMinecraftVersion().isAtLeast(MinecraftVersion.MINECRAFT_1_14) ? Material.BLAST_FURNACE : Material.FURNACE), new ItemStack(baseMaterial) }, BlockFace.UP);
 
         this.range = range;
         this.silkTouch = silkTouch;
@@ -146,7 +146,7 @@ public class IndustrialMiner extends MultiBlockMachine {
      *            The item that shall be consumed
      */
     public void addFuelType(int ores, ItemStack item) {
-        Validate.isTrue(ores > 1 && ores % 2 == 0, "The amount of ores must be at least 2 and a multiple of 2.");
+        Validate.isTrue(ores > 1 && ores % 2 == 0, "礦物的數量必須最少為二且二的倍數.");
         fuelTypes.add(new MachineFuel(ores / 2, item));
     }
 
@@ -163,7 +163,7 @@ public class IndustrialMiner extends MultiBlockMachine {
             ItemStack item = fuel.getInput().clone();
             ItemMeta im = item.getItemMeta();
             List<String> lore = new ArrayList<>();
-            lore.add(ChatColors.color("&8\u21E8 &7Lasts for max. " + fuel.getTicks() + " Ores"));
+            lore.add(ChatColors.color("&8\u21E8 &7剩餘最多 " + fuel.getTicks() + " 個礦物"));
             im.setLore(lore);
             item.setItemMeta(im);
             list.add(item);
