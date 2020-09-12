@@ -33,7 +33,7 @@ public class SlimefunGuideItem extends ItemStack {
         meta.setDisplayName(ChatColors.color(name));
 
         List<String> lore = new LinkedList<>();
-        lore.add(implementation instanceof CheatSheetSlimefunGuide ? "&4&l只能由管理員打開" : "");
+        lore.add(implementation instanceof CheatSheetSlimefunGuide ? ChatColors.color("&4&l只能由管理員打開") : "");
         lore.add(ChatColors.color("&e右鍵點擊 &8\u21E8 &7打開指南"));
         lore.add(ChatColors.color("&e蹲下+右鍵點擊 &8\u21E8 &7打開設置及資訊"));
 
