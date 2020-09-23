@@ -2,7 +2,7 @@
 正在找原作連結? [**點此**](https://github.com/Slimefun/Slimefun4/blob/master/README.md#download-slimefun-4)
 Looking for English Version? [**Click here!**](https://github.com/Slimefun/Slimefun4)
 
-下載此翻譯版? [**點此**]()
+下載此翻譯版? [**點此**](https://xmikux.github.io/builds/xMikux/Slimefun4/master/)
 
 **此插件還正在翻譯中!**
 此為業餘翻譯,有甚麼錯誤的歡迎糾正。 **無法時常更新** <br>
@@ -18,7 +18,8 @@ Looking for English Version? [**Click here!**](https://github.com/Slimefun/Slime
 
 但它也帶來非常多的附加插件!<br>
 查看官方的 [附加插件](https://github.com/Slimefun/Slimefun4/wiki/Addons), 你可能會找到你想要的附加. <br>
-查看此專案翻譯者的繁體附加插件 **仍在翻譯中**
+查看此專案翻譯者的繁體附加插件 **仍在翻譯中** 但你可以在[構建頁面](https://xmikux.github.io/builds/)上找已翻譯.<br>
+雖然有可能哪裡有翻譯錯誤 請多見諒.
 
 ### 快速導航
 * **[下載黏液科技](#下載-黏液科技)**
@@ -40,7 +41,7 @@ Looking for English Version? [**Click here!**](https://github.com/Slimefun/Slime
 | **Bug 回報** | :heavy_check_mark: | :x: |
 | **發布前測試** | :x: | :heavy_check_mark: |
 | **更新日誌** | :x: | :memo: **[更新日誌](https://github.com/Slimefun/Slimefun4/blob/master/CHANGELOG.md)** |
-| **下載連結** | :floppy_disk: **[下載最新](https://github.com/xMikux/Slimefun4/releases)** | :floppy_disk: **[下載穩定版](https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun4/stable/)** |
+| **下載連結** | :floppy_disk: **[下載最新](https://xmikux.github.io/builds/xMikux/Slimefun4/master)** | :floppy_disk: **[下載穩定版](https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun4/stable/)** |
 
 **建議使用最新版或官方最新開發版,可以獲得最新內容更新以及Bug修復!**
 
@@ -64,8 +65,8 @@ Looking for English Version? [**Click here!**](https://github.com/Slimefun/Slime
 
 <p align="center">
   <a href="https://discord.gg/fsD4Bkh">
-    <img src="https://img.shields.io/discord/565557184348422174?color=7289DA&label=Discord&style=for-the-badge" alt="Discord Invite"/>
-  </a><br>
+    <img src="https://discordapp.com/api/guilds/565557184348422174/widget.png?style=banner3" alt="Discord Invite"/>
+  </a>
 </p>
 
 ## 免責聲明
