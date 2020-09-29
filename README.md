@@ -64,7 +64,7 @@ Looking for English Version? [**Click here!**](https://github.com/Slimefun/Slime
 不遵守這些規則將導致你會被踢除甚至封禁在官方Discord.
 
 <p align="center">
-  <a href="https://discord.gg/fsD4Bkh">
+  <a href="https://discord.gg/slimefun">
     <img src="https://discordapp.com/api/guilds/565557184348422174/widget.png?style=banner3" alt="Discord Invite"/>
   </a>
 </p>
