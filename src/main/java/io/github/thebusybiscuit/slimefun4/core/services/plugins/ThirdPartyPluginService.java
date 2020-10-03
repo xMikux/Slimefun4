@@ -96,7 +96,7 @@ public class ThirdPartyPluginService {
 
     private boolean isPluginInstalled(@Nonnull String hook) {
         if (plugin.getServer().getPluginManager().isPluginEnabled(hook)) {
-            Slimefun.getLogger().log(Level.INFO, "Hooked into Plugin: {0}", hook);
+            Slimefun.getLogger().log(Level.INFO, "鉤入插件: {0}", hook);
             return true;
         }
         else {

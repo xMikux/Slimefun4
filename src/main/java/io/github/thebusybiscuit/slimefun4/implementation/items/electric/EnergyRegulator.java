@@ -46,7 +46,7 @@ public class EnergyRegulator extends SlimefunItem {
 
             @Override
             public void onPlayerPlace(BlockPlaceEvent e) {
-                SimpleHologram.update(e.getBlock(), "&7Connecting...");
+                SimpleHologram.update(e.getBlock(), "&7連接中...");
             }
 
         };
