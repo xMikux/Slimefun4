@@ -143,6 +143,7 @@ messages:
     knight: "&a&o你的護身符給了你5秒的回復時間"
     whirlwind: "&a&o你的護身符反射了投射物"
     wizard: "&a&o你的護身符為你升高了幸運等級，但也降低了其他附魔等級"
+    caveman: '&a&o你的護符給予你挖掘加速'
 
   soulbound-rune:
     fail: "&c你一次只能魂綁一個物品。"
@@ -256,6 +257,9 @@ anvil:
 
 brewing_stand:
   not-working: '&4你不能用Slimefun物品釀造!'
+
+cartography_table:
+  not-working: '&4你不能用Slimefun物品在製圖台上!'
 
 villagers:
   no-trading: '&4你不能用Slimefun的物品和村民交易!'

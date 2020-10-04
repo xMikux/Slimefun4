@@ -551,6 +551,7 @@ public final class SlimefunItems {
     public static final SlimefunItemStack TALISMAN_KNIGHT = new SlimefunItemStack("KNIGHT_TALISMAN", Material.EMERALD, "&a騎士護身符", "", "&f當你的欄位有這個護身符時", "&f如果你被近戰怪物攻擊的時候", "&e有30％的機率給予5秒的「回復 IV」效果", "&c會消耗此護身符");
     public static final SlimefunItemStack TALISMAN_WHIRLWIND = new SlimefunItemStack("WHIRLWIND_TALISMAN", Material.EMERALD, "&a旋風護身符", "", "&f當你的欄位有這個護身符時", "&e有60％的機率反彈朝向你的投射物");
     public static final SlimefunItemStack TALISMAN_WIZARD = new SlimefunItemStack("WIZARD_TALISMAN", Material.EMERALD, "&a巫師護身符", "", "&f當你的欄位有這個護身符時", "&e附魔時有機率附到等級IV或V的附魔", "&e但也有機率降低其他附魔等級");
+    public static final SlimefunItemStack TALISMAN_CAVEMAN = new SlimefunItemStack("CAVEMAN_TALISMAN", Material.EMERALD, "&a穴居人護身符", "", "&f當你的欄位有這個護身符時", "&f將有50%的機率", "&f在你挖任何礦物時", "&f獲得「挖掘加速 III」的效果");
 
     /* Staves */
     public static final SlimefunItemStack STAFF_ELEMENTAL = new SlimefunItemStack("STAFF_ELEMENTAL", Material.STICK, "&6元素法杖");
