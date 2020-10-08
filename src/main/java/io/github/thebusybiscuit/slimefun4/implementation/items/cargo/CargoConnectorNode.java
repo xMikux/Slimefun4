@@ -26,8 +26,7 @@ public class CargoConnectorNode extends SimpleSlimefunItem<BlockUseHandler> {
 
             if (CargoNet.getNetworkFromLocation(b.getLocation()) != null) {
                 p.sendMessage(ChatColors.color("&7連接: " + "&2\u2714"));
-            }
-            else {
+            } else {
                 p.sendMessage(ChatColors.color("&7連接: " + "&4\u2718"));
             }
         };

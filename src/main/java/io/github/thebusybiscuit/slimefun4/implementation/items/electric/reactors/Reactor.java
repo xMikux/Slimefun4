@@ -159,8 +159,7 @@ public abstract class Reactor extends AbstractEnergyProvider {
 
                 return false;
             });
-        }
-        else {
+        } else {
             menu.replaceExistingItem(INFO_SLOT, new CustomItem(Material.RED_WOOL, "&7反應爐端口", "", "&c未檢測到", "", "&7反應爐端口必須放置在反應爐上方的第3格處!"));
             menu.addMenuClickHandler(INFO_SLOT, (p, slot, item, action) -> {
                 updateInventory(menu, b);
@@ -193,8 +192,7 @@ public abstract class Reactor extends AbstractEnergyProvider {
 
         if (needsCooling()) {
             preset.addItem(7, new CustomItem(getCoolant(), "&b冷卻劑槽", "", "&f可以放入冷卻劑", "&4如果沒有冷卻劑", "&4你的反應爐將會爆炸"));
-        }
-        else {
+        } else {
             preset.addItem(7, new CustomItem(Material.BARRIER, "&b冷卻劑槽", "", "&f可以放入冷卻劑"));
 
             for (int i : border_4) {
@@ -284,13 +282,11 @@ public abstract class Reactor extends AbstractEnergyProvider {
 
             if (timeleft > 0) {
                 return generateEnergy(l, data, inv, accessPort, timeleft);
-            }
-            else {
+            } else {
                 createByproduct(l, inv, accessPort);
                 return 0;
             }
-        }
-        else {
+        } else {
             burnNextFuel(l, inv, accessPort);
             return 0;
         }
@@ -321,8 +317,7 @@ public abstract class Reactor extends AbstractEnergyProvider {
 
         if (space >= produced) {
             return getEnergyProduction();
-        }
-        else {
+        } else {
             return 0;
         }
     }
@@ -438,8 +433,7 @@ public abstract class Reactor extends AbstractEnergyProvider {
             }
 
             return false;
-        }
-        else {
+        } else {
             ReactorHologram.update(reactor, "&b\u2744 &7" + getPercentage(timeleft, processing.get(reactor).getTicks()) + "%");
         }
 
@@ -484,8 +478,7 @@ public abstract class Reactor extends AbstractEnergyProvider {
 
         if (BlockStorage.check(port, SlimefunItems.REACTOR_ACCESS_PORT.getItemId())) {
             return BlockStorage.getInventory(port);
-        }
-        else {
+        } else {
             return null;
         }
     }

@@ -57,8 +57,7 @@ public class CargoNet extends ChestTerminalNetwork {
 
         if (cargoNetwork.isPresent()) {
             return cargoNetwork.get();
-        }
-        else {
+        } else {
             CargoNet network = new CargoNet(l);
             SlimefunPlugin.getNetworkManager().registerNetwork(network);
             return network;
@@ -152,8 +151,7 @@ public class CargoNet extends ChestTerminalNetwork {
 
         if (connectorNodes.isEmpty() && terminusNodes.isEmpty()) {
             SimpleHologram.update(b, "&c找不到物流節點");
-        }
-        else {
+        } else {
             SimpleHologram.update(b, "&7狀態: &a&l在線");
 
             // Skip ticking if the threshold is not reached. The delay is not same as minecraft tick,
@@ -192,8 +190,7 @@ public class CargoNet extends ChestTerminalNetwork {
 
             if (frequency == 16) {
                 chestTerminalNodes.add(node);
-            }
-            else if (frequency >= 0 && frequency < 16) {
+            } else if (frequency >= 0 && frequency < 16) {
                 inputs.put(node, frequency);
             }
         }
@@ -252,8 +249,7 @@ public class CargoNet extends ChestTerminalNetwork {
         try {
             String str = BlockStorage.getLocationInfo(node).getString("frequency");
             return str == null ? 0 : Integer.parseInt(str);
-        }
-        catch (Exception x) {
+        } catch (Exception x) {
             Slimefun.getLogger().log(Level.SEVERE, x, () -> "An Error occurred while parsing a Cargo Node Frequency (" + node.getWorld().getName() + " - " + node.getBlockX() + "," + node.getBlockY() + "," + +node.getBlockZ() + ")");
             return 0;
         }

@@ -104,15 +104,13 @@ public class MetricsService {
             SlimefunPlugin.runSync(() -> {
                 try {
                     start.invoke(null);
-                    plugin.getLogger().info("Metrics構建 #" + version + "啟動.");
-                }
-                catch (Exception | LinkageError e) {
+                    plugin.getLogger().info("Metrics構建 #" + version + " 啟動.");
+                } catch (Exception | LinkageError e) {
                     plugin.getLogger().log(Level.WARNING, "無法啟動metrics.", e);
                 }
             });
-        }
-        catch (Exception | LinkageError e) {
-            plugin.getLogger().log(Level.WARNING, "Failed to load the metrics module. Maybe the jar is corrupt?", e);
+        } catch (Exception | LinkageError e) {
+            plugin.getLogger().log(Level.WARNING, "無法加載metrics模塊. 可能jar損壞了?", e);
         }
     }
 
@@ -125,8 +123,7 @@ public class MetricsService {
             if (moduleClassLoader != null) {
                 moduleClassLoader.close();
             }
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             plugin.getLogger().log(Level.WARNING, "無法清理模塊加載. 有些記憶體可能已洩漏.");
         }
     }
@@ -177,8 +174,7 @@ public class MetricsService {
             }
 
             return node.getObject().getInt("tag_name");
-        }
-        catch (UnirestException e) {
+        } catch (UnirestException e) {
             plugin.getLogger().log(Level.WARNING, "無法獲取Metrics最新構建: {0}", e.getMessage());
             return -1;
         }
@@ -224,12 +220,10 @@ public class MetricsService {
                 hasDownloadedUpdate = true;
                 return true;
             }
-        }
-        catch (UnirestException e) {
+        } catch (UnirestException e) {
             plugin.getLogger().log(Level.WARNING, "無法從構建頁面獲取最新的jar檔案. 也許GitHub服務中斷?");
-        }
-        catch (IOException e) {
-            plugin.getLogger().log(Level.WARNING, "無法將舊的metric檔案替換維新的. 請手動執行此操作! 錯誤: {0}", e.getMessage());
+        } catch (IOException e) {
+            plugin.getLogger().log(Level.WARNING, "無法將舊的metric檔案替換為新的. 請手動執行此操作! 錯誤: {0}", e.getMessage());
         }
 
         return false;

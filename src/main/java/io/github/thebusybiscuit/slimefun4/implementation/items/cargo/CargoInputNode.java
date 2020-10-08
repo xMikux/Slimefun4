@@ -44,8 +44,7 @@ public class CargoInputNode extends AbstractFilterNode {
                 updateBlockMenu(menu, b);
                 return false;
             });
-        }
-        else {
+        } else {
             menu.replaceExistingItem(24, new CustomItem(HeadTexture.ENERGY_REGULATOR.getAsItemStack(), "&7循環模式: &2\u2714", "", "&e> 點擊以禁用循環模式", "&e(物品將在頻道上平均分配)"));
             menu.addMenuClickHandler(24, (p, slot, item, action) -> {
                 BlockStorage.addBlockInfo(b, ROUND_ROBIN_MODE, String.valueOf(false));

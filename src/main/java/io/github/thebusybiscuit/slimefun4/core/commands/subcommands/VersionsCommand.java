@@ -50,14 +50,12 @@ class VersionsCommand extends SubCommand {
                 String version = plugin.getDescription().getVersion();
 
                 if (Bukkit.getPluginManager().isPluginEnabled(plugin)) {
-                    sender.sendMessage(ChatColor.GREEN + " " + plugin.getName() + ChatColor.DARK_GREEN + " " + version);
-                }
-                else {
-                    sender.sendMessage(ChatColor.RED + " " + plugin.getName() + ChatColor.DARK_RED + " " + version);
+                    sender.sendMessage(ChatColor.GREEN + " " + plugin.getName() + ChatColor.DARK_GREEN + " v" + version);
+                } else {
+                    sender.sendMessage(ChatColor.RED + " " + plugin.getName() + ChatColor.DARK_RED + " v" + version);
                 }
             }
-        }
-        else {
+        } else {
             SlimefunPlugin.getLocalization().sendMessage(sender, "messages.no-permission", true);
         }
     }

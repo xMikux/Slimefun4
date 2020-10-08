@@ -62,9 +62,8 @@ public class ReactorAccessPort extends SlimefunItem {
 
                         return false;
                     });
-                }
-                else {
-                    menu.replaceExistingItem(INFO_SLOT, new CustomItem(Material.RED_WOOL, "&7反應爐", "", "&c未檢測到", "", "&7反應爐必須放置在反應爐端口下方的第3格處!"));
+                } else {
+                    menu.replaceExistingItem(INFO_SLOT, new CustomItem(Material.RED_WOOL, "&7反應爐", "", "&c未檢測到", "", "&7反應爐必須放置在反應爐端口下方的第3格處"));
                     menu.addMenuClickHandler(INFO_SLOT, (p, slot, item, action) -> {
                         newInstance(menu, b);
                         return false;
@@ -76,8 +75,7 @@ public class ReactorAccessPort extends SlimefunItem {
             public int[] getSlotsAccessedByItemTransport(ItemTransportFlow flow) {
                 if (flow == ItemTransportFlow.INSERT) {
                     return getInputSlots();
-                }
-                else {
+                } else {
                     return getOutputSlots();
                 }
             }
@@ -87,12 +85,10 @@ public class ReactorAccessPort extends SlimefunItem {
                 if (flow == ItemTransportFlow.INSERT) {
                     if (SlimefunItem.getByItem(item) instanceof CoolantCell) {
                         return getCoolantSlots();
-                    }
-                    else {
+                    } else {
                         return getFuelSlots();
                     }
-                }
-                else {
+                } else {
                     return getOutputSlots();
                 }
             }

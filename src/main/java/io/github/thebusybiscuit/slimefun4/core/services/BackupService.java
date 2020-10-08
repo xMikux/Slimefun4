@@ -42,8 +42,7 @@ public class BackupService implements Runnable {
         if (backups.size() > MAX_BACKUPS) {
             try {
                 purgeBackups(backups);
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 Slimefun.getLogger().log(Level.WARNING, "無法刪除舊的備份資料", e);
             }
         }
@@ -57,13 +56,11 @@ public class BackupService implements Runnable {
                         createBackup(output);
                     }
 
-                    Slimefun.getLogger().log(Level.INFO, "備份Slimefun資料至 {0}", file.getName());
-                }
-                else {
+                    Slimefun.getLogger().log(Level.INFO, "備份Slimefun資料至: {0}", file.getName());
+                } else {
                     Slimefun.getLogger().log(Level.WARNING, "無法創建備份檔案: {0}", file.getName());
                 }
-            }
-            catch (IOException x) {
+            } catch (IOException x) {
                 Slimefun.getLogger().log(Level.SEVERE, x, () -> "An Error occurred while creating a backup for Slimefun " + SlimefunPlugin.getVersion());
             }
         }

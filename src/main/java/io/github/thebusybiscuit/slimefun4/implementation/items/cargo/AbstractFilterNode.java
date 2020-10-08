@@ -74,8 +74,7 @@ abstract class AbstractFilterNode extends AbstractCargoNode {
                 updateBlockMenu(menu, b);
                 return false;
             });
-        }
-        else {
+        } else {
             menu.replaceExistingItem(15, new CustomItem(Material.BLACK_WOOL, "&7模式: &8黑名單", "", "&e> 點擊更改為白名單"));
             menu.addMenuClickHandler(15, (p, slot, item, action) -> {
                 BlockStorage.addBlockInfo(b, FILTER_TYPE, "whitelist");
@@ -93,9 +92,8 @@ abstract class AbstractFilterNode extends AbstractCargoNode {
                 updateBlockMenu(menu, b);
                 return false;
             });
-        }
-        else {
-            menu.replaceExistingItem(25, new CustomItem(Material.MAP, "&7包括 Lore: &4\u2718", "", "&e> 點擊以切換是否包含Lore"));
+        } else {
+            menu.replaceExistingItem(25, new CustomItem(Material.MAP, "&7包括: &4\u2718", "", "&e> 點擊以切換是否包含Lore"));
             menu.addMenuClickHandler(25, (p, slot, item, action) -> {
                 BlockStorage.addBlockInfo(b, FILTER_LORE, String.valueOf(true));
                 updateBlockMenu(menu, b);
