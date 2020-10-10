@@ -63,7 +63,7 @@ public class ReactorAccessPort extends SlimefunItem {
                         return false;
                     });
                 } else {
-                    menu.replaceExistingItem(INFO_SLOT, new CustomItem(Material.RED_WOOL, "&7反應爐", "", "&c未檢測到", "", "&7反應爐必須放置在反應爐端口下方的第3格處"));
+                    menu.replaceExistingItem(INFO_SLOT, new CustomItem(Material.RED_WOOL, "&7反應爐", "", "&c未檢測到", "", "&7反應爐必須放置在反應爐端口下方的第3格處!"));
                     menu.addMenuClickHandler(INFO_SLOT, (p, slot, item, action) -> {
                         newInstance(menu, b);
                         return false;
