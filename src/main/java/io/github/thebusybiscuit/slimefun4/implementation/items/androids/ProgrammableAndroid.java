@@ -81,7 +81,7 @@ public class ProgrammableAndroid extends SlimefunItem implements InventoryBlock,
         texture = item.getSkullTexture().orElse(null);
         registerDefaultFuelTypes();
 
-        new BlockMenuPreset(getID(), "可編輯的機器人") {
+        new BlockMenuPreset(getId(), "可編輯的機器人") {
 
             @Override
             public void init() {
@@ -131,7 +131,7 @@ public class ProgrammableAndroid extends SlimefunItem implements InventoryBlock,
             }
         };
 
-        registerBlockHandler(getID(), (p, b, stack, reason) -> {
+        registerBlockHandler(getId(), (p, b, stack, reason) -> {
             boolean allow = reason == UnregisterReason.PLAYER_BREAK && (BlockStorage.getLocationInfo(b.getLocation(), "owner").equals(p.getUniqueId().toString()) || p.hasPermission("slimefun.android.bypass"));
 
             if (allow) {

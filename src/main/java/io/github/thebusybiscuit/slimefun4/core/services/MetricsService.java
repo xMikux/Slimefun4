@@ -48,12 +48,7 @@ public class MetricsService {
     private boolean hasDownloadedUpdate = false;
 
     static {
-        Unirest.config()
-        .concurrency(2, 1)
-        .setDefaultHeader("User-Agent", "MetricsModule Auto-Updater")
-        .setDefaultHeader("Accept", "application/vnd.github.v3+json")
-        .enableCookieManagement(false)
-        .cookieSpec("ignoreCookies");
+        Unirest.config().concurrency(2, 1).setDefaultHeader("User-Agent", "MetricsModule Auto-Updater").setDefaultHeader("Accept", "application/vnd.github.v3+json").enableCookieManagement(false).cookieSpec("ignoreCookies");
     }
 
     public MetricsService(@Nonnull SlimefunPlugin plugin) {
@@ -221,7 +216,7 @@ public class MetricsService {
                 return true;
             }
         } catch (UnirestException e) {
-            plugin.getLogger().log(Level.WARNING, "無法從構建頁面獲取最新的jar檔案. 也許GitHub服務中斷?");
+            plugin.getLogger().log(Level.WARNING, "無法從構建頁面獲取最新的jar檔案. 也許GitHub服務中斷? 回應: {0}", e.getMessage());
         } catch (IOException e) {
             plugin.getLogger().log(Level.WARNING, "無法將舊的metric檔案替換為新的. 請手動執行此操作! 錯誤: {0}", e.getMessage());
         }
