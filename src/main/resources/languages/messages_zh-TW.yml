@@ -254,6 +254,7 @@ machines:
 
 anvil:
   not-working: "&4科技物品需要用自動鐵砧+修理膠帶!"
+  mcmmo-salvaging: '&4你無法挽救Slimefun物品!'
 
 brewing_stand:
   not-working: '&4你不能用Slimefun物品釀造!'
@@ -270,6 +271,9 @@ backpack:
 
 workbench:
   not-enhanced: "&4科技物品不可在普通合成台使用"
+
+cauldron:
+  no-discoloring: '&4你無法將Slimefun的盔甲褪色'
 
 gps:
   deathpoint: "&4死亡點&7%date%"
