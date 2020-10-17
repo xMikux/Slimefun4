@@ -33,7 +33,7 @@ Looking for English Version? [**Click here!**](https://github.com/Slimefun/Slime
 
 | | 開發版 (最新) | "穩定版 (官方)" |
 | ------------------ | -------- | -------- |
-| **Minecraft 版本** | :video_game: **1.13.\* - 1.16.\*** | :video_game: **1.13.\* - 1.16.\*** |
+| **Minecraft 版本** | :video_game: **1.14.\* - 1.16.\*** | :video_game: **1.13.\* - 1.16.\*** |
 | **自動更新** | :heavy_check_mark: | :heavy_check_mark: |
 | **頻繁的更新** | :heavy_check_mark: | :x: |
 | **最新內容** | :heavy_check_mark: | :x: |
