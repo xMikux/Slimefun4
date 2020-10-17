@@ -8,12 +8,10 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.ItemStack;
 
 import io.github.thebusybiscuit.slimefun4.core.attributes.Soulbound;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemDropHandler;
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
@@ -48,11 +46,11 @@ public class SoulboundRune extends SimpleSlimefunItem<ItemDropHandler> {
         return (e, p, item) -> {
             if (isItem(item.getItemStack())) {
 
-                if (!Slimefun.hasUnlocked(p, SlimefunItems.SOULBOUND_RUNE, true)) {
+                if (!Slimefun.hasUnlocked(p, this, true)) {
                     return true;
                 }
 
-                Slimefun.runSync(() -> activate(p, e, item), 20L);
+                SlimefunPlugin.runSync(() -> activate(p, item), 20L);
 
                 return true;
             }
@@ -60,52 +58,61 @@ public class SoulboundRune extends SimpleSlimefunItem<ItemDropHandler> {
         };
     }
 
-    private void activate(Player p, PlayerDropItemEvent e, Item item) {
+    private void activate(Player p, Item rune) {
         // Being sure the entity is still valid and not picked up or whatsoever.
-        if (!item.isValid()) {
+        if (!rune.isValid()) {
             return;
         }
 
-        Location l = item.getLocation();
+        Location l = rune.getLocation();
         Collection<Entity> entites = l.getWorld().getNearbyEntities(l, RANGE, RANGE, RANGE, this::findCompatibleItem);
         Optional<Entity> optional = entites.stream().findFirst();
 
         if (optional.isPresent()) {
-            Item entity = (Item) optional.get();
-            ItemStack target = entity.getItemStack();
+            Item item = (Item) optional.get();
+            ItemStack itemStack = item.getItemStack();
 
-            SlimefunUtils.setSoulbound(target, true);
-
-            if (target.getAmount() == 1) {
-                e.setCancelled(true);
-
+            if (itemStack.getAmount() == 1) {
                 // This lightning is just an effect, it deals no damage.
                 l.getWorld().strikeLightningEffect(l);
 
-                Slimefun.runSync(() -> {
+                SlimefunPlugin.runSync(() -> {
                     // Being sure entities are still valid and not picked up or whatsoever.
-                    if (item.isValid() && entity.isValid() && target.getAmount() == 1) {
+                    if (rune.isValid() && item.isValid() && itemStack.getAmount() == 1) {
 
                         l.getWorld().createExplosion(l, 0);
                         l.getWorld().playSound(l, Sound.ENTITY_GENERIC_EXPLODE, 0.3F, 1);
 
-                        entity.remove();
                         item.remove();
-                        l.getWorld().dropItemNaturally(l, target);
+                        rune.remove();
+
+                        SlimefunUtils.setSoulbound(itemStack, true);
+                        l.getWorld().dropItemNaturally(l, itemStack);
 
                         SlimefunPlugin.getLocalization().sendMessage(p, "messages.soulbound-rune.success", true);
+                    } else {
+                        SlimefunPlugin.getLocalization().sendMessage(p, "messages.soulbound-rune.fail", true);
                     }
                 }, 10L);
-            }
-            else {
+            } else {
                 SlimefunPlugin.getLocalization().sendMessage(p, "messages.soulbound-rune.fail", true);
             }
         }
     }
 
-    private boolean findCompatibleItem(Entity n) {
-        if (n instanceof Item) {
-            Item item = (Item) n;
+    /**
+     * This method checks whether a given {@link Entity} is an {@link Item} which can
+     * be bound to a soul. We exclude the {@link SoulboundRune} itself and any already
+     * {@link Soulbound} {@link Item}.
+     * 
+     * @param entity
+     *            The {@link Entity} to check
+     * 
+     * @return Whether this {@link Entity} is compatible
+     */
+    private boolean findCompatibleItem(Entity entity) {
+        if (entity instanceof Item) {
+            Item item = (Item) entity;
 
             return !SlimefunUtils.isSoulbound(item.getItemStack()) && !isItem(item.getItemStack());
         }

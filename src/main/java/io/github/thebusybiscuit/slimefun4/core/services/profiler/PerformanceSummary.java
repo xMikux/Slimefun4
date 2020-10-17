@@ -8,6 +8,9 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -17,40 +20,45 @@ import io.github.thebusybiscuit.slimefun4.utils.NumberUtils;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.chat.hover.content.Content;
+import net.md_5.bungee.api.chat.hover.content.Text;
 
 class PerformanceSummary {
 
     // The threshold at which a Block or Chunk is significant enough to appear in /sf timings
-    private static final int VISIBILITY_THRESHOLD = 280_000;
-    private static final int MIN_ITEMS = 3;
-    private static final int MAX_ITEMS = 10;
+    private static final int VISIBILITY_THRESHOLD = 260_000;
+    private static final int MIN_ITEMS = 6;
+    private static final int MAX_ITEMS = 20;
 
     private final SlimefunProfiler profiler;
     private final PerformanceRating rating;
     private final long totalElapsedTime;
     private final int totalTickedBlocks;
     private final float percentage;
+    private final int tickRate;
 
     private final Map<String, Long> chunks;
     private final Map<String, Long> plugins;
     private final Map<String, Long> items;
 
-    PerformanceSummary(SlimefunProfiler profiler, long totalElapsedTime, int totalTickedBlocks) {
+    PerformanceSummary(@Nonnull SlimefunProfiler profiler, long totalElapsedTime, int totalTickedBlocks) {
         this.profiler = profiler;
         this.rating = profiler.getPerformance();
         this.percentage = profiler.getPercentageOfTick();
         this.totalElapsedTime = totalElapsedTime;
         this.totalTickedBlocks = totalTickedBlocks;
+        this.tickRate = profiler.getTickRate();
 
         chunks = profiler.getByChunk();
         plugins = profiler.getByPlugin();
         items = profiler.getByItem();
     }
 
-    public void send(CommandSender sender) {
+    public void send(@Nonnull CommandSender sender) {
         sender.sendMessage("");
         sender.sendMessage(ChatColor.GREEN + "===== Slimefun Lag Profiler =====");
-        sender.sendMessage(ChatColor.GOLD + "Total: " + ChatColor.YELLOW + NumberUtils.getAsMillis(totalElapsedTime));
+        sender.sendMessage(ChatColor.GOLD + "Total time: " + ChatColor.YELLOW + NumberUtils.getAsMillis(totalElapsedTime));
+        sender.sendMessage(ChatColor.GOLD + "Running every: " + ChatColor.YELLOW + NumberUtils.roundDecimalNumber(tickRate / 20.0) + "s (" + tickRate + " ticks)");
         sender.sendMessage(ChatColor.GOLD + "Performance: " + getPerformanceRating());
         sender.sendMessage("");
 
@@ -62,8 +70,7 @@ class PerformanceSummary {
                 String average = NumberUtils.getAsMillis(entry.getValue() / count);
 
                 return entry.getKey() + " - " + count + "x (" + time + " | avg: " + average + ')';
-            }
-            else {
+            } else {
                 return entry.getKey() + " - " + count + "x (" + time + ')';
             }
         });
@@ -83,6 +90,7 @@ class PerformanceSummary {
         });
     }
 
+    @ParametersAreNonnullByDefault
     private void summarizeTimings(int count, String name, CommandSender sender, Map<String, Long> map, Function<Map.Entry<String, Long>, String> formatter) {
         Stream<Map.Entry<String, Long>> stream = map.entrySet().stream();
         List<Entry<String, Long>> results = stream.sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())).collect(Collectors.toList());
@@ -91,13 +99,14 @@ class PerformanceSummary {
         if (sender instanceof Player) {
             TextComponent component = summarizeAsTextComponent(count, prefix, results, formatter);
             sender.spigot().sendMessage(component);
-        }
-        else {
+        } else {
             String text = summarizeAsString(count, prefix, results, formatter);
             sender.sendMessage(text);
         }
     }
 
+    @Nonnull
+    @ParametersAreNonnullByDefault
     private TextComponent summarizeAsTextComponent(int count, String prefix, List<Map.Entry<String, Long>> results, Function<Entry<String, Long>, String> formatter) {
         TextComponent component = new TextComponent(prefix);
         component.setColor(ChatColor.YELLOW);
@@ -107,24 +116,24 @@ class PerformanceSummary {
             hoverComponent.setColor(ChatColor.GRAY);
             StringBuilder builder = new StringBuilder();
 
-            int displayed = 0;
-            int hidden = 0;
+            int shownEntries = 0;
+            int hiddenEntries = 0;
 
             for (Map.Entry<String, Long> entry : results) {
-                if (displayed < MAX_ITEMS && (displayed < MIN_ITEMS || entry.getValue() > VISIBILITY_THRESHOLD)) {
+                if (shownEntries < MAX_ITEMS && (shownEntries < MIN_ITEMS || entry.getValue() > VISIBILITY_THRESHOLD)) {
                     builder.append("\n").append(ChatColor.YELLOW).append(formatter.apply(entry));
-                    displayed++;
-                }
-                else {
-                    hidden++;
+                    shownEntries++;
+                } else {
+                    hiddenEntries++;
                 }
             }
 
-            if (hidden > 0) {
-                builder.append("\n\n&c+ &6").append(hidden).append(" more");
+            if (hiddenEntries > 0) {
+                builder.append("\n\n&c+ &6").append(hiddenEntries).append(" more");
             }
 
-            hoverComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TextComponent.fromLegacyText(ChatColors.color(builder.toString()))));
+            Content content = new Text(TextComponent.fromLegacyText(ChatColors.color(builder.toString())));
+            hoverComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, content));
 
             component.addExtra(hoverComponent);
         }
@@ -132,38 +141,37 @@ class PerformanceSummary {
         return component;
     }
 
+    @Nonnull
+    @ParametersAreNonnullByDefault
     private String summarizeAsString(int count, String prefix, List<Entry<String, Long>> results, Function<Entry<String, Long>, String> formatter) {
-        int displayed = 0;
-        int hidden = 0;
+        int shownEntries = 0;
+        int hiddenEntries = 0;
 
         StringBuilder builder = new StringBuilder();
-        builder.append(ChatColor.GOLD);
-        builder.append(prefix);
+        builder.append(ChatColor.GOLD).append(prefix);
 
         if (count > 0) {
             builder.append(ChatColor.YELLOW);
 
             for (Map.Entry<String, Long> entry : results) {
-                if (displayed < MAX_ITEMS && (displayed < MIN_ITEMS || entry.getValue() > VISIBILITY_THRESHOLD)) {
+                if (shownEntries < MAX_ITEMS && (shownEntries < MIN_ITEMS || entry.getValue() > VISIBILITY_THRESHOLD)) {
                     builder.append("\n  ");
                     builder.append(ChatColor.stripColor(formatter.apply(entry)));
-                    displayed++;
-                }
-                else {
-                    hidden++;
+                    shownEntries++;
+                } else {
+                    hiddenEntries++;
                 }
             }
 
-            if (hidden > 0) {
-                builder.append("\n+ ");
-                builder.append(hidden);
-                builder.append(" more...");
+            if (hiddenEntries > 0) {
+                builder.append("\n+ ").append(hiddenEntries).append(" more...");
             }
         }
 
         return builder.toString();
     }
 
+    @Nonnull
     private String getPerformanceRating() {
         StringBuilder builder = new StringBuilder();
         builder.append(NumberUtils.getColorFromPercentage(100 - Math.min(percentage, 100)));

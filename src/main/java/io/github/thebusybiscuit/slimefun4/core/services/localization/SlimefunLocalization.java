@@ -5,6 +5,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.UnaryOperator;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
@@ -35,7 +38,7 @@ import me.mrCookieSlime.Slimefun.Lists.RecipeType;
  */
 public abstract class SlimefunLocalization extends Localization implements Keyed {
 
-    public SlimefunLocalization(SlimefunPlugin plugin) {
+    public SlimefunLocalization(@Nonnull SlimefunPlugin plugin) {
         super(plugin);
     }
 
@@ -45,18 +48,21 @@ public abstract class SlimefunLocalization extends Localization implements Keyed
      * 
      * @param id
      *            The language code
+     * 
      * @return A {@link Language} with the given id or null
      */
-    public abstract Language getLanguage(String id);
+    @Nullable
+    public abstract Language getLanguage(@Nonnull String id);
 
     /**
      * This method returns the currently selected {@link Language} of a {@link Player}.
      * 
      * @param p
      *            The {@link Player} to query
+     * 
      * @return The {@link Language} that was selected by the given {@link Player}
      */
-    public abstract Language getLanguage(Player p);
+    public abstract Language getLanguage(@Nonnull Player p);
 
     /**
      * This method returns the default {@link Language} of this {@link Server}
@@ -65,7 +71,7 @@ public abstract class SlimefunLocalization extends Localization implements Keyed
      */
     public abstract Language getDefaultLanguage();
 
-    protected abstract boolean hasLanguage(String id);
+    protected abstract boolean hasLanguage(@Nonnull String id);
 
     /**
      * This method returns a full {@link Collection} of every {@link Language} that was
@@ -73,12 +79,13 @@ public abstract class SlimefunLocalization extends Localization implements Keyed
      * 
      * @return A {@link Collection} that contains every installed {@link Language}
      */
+    @Nonnull
     public abstract Collection<Language> getLanguages();
 
-    protected abstract void addLanguage(String id, String texture);
+    protected abstract void addLanguage(@Nonnull String id, @Nonnull String texture);
 
     protected void loadEmbeddedLanguages() {
-        for (SupportedLanguage lang : SupportedLanguage.values()) {
+        for (SupportedLanguage lang : SupportedLanguage.valuesCache) {
             if (lang.isReadyForRelease() || SlimefunPlugin.getUpdater().getBranch() != SlimefunBranch.STABLE) {
                 addLanguage(lang.getLanguageId(), lang.getTexture());
             }
@@ -87,25 +94,62 @@ public abstract class SlimefunLocalization extends Localization implements Keyed
 
     public String getMessage(Player p, String key) {
         Language language = getLanguage(p);
-        if (language == null) return "NO LANGUAGE FOUND";
-        return language.getMessagesFile().getString(key);
+
+        if (language == null) {
+            return "NO LANGUAGE FOUND";
+        }
+
+        String message = language.getMessagesFile().getString(key);
+
+        if (message == null) {
+            Language fallback = getLanguage(SupportedLanguage.ENGLISH.getLanguageId());
+            return fallback.getMessagesFile().getString(key);
+        }
+
+        return message;
     }
 
     public List<String> getMessages(Player p, String key) {
         Language language = getLanguage(p);
-        if (language == null) return Arrays.asList("NO LANGUAGE FOUND");
-        return language.getMessagesFile().getStringList(key);
+
+        if (language == null) {
+            return Arrays.asList("NO LANGUAGE FOUND");
+        }
+
+        List<String> messages = language.getMessagesFile().getStringList(key);
+
+        if (messages.isEmpty()) {
+            Language fallback = getLanguage(SupportedLanguage.ENGLISH.getLanguageId());
+            return fallback.getMessagesFile().getStringList(key);
+        }
+
+        return messages;
+    }
+
+    public List<String> getMessages(Player p, String key, UnaryOperator<String> function) {
+        List<String> messages = getMessages(p, key);
+        messages.replaceAll(function);
+
+        return messages;
     }
 
     public String getResearchName(Player p, NamespacedKey key) {
         Language language = getLanguage(p);
-        if (language.getResearchesFile() == null) return null;
+
+        if (language.getResearchesFile() == null) {
+            return null;
+        }
+
         return language.getResearchesFile().getString(key.getNamespace() + "." + key.getKey());
     }
 
     public String getCategoryName(Player p, NamespacedKey key) {
         Language language = getLanguage(p);
-        if (language.getCategoriesFile() == null) return null;
+
+        if (language.getCategoriesFile() == null) {
+            return null;
+        }
+
         return language.getCategoriesFile().getString(key.getNamespace() + "." + key.getKey());
     }
 
@@ -116,9 +160,9 @@ public abstract class SlimefunLocalization extends Localization implements Keyed
 
         if (value != null) {
             return value;
-        }
-        else {
-            return getLanguage("en").getResourcesFile().getString(key);
+        } else {
+            Language fallback = getLanguage(SupportedLanguage.ENGLISH.getLanguageId());
+            return fallback.getResourcesFile().getString(key);
         }
     }
 
@@ -154,8 +198,7 @@ public abstract class SlimefunLocalization extends Localization implements Keyed
 
         if (sender instanceof Player) {
             sender.sendMessage(ChatColors.color(prefix + getMessage((Player) sender, key)));
-        }
-        else {
+        } else {
             sender.sendMessage(ChatColor.stripColor(ChatColors.color(prefix + getMessage(key))));
         }
     }
@@ -179,8 +222,7 @@ public abstract class SlimefunLocalization extends Localization implements Keyed
 
         if (sender instanceof Player) {
             sender.sendMessage(ChatColors.color(prefix + function.apply(getMessage((Player) sender, key))));
-        }
-        else {
+        } else {
             sender.sendMessage(ChatColor.stripColor(ChatColors.color(prefix + function.apply(getMessage(key)))));
         }
     }
@@ -194,8 +236,7 @@ public abstract class SlimefunLocalization extends Localization implements Keyed
                 String message = ChatColors.color(prefix + translation);
                 sender.sendMessage(message);
             }
-        }
-        else {
+        } else {
             for (String translation : getMessages(key)) {
                 String message = ChatColors.color(prefix + translation);
                 sender.sendMessage(ChatColor.stripColor(message));
@@ -212,8 +253,7 @@ public abstract class SlimefunLocalization extends Localization implements Keyed
                 String message = ChatColors.color(prefix + function.apply(translation));
                 sender.sendMessage(message);
             }
-        }
-        else {
+        } else {
             for (String translation : getMessages(key)) {
                 String message = ChatColors.color(prefix + function.apply(translation));
                 sender.sendMessage(ChatColor.stripColor(message));

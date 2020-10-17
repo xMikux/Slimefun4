@@ -1,5 +1,7 @@
 package io.github.thebusybiscuit.slimefun4.implementation.tasks;
 
+import javax.annotation.Nonnull;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Material;
@@ -15,7 +17,7 @@ public class JetpackTask extends PlayerTask {
 
     private final Jetpack jetpack;
 
-    public JetpackTask(Player p, Jetpack jetpack) {
+    public JetpackTask(@Nonnull Player p, @Nonnull Jetpack jetpack) {
         super(p);
         this.jetpack = jetpack;
     }
@@ -40,8 +42,7 @@ public class JetpackTask extends PlayerTask {
             vector.add(p.getEyeLocation().getDirection().multiply(0.2F));
 
             p.setVelocity(vector);
-        }
-        else {
+        } else {
             Bukkit.getScheduler().cancelTask(id);
         }
     }

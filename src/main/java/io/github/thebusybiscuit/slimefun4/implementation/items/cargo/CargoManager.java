@@ -24,7 +24,7 @@ public class CargoManager extends SlimefunItem {
     public CargoManager(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(category, item, recipeType, recipe);
 
-        registerBlockHandler(getID(), (p, b, tool, reason) -> {
+        registerBlockHandler(getId(), (p, b, tool, reason) -> {
             SimpleHologram.remove(b);
             return true;
         });
@@ -46,8 +46,6 @@ public class CargoManager extends SlimefunItem {
 
         }, new BlockUseHandler() {
 
-            private String visualizerKey = "visualizer";
-
             @Override
             public void onRightClick(PlayerRightClickEvent e) {
                 Optional<Block> block = e.getClickedBlock();
@@ -56,13 +54,12 @@ public class CargoManager extends SlimefunItem {
                     Player p = e.getPlayer();
                     Block b = block.get();
 
-                    if (BlockStorage.getLocationInfo(b.getLocation(), visualizerKey) == null) {
-                        BlockStorage.addBlockInfo(b, visualizerKey, "disabled");
-                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cCargo Net Visualizer: " + "&4\u2718"));
-                    }
-                    else {
-                        BlockStorage.addBlockInfo(b, visualizerKey, null);
-                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cCargo Net Visualizer: " + "&2\u2714"));
+                    if (BlockStorage.getLocationInfo(b.getLocation(), "visualizer") == null) {
+                        BlockStorage.addBlockInfo(b, "visualizer", "disabled");
+                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c顯示物流網路: " + "&4\u2718"));
+                    } else {
+                        BlockStorage.addBlockInfo(b, "visualizer", null);
+                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c顯示物流網路: " + "&2\u2714"));
                     }
                 }
             }

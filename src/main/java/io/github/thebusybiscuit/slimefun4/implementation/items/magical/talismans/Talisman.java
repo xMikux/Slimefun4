@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockDropItemEvent;
 import org.bukkit.event.enchantment.EnchantItemEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityEvent;
@@ -19,10 +20,12 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
+import io.github.thebusybiscuit.cscorelib2.inventory.ItemUtils;
 import io.github.thebusybiscuit.cscorelib2.item.CustomItem;
 import io.github.thebusybiscuit.slimefun4.core.researching.Research;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
+import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
@@ -63,18 +66,17 @@ public class Talisman extends SlimefunItem {
         this.chance = chance;
 
         if (!(this instanceof EnderTalisman)) {
-            String name = "&5Ender " + ChatColor.stripColor(getItem().getItemMeta().getDisplayName());
+            String name = "&5終界" + ChatColor.stripColor(getItem().getItemMeta().getDisplayName());
             List<String> lore = new ArrayList<>();
-            lore.add("&7&oEnder Infused");
-            lore.add("");
+            lore.add("&7&o注入終界能量");
+            lore.add("&7&o要放在「終界箱」才能使用");
 
             for (String line : getItem().getItemMeta().getLore()) {
                 lore.add(line);
             }
 
-            enderTalisman = new SlimefunItemStack("ENDER_" + getID(), getItem().getType(), name, lore.toArray(new String[0]));
-        }
-        else {
+            enderTalisman = new SlimefunItemStack("ENDER_" + getId(), getItem().getType(), name, lore.toArray(new String[0]));
+        } else {
             enderTalisman = null;
         }
     }
@@ -106,7 +108,7 @@ public class Talisman extends SlimefunItem {
     @Override
     public void postRegister() {
         EnderTalisman talisman = new EnderTalisman(this, getEnderVariant());
-        talisman.register(addon);
+        talisman.register(getAddon());
     }
 
     @Override
@@ -125,12 +127,11 @@ public class Talisman extends SlimefunItem {
     }
 
     private static boolean hasMessage(Talisman talisman) {
-        return !("").equalsIgnoreCase(talisman.getMessageSuffix());
+        return talisman.getMessageSuffix() != null;
     }
 
     public static boolean checkFor(Event e, SlimefunItemStack stack) {
-        SlimefunItem item = SlimefunItem.getByItem(stack);
-        return checkFor(e, item);
+        return checkFor(e, stack.getItem());
     }
 
     public static boolean checkFor(Event e, SlimefunItem item) {
@@ -150,39 +151,34 @@ public class Talisman extends SlimefunItem {
 
         ItemStack talismanItem = talisman.getItem();
 
-        if (p.getInventory().containsAtLeast(talismanItem, 1)) {
-            if (Slimefun.hasUnlocked(p, talismanItem, true)) {
-                activateTalisman(e, p, p.getInventory(), talisman, talismanItem);
+        if (SlimefunUtils.containsSimilarItem(p.getInventory(), talismanItem, true)) {
+            if (Slimefun.hasUnlocked(p, talisman, true)) {
+                activateTalisman(e, p, p.getInventory(), talisman);
                 return true;
-            }
-            else {
+            } else {
                 return false;
             }
-        }
-        else {
+        } else {
             ItemStack enderTalisman = talisman.getEnderVariant();
 
-            if (p.getEnderChest().containsAtLeast(enderTalisman, 1)) {
-                if (Slimefun.hasUnlocked(p, enderTalisman, true)) {
-                    activateTalisman(e, p, p.getEnderChest(), talisman, enderTalisman);
+            if (SlimefunUtils.containsSimilarItem(p.getEnderChest(), enderTalisman, true)) {
+                if (Slimefun.hasUnlocked(p, talisman, true)) {
+                    activateTalisman(e, p, p.getEnderChest(), talisman);
                     return true;
-                }
-                else {
+                } else {
                     return false;
                 }
-            }
-            else {
+            } else {
                 return false;
             }
         }
     }
 
-    private static void activateTalisman(Event e, Player p, Inventory inv, Talisman talisman, ItemStack talismanItem) {
-        consumeItem(inv, talisman, talismanItem);
+    private static void activateTalisman(Event e, Player p, Inventory inv, Talisman talisman) {
+        consumeItem(inv, talisman);
         applyTalismanEffects(p, talisman);
         cancelEvent(e, talisman);
         sendMessage(p, talisman);
-
     }
 
     private static void applyTalismanEffects(Player p, Talisman talisman) {
@@ -203,26 +199,32 @@ public class Talisman extends SlimefunItem {
         }
     }
 
-    private static void consumeItem(Inventory inv, Talisman talisman, ItemStack talismanItem) {
+    private static void consumeItem(Inventory inv, Talisman talisman) {
         if (talisman.isConsumable()) {
-            inv.removeItem(talismanItem);
+            ItemStack[] contents = inv.getContents();
+            for (int i = 0; i < contents.length; i++) {
+                ItemStack item = contents[i];
+
+                if (SlimefunUtils.isItemSimilar(item, talisman.getItem(), true, false)) {
+                    ItemUtils.consumeItem(item, false);
+                    return;
+                }
+            }
         }
     }
 
     private static Player getPlayerByEventType(Event e) {
         if (e instanceof EntityDeathEvent) {
             return ((EntityDeathEvent) e).getEntity().getKiller();
-        }
-        else if (e instanceof BlockBreakEvent) {
+        } else if (e instanceof BlockBreakEvent) {
             return ((BlockBreakEvent) e).getPlayer();
-        }
-        else if (e instanceof PlayerEvent) {
+        } else if (e instanceof BlockDropItemEvent) {
+            return ((BlockDropItemEvent) e).getPlayer();
+        } else if (e instanceof PlayerEvent) {
             return ((PlayerEvent) e).getPlayer();
-        }
-        else if (e instanceof EntityEvent) {
+        } else if (e instanceof EntityEvent) {
             return (Player) ((EntityEvent) e).getEntity();
-        }
-        else if (e instanceof EnchantItemEvent) {
+        } else if (e instanceof EnchantItemEvent) {
             return ((EnchantItemEvent) e).getEnchanter();
         }
 

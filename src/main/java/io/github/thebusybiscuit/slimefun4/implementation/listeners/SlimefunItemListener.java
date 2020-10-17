@@ -2,6 +2,9 @@ package io.github.thebusybiscuit.slimefun4.implementation.listeners;
 
 import java.util.Optional;
 
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -30,7 +33,7 @@ import me.mrCookieSlime.Slimefun.api.inventory.UniversalBlockMenu;
 
 public class SlimefunItemListener implements Listener {
 
-    public SlimefunItemListener(SlimefunPlugin plugin) {
+    public SlimefunItemListener(@Nonnull SlimefunPlugin plugin) {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
@@ -64,14 +67,15 @@ public class SlimefunItemListener implements Listener {
         }
     }
 
+    @Nonnull
+    @ParametersAreNonnullByDefault
     private boolean rightClickItem(PlayerInteractEvent e, PlayerRightClickEvent event, boolean defaultValue) {
         Optional<SlimefunItem> optional = event.getSlimefunItem();
 
         if (optional.isPresent()) {
             if (Slimefun.hasUnlocked(e.getPlayer(), optional.get(), true)) {
                 return optional.get().callItemHandler(ItemUseHandler.class, handler -> handler.onRightClick(event));
-            }
-            else {
+            } else {
                 event.setUseItem(Result.DENY);
             }
         }
@@ -79,6 +83,7 @@ public class SlimefunItemListener implements Listener {
         return defaultValue;
     }
 
+    @ParametersAreNonnullByDefault
     private boolean rightClickBlock(PlayerInteractEvent e, PlayerRightClickEvent event) {
         Optional<SlimefunItem> optional = event.getSlimefunBlock();
 
@@ -91,7 +96,7 @@ public class SlimefunItemListener implements Listener {
             boolean interactable = optional.get().callItemHandler(BlockUseHandler.class, handler -> handler.onRightClick(event));
 
             if (!interactable) {
-                String id = optional.get().getID();
+                String id = optional.get().getId();
                 Player p = e.getPlayer();
 
                 if (BlockMenuPreset.isInventory(id)) {
@@ -104,6 +109,7 @@ public class SlimefunItemListener implements Listener {
         return true;
     }
 
+    @ParametersAreNonnullByDefault
     private void openInventory(Player p, String id, PlayerInteractEvent e, PlayerRightClickEvent event) {
         if (!p.isSneaking() || Material.AIR == event.getItem().getType()) {
             e.setCancelled(true);
@@ -113,18 +119,15 @@ public class SlimefunItemListener implements Listener {
 
                 if (menu.canOpen(e.getClickedBlock(), p)) {
                     menu.open(p);
-                }
-                else {
+                } else {
                     SlimefunPlugin.getLocalization().sendMessage(p, "inventory.no-access", true);
                 }
-            }
-            else if (BlockStorage.getStorage(e.getClickedBlock().getWorld()).hasInventory(e.getClickedBlock().getLocation())) {
+            } else if (BlockStorage.getStorage(e.getClickedBlock().getWorld()).hasInventory(e.getClickedBlock().getLocation())) {
                 BlockMenu menu = BlockStorage.getInventory(e.getClickedBlock().getLocation());
 
                 if (menu.canOpen(e.getClickedBlock(), p)) {
                     menu.open(p);
-                }
-                else {
+                } else {
                     SlimefunPlugin.getLocalization().sendMessage(p, "inventory.no-access", true);
                 }
             }

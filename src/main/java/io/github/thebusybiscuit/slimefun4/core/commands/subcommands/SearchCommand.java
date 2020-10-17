@@ -14,17 +14,7 @@ import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 class SearchCommand extends SubCommand {
 
     SearchCommand(SlimefunPlugin plugin, SlimefunCommand cmd) {
-        super(plugin, cmd);
-    }
-
-    @Override
-    public String getName() {
-        return "search";
-    }
-
-    @Override
-    public boolean isHidden() {
-        return false;
+        super(plugin, cmd, "search", false);
     }
 
     @Override
@@ -34,16 +24,13 @@ class SearchCommand extends SubCommand {
                 if (args.length > 1) {
                     String query = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
                     PlayerProfile.get((Player) sender, profile -> SlimefunGuide.openSearch(profile, query, true, true));
-                }
-                else {
+                } else {
                     SlimefunPlugin.getLocalization().sendMessage(sender, "messages.usage", true, msg -> msg.replace("%usage%", "/sf search <SearchTerm>"));
                 }
-            }
-            else {
+            } else {
                 SlimefunPlugin.getLocalization().sendMessage(sender, "messages.no-permission", true);
             }
-        }
-        else {
+        } else {
             SlimefunPlugin.getLocalization().sendMessage(sender, "messages.only-players", true);
         }
     }

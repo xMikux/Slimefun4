@@ -2,15 +2,17 @@ package io.github.thebusybiscuit.slimefun4.api.player;
 
 import java.io.File;
 
+import javax.annotation.Nonnull;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import io.github.thebusybiscuit.cscorelib2.config.Config;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import io.github.thebusybiscuit.slimefun4.implementation.items.backpacks.SlimefunBackpack;
 import io.github.thebusybiscuit.slimefun4.implementation.listeners.BackpackListener;
-import me.mrCookieSlime.Slimefun.api.Slimefun;
 
 /**
  * This class represents the instance of a {@link SlimefunBackpack} that is ready to
@@ -25,6 +27,8 @@ import me.mrCookieSlime.Slimefun.api.Slimefun;
  * @see BackpackListener
  */
 public class PlayerBackpack {
+
+    private static final String CONFIG_PREFIX = "backpacks.";
 
     private final PlayerProfile profile;
     private final int id;
@@ -41,11 +45,11 @@ public class PlayerBackpack {
      * @param id
      *            The id of this Backpack
      */
-    public PlayerBackpack(PlayerProfile profile, int id) {
-        this(profile, id, profile.getConfig().getInt("backpacks." + id + ".size"));
+    public PlayerBackpack(@Nonnull PlayerProfile profile, int id) {
+        this(profile, id, profile.getConfig().getInt(CONFIG_PREFIX + id + ".size"));
 
         for (int i = 0; i < size; i++) {
-            inventory.setItem(i, cfg.getItem("backpacks." + id + ".contents." + i));
+            inventory.setItem(i, cfg.getItem(CONFIG_PREFIX + id + ".contents." + i));
         }
     }
 
@@ -59,7 +63,7 @@ public class PlayerBackpack {
      * @param size
      *            The size of this Backpack
      */
-    public PlayerBackpack(PlayerProfile profile, int id, int size) {
+    public PlayerBackpack(@Nonnull PlayerProfile profile, int id, int size) {
         if (size < 9 || size > 54 || size % 9 != 0) {
             throw new IllegalArgumentException("Invalid size! Size must be one of: [9, 18, 27, 36, 45, 54]");
         }
@@ -69,10 +73,10 @@ public class PlayerBackpack {
         this.cfg = profile.getConfig();
         this.size = size;
 
-        cfg.setValue("backpacks." + id + ".size", size);
+        cfg.setValue(CONFIG_PREFIX + id + ".size", size);
         markDirty();
 
-        inventory = Bukkit.createInventory(null, size, "Backpack [" + size + " Slots]");
+        inventory = Bukkit.createInventory(null, size, "背包 [" + size + "格]");
     }
 
     /**
@@ -89,6 +93,7 @@ public class PlayerBackpack {
      * 
      * @return The owning {@link PlayerProfile}
      */
+    @Nonnull
     public PlayerProfile getOwner() {
         return profile;
     }
@@ -107,6 +112,7 @@ public class PlayerBackpack {
      * 
      * @return The {@link Inventory} of this {@link PlayerBackpack}
      */
+    @Nonnull
     public Inventory getInventory() {
         return inventory;
     }
@@ -119,7 +125,7 @@ public class PlayerBackpack {
      *            The players who this Backpack will be shown to
      */
     public void open(Player... players) {
-        Slimefun.runSync(() -> {
+        SlimefunPlugin.runSync(() -> {
             for (Player p : players) {
                 p.openInventory(inventory);
             }
@@ -138,7 +144,7 @@ public class PlayerBackpack {
         }
 
         this.size = size;
-        cfg.setValue("backpacks." + id + ".size", size);
+        cfg.setValue(CONFIG_PREFIX + id + ".size", size);
 
         Inventory inv = Bukkit.createInventory(null, size, "Backpack [" + size + " Slots]");
 
@@ -156,7 +162,7 @@ public class PlayerBackpack {
      */
     public void save() {
         for (int i = 0; i < size; i++) {
-            cfg.setValue("backpacks." + id + ".contents." + i, inventory.getItem(i));
+            cfg.setValue(CONFIG_PREFIX + id + ".contents." + i, inventory.getItem(i));
         }
     }
 

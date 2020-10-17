@@ -3,6 +3,8 @@ package io.github.thebusybiscuit.slimefun4.utils.itemstack;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import org.apache.commons.lang.Validate;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -22,19 +24,20 @@ import org.bukkit.inventory.meta.ItemMeta;
  */
 public final class ItemStackWrapper extends ItemStack {
 
-    private static final String ERROR_MESSAGE = "ItemStackWrappers are immutable and not indended for actual usage.";
+    private static final String ERROR_MESSAGE = "ItemStackWrappers are immutable and not intended for actual usage.";
 
     private final ItemMeta meta;
+    private final int amount;
     private final boolean hasItemMeta;
 
-    public ItemStackWrapper(ItemStack item) {
+    public ItemStackWrapper(@Nonnull ItemStack item) {
         super(item.getType());
+        amount = item.getAmount();
         hasItemMeta = item.hasItemMeta();
 
         if (hasItemMeta) {
             meta = item.getItemMeta();
-        }
-        else {
+        } else {
             meta = null;
         }
     }
@@ -52,15 +55,14 @@ public final class ItemStackWrapper extends ItemStack {
         // This will significantly speed up any loop comparisons if used correctly.
         if (meta == null) {
             throw new UnsupportedOperationException("This ItemStack has no ItemMeta! Make sure to check ItemStack#hasItemMeta() before accessing this method!");
-        }
-        else {
+        } else {
             return meta;
         }
     }
 
     @Override
     public int getAmount() {
-        return 1;
+        return amount;
     }
 
     @Override
@@ -106,7 +108,8 @@ public final class ItemStackWrapper extends ItemStack {
      * 
      * @return An {@link ItemStackWrapper} array
      */
-    public static ItemStackWrapper[] wrapArray(ItemStack[] items) {
+    @Nonnull
+    public static ItemStackWrapper[] wrapArray(@Nonnull ItemStack[] items) {
         Validate.notNull(items, "The array must not be null!");
         ItemStackWrapper[] array = new ItemStackWrapper[items.length];
 
@@ -127,15 +130,15 @@ public final class ItemStackWrapper extends ItemStack {
      * 
      * @return An {@link ItemStackWrapper} array
      */
-    public static List<ItemStackWrapper> wrapList(List<ItemStack> items) {
+    @Nonnull
+    public static List<ItemStackWrapper> wrapList(@Nonnull List<ItemStack> items) {
         Validate.notNull(items, "The list must not be null!");
         List<ItemStackWrapper> list = new ArrayList<>(items.size());
 
         for (ItemStack item : items) {
             if (item != null) {
                 list.add(new ItemStackWrapper(item));
-            }
-            else {
+            } else {
                 list.add(null);
             }
         }

@@ -15,6 +15,10 @@ import java.util.logging.Level;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import javax.annotation.Nonnull;
+
+import org.apache.commons.lang.Validate;
+
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
 
@@ -37,10 +41,9 @@ public class BackupService implements Runnable {
 
         if (backups.size() > MAX_BACKUPS) {
             try {
-                deleteOldBackups(backups);
-            }
-            catch (IOException e) {
-                Slimefun.getLogger().log(Level.WARNING, "Could not delete an old backup", e);
+                purgeBackups(backups);
+            } catch (IOException e) {
+                Slimefun.getLogger().log(Level.WARNING, "無法刪除舊的備份資料", e);
             }
         }
 
@@ -53,19 +56,18 @@ public class BackupService implements Runnable {
                         createBackup(output);
                     }
 
-                    Slimefun.getLogger().log(Level.INFO, "Backed up Slimefun data to: {0}", file.getName());
+                    Slimefun.getLogger().log(Level.INFO, "備份Slimefun資料至: {0}", file.getName());
+                } else {
+                    Slimefun.getLogger().log(Level.WARNING, "無法創建備份檔案: {0}", file.getName());
                 }
-                else {
-                    Slimefun.getLogger().log(Level.WARNING, "Could not create backup-file: {0}", file.getName());
-                }
-            }
-            catch (IOException x) {
+            } catch (IOException x) {
                 Slimefun.getLogger().log(Level.SEVERE, x, () -> "An Error occurred while creating a backup for Slimefun " + SlimefunPlugin.getVersion());
             }
         }
     }
 
-    private void createBackup(ZipOutputStream output) throws IOException {
+    private void createBackup(@Nonnull ZipOutputStream output) throws IOException {
+        Validate.notNull(output, "The Output Stream cannot be null!");
 
         for (File folder : new File("data-storage/Slimefun/stored-blocks/").listFiles()) {
             addDirectory(output, folder, "stored-blocks/" + folder.getName());
@@ -93,7 +95,7 @@ public class BackupService implements Runnable {
         }
     }
 
-    private void addDirectory(ZipOutputStream output, File directory, String zipPath) throws IOException {
+    private void addDirectory(@Nonnull ZipOutputStream output, @Nonnull File directory, @Nonnull String zipPath) throws IOException {
         byte[] buffer = new byte[1024];
 
         for (File file : directory.listFiles()) {
@@ -112,7 +114,16 @@ public class BackupService implements Runnable {
         }
     }
 
-    private void deleteOldBackups(List<File> backups) throws IOException {
+    /**
+     * This method will delete old backups.
+     * 
+     * @param backups
+     *            The {@link List} of all backups
+     * 
+     * @throws IOException
+     *             An {@link IOException} is thrown if a {@link File} could not be deleted
+     */
+    private void purgeBackups(@Nonnull List<File> backups) throws IOException {
         Collections.sort(backups, (a, b) -> {
             LocalDateTime time1 = LocalDateTime.parse(a.getName().substring(0, a.getName().length() - 4), format);
             LocalDateTime time2 = LocalDateTime.parse(b.getName().substring(0, b.getName().length() - 4), format);

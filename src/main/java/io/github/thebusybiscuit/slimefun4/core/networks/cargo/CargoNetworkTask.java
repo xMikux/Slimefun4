@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.Inventory;
@@ -16,6 +18,7 @@ import org.bukkit.inventory.ItemStack;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.DirtyChestMenu;
 
@@ -43,6 +46,7 @@ class CargoNetworkTask implements Runnable {
     private final Set<Location> chestTerminalInputs;
     private final Set<Location> chestTerminalOutputs;
 
+    @ParametersAreNonnullByDefault
     CargoNetworkTask(CargoNet network, Map<Location, Integer> inputs, Map<Integer, List<Location>> outputs, Set<Location> chestTerminalInputs, Set<Location> chestTerminalOutputs) {
         this.network = network;
 
@@ -63,22 +67,22 @@ class CargoNetworkTask implements Runnable {
 
         // All operations happen here: Everything gets iterated from the Input Nodes.
         // (Apart from ChestTerminal Buses)
+        SlimefunItem inputNode = SlimefunItems.CARGO_INPUT_NODE.getItem();
         for (Map.Entry<Location, Integer> entry : inputs.entrySet()) {
             long nodeTimestamp = System.nanoTime();
             Location input = entry.getKey();
             Optional<Block> attachedBlock = network.getAttachedBlock(input);
 
-            if (attachedBlock.isPresent()) {
-                routeItems(input, attachedBlock.get(), entry.getValue(), outputs);
-            }
+            attachedBlock.ifPresent(block -> routeItems(input, block, entry.getValue(), outputs));
 
             // This will prevent this timings from showing up for the Cargo Manager
-            timestamp += SlimefunPlugin.getProfiler().closeEntry(entry.getKey(), SlimefunItems.CARGO_INPUT_NODE.getItem(), nodeTimestamp);
+            timestamp += SlimefunPlugin.getProfiler().closeEntry(entry.getKey(), inputNode, nodeTimestamp);
         }
 
         // Chest Terminal Code
         if (SlimefunPlugin.getThirdPartySupportService().isChestTerminalInstalled()) {
-            network.updateTerminals(chestTerminalInputs);
+            // This will deduct any CT timings and attribute them towards the actual terminal
+            timestamp += network.updateTerminals(chestTerminalInputs);
         }
 
         // Submit a timings report
@@ -104,21 +108,25 @@ class CargoNetworkTask implements Runnable {
             Inventory inv = inventories.get(inputTarget.getLocation());
 
             if (inv != null) {
+                // Check if the original slot hasn't been occupied in the meantime
                 if (inv.getItem(previousSlot) == null) {
                     inv.setItem(previousSlot, stack);
+                } else {
+                    // Try to add the item into another available slot then
+                    ItemStack rest = inv.addItem(stack).get(0);
+
+                    if (rest != null) {
+                        // If the item still couldn't be inserted, simply drop it on the ground
+                        inputTarget.getWorld().dropItem(inputTarget.getLocation().add(0, 1, 0), rest);
+                    }
                 }
-                else {
-                    inputTarget.getWorld().dropItem(inputTarget.getLocation().add(0, 1, 0), stack);
-                }
-            }
-            else {
+            } else {
                 DirtyChestMenu menu = CargoUtils.getChestMenu(inputTarget);
 
                 if (menu != null) {
                     if (menu.getItemInSlot(previousSlot) == null) {
                         menu.replaceExistingItem(previousSlot, stack);
-                    }
-                    else {
+                    } else {
                         inputTarget.getWorld().dropItem(inputTarget.getLocation().add(0, 1, 0), stack);
                     }
                 }
@@ -172,8 +180,7 @@ class CargoNetworkTask implements Runnable {
             }
 
             index++;
-        }
-        else {
+        } else {
             index = 1;
         }
 

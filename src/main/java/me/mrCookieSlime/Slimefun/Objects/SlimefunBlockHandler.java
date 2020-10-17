@@ -15,25 +15,11 @@ import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.UnregisterReason;
  * {@code SlimefunItem.registerBlockHandler(String, SlimefunBlockHandler); }
  * 
  * @author TheBusyBiscuit
- *
+ * 
+ * 
  */
 @FunctionalInterface
 public interface SlimefunBlockHandler {
-
-    /**
-     * This method gets called when the {@link Block} is placed.
-     * Use this method to initialize block data.
-     * 
-     * @param p
-     *            The {@link Player} who placed it
-     * @param b
-     *            The {@link Block} that was placed
-     * @param item
-     *            The {@link SlimefunItem} that will be stored inside the {@link Block}
-     */
-    default void onPlace(Player p, Block b, SlimefunItem item) {
-        // This method can optionally be implemented by classes implementing it.
-    }
 
     /**
      * This method gets called when the {@link Block} is broken.

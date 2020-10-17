@@ -15,8 +15,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import org.bukkit.Bukkit;
-import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -57,11 +60,11 @@ public class BlockStorage {
     private static int chunkChanges = 0;
     private int changes = 0;
 
-    public static BlockStorage getStorage(World world) {
+    public static BlockStorage getStorage(@Nonnull World world) {
         return SlimefunPlugin.getRegistry().getWorlds().get(world.getName());
     }
 
-    public static BlockStorage getForcedStorage(World world) {
+    public static BlockStorage getForcedStorage(@Nonnull World world) {
         return isWorldRegistered(world.getName()) ? SlimefunPlugin.getRegistry().getWorlds().get(world.getName()) : new BlockStorage(world);
     }
 
@@ -89,8 +92,7 @@ public class BlockStorage {
             if (w != null) {
                 return new Location(w, Integer.parseInt(components[1]), Integer.parseInt(components[2]), Integer.parseInt(components[3]));
             }
-        }
-        catch (NumberFormatException x) {
+        } catch (NumberFormatException x) {
             Slimefun.getLogger().log(Level.WARNING, "Could not parse Number", x);
         }
         return null;
@@ -100,7 +102,7 @@ public class BlockStorage {
         this.world = w;
 
         if (world.getName().indexOf('.') != -1) {
-            throw new IllegalArgumentException("Slimefun cannot deal with World names that contain a dot: " + w.getName());
+            throw new IllegalArgumentException("Slimefun 無法處理世界名稱包含點: " + w.getName());
         }
 
         if (SlimefunPlugin.getRegistry().getWorlds().containsKey(w.getName())) {
@@ -108,15 +110,14 @@ public class BlockStorage {
             return;
         }
 
-        Slimefun.getLogger().log(Level.INFO, "Loading Blocks for World \"{0}\"", w.getName());
-        Slimefun.getLogger().log(Level.INFO, "This may take a long time...");
+        Slimefun.getLogger().log(Level.INFO, "載入方塊給世界 \"{0}\"", w.getName());
+        Slimefun.getLogger().log(Level.INFO, "這可能需要一些時間...");
 
         File dir = new File(PATH_BLOCKS + w.getName());
 
         if (dir.exists()) {
             loadBlocks(dir);
-        }
-        else {
+        } else {
             dir.mkdirs();
         }
 
@@ -137,68 +138,71 @@ public class BlockStorage {
         try {
             for (File file : directory.listFiles()) {
                 if (file.getName().equals("null.sfb")) {
-                    Slimefun.getLogger().log(Level.WARNING, "File with corrupted blocks detected!");
-                    Slimefun.getLogger().log(Level.WARNING, "Slimefun will simply skip this File, you should look inside though!");
+                    Slimefun.getLogger().log(Level.WARNING, "檢測到方塊損毀檔案!");
+                    Slimefun.getLogger().log(Level.WARNING, "Slimefun 會跳過此檔案, 你應該檢查看看!");
                     Slimefun.getLogger().log(Level.WARNING, file.getPath());
-                }
-                else if (file.getName().endsWith(".sfb")) {
+                } else if (file.getName().endsWith(".sfb")) {
                     if (timestamp + delay < System.currentTimeMillis()) {
                         int progress = Math.round((((done * 100.0F) / total) * 100.0F) / 100.0F);
-                        Slimefun.getLogger().log(Level.INFO, "Loading Blocks... {0}% done (\"{1}\")", new Object[] { progress, world.getName() });
+                        Slimefun.getLogger().log(Level.INFO, "載入方塊... {0}% 完成 (\"{1}\")", new Object[] { progress, world.getName() });
                         timestamp = System.currentTimeMillis();
                     }
 
                     FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
 
                     for (String key : cfg.getKeys(false)) {
-                        Location l = deserializeLocation(key);
-                        String chunkString = locationToChunkString(l);
-
-                        try {
-                            totalBlocks++;
-                            String json = cfg.getString(key);
-                            Config blockInfo = parseBlockInfo(l, json);
-
-                            if (blockInfo != null && blockInfo.contains("id")) {
-                                if (storage.containsKey(l)) {
-                                    // It should not be possible to have two blocks on the same location. Ignore the
-                                    // new entry if a block is already present and print an error to the console.
-
-                                    Slimefun.getLogger().log(Level.INFO, "Ignoring duplicate block @ {0}, {1}, {2}", new Object[] { l.getBlockX(), l.getBlockY(), l.getBlockZ() });
-                                    Slimefun.getLogger().log(Level.INFO, "New: {0} | Old: {1}", new Object[] { key, serializeBlockInfo(storage.get(l)) });
-                                    continue;
-                                }
-
-                                storage.put(l, blockInfo);
-
-                                if (SlimefunPlugin.getRegistry().getTickerBlocks().contains(file.getName().replace(".sfb", ""))) {
-                                    Set<Location> locations = SlimefunPlugin.getRegistry().getActiveTickers().getOrDefault(chunkString, new HashSet<>());
-                                    locations.add(l);
-                                    SlimefunPlugin.getRegistry().getActiveTickers().put(chunkString, locations);
-
-                                    if (!SlimefunPlugin.getRegistry().getActiveChunks().contains(chunkString)) {
-                                        SlimefunPlugin.getRegistry().getActiveChunks().add(chunkString);
-                                    }
-                                }
-                            }
-                        }
-                        catch (Exception x) {
-                            Slimefun.getLogger().log(Level.WARNING, x, () -> "Failed to load " + file.getName() + '(' + key + ") for Slimefun " + SlimefunPlugin.getVersion());
-                        }
+                        loadBlock(file, cfg, key);
+                        totalBlocks++;
                     }
 
                     done++;
                 }
             }
-        }
-        finally {
+        } finally {
             long time = (System.currentTimeMillis() - start);
-            Slimefun.getLogger().log(Level.INFO, "Loading Blocks... 100% (FINISHED - {0}ms)", time);
-            Slimefun.getLogger().log(Level.INFO, "Loaded a total of {0} Blocks for World \"{1}\"", new Object[] { totalBlocks, world.getName() });
+            Slimefun.getLogger().log(Level.INFO, "載入方塊... 100% (已完成 - {0}毫秒)", time);
+            Slimefun.getLogger().log(Level.INFO, "總共載入{0}個方塊於世界 \"{1}\"", new Object[] { totalBlocks, world.getName() });
 
             if (totalBlocks > 0) {
-                Slimefun.getLogger().log(Level.INFO, "Avg: {0}ms/Block", DoubleHandler.fixDouble((double) time / (double) totalBlocks, 3));
+                Slimefun.getLogger().log(Level.INFO, "平均: {0}毫秒/方塊", DoubleHandler.fixDouble((double) time / (double) totalBlocks, 3));
             }
+        }
+    }
+
+    private void loadBlock(File file, FileConfiguration cfg, String key) {
+        Location l = deserializeLocation(key);
+
+        if (l == null) {
+            // That location was malformed, we will skip this one
+            return;
+        }
+
+        try {
+            String chunkString = locationToChunkString(l);
+            String json = cfg.getString(key);
+            Config blockInfo = parseBlockInfo(l, json);
+
+            if (blockInfo != null && blockInfo.contains("id")) {
+                if (storage.containsKey(l)) {
+                    // It should not be possible to have two blocks on the same location. Ignore the
+                    // new entry if a block is already present and print an error to the console.
+                    if (SlimefunPlugin.getRegistry().logDuplicateBlockEntries()) {
+                        Slimefun.getLogger().log(Level.INFO, "忽略重複方塊 @ {0}, {1}, {2} ({3} -> {4})", new Object[] { l.getBlockX(), l.getBlockY(), l.getBlockZ(), blockInfo.getString("id"), storage.get(l).getString("id") });
+                    }
+
+                    return;
+                }
+
+                storage.put(l, blockInfo);
+
+                if (SlimefunPlugin.getRegistry().getTickerBlocks().contains(file.getName().replace(".sfb", ""))) {
+                    Map<String, Set<Location>> tickers = SlimefunPlugin.getTickerTask().getActiveTickers();
+                    Set<Location> locations = tickers.computeIfAbsent(chunkString, id -> new HashSet<>());
+                    locations.add(l);
+                }
+            }
+        } catch (Exception x) {
+            Slimefun.getLogger().log(Level.WARNING, x, () -> "載入失敗 " + file.getName() + '(' + key + ") 於Slimefun " + SlimefunPlugin.getVersion());
         }
     }
 
@@ -211,11 +215,11 @@ public class BlockStorage {
             for (String key : cfg.getKeys(false)) {
                 try {
                     if (world.getName().equals(PatternUtils.SEMICOLON.split(key)[0])) {
-                        SlimefunPlugin.getRegistry().getChunks().put(key, new BlockInfoConfig(parseJSON(cfg.getString(key))));
+                        BlockInfoConfig data = new BlockInfoConfig(parseJSON(cfg.getString(key)));
+                        SlimefunPlugin.getRegistry().getChunks().put(key, data);
                     }
-                }
-                catch (Exception x) {
-                    Slimefun.getLogger().log(Level.WARNING, x, () -> "Failed to load " + chunks.getName() + " in World " + world.getName() + '(' + key + ") for Slimefun " + SlimefunPlugin.getVersion());
+                } catch (Exception x) {
+                    Slimefun.getLogger().log(Level.WARNING, x, () -> "載入失敗 " + chunks.getName() + " 在世界 " + world.getName() + '(' + key + ") 於Slimefun " + SlimefunPlugin.getVersion());
                 }
             }
         }
@@ -236,8 +240,7 @@ public class BlockStorage {
                     if (preset != null) {
                         inventories.put(l, new BlockMenu(preset, l, cfg));
                     }
-                }
-                catch (Exception x) {
+                } catch (Exception x) {
                     Slimefun.getLogger().log(Level.SEVERE, x, () -> "An Error occurred while loading this Block Inventory: " + file.getName());
                 }
             }
@@ -252,8 +255,7 @@ public class BlockStorage {
                     if (preset != null) {
                         SlimefunPlugin.getRegistry().getUniversalInventories().put(preset.getID(), new UniversalBlockMenu(preset, cfg));
                     }
-                }
-                catch (Exception x) {
+                } catch (Exception x) {
                     Slimefun.getLogger().log(Level.SEVERE, x, () -> "An Error occurred while loading this universal Inventory: " + file.getName());
                 }
             }
@@ -261,7 +263,7 @@ public class BlockStorage {
     }
 
     public void computeChanges() {
-        changes = blocksCache.size() + chunkChanges;
+        changes = blocksCache.size();
 
         Map<Location, BlockMenu> inventories2 = new HashMap<>(inventories);
         for (Map.Entry<Location, BlockMenu> entry : inventories2.entrySet()) {
@@ -278,21 +280,14 @@ public class BlockStorage {
         return changes;
     }
 
-    public void save(boolean remove) {
-        save(true, remove);
-    }
-
-    public void save(boolean computeChanges, boolean remove) {
-        if (computeChanges) {
-            computeChanges();
-        }
+    public void save() {
+        computeChanges();
 
         if (changes == 0) {
             return;
         }
 
-        Slimefun.getLogger().log(Level.INFO, "Saving Blocks for World \"{0}\" ({1} Change(s) queued)", new Object[] { world.getName(), changes });
-
+        Slimefun.getLogger().log(Level.INFO, "保存世界方塊資料 \"{0}\" ({1}個變化已排隊)", new Object[] { world.getName(), changes });
         Map<String, Config> cache = new HashMap<>(blocksCache);
 
         for (Map.Entry<String, Config> entry : cache.entrySet()) {
@@ -305,60 +300,55 @@ public class BlockStorage {
                 if (file.exists()) {
                     try {
                         Files.delete(file.toPath());
-                    }
-                    catch (IOException e) {
-                        Slimefun.getLogger().log(Level.WARNING, e, () -> "Could not delete file \"" + file.getName() + '"');
+                    } catch (IOException e) {
+                        Slimefun.getLogger().log(Level.WARNING, e, () -> "無法刪除此檔案 \"" + file.getName() + '"');
                     }
                 }
-            }
-            else {
+            } else {
                 File tmpFile = new File(cfg.getFile().getParentFile(), cfg.getFile().getName() + ".tmp");
                 cfg.save(tmpFile);
 
                 try {
                     Files.move(tmpFile.toPath(), cfg.getFile().toPath(), StandardCopyOption.ATOMIC_MOVE);
-                }
-                catch (IOException x) {
+                } catch (IOException x) {
                     Slimefun.getLogger().log(Level.SEVERE, x, () -> "An Error occurred while copying a temporary File for Slimefun " + SlimefunPlugin.getVersion());
                 }
             }
         }
 
-        Map<Location, BlockMenu> inventories2 = new HashMap<>(inventories);
-
-        for (Map.Entry<Location, BlockMenu> entry : inventories2.entrySet()) {
+        Map<Location, BlockMenu> unsavedInventories = new HashMap<>(inventories);
+        for (Map.Entry<Location, BlockMenu> entry : unsavedInventories.entrySet()) {
             entry.getValue().save(entry.getKey());
         }
 
-        Map<String, UniversalBlockMenu> universalInventories2 = new HashMap<>(SlimefunPlugin.getRegistry().getUniversalInventories());
-
-        for (Map.Entry<String, UniversalBlockMenu> entry : universalInventories2.entrySet()) {
+        Map<String, UniversalBlockMenu> unsavedUniversalInventories = new HashMap<>(SlimefunPlugin.getRegistry().getUniversalInventories());
+        for (Map.Entry<String, UniversalBlockMenu> entry : unsavedUniversalInventories.entrySet()) {
             entry.getValue().save();
         }
 
-        if (chunkChanges > 0) {
-            saveChunks(remove);
-        }
-
         changes = 0;
-        chunkChanges = 0;
     }
 
-    private void saveChunks(boolean remove) {
-        File chunks = new File(PATH_CHUNKS + "chunks.sfc");
-        Config cfg = new Config(PATH_CHUNKS + "chunks.temp");
+    public void saveAndRemove() {
+        save();
+        SlimefunPlugin.getRegistry().getWorlds().remove(world.getName());
+    }
 
-        for (Map.Entry<String, BlockInfoConfig> entry : SlimefunPlugin.getRegistry().getChunks().entrySet()) {
-            // Saving empty chunk data is pointless
-            if (!entry.getValue().getKeys().isEmpty()) {
-                cfg.setValue(entry.getKey(), entry.getValue().toJSON());
+    public static void saveChunks() {
+        if (chunkChanges > 0) {
+            File chunks = new File(PATH_CHUNKS + "chunks.sfc");
+            Config cfg = new Config(PATH_CHUNKS + "chunks.temp");
+
+            for (Map.Entry<String, BlockInfoConfig> entry : SlimefunPlugin.getRegistry().getChunks().entrySet()) {
+                // Saving empty chunk data is pointless
+                if (!entry.getValue().getKeys().isEmpty()) {
+                    cfg.setValue(entry.getKey(), entry.getValue().toJSON());
+                }
             }
-        }
 
-        cfg.save(chunks);
+            cfg.save(chunks);
 
-        if (remove) {
-            SlimefunPlugin.getRegistry().getWorlds().remove(world.getName());
+            chunkChanges = 0;
         }
     }
 
@@ -366,7 +356,7 @@ public class BlockStorage {
         SlimefunItem sfitem = SlimefunItem.getByItem(item);
 
         if (sfitem != null) {
-            addBlockInfo(block, "id", sfitem.getID(), true);
+            addBlockInfo(block, "id", sfitem.getId(), true);
         }
     }
 
@@ -376,32 +366,32 @@ public class BlockStorage {
 
     /**
      * Retrieves the SlimefunItem's ItemStack from the specified Block.
-     * If the specified Block is registered in BlockStorage, its data will be erased from it, regardless of the returned
-     * value.
+     * If the specified Block is registered in BlockStorage,
+     * its data will be erased from it, regardless of the returned value.
      *
      * @param block
      *            the block to retrieve the ItemStack from
+     * 
      * @return the SlimefunItem's ItemStack corresponding to the block if it has one, otherwise null
-     *
-     * @since 4.0
      */
+    @Nullable
     public static ItemStack retrieve(Block block) {
         if (!hasBlockInfo(block)) {
             return null;
-        }
-        else {
-            SlimefunItem item = SlimefunItem.getByID(getLocationInfo(block.getLocation(), "id"));
+        } else {
+            String id = getLocationInfo(block.getLocation(), "id");
+            SlimefunItem item = SlimefunItem.getByID(id);
             clearBlockInfo(block);
 
             if (item == null) {
                 return null;
-            }
-            else {
+            } else {
                 return item.getItem();
             }
         }
     }
 
+    @Nonnull
     public static Config getLocationInfo(Location l) {
         BlockStorage storage = getStorage(l.getWorld());
 
@@ -413,6 +403,7 @@ public class BlockStorage {
         return cfg == null ? emptyBlockData : cfg;
     }
 
+    @Nonnull
     private static Map<String, String> parseJSON(String json) {
         Map<String, String> map = new HashMap<>();
 
@@ -424,14 +415,14 @@ public class BlockStorage {
                 map.put(entry.getKey(), entry.getValue().getAsString());
             }
         }
+
         return map;
     }
 
     private static BlockInfoConfig parseBlockInfo(Location l, String json) {
         try {
             return new BlockInfoConfig(parseJSON(json));
-        }
-        catch (Exception x) {
+        } catch (Exception x) {
             Logger logger = Slimefun.getLogger();
             logger.log(Level.WARNING, x.getClass().getName());
             logger.log(Level.WARNING, "Failed to parse BlockInfo for Block @ {0}, {1}, {2}", new Object[] { l.getBlockX(), l.getBlockY(), l.getBlockZ() });
@@ -457,8 +448,7 @@ public class BlockStorage {
 
             writer.endObject();
             return string.toString();
-        }
-        catch (IOException x) {
+        } catch (IOException x) {
             Slimefun.getLogger().log(Level.SEVERE, "An error occurred while serializing BlockInfo", x);
             return null;
         }
@@ -501,8 +491,7 @@ public class BlockStorage {
         if (storage != null) {
             Config cfg = storage.storage.get(l);
             return cfg != null && cfg.getString("id") != null;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -527,15 +516,15 @@ public class BlockStorage {
                 if (!SlimefunPlugin.getRegistry().getUniversalInventories().containsKey(id)) {
                     storage.loadUniversalInventory(BlockMenuPreset.getPreset(id));
                 }
-            }
-            else if (!storage.hasInventory(l)) {
+            } else if (!storage.hasInventory(l)) {
                 File file = new File(PATH_INVENTORIES + serializeLocation(l) + ".sfi");
+                BlockMenuPreset preset = BlockMenuPreset.getPreset(id);
 
                 if (file.exists()) {
-                    storage.inventories.put(l, new BlockMenu(BlockMenuPreset.getPreset(id), l, new io.github.thebusybiscuit.cscorelib2.config.Config(file)));
-                }
-                else {
-                    storage.loadInventory(l, BlockMenuPreset.getPreset(id));
+                    BlockMenu inventory = new BlockMenu(preset, l, new io.github.thebusybiscuit.cscorelib2.config.Config(file));
+                    storage.inventories.put(l, inventory);
+                } else {
+                    storage.loadInventory(l, preset);
                 }
             }
         }
@@ -573,7 +562,16 @@ public class BlockStorage {
         SlimefunPlugin.getTickerTask().queueDelete(l, destroy);
     }
 
-    public static void _integrated_removeBlockInfo(Location l, boolean destroy) {
+    /**
+     * <strong>Do not call this method!</strong>.
+     * This method is used for internal purposes only.
+     * 
+     * @param l
+     *            The {@link Location}
+     * @param destroy
+     *            Whether to completely destroy the block data
+     */
+    public static void deleteLocationInfoUnsafely(Location l, boolean destroy) {
         BlockStorage storage = getStorage(l.getWorld());
 
         if (hasBlockInfo(l)) {
@@ -594,27 +592,35 @@ public class BlockStorage {
             }
 
             String chunkString = locationToChunkString(l);
+            Map<String, Set<Location>> tickers = SlimefunPlugin.getTickerTask().getActiveTickers();
+            Set<Location> locations = tickers.get(chunkString);
 
-            if (SlimefunPlugin.getRegistry().getActiveTickers().containsKey(chunkString)) {
-                Set<Location> locations = SlimefunPlugin.getRegistry().getActiveTickers().get(chunkString);
+            if (locations != null) {
                 locations.remove(l);
 
                 if (locations.isEmpty()) {
-                    SlimefunPlugin.getRegistry().getActiveTickers().remove(chunkString);
-                    SlimefunPlugin.getRegistry().getActiveChunks().remove(chunkString);
-                }
-                else {
-                    SlimefunPlugin.getRegistry().getActiveTickers().put(chunkString, locations);
+                    tickers.remove(chunkString);
                 }
             }
         }
     }
 
+    @ParametersAreNonnullByDefault
     public static void moveBlockInfo(Location from, Location to) {
         SlimefunPlugin.getTickerTask().queueMove(from, to);
     }
 
-    public static void _integrated_moveLocationInfo(Location from, Location to) {
+    /**
+     * <strong>Do not call this method!</strong>.
+     * This method is used for internal purposes only.
+     * 
+     * @param from
+     *            The origin {@link Location}
+     * @param to
+     *            The destination {@link Location}
+     */
+    @ParametersAreNonnullByDefault
+    public static void moveLocationInfoUnsafely(Location from, Location to) {
         if (!hasBlockInfo(from)) {
             return;
         }
@@ -634,17 +640,14 @@ public class BlockStorage {
         storage.storage.remove(from);
 
         String chunkString = locationToChunkString(from);
+        Map<String, Set<Location>> tickers = SlimefunPlugin.getTickerTask().getActiveTickers();
+        Set<Location> locations = tickers.get(chunkString);
 
-        if (SlimefunPlugin.getRegistry().getActiveTickers().containsKey(chunkString)) {
-            Set<Location> locations = SlimefunPlugin.getRegistry().getActiveTickers().get(chunkString);
+        if (locations != null) {
             locations.remove(from);
 
             if (locations.isEmpty()) {
-                SlimefunPlugin.getRegistry().getActiveTickers().remove(chunkString);
-                SlimefunPlugin.getRegistry().getActiveChunks().remove(chunkString);
-            }
-            else {
-                SlimefunPlugin.getRegistry().getActiveTickers().put(chunkString, locations);
+                tickers.remove(chunkString);
             }
         }
     }
@@ -666,10 +669,9 @@ public class BlockStorage {
                 String chunkString = locationToChunkString(l);
 
                 if (value != null) {
-                    Set<Location> locations = SlimefunPlugin.getRegistry().getActiveTickers().computeIfAbsent(chunkString, c -> new HashSet<>());
+                    Map<String, Set<Location>> tickers = SlimefunPlugin.getTickerTask().getActiveTickers();
+                    Set<Location> locations = tickers.computeIfAbsent(chunkString, id -> new HashSet<>());
                     locations.add(l);
-
-                    SlimefunPlugin.getRegistry().getActiveChunks().add(chunkString);
                 }
             }
         }
@@ -720,8 +722,7 @@ public class BlockStorage {
         try {
             String id = getLocationInfo(l, "id");
             return id != null && id.equalsIgnoreCase(slimefunItem);
-        }
-        catch (Exception x) {
+        } catch (Exception x) {
             Slimefun.getLogger().log(Level.SEVERE, x, () -> "An Exception occurred while checking " + new BlockPosition(l) + " for: \"" + slimefunItem + "\"");
             return false;
         }
@@ -729,18 +730,6 @@ public class BlockStorage {
 
     public static boolean isWorldRegistered(String name) {
         return SlimefunPlugin.getRegistry().getWorlds().containsKey(name);
-    }
-
-    public static Set<String> getTickingChunks() {
-        return new HashSet<>(SlimefunPlugin.getRegistry().getActiveChunks());
-    }
-
-    public static Set<Location> getTickingLocations(Chunk chunk) {
-        return getTickingLocations(chunk.toString());
-    }
-
-    public static Set<Location> getTickingLocations(String chunk) {
-        return new HashSet<>(SlimefunPlugin.getRegistry().getActiveTickers().get(chunk));
     }
 
     public BlockMenu loadInventory(Location l, BlockMenuPreset preset) {
@@ -769,7 +758,8 @@ public class BlockStorage {
     }
 
     public void loadUniversalInventory(BlockMenuPreset preset) {
-        SlimefunPlugin.getRegistry().getUniversalInventories().put(preset.getID(), new UniversalBlockMenu(preset));
+        UniversalBlockMenu inventory = new UniversalBlockMenu(preset);
+        SlimefunPlugin.getRegistry().getUniversalInventories().put(preset.getID(), inventory);
     }
 
     public void clearInventory(Location l) {
@@ -779,7 +769,7 @@ public class BlockStorage {
             for (HumanEntity human : new ArrayList<>(menu.toInventory().getViewers())) {
                 // Prevents "java.lang.IllegalStateException: Asynchronous entity add!"
                 // when closing the inventory while holding an item
-                Slimefun.runSync(human::closeInventory);
+                SlimefunPlugin.runSync(human::closeInventory);
             }
 
             inventories.get(l).delete(l);
@@ -817,8 +807,7 @@ public class BlockStorage {
 
         if (storage == null) {
             return false;
-        }
-        else {
+        } else {
             return storage.hasInventory(b.getLocation());
         }
     }
@@ -834,8 +823,7 @@ public class BlockStorage {
 
         if (menu != null) {
             return menu;
-        }
-        else {
+        } else {
             return storage.loadInventory(l, BlockMenuPreset.getPreset(checkID(l)));
         }
     }
@@ -855,8 +843,7 @@ public class BlockStorage {
             }
 
             return cfg;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             Slimefun.getLogger().log(Level.SEVERE, e, () -> "Failed to parse ChunkInfo for Slimefun " + SlimefunPlugin.getVersion());
             return emptyBlockData;
         }

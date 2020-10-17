@@ -2,6 +2,9 @@ package io.github.thebusybiscuit.slimefun4.api.events;
 
 import java.util.Optional;
 
+import javax.annotation.Nonnull;
+
+import org.apache.commons.lang.Validate;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -35,7 +38,7 @@ public class PlayerRightClickEvent extends Event {
     private Result itemResult = Result.DEFAULT;
     private Result blockResult = Result.DEFAULT;
 
-    public PlayerRightClickEvent(PlayerInteractEvent e) {
+    public PlayerRightClickEvent(@Nonnull PlayerInteractEvent e) {
         event = e;
         player = e.getPlayer();
         clickedBlock = Optional.ofNullable(e.getClickedBlock());
@@ -44,24 +47,17 @@ public class PlayerRightClickEvent extends Event {
 
         if (e.getItem() == null || e.getItem().getType() == Material.AIR || e.getItem().getAmount() == 0) {
             itemStack = Optional.empty();
-        }
-        else {
+        } else {
             itemStack = Optional.of(e.getItem());
         }
     }
 
-    public static HandlerList getHandlerList() {
-        return handlers;
-    }
-
-    public HandlerList getHandlers() {
-        return handlers;
-    }
-
+    @Nonnull
     public PlayerInteractEvent getInteractEvent() {
         return event;
     }
 
+    @Nonnull
     public Player getPlayer() {
         return player;
     }
@@ -73,6 +69,7 @@ public class PlayerRightClickEvent extends Event {
      * 
      * @return The {@link ItemStack} that the {@link Player} right clicked with
      */
+    @Nonnull
     public ItemStack getItem() {
         return itemStack.orElse(new ItemStack(Material.AIR));
     }
@@ -83,25 +80,27 @@ public class PlayerRightClickEvent extends Event {
      * 
      * @return The hand used in this {@link Event}
      */
+    @Nonnull
     public EquipmentSlot getHand() {
         return hand;
     }
 
+    @Nonnull
     public Optional<Block> getClickedBlock() {
         return clickedBlock;
     }
 
+    @Nonnull
     public BlockFace getClickedFace() {
         return face;
     }
 
+    @Nonnull
     public Optional<SlimefunItem> getSlimefunItem() {
-
         if (!slimefunItem.isComputed()) {
             if (itemStack.isPresent()) {
                 slimefunItem.compute(SlimefunItem.getByItem(itemStack.get()));
-            }
-            else {
+            } else {
                 slimefunItem = ComputedOptional.empty();
             }
         }
@@ -109,13 +108,12 @@ public class PlayerRightClickEvent extends Event {
         return slimefunItem.getAsOptional();
     }
 
+    @Nonnull
     public Optional<SlimefunItem> getSlimefunBlock() {
-
         if (!slimefunBlock.isComputed()) {
             if (clickedBlock.isPresent()) {
                 slimefunBlock.compute(BlockStorage.check(clickedBlock.get()));
-            }
-            else {
+            } else {
                 slimefunBlock = ComputedOptional.empty();
             }
         }
@@ -128,20 +126,35 @@ public class PlayerRightClickEvent extends Event {
         blockResult = Result.DENY;
     }
 
+    @Nonnull
     public Result useItem() {
         return itemResult;
     }
 
+    @Nonnull
     public Result useBlock() {
         return blockResult;
     }
 
-    public void setUseItem(Result result) {
+    public void setUseItem(@Nonnull Result result) {
+        Validate.notNull(result, "Result cannot be null");
         itemResult = result;
     }
 
-    public void setUseBlock(Result result) {
+    public void setUseBlock(@Nonnull Result result) {
+        Validate.notNull(result, "Result cannot be null");
         blockResult = result;
+    }
+
+    @Nonnull
+    public static HandlerList getHandlerList() {
+        return handlers;
+    }
+
+    @Nonnull
+    @Override
+    public HandlerList getHandlers() {
+        return getHandlerList();
     }
 
 }

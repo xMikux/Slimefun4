@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -14,10 +17,12 @@ import org.bukkit.inventory.ItemStack;
 
 import io.github.thebusybiscuit.cscorelib2.inventory.InvUtils;
 import io.github.thebusybiscuit.cscorelib2.item.CustomItem;
+import io.github.thebusybiscuit.slimefun4.api.events.AsyncMachineProcessCompleteEvent;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
+import io.github.thebusybiscuit.slimefun4.utils.itemstack.ItemStackWrapper;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu.AdvancedMenuClickHandler;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ClickAction;
@@ -28,7 +33,6 @@ import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
-import me.mrCookieSlime.Slimefun.api.energy.ChargableBlock;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 
@@ -43,28 +47,18 @@ public abstract class AContainer extends SlimefunItem implements InventoryBlock,
 
     protected final List<MachineRecipe> recipes = new ArrayList<>();
 
+    @ParametersAreNonnullByDefault
     public AContainer(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(category, item, recipeType, recipe);
 
         createPreset(this, getInventoryTitle(), this::constructMenu);
 
-        registerBlockHandler(id, (p, b, tool, reason) -> {
+        registerBlockHandler(item.getItemId(), (p, b, tool, reason) -> {
             BlockMenu inv = BlockStorage.getInventory(b);
 
             if (inv != null) {
-                for (int slot : getInputSlots()) {
-                    if (inv.getItemInSlot(slot) != null) {
-                        b.getWorld().dropItemNaturally(b.getLocation(), inv.getItemInSlot(slot));
-                        inv.replaceExistingItem(slot, null);
-                    }
-                }
-
-                for (int slot : getOutputSlots()) {
-                    if (inv.getItemInSlot(slot) != null) {
-                        b.getWorld().dropItemNaturally(b.getLocation(), inv.getItemInSlot(slot));
-                        inv.replaceExistingItem(slot, null);
-                    }
-                }
+                inv.dropItems(b.getLocation(), getInputSlots());
+                inv.dropItems(b.getLocation(), getOutputSlots());
             }
 
             progress.remove(b);
@@ -75,6 +69,7 @@ public abstract class AContainer extends SlimefunItem implements InventoryBlock,
         registerDefaultRecipes();
     }
 
+    @ParametersAreNonnullByDefault
     public AContainer(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, ItemStack recipeOutput) {
         this(category, item, recipeType, recipe);
         this.recipeOutput = recipeOutput;
@@ -86,14 +81,14 @@ public abstract class AContainer extends SlimefunItem implements InventoryBlock,
         }
 
         for (int i : BORDER_IN) {
-            preset.addItem(i, new CustomItem(new ItemStack(Material.CYAN_STAINED_GLASS_PANE), " "), ChestMenuUtils.getEmptyClickHandler());
+            preset.addItem(i, ChestMenuUtils.getInputSlotTexture(), ChestMenuUtils.getEmptyClickHandler());
         }
 
         for (int i : BORDER_OUT) {
-            preset.addItem(i, new CustomItem(new ItemStack(Material.ORANGE_STAINED_GLASS_PANE), " "), ChestMenuUtils.getEmptyClickHandler());
+            preset.addItem(i, ChestMenuUtils.getOutputSlotTexture(), ChestMenuUtils.getEmptyClickHandler());
         }
 
-        preset.addItem(22, new CustomItem(new ItemStack(Material.BLACK_STAINED_GLASS_PANE), " "), ChestMenuUtils.getEmptyClickHandler());
+        preset.addItem(22, new CustomItem(Material.BLACK_STAINED_GLASS_PANE, " "), ChestMenuUtils.getEmptyClickHandler());
 
         for (int i : getOutputSlots()) {
             preset.addMenuClickHandler(i, new AdvancedMenuClickHandler() {
@@ -119,7 +114,9 @@ public abstract class AContainer extends SlimefunItem implements InventoryBlock,
      * 
      * @return The title of the {@link Inventory} of this {@link AContainer}
      */
-    public abstract String getInventoryTitle();
+    public String getInventoryTitle() {
+        return getItemName();
+    }
 
     /**
      * This method returns the {@link ItemStack} that this {@link AContainer} will
@@ -174,7 +171,9 @@ public abstract class AContainer extends SlimefunItem implements InventoryBlock,
         List<ItemStack> displayRecipes = new ArrayList<>(recipes.size() * 2);
 
         for (MachineRecipe recipe : recipes) {
-            if (recipe.getInput().length != 1) continue;
+            if (recipe.getInput().length != 1) {
+                continue;
+            }
 
             displayRecipes.add(recipe.getInput()[0]);
             displayRecipes.add(recipe.getOutput()[0]);
@@ -244,63 +243,74 @@ public abstract class AContainer extends SlimefunItem implements InventoryBlock,
             if (timeleft > 0) {
                 ChestMenuUtils.updateProgressbar(inv, 22, timeleft, processing.get(b).getTicks(), getProgressBar());
 
-                if (getCapacity() > 0) {
-                    if (ChargableBlock.getCharge(b) < getEnergyConsumption()) {
+                if (isChargeable()) {
+                    if (getCharge(b.getLocation()) < getEnergyConsumption()) {
                         return;
                     }
 
-                    ChargableBlock.addCharge(b, -getEnergyConsumption());
-                    progress.put(b, timeleft - 1);
+                    removeCharge(b.getLocation(), getEnergyConsumption());
                 }
-                else {
-                    progress.put(b, timeleft - 1);
-                }
-            }
-            else {
+                progress.put(b, timeleft - 1);
+            } else {
                 inv.replaceExistingItem(22, new CustomItem(Material.BLACK_STAINED_GLASS_PANE, " "));
 
                 for (ItemStack output : processing.get(b).getOutput()) {
                     inv.pushItem(output.clone(), getOutputSlots());
                 }
 
+                Bukkit.getPluginManager().callEvent(new AsyncMachineProcessCompleteEvent(b.getLocation(), AContainer.this, getProcessing(b)));
+
                 progress.remove(b);
                 processing.remove(b);
             }
-        }
-        else {
-            MachineRecipe r = null;
-            Map<Integer, Integer> found = new HashMap<>();
+        } else {
+            MachineRecipe next = findNextRecipe(inv);
 
-            for (MachineRecipe recipe : recipes) {
-                for (ItemStack input : recipe.getInput()) {
-                    for (int slot : getInputSlots()) {
-                        if (SlimefunUtils.isItemSimilar(inv.getItemInSlot(slot), input, true)) {
-                            found.put(slot, input.getAmount());
-                            break;
-                        }
+            if (next != null) {
+                processing.put(b, next);
+                progress.put(b, next.getTicks());
+            }
+        }
+    }
+
+    protected MachineRecipe findNextRecipe(BlockMenu inv) {
+        Map<Integer, ItemStack> inventory = new HashMap<>();
+
+        for (int slot : getInputSlots()) {
+            ItemStack item = inv.getItemInSlot(slot);
+
+            if (item != null) {
+                inventory.put(slot, new ItemStackWrapper(item));
+            }
+        }
+
+        Map<Integer, Integer> found = new HashMap<>();
+
+        for (MachineRecipe recipe : recipes) {
+            for (ItemStack input : recipe.getInput()) {
+                for (int slot : getInputSlots()) {
+                    if (SlimefunUtils.isItemSimilar(inventory.get(slot), input, true)) {
+                        found.put(slot, input.getAmount());
+                        break;
                     }
-                }
-                if (found.size() == recipe.getInput().length) {
-                    r = recipe;
-                    break;
-                }
-                else {
-                    found.clear();
                 }
             }
 
-            if (r != null) {
-                if (!InvUtils.fitAll(inv.toInventory(), r.getOutput(), getOutputSlots())) {
-                    return;
+            if (found.size() == recipe.getInput().length) {
+                if (!InvUtils.fitAll(inv.toInventory(), recipe.getOutput(), getOutputSlots())) {
+                    return null;
                 }
 
                 for (Map.Entry<Integer, Integer> entry : found.entrySet()) {
                     inv.consumeItem(entry.getKey(), entry.getValue());
                 }
 
-                processing.put(b, r);
-                progress.put(b, r.getTicks());
+                return recipe;
+            } else {
+                found.clear();
             }
         }
+
+        return null;
     }
 }

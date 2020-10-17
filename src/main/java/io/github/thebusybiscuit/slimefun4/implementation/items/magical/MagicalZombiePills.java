@@ -1,14 +1,24 @@
 package io.github.thebusybiscuit.slimefun4.implementation.items.magical;
 
-import io.github.thebusybiscuit.cscorelib2.inventory.ItemUtils;
+import javax.annotation.Nonnull;
+
+import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.Sound;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.PigZombie;
+import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.ZombieVillager;
 import org.bukkit.inventory.ItemStack;
 
+import io.github.thebusybiscuit.cscorelib2.inventory.ItemUtils;
 import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
+import io.github.thebusybiscuit.slimefun4.api.events.PlayerRightClickEvent;
+import io.github.thebusybiscuit.slimefun4.core.attributes.NotPlaceable;
 import io.github.thebusybiscuit.slimefun4.core.handlers.EntityInteractHandler;
+import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
@@ -28,28 +38,59 @@ import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
  * @see EntityInteractHandler
  *
  */
-public class MagicalZombiePills extends SimpleSlimefunItem<EntityInteractHandler> {
+public class MagicalZombiePills extends SimpleSlimefunItem<EntityInteractHandler> implements NotPlaceable {
 
     public MagicalZombiePills(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, ItemStack recipeOutput) {
         super(category, item, recipeType, recipe, recipeOutput);
+
+        addItemHandler(onRightClick());
     }
 
     @Override
     public EntityInteractHandler getItemHandler() {
-        return (p, entity, item, offhand) -> {
-            if (entity.getType() == EntityType.ZOMBIE_VILLAGER) {
+        return (e, item, offhand) -> {
+            Entity entity = e.getRightClicked();
+            Player p = e.getPlayer();
 
-                ItemUtils.consumeItem(item, false);
-                p.playSound(p.getLocation(), Sound.ENTITY_ZOMBIE_VILLAGER_CONVERTED, 1, 1);
-
-                ZombieVillager zombieVillager = (ZombieVillager) entity;
-                zombieVillager.setConversionTime(1);
-
-                if (SlimefunPlugin.getMinecraftVersion().isAtLeast(MinecraftVersion.MINECRAFT_1_15)) {
-                    zombieVillager.setConversionPlayer(p);
-                }
+            if (entity instanceof ZombieVillager) {
+                useItem(p, item);
+                healZombieVillager((ZombieVillager) entity, p);
+            } else if (SlimefunPlugin.getMinecraftVersion().isAtLeast(MinecraftVersion.MINECRAFT_1_16) && entity instanceof PigZombie) {
+                useItem(p, item);
+                healZombifiedPiglin((PigZombie) entity);
             }
         };
     }
 
+    /**
+     * This method cancels {@link PlayerRightClickEvent} to prevent placing {@link MagicalZombiePills}.
+     *
+     * @return the {@link ItemUseHandler} of this {@link SlimefunItem}
+     */
+    public ItemUseHandler onRightClick() {
+        return PlayerRightClickEvent::cancel;
+    }
+
+    private void useItem(@Nonnull Player p, @Nonnull ItemStack item) {
+        if (p.getGameMode() != GameMode.CREATIVE) {
+            ItemUtils.consumeItem(item, false);
+        }
+
+        p.playSound(p.getLocation(), Sound.ENTITY_ZOMBIE_VILLAGER_CONVERTED, 1, 1);
+    }
+
+    private void healZombieVillager(@Nonnull ZombieVillager zombieVillager, @Nonnull Player p) {
+        zombieVillager.setConversionTime(1);
+
+        if (SlimefunPlugin.getMinecraftVersion().isAtLeast(MinecraftVersion.MINECRAFT_1_15)) {
+            zombieVillager.setConversionPlayer(p);
+        }
+    }
+
+    private void healZombifiedPiglin(@Nonnull PigZombie zombiePiglin) {
+        Location loc = zombiePiglin.getLocation();
+
+        zombiePiglin.remove();
+        loc.getWorld().spawnEntity(loc, EntityType.PIGLIN);
+    }
 }

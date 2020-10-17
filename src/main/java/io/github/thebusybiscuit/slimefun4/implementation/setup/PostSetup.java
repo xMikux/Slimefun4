@@ -14,6 +14,8 @@ import java.util.logging.Level;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.annotation.Nonnull;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -44,8 +46,7 @@ public final class PostSetup {
     private PostSetup() {}
 
     public static void setupWiki() {
-        Slimefun.getLogger().log(Level.INFO, "Loading Wiki pages...");
-
+        Slimefun.getLogger().log(Level.INFO, "載入 Wiki 頁...");
         JsonParser parser = new JsonParser();
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(SlimefunPlugin.class.getResourceAsStream("/wiki.json"), StandardCharsets.UTF_8))) {
@@ -59,9 +60,8 @@ public final class PostSetup {
                     item.addOficialWikipage(entry.getValue().getAsString());
                 }
             }
-        }
-        catch (IOException e) {
-            Slimefun.getLogger().log(Level.SEVERE, "Failed to load wiki.json file", e);
+        } catch (IOException e) {
+            Slimefun.getLogger().log(Level.SEVERE, "加載失敗 wiki.json 檔", e);
         }
     }
 
@@ -74,8 +74,7 @@ public final class PostSetup {
             if (item == null) {
                 Slimefun.getLogger().log(Level.WARNING, "Removed bugged Item ('NULL?')");
                 iterator.remove();
-            }
-            else {
+            } else {
                 item.load();
             }
         }
@@ -92,22 +91,23 @@ public final class PostSetup {
         sender.sendMessage("");
         sender.sendMessage(ChatColor.GREEN + "######################### - Slimefun v" + SlimefunPlugin.getVersion() + " - #########################");
         sender.sendMessage("");
-        sender.sendMessage(ChatColor.GREEN + "Successfully loaded " + total + " Items and " + SlimefunPlugin.getRegistry().getResearches().size() + " Researches");
-        sender.sendMessage(ChatColor.GREEN + "( " + slimefunOnly + " Items from Slimefun, " + (total - slimefunOnly) + " Items from " + SlimefunPlugin.getInstalledAddons().size() + " Addons )");
+        sender.sendMessage(ChatColor.GREEN + "成功載入 " + total + " 個物品和 " + SlimefunPlugin.getRegistry().getResearches().size() + " 個研究");
+        sender.sendMessage(ChatColor.GREEN + "( " + slimefunOnly + " 物品來自Slimefun, " + (total - slimefunOnly) + " 個物品來自 " + SlimefunPlugin.getInstalledAddons().size() + " 附加 )");
         sender.sendMessage("");
-        sender.sendMessage(ChatColor.GREEN + "Slimefun is an Open-Source project that is kept alive by a large community.");
-        sender.sendMessage(ChatColor.GREEN + "Consider helping us maintain this project by contributing on GitHub!");
+        sender.sendMessage(ChatColor.GREEN + "Slimefun 是一個開源專案,由活躍的大型社區.");
+        sender.sendMessage(ChatColor.GREEN + "通過GitHub上進行貢獻來維護此專案!");
 
         if (SlimefunPlugin.getUpdater().getBranch().isOfficial()) {
             sender.sendMessage("");
-            sender.sendMessage(ChatColor.GREEN + " - Source Code:  https://github.com/TheBusyBiscuit/Slimefun4");
-            sender.sendMessage(ChatColor.GREEN + " - Wiki:         https://github.com/TheBusyBiscuit/Slimefun4/wiki");
-            sender.sendMessage(ChatColor.GREEN + " - Addons:       https://github.com/TheBusyBiscuit/Slimefun4/wiki/Addons");
-            sender.sendMessage(ChatColor.GREEN + " - Bug Reports:  https://github.com/TheBusyBiscuit/Slimefun4/issues");
-            sender.sendMessage(ChatColor.GREEN + " - Discord:      https://discord.gg/fsD4Bkh");
-        }
-        else {
-            sender.sendMessage(ChatColor.GREEN + " - UNOFFICIALLY MODIFIED BUILD - NO OFFICIAL SUPPORT GIVEN");
+            sender.sendMessage(ChatColor.GREEN + " - Source Code:  https://github.com/Slimefun/Slimefun4");
+            sender.sendMessage(ChatColor.GREEN + " - Wiki:         https://github.com/Slimefun/Slimefun4/wiki");
+            sender.sendMessage(ChatColor.GREEN + " - Addons:       https://github.com/Slimefun/Slimefun4/wiki/Addons");
+            sender.sendMessage(ChatColor.GREEN + " - Bug Reports:  https://github.com/Slimefun/Slimefun4/issues");
+            sender.sendMessage(ChatColor.GREEN + " - Discord:      https://discord.gg/slimefun");
+        } else {
+            sender.sendMessage("");
+            sender.sendMessage(ChatColor.GREEN + " - 源代碼: https://github.com/xMikux/Slimefun4");
+            sender.sendMessage(ChatColor.GREEN + " - 此為繁體翻譯版 - 無官方支持");
         }
 
         sender.sendMessage("");
@@ -157,8 +157,7 @@ public final class PostSetup {
             for (ItemStack[] recipe : grinder.getRecipes()) {
                 if (input == null) {
                     input = recipe;
-                }
-                else {
+                } else {
                     if (input[0] != null && recipe[0] != null) {
                         grinderRecipes.add(new ItemStack[] { input[0], recipe[0] });
                     }
@@ -175,8 +174,7 @@ public final class PostSetup {
             for (ItemStack[] recipe : crusher.getRecipes()) {
                 if (input == null) {
                     input = recipe;
-                }
-                else {
+                } else {
                     if (input[0] != null && recipe[0] != null) {
                         grinderRecipes.add(new ItemStack[] { input[0], recipe[0] });
                     }
@@ -206,8 +204,7 @@ public final class PostSetup {
             for (ItemStack[] output : smeltery.getRecipes()) {
                 if (input == null) {
                     input = output;
-                }
-                else {
+                } else {
                     if (input[0] != null && output[0] != null) {
                         addSmelteryRecipe(input, output, makeshiftSmeltery);
                     }
@@ -245,15 +242,14 @@ public final class PostSetup {
 
             registerMachineRecipe("ELECTRIC_INGOT_FACTORY", 8, new ItemStack[] { ingredients.get(0) }, new ItemStack[] { output[0] });
             registerMachineRecipe("ELECTRIC_INGOT_PULVERIZER", 3, new ItemStack[] { output[0] }, new ItemStack[] { ingredients.get(0) });
-        }
-        else {
+        } else {
             registerMachineRecipe("ELECTRIC_SMELTERY", 12, ingredients.toArray(new ItemStack[0]), new ItemStack[] { output[0] });
         }
     }
 
-    private static boolean isDust(ItemStack item) {
+    private static boolean isDust(@Nonnull ItemStack item) {
         SlimefunItem sfItem = SlimefunItem.getByItem(item);
-        return sfItem != null && sfItem.getID().endsWith("_DUST");
+        return sfItem != null && sfItem.getId().endsWith("_DUST");
     }
 
     private static void registerMachineRecipe(String machine, int seconds, ItemStack[] input, ItemStack[] output) {

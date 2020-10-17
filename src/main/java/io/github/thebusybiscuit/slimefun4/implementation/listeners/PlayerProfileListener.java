@@ -2,6 +2,8 @@ package io.github.thebusybiscuit.slimefun4.implementation.listeners;
 
 import java.util.Optional;
 
+import javax.annotation.Nonnull;
+
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,7 +24,7 @@ import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
  */
 public class PlayerProfileListener implements Listener {
 
-    public PlayerProfileListener(SlimefunPlugin plugin) {
+    public PlayerProfileListener(@Nonnull SlimefunPlugin plugin) {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
@@ -31,9 +33,7 @@ public class PlayerProfileListener implements Listener {
         Optional<PlayerProfile> profile = PlayerProfile.find(e.getPlayer());
 
         // if we still have a profile of this Player in memory, delete it
-        if (profile.isPresent()) {
-            profile.get().markForDeletion();
-        }
+        profile.ifPresent(PlayerProfile::markForDeletion);
     }
 
     @EventHandler(ignoreCancelled = true)
@@ -41,9 +41,7 @@ public class PlayerProfileListener implements Listener {
         Optional<PlayerProfile> profile = PlayerProfile.find(e.getPlayer());
 
         // if we still have a profile of this Player in memory, delete it
-        if (profile.isPresent()) {
-            profile.get().markForDeletion();
-        }
+        profile.ifPresent(PlayerProfile::markForDeletion);
     }
 
 }

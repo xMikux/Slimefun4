@@ -12,17 +12,7 @@ import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 class OpenGuideCommand extends SubCommand {
 
     OpenGuideCommand(SlimefunPlugin plugin, SlimefunCommand cmd) {
-        super(plugin, cmd);
-    }
-
-    @Override
-    public String getName() {
-        return "open_guide";
-    }
-
-    @Override
-    public boolean isHidden() {
-        return false;
+        super(plugin, cmd, "open_guide", false);
     }
 
     @Override
@@ -31,12 +21,10 @@ class OpenGuideCommand extends SubCommand {
             if (sender.hasPermission("slimefun.command.open_guide")) {
                 boolean book = SlimefunPlugin.getCfg().getBoolean("guide.default-view-book");
                 SlimefunGuide.openGuide((Player) sender, book ? SlimefunGuideLayout.BOOK : SlimefunGuideLayout.CHEST);
-            }
-            else {
+            } else {
                 SlimefunPlugin.getLocalization().sendMessage(sender, "messages.no-permission", true);
             }
-        }
-        else {
+        } else {
             SlimefunPlugin.getLocalization().sendMessage(sender, "messages.only-players", true);
         }
     }

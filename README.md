@@ -1,181 +1,118 @@
 # Slimefun 4
-Looking for the download link? [**Click here**](https://github.com/TheBusyBiscuit/Slimefun4/blob/master/README.md#download-slimefun-4)
+正在找原作連結? [**點此**](https://github.com/Slimefun/Slimefun4/blob/master/README.md#download-slimefun-4)
+Looking for English Version? [**Click here!**](https://github.com/Slimefun/Slimefun4)
 
-Slimefun is a plugin which aims to turn your Spigot Server into a modpack without ever installing a single mod. It offers everything you could possibly imagine. From Backpacks to Jetpacks! Slimefun lets every player decide on their own how much they want to dive into Magic or Tech.<br>
-We got everything from magical wands to nuclear reactors.<br>
-We feature a magical altar, an electric power grid and even item transport systems.
+下載此翻譯版? [**點此**](https://xmikux.github.io/builds/xMikux/Slimefun4/master/)
 
-This project originally started back in 2013 and has grown ever since.<br>
-From one single person working on this plugin back then, we grew to a community of thousands of players and over 100 contributors to this project.<br>
-It currently adds over **500 new items and recipes** to Minecraft ([Read more about the history of this project](https://github.com/TheBusyBiscuit/Slimefun4/wiki/Slimefun-in-a-nutshell)).
+**此插件還正在翻譯中!**
+此為業餘翻譯,有甚麼錯誤的歡迎糾正。 **無法時常更新** <br>
+以及貢獻者們都是第一次接觸Git與Github,所以有可能會出現一些錯誤的操作 <br>
 
-But it also comes with a lot of Addons too!<br>
-Check out our [Addons](https://github.com/TheBusyBiscuit/Slimefun4/wiki/Addons), you may find exactly what you were looking for.
+如果你使用了此版本的黏液科技,**請勿**在官方的問題追蹤那回報問題! <br>
+如果真的要回報,請先用官方的最新開發版測試是否有這問題,如果有請使用英文回報! <br>
+如果是此翻譯導致的問題,歡迎開問題追蹤!
 
-### Quick navigation
-* **[Download Slimefun4](#download-slimefun-4)**
-* **[Discord Support Server](#discord)**
-* **[Bug Tracker](https://github.com/TheBusyBiscuit/Slimefun4/issues)**
-* **[Wiki](https://github.com/TheBusyBiscuit/Slimefun4/wiki)**
-* **[FAQ](https://github.com/TheBusyBiscuit/Slimefun4/wiki/FAQ)**
+此專案最初於2013年開始開發,此後一直發展.<br>
+從那時一個人從事此插件開發到發展成一個擁有數千名參與者與一百多個貢獻者的社區.<br>
+目前已添加了 **五百多種新物品與合成表**到 Minecraft ([閱讀有關於官方黏液科技專案的歷史](https://github.com/Slimefun/Slimefun4/wiki/Slimefun-in-a-nutshell)).
 
-## Download Slimefun 4
-(See also: [How to install Slimefun](https://github.com/TheBusyBiscuit/Slimefun4/wiki/Installing-Slimefun))
+但它也帶來非常多的附加插件!<br>
+查看官方的 [附加插件](https://github.com/Slimefun/Slimefun4/wiki/Addons), 你可能會找到你想要的附加. <br>
+查看此專案翻譯者的繁體附加插件 **仍在翻譯中** 但你可以在[構建頁面](https://xmikux.github.io/builds/)上找已翻譯.<br>
+雖然有可能哪裡有翻譯錯誤 請多見諒.
 
-**Due to [Spigot's abandonce of the Bukkit API](https://www.spigotmc.org/threads/spigot-bungeecord-1-16-1.447405/#post-3852349), Slimefun is no longer able to work on CraftBukkit, please switch over to Spigot or Paper if you haven't already.**
+### 快速導航
+* **[下載黏液科技](#下載-黏液科技)**
+* **[截圖](#截圖)**
+* **[Discord 支持伺服器 (官方)](#discord)**
+* **[Bug 追蹤 (官方)](https://github.com/Slimefun/Slimefun4/issues)**
+* **[Wiki (官方)](https://github.com/Slimefun/Slimefun4/wiki)**
+* **[FAQ (官方)](https://github.com/Slimefun/Slimefun4/wiki/FAQ)**
 
-Slimefun 4 can be downloaded **for free** on our builds page.<br>
-We currently provide two distinct versions of Slimefun, development builds and "stable" builds.<br>
-Here is a full summary of the differences between the two different versions of Slimefun.
+## 下載 黏液科技
 
-| | development (latest) | "stable" |
+| | 開發版 (最新) | "穩定版 (官方)" |
 | ------------------ | -------- | -------- |
-| **Minecraft version(s)** | :video_game: **1.13.\* - 1.16.\*** | :video_game: **1.13.\* - 1.16.\*** |
-| **automatic updates** | :heavy_check_mark: | :heavy_check_mark: |
-| **frequent updates** | :heavy_check_mark: | :x: |
-| **latest content** | :heavy_check_mark: | :x: |
-| **Discord support** | :heavy_check_mark: | :x: |
-| **Bug Reports** | :heavy_check_mark: | :x: |
-| **testing before release** | :x: | :heavy_check_mark: |
-| **change logs** | :x: | :memo: **[change log](https://github.com/TheBusyBiscuit/Slimefun4/blob/master/CHANGELOG.md)** |
-| **Download link** | :floppy_disk: **[download latest](https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun4/master/)** | :floppy_disk: **[download "stable"](https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun4/stable/)** |
+| **Minecraft 版本** | :video_game: **1.14.\* - 1.16.\*** | :video_game: **1.13.\* - 1.16.\*** |
+| **自動更新** | :heavy_check_mark: | :heavy_check_mark: |
+| **頻繁的更新** | :heavy_check_mark: | :x: |
+| **最新內容** | :heavy_check_mark: | :x: |
+| **Discord 支持** | :heavy_check_mark: | :x: |
+| **Bug 回報** | :heavy_check_mark: | :x: |
+| **發布前測試** | :x: | :heavy_check_mark: |
+| **更新日誌** | :x: | :memo: **[更新日誌](https://github.com/Slimefun/Slimefun4/blob/master/CHANGELOG.md)** |
+| **下載連結** | :floppy_disk: **[下載最新](https://xmikux.github.io/builds/xMikux/Slimefun4/master)** | :floppy_disk: **[下載穩定版](https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun4/stable/)** |
 
-**:exclamation: We wholeheartedly recommend you to use _development builds_, they are the most recent version of Slimefun and also receive the most frequent updates!**
-<details>
-  <summary>Here's why...</summary>
-  
-"Stable" builds do not receive frequent updates or fast patches. As time goes on, bugs are fixed but it will take some time until these fixes make it into a "stable" build. We will also not accept or review any bug reports from "stable" builds. They are in fact just old development builds that seemed to run fine without any __major__ issues.
+**建議使用最新版或官方最新開發版,可以獲得最新內容更新以及Bug修復!**
 
-**Why use a "stable" build then?**<br>
-While "stable" builds most definitely contain more bugs than development builds due to their very slow update schedule. you can be sure that they will not include __game-breaking__ issues, but rest assured that development builds almost never contain such issues either. If your server or business however heavily depends on a version of Slimefun that does not change/update a lot, you are forgiven if you choose the "stable" branch. But development builds will bring you the best experience, both in terms of features and bug fixes.
-
-**What exactly are these "stable" builds then and why do you put them in quotes?**<br>
-"Stable" builds are literally just outdated development builds that seemed to run fine without any __major__ issues. But they are far from bug-free hence why actually calling them stable would be hypocritical. However these builds can only really stay "stable" if there are enough people using development builds and report any bugs they come across. Otherwise potential issues may go unnoticed and slip into a "stable" build. Again, we really recommend you to choose the development builds. But since a few people really wanted "stable" builds, they are now an option too.
-
-</details>
+## 截圖
+所以黏液科技看起來像是甚麼?<br>
+好吧,我們請求了在黏液科技官方Discord上的用戶提供了一些螢幕截圖,看看吧!
+|                 反應堆 和 電力                  |            非常棒的工廠             |          魔法祭壇           |
+| :-------------------------------------------: | :--------------------------------------: | :----------------------------------------: |
+| ![](https://raw.githubusercontent.com/Slimefun/Slimefun-Wiki/master/images/showcase1.png) | ![](https://raw.githubusercontent.com/Slimefun/Slimefun-Wiki/master/images/showcase6.png) | ![](https://raw.githubusercontent.com/Slimefun/Slimefun-Wiki/master/images/showcase5.png) |
+| *截圖提供者 HamtaBot#0001* | *截圖提供者 Piͭxͪeͤl (mnb)#5049* | *截圖提供者 Kilaruna#4981* |
+| ![](https://raw.githubusercontent.com/Slimefun/Slimefun-Wiki/master/images/showcase4.png) | ![](https://raw.githubusercontent.com/Slimefun/Slimefun-Wiki/master/images/showcase3.png) | ![](https://raw.githubusercontent.com/Slimefun/Slimefun-Wiki/master/images/showcase2.png) |
+| *截圖提供者 GalaxyKat11#3816* | *截圖提供者 TamThan#7987* | *截圖提供者 Kilaruna#4981* |
 
 ## Discord
-You can find Slimefun's community on Discord and connect with **over 2000** users of this plugin from all over the world.<br>
-Click the badge down below to join the server for suggestions/questions or other discussions about this plugin.<br>
-We are also hosting a community event every so often, join us to find out more.<br>
-**Important**: We do **not** accept bug reports on discord, please use our [Issue Tracker](https://github.com/TheBusyBiscuit/Slimefun4/issues) to submit bug reports!
+你可以在Discord找到Slimefun的官方社區,並與來自世界各地**兩千以上**的用戶使用此插件.<br>
+點擊底下的徵標來加入伺服器,以獲取有關官方插件的建議/問題與其他討論.<br>
+官方也經常舉辦社區活動,請加入來了解更多訊息.<br>
 
-Due to the sheer size of this discord server, we need to enforce some [important rules](https://github.com/TheBusyBiscuit/Slimefun4/wiki/Discord-Rules).<br>
-Not following these rules can lead to a kick or even a ban from the server.
+由於官方的Discord規模龐大,他們將執行一些[重要規則](https://github.com/Slimefun/Slimefun4/wiki/Discord-Rules).<br>
+不遵守這些規則將導致你會被踢除甚至封禁在官方Discord.
 
 <p align="center">
-  <a href="https://discord.gg/fsD4Bkh">
-    <img src="https://img.shields.io/discord/565557184348422174?color=7289DA&label=Discord&style=for-the-badge" alt="Discord Invite"/>
-  </a><br>
-  (Click the badge to join)
+  <a href="https://discord.gg/slimefun">
+    <img src="https://discordapp.com/api/guilds/565557184348422174/widget.png?style=banner3" alt="Discord Invite"/>
+  </a>
 </p>
 
-## Wiki
-Slimefun has a (detailed and well-maintained - *cough*) Wiki for new players, maybe also consider
-expanding the wiki to help grow our community and help out new users of this plugin.
-https://github.com/TheBusyBiscuit/Slimefun4/wiki
+## 免責聲明
+Slimefun4 使用各種系統來收集使用情況資訊或自動下載更新有關該專案的最新消息.我們不會從您那裡收集任何個人訊息,但有一些服務可能會收集或下載某種形式的資訊. <br>
 
-##### Highlighted Articles
-* [What is Slimefun?](https://github.com/TheBusyBiscuit/Slimefun4/wiki/Slimefun-in-a-nutshell)
-* [How to install Slimefun](https://github.com/TheBusyBiscuit/Slimefun4/wiki/Installing-Slimefun)
-* [Addons for Slimefun 4](https://github.com/TheBusyBiscuit/Slimefun4/wiki/Addons)
-* [How to create an Addon for Slimefun 4](https://github.com/TheBusyBiscuit/Slimefun4/wiki/Developer-Guide)
-* [Getting Started](https://github.com/TheBusyBiscuit/Slimefun4/wiki/Getting-Started)
-* [Frequently Asked Questions](https://github.com/TheBusyBiscuit/Slimefun4/wiki/FAQ)
-* [Common issues](https://github.com/TheBusyBiscuit/Slimefun4/wiki/Common-Issues)
-* [Help us expand the Wiki!](https://github.com/TheBusyBiscuit/Slimefun4/wiki/Expanding-the-Wiki)
-* [Help us translate Slimefun!](https://github.com/TheBusyBiscuit/Slimefun4/wiki/Translating-Slimefun)
-
-The wiki is entirely community-run, so if you find an article missing, feel free to write one and share it with others.
-
-## Contributing to this project
-Slimefun 4 is an Open-Source project and licensed under
-[GNU GPLv3](https://github.com/TheBusyBiscuit/Slimefun4/blob/master/LICENSE).<br>
-Over 100 people have already contributed to this amazing project. You guys are awesome.<br>
-Please consider helping us maintain this project too, your engagement keeps the project alive <3.
-
-### Translations
-Slimefun4 has recently added suport for translations, note that translations are still _work in progress_.<br>
-So not everything may be available for translation yet.<br>
-[Read more...](https://github.com/TheBusyBiscuit/Slimefun4/wiki/Translating-Slimefun)
-
-### Pull requests
-This is an open-source community project, so **your contributions keep this plugin alive!**<br>
-Pull Requests can be fixes, changes or even additions, but please keep in mind that if you add too much content to Slimefun 4, you should maybe consider making an Addon for it instead ([Developer Guide](https://github.com/TheBusyBiscuit/Slimefun4/wiki/Developer-Guide)).
-
-#### Compiling
-Slimefun is written in Java and uses [Maven](https://maven.apache.org/) for compilation.<br>
-To compile Slimefun yourself, follow these steps:
-
-1. Clone the project via git<br>
-`$ git clone https://github.com/TheBusyBiscuit/Slimefun4/`
-2. Compile the project using Maven<br>
-`$ mvn clean package`
-
-If you are already using an IDE, make sure to import the project via git and set it as a *Maven project*. Then you should be able build it via Maven using the goals `clean package`.
-
-If you have any further questions, then please join our [Discord Support Server](#discord) and ask your questions in the `#programming-help` channel. Note that we will not accept any bug reports from custom-compiled versions of Slimefun.
-
-### Code Quality
-Slimefun uses [Sonarcloud.io](https://sonarcloud.io/dashboard?id=TheBusyBiscuit_Slimefun4) to monitor Code Quality.
-
-| [Overall Maintainability](https://sonarcloud.io/documentation/user-guide/metric-definitions/#maintainability) | "Code Smells" | "Technical Debt" | Test Coverage |
-| ---- | ---- | ---- | ---- |
-| [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=TheBusyBiscuit_Slimefun4&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=TheBusyBiscuit_Slimefun4) | [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=TheBusyBiscuit_Slimefun4&metric=code_smells)](https://sonarcloud.io/dashboard?id=TheBusyBiscuit_Slimefun4) | [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=TheBusyBiscuit_Slimefun4&metric=sqale_index)](https://sonarcloud.io/dashboard?id=TheBusyBiscuit_Slimefun4) | [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=TheBusyBiscuit_Slimefun4&metric=coverage)](https://sonarcloud.io/dashboard?id=TheBusyBiscuit_Slimefun4) |
-
-##### "Code Smells"
-Code Smells are portions of the source code that are confusing, lack documentation or are just done very badly in general. These code smells should be held to a bare minimum.
-
-_Please contact us on [Discord](#discord) before working on any code smells. Some design patterns may not be changed abruptly because an addon might depend on them._
-
-##### "Technical Debt"
-Technical Debt is basically an estimate for how long it would take to fix all issues and code smells.
-
-##### Test Coverage
-Slimefun now also uses Automated Tests to determine whether an update could break something. The coverage shows how much these tests cover. Higher coverage means less breaking changes and as a result also better and more reliable builds.
-Due to this being a very huge project though, getting to `100% coverage` is probably close to impossible. But increasing that number even slightly still helps. So feel free to write Unit Tests for Slimefun and place them in the [/src/test/java/](https://github.com/TheBusyBiscuit/Slimefun4/tree/master/src/test/java) folder.
-
-## Disclaimers
-Slimefun4 uses various systems that collect usage information or download automatic updates as well as the latest information about the project.
-We do not collect any personal information from you but there are some services that may gather or download some form of data.
-
-You can opt-out of the Auto-Updater and stats collection at any time.
+您可隨時選擇關閉自動更新和訊息整合.
 
 <details>
-  <summary>Automatic updates</summary>
+  <summary>自動更新</summary>
   
-Slimefun4 uses an Auto-Updater which connects to https://thebusybiscuit.github.io/builds/ to check for and download updates.<br>
-This behaviour is enabled by default but can be turned off under `/plugins/Slimefun/config.yml`.<br>
-We highly recommend you to keep this on at any time though, as you could be missing out on important patches.
+Slimefun4 繁體翻譯版使用GitHub API以檢查和下載更新<br>
+此設定默認是關閉的,但你可以開啟在`/plugins/Slimefun/config.yml`.<br>
+**此功能未完成**
 </details>
 
 <details>
-  <summary>Metrics and Statistics</summary>
+  <summary>指標與統計</summary>
   
-Slimefun4 uses [bStats](https://bstats.org/plugin/bukkit/Slimefun/4574) to collect anonymous information about the usage of this plugin.<br>
-This is solely for statistical purposes, as we are interested in how Servers/Players use this plugin.<br>
-All available data is anonymous and aggregated, at no point can we see individual server or player information.<br>
-All of the collected data is publicly accessible: https://bstats.org/plugin/bukkit/Slimefun/4574
+Slimefun4 使用[bStats](https://bstats.org/plugin/bukkit/Slimefun/4574)來收集關此插件的匿名訊息.<br>
+這僅出於統計目的,因為我們對伺服器/玩家如何使用此插件感到興趣.<br>
+所有可用數據都是匿名和匯總,我們絕對不會看到單個伺服器訊息或玩家訊息.<br>
+所有收集的均可公開訪問: https://bstats.org/plugin/bukkit/Slimefun/4574
 
-You can also disable this behaviour under `/plugins/bStats/config.yml`.<br>
-For more info see [bStats' Privacy Policy](https://bstats.org/privacy-policy)
+您可以在此位置關閉統計 `/plugins/bStats/config.yml`.<br>
+更多訊息請查看 [bStats' 隱私政策](https://bstats.org/privacy-policy)
+
+安裝此插件時,會自動下載我們的[bStats 模塊](https://github.com/Slimefun/MetricsModule),該模塊將用於伺服器自動更新,與主插件無關.這樣,在出現嚴重性能問題的情況下,即時數據和對影響性能的洞察可能至關重要,我們可以自動向bStats模塊推出更新.
+這些更新可以關閉在於 `/plugins/Slimefun/config.yml`.要關閉整個指標收集,請參見上面的段落
+
 </details>
 
 <details>
-  <summary>GitHub Integration</summary>
+  <summary>GitHub 整合</summary>
   
-Lastly, Slimefun4 connects to https://api.github.com/ to gather information about this open-source project.<br>
-No information about you or your Minecraft Server is sent to GitHub.
+最後, Slimefun4 連接至 https://api.github.com/ 以收集有關此開源專案的資訊.<br>
+沒有任何有關於您或您的Minecraft伺服器訊息會發送到GitHub.
 
-This information includes (but is not limited to)
-* list of contributors, their username and profile link (from the repositories `TheBusyBiscuit/Slimefun4`, `Slimefun/Slimefun-Wiki` and `Slimefun/Resourcepack`)
-* amount of open issues in this repository
-* amount of pending pull requests in this repository
-* amount of stars in this repository
-* amount of forks of this repository
-* amount of code-bytes in this repository
-* date of the last commit to this repository
+此訊息包括 (但不限於)
+* 貢獻者列表,它們的用戶名稱與個人資料連結(來自儲存庫 `Slimefun/Slimefun4`, `Slimefun/Slimefun-Wiki` 和 `Slimefun/Resourcepack`)
+* 此儲存庫中的未解決問題數量
+* 此處存庫中帶處力的拉取請求數量
+* 此儲存庫中的星星數
+* 此儲存庫的分叉數量
+* 此儲存庫中的代碼字節數
+* 對該儲存庫的最後一次提交日期
 </details>
 
-Additionally the plugin connects to https://mojang.com/ to retrieve the Minecraft skins of our contributors (if possible).<br>
-Note that Slimefun is not associated with `Mojang Studios` or Minecraft.
+此外,該插件會連接至 [textures.minecraft.net](https://www.minecraft.net/en-us) 來獲取我們的貢獻者Minecraft外觀(如果可以).<br>
+請注意 Slimefun 與 `Mojang Studios`或Minecraft沒有任何關聯.

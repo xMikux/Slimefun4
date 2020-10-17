@@ -25,7 +25,7 @@ public class PortableDustbin extends SimpleSlimefunItem<ItemUseHandler> implemen
             e.cancel();
 
             Player p = e.getPlayer();
-            p.openInventory(Bukkit.createInventory(null, 9 * 3, ChatColor.DARK_RED + "Delete Items"));
+            p.openInventory(Bukkit.createInventory(null, 9 * 3, ChatColor.DARK_RED + "刪除物品"));
             p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
         };
     }

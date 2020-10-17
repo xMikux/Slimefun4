@@ -2,6 +2,8 @@ package io.github.thebusybiscuit.slimefun4.implementation.tasks;
 
 import java.util.logging.Level;
 
+import javax.annotation.Nonnull;
+
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 
@@ -35,7 +37,7 @@ public class SlimefunStartupTask implements Runnable {
      * @param runnable
      *            A {@link Runnable} containing additional operations that need to be run
      */
-    public SlimefunStartupTask(SlimefunPlugin plugin, Runnable runnable) {
+    public SlimefunStartupTask(@Nonnull SlimefunPlugin plugin, @Nonnull Runnable runnable) {
         this.plugin = plugin;
         this.runnable = runnable;
     }
@@ -53,9 +55,8 @@ public class SlimefunStartupTask implements Runnable {
         for (World world : Bukkit.getWorlds()) {
             try {
                 new BlockStorage(world);
-            }
-            catch (Exception x) {
-                Slimefun.getLogger().log(Level.SEVERE, x, () -> "An Error occured while trying to load World \"" + world.getName() + "\" for Slimefun v" + SlimefunPlugin.getVersion());
+            } catch (Exception x) {
+                Slimefun.getLogger().log(Level.SEVERE, x, () -> "An Error occurred while trying to load World \"" + world.getName() + "\" for Slimefun v" + SlimefunPlugin.getVersion());
             }
         }
 

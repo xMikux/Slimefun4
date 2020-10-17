@@ -21,8 +21,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 import io.github.thebusybiscuit.cscorelib2.chat.ChatColors;
 import io.github.thebusybiscuit.cscorelib2.item.CustomItem;
 import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
+import io.github.thebusybiscuit.slimefun4.api.items.ItemSetting;
 import io.github.thebusybiscuit.slimefun4.core.multiblocks.MultiBlockMachine;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
+import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineFuel;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
@@ -47,14 +49,16 @@ public class IndustrialMiner extends MultiBlockMachine {
 
     private final int range;
     private final boolean silkTouch;
+    private final ItemSetting<Boolean> canMineAncientDebris = new ItemSetting<>("can-mine-ancient-debris", false);
 
     public IndustrialMiner(Category category, SlimefunItemStack item, Material baseMaterial, boolean silkTouch, int range) {
-        super(category, item, new ItemStack[] { null, null, null, new CustomItem(Material.PISTON, "Piston (facing up)"), new ItemStack(Material.CHEST), new CustomItem(Material.PISTON, "Piston (facing up)"), new ItemStack(baseMaterial), new ItemStack(SlimefunPlugin.getMinecraftVersion().isAtLeast(MinecraftVersion.MINECRAFT_1_14) ? Material.BLAST_FURNACE : Material.FURNACE), new ItemStack(baseMaterial) }, new ItemStack[0], BlockFace.UP);
+        super(category, item, new ItemStack[] { null, null, null, new CustomItem(Material.PISTON, "活塞 (朝上)"), new ItemStack(Material.CHEST), new CustomItem(Material.PISTON, "活塞 (朝上)"), new ItemStack(baseMaterial), new ItemStack(SlimefunPlugin.getMinecraftVersion().isAtLeast(MinecraftVersion.MINECRAFT_1_14) ? Material.BLAST_FURNACE : Material.FURNACE), new ItemStack(baseMaterial) }, BlockFace.UP);
 
         this.range = range;
         this.silkTouch = silkTouch;
 
         registerDefaultFuelTypes();
+        addItemSetting(canMineAncientDebris);
     }
 
     /**
@@ -129,7 +133,7 @@ public class IndustrialMiner extends MultiBlockMachine {
         case LAPIS_ORE:
             return new ItemStack(Material.LAPIS_LAZULI, 4 + random.nextInt(4));
         default:
-            // This includes Iron and Gold ore
+            // This includes Iron and Gold ore (and Ancient Debris)
             return new ItemStack(ore);
         }
     }
@@ -143,7 +147,7 @@ public class IndustrialMiner extends MultiBlockMachine {
      *            The item that shall be consumed
      */
     public void addFuelType(int ores, ItemStack item) {
-        Validate.isTrue(ores > 1 && ores % 2 == 0, "The amount of ores must be at least 2 and a multiple of 2.");
+        Validate.isTrue(ores > 1 && ores % 2 == 0, "礦物的數量必須最少為二且二的倍數.");
         fuelTypes.add(new MachineFuel(ores / 2, item));
     }
 
@@ -160,7 +164,7 @@ public class IndustrialMiner extends MultiBlockMachine {
             ItemStack item = fuel.getInput().clone();
             ItemMeta im = item.getItemMeta();
             List<String> lore = new ArrayList<>();
-            lore.add(ChatColors.color("&8\u21E8 &7Lasts for max. " + fuel.getTicks() + " Ores"));
+            lore.add(ChatColors.color("&8\u21E8 &7剩餘最多 " + fuel.getTicks() + " 個礦物"));
             im.setLore(lore);
             item.setItemMeta(im);
             list.add(item);
@@ -192,8 +196,7 @@ public class IndustrialMiner extends MultiBlockMachine {
 
         if (northern.getType() == Material.PISTON) {
             return new Block[] { northern, chest.getRelative(BlockFace.SOUTH) };
-        }
-        else {
+        } else {
             return new Block[] { chest.getRelative(BlockFace.WEST), chest.getRelative(BlockFace.EAST) };
         }
     }
@@ -207,7 +210,14 @@ public class IndustrialMiner extends MultiBlockMachine {
      * @return Whether this {@link IndustrialMiner} is capable of mining this {@link Material}
      */
     public boolean canMine(Material type) {
-        return type.name().endsWith("_ORE");
+        if (SlimefunTag.INDUSTRIAL_MINER_ORES.isTagged(type)) {
+            return true;
+        } else if (SlimefunPlugin.getMinecraftVersion().isAtLeast(MinecraftVersion.MINECRAFT_1_16)) {
+            return type == Material.ANCIENT_DEBRIS && canMineAncientDebris.getValue();
+
+        }
+
+        return false;
     }
 
 }

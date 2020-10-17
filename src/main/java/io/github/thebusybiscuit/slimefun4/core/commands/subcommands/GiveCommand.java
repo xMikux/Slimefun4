@@ -1,11 +1,5 @@
 package io.github.thebusybiscuit.slimefun4.core.commands.subcommands;
 
-import java.util.Locale;
-import java.util.Optional;
-
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-
 import io.github.thebusybiscuit.cscorelib2.item.CustomItem;
 import io.github.thebusybiscuit.cscorelib2.players.PlayerList;
 import io.github.thebusybiscuit.slimefun4.core.commands.SlimefunCommand;
@@ -14,6 +8,13 @@ import io.github.thebusybiscuit.slimefun4.core.multiblocks.MultiBlockMachine;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import io.github.thebusybiscuit.slimefun4.utils.PatternUtils;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.Locale;
+import java.util.Map;
+import java.util.Optional;
 
 class GiveCommand extends SubCommand {
 
@@ -22,17 +23,7 @@ class GiveCommand extends SubCommand {
     private static final String PLACEHOLDER_AMOUNT = "%amount%";
 
     GiveCommand(SlimefunPlugin plugin, SlimefunCommand cmd) {
-        super(plugin, cmd);
-    }
-
-    @Override
-    public String getName() {
-        return "give";
-    }
-
-    @Override
-    public boolean isHidden() {
-        return false;
+        super(plugin, cmd, "give", false);
     }
 
     @Override
@@ -48,20 +39,16 @@ class GiveCommand extends SubCommand {
 
                     if (sfItem != null) {
                         giveItem(sender, p, sfItem, args);
-                    }
-                    else {
+                    } else {
                         SlimefunPlugin.getLocalization().sendMessage(sender, "messages.not-valid-item", true, msg -> msg.replace(PLACEHOLDER_ITEM, args[2]));
                     }
-                }
-                else {
+                } else {
                     SlimefunPlugin.getLocalization().sendMessage(sender, "messages.not-online", true, msg -> msg.replace(PLACEHOLDER_PLAYER, args[1]));
                 }
-            }
-            else {
+            } else {
                 SlimefunPlugin.getLocalization().sendMessage(sender, "messages.usage", true, msg -> msg.replace("%usage%", "/sf give <Player> <Slimefun Item> [Amount]"));
             }
-        }
-        else {
+        } else {
             SlimefunPlugin.getLocalization().sendMessage(sender, "messages.no-permission", true);
         }
     }
@@ -69,16 +56,20 @@ class GiveCommand extends SubCommand {
     private void giveItem(CommandSender sender, Player p, SlimefunItem sfItem, String[] args) {
         if (sfItem instanceof MultiBlockMachine) {
             SlimefunPlugin.getLocalization().sendMessage(sender, "guide.cheat.no-multiblocks");
-        }
-        else {
+        } else {
             int amount = parseAmount(args);
 
             if (amount > 0) {
                 SlimefunPlugin.getLocalization().sendMessage(p, "messages.given-item", true, msg -> msg.replace(PLACEHOLDER_ITEM, sfItem.getItemName()).replace(PLACEHOLDER_AMOUNT, String.valueOf(amount)));
-                p.getInventory().addItem(new CustomItem(sfItem.getItem(), amount));
+                Map<Integer, ItemStack> excess = p.getInventory().addItem(new CustomItem(sfItem.getItem(), amount));
+                if (SlimefunPlugin.getCfg().getBoolean("options.drop-excess-sf-give-items") && !excess.isEmpty()) {
+                    for (ItemStack is : excess.values()) {
+                        p.getWorld().dropItem(p.getLocation(), is);
+                    }
+                }
+
                 SlimefunPlugin.getLocalization().sendMessage(sender, "messages.give-item", true, msg -> msg.replace(PLACEHOLDER_PLAYER, args[1]).replace(PLACEHOLDER_ITEM, sfItem.getItemName()).replace(PLACEHOLDER_AMOUNT, String.valueOf(amount)));
-            }
-            else {
+            } else {
                 SlimefunPlugin.getLocalization().sendMessage(sender, "messages.not-valid-amount", true, msg -> msg.replace(PLACEHOLDER_AMOUNT, args[3]));
             }
         }
@@ -90,8 +81,7 @@ class GiveCommand extends SubCommand {
         if (args.length == 4) {
             if (PatternUtils.NUMERIC.matcher(args[3]).matches()) {
                 amount = Integer.parseInt(args[3]);
-            }
-            else {
+            } else {
                 return 0;
             }
         }

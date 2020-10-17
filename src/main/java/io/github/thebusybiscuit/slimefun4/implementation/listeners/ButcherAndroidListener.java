@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -20,10 +23,9 @@ import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import io.github.thebusybiscuit.slimefun4.implementation.items.androids.AndroidInstance;
 import io.github.thebusybiscuit.slimefun4.implementation.items.androids.ButcherAndroid;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
-import me.mrCookieSlime.Slimefun.api.Slimefun;
 
 /**
- * This {@link Listener} handles the collecton of drops from an {@link Entity} that was
+ * This {@link Listener} handles the collection of drops from an {@link Entity} that was
  * killed by a {@link ButcherAndroid}.
  * 
  * @author TheBusyBiscuit
@@ -33,7 +35,7 @@ public class ButcherAndroidListener implements Listener {
 
     private static final String METADATA_KEY = "android_killer";
 
-    public ButcherAndroidListener(SlimefunPlugin plugin) {
+    public ButcherAndroidListener(@Nonnull SlimefunPlugin plugin) {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
@@ -42,7 +44,7 @@ public class ButcherAndroidListener implements Listener {
         if (e.getEntity().hasMetadata(METADATA_KEY)) {
             AndroidInstance obj = (AndroidInstance) e.getEntity().getMetadata(METADATA_KEY).get(0).value();
 
-            Slimefun.runSync(() -> {
+            SlimefunPlugin.runSync(() -> {
                 List<ItemStack> items = new ArrayList<>();
 
                 // Collect any nearby dropped items
@@ -74,6 +76,7 @@ public class ButcherAndroidListener implements Listener {
      * @param entityType
      *            The {@link EntityType} of the killed entity
      */
+    @ParametersAreNonnullByDefault
     private void addExtraDrops(List<ItemStack> drops, EntityType entityType) {
         Random random = ThreadLocalRandom.current();
 

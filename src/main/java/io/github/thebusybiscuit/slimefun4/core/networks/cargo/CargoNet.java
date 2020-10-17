@@ -9,6 +9,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.logging.Level;
 
+import javax.annotation.Nonnull;
+
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
@@ -46,17 +48,16 @@ public class CargoNet extends ChestTerminalNetwork {
     protected final Map<Location, Integer> roundRobin = new HashMap<>();
     private int tickDelayThreshold = 0;
 
-    public static CargoNet getNetworkFromLocation(Location l) {
+    public static CargoNet getNetworkFromLocation(@Nonnull Location l) {
         return SlimefunPlugin.getNetworkManager().getNetworkFromLocation(l, CargoNet.class).orElse(null);
     }
 
-    public static CargoNet getNetworkFromLocationOrCreate(Location l) {
+    public static CargoNet getNetworkFromLocationOrCreate(@Nonnull Location l) {
         Optional<CargoNet> cargoNetwork = SlimefunPlugin.getNetworkManager().getNetworkFromLocation(l, CargoNet.class);
 
         if (cargoNetwork.isPresent()) {
             return cargoNetwork.get();
-        }
-        else {
+        } else {
             CargoNet network = new CargoNet(l);
             SlimefunPlugin.getNetworkManager().registerNetwork(network);
             return network;
@@ -69,7 +70,7 @@ public class CargoNet extends ChestTerminalNetwork {
      * @param l
      *            The {@link Location} marking the manager of this {@link Network}.
      */
-    protected CargoNet(Location l) {
+    protected CargoNet(@Nonnull Location l) {
         super(l);
     }
 
@@ -79,7 +80,7 @@ public class CargoNet extends ChestTerminalNetwork {
     }
 
     @Override
-    public NetworkComponent classifyLocation(Location l) {
+    public NetworkComponent classifyLocation(@Nonnull Location l) {
         String id = BlockStorage.checkID(l);
 
         if (id == null) {
@@ -142,17 +143,16 @@ public class CargoNet extends ChestTerminalNetwork {
 
     public void tick(Block b) {
         if (!regulator.equals(b.getLocation())) {
-            SimpleHologram.update(b, "&4Multiple Cargo Regulators connected");
+            SimpleHologram.update(b, "&4連接了多個物流核心");
             return;
         }
 
         super.tick();
 
         if (connectorNodes.isEmpty() && terminusNodes.isEmpty()) {
-            SimpleHologram.update(b, "&cNo Cargo Nodes found");
-        }
-        else {
-            SimpleHologram.update(b, "&7Status: &a&lONLINE");
+            SimpleHologram.update(b, "&c找不到物流節點");
+        } else {
+            SimpleHologram.update(b, "&7狀態: &a&l在線");
 
             // Skip ticking if the threshold is not reached. The delay is not same as minecraft tick,
             // but it's based on 'custom-ticker-delay' config.
@@ -175,10 +175,10 @@ public class CargoNet extends ChestTerminalNetwork {
                 display();
             }
 
-            SlimefunPlugin.getProfiler().scheduleEntries(1 + inputNodes.size());
+            SlimefunPlugin.getProfiler().scheduleEntries((terminals.isEmpty() ? 1 : 2) + inputs.size());
 
             CargoNetworkTask runnable = new CargoNetworkTask(this, inputs, outputs, chestTerminalInputs, chestTerminalOutputs);
-            Slimefun.runSync(runnable);
+            SlimefunPlugin.runSync(runnable);
         }
     }
 
@@ -190,8 +190,7 @@ public class CargoNet extends ChestTerminalNetwork {
 
             if (frequency == 16) {
                 chestTerminalNodes.add(node);
-            }
-            else if (frequency >= 0 && frequency < 16) {
+            } else if (frequency >= 0 && frequency < 16) {
                 inputs.put(node, frequency);
             }
         }
@@ -250,8 +249,7 @@ public class CargoNet extends ChestTerminalNetwork {
         try {
             String str = BlockStorage.getLocationInfo(node).getString("frequency");
             return str == null ? 0 : Integer.parseInt(str);
-        }
-        catch (Exception x) {
+        } catch (Exception x) {
             Slimefun.getLogger().log(Level.SEVERE, x, () -> "An Error occurred while parsing a Cargo Node Frequency (" + node.getWorld().getName() + " - " + node.getBlockX() + "," + node.getBlockY() + "," + +node.getBlockZ() + ")");
             return 0;
         }

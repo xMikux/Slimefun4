@@ -3,6 +3,9 @@ package io.github.thebusybiscuit.slimefun4.core.networks.cargo;
 import java.util.Map;
 import java.util.logging.Level;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Tag;
@@ -19,6 +22,7 @@ import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import io.github.thebusybiscuit.slimefun4.utils.itemstack.ItemStackWrapper;
+import io.papermc.lib.PaperLib;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
@@ -42,7 +46,7 @@ final class CargoUtils {
      * 
      * @return Whether this {@link Block} represents a {@link BlockState} that is an {@link InventoryHolder}
      */
-    static boolean hasInventory(Block block) {
+    static boolean hasInventory(@Nullable Block block) {
         if (block == null) {
             // No block, no inventory
             return false;
@@ -82,6 +86,48 @@ final class CargoUtils {
         return false;
     }
 
+    static int[] getInputSlotRange(@Nonnull Inventory inv, @Nullable ItemStack item) {
+        if (inv instanceof FurnaceInventory) {
+            if (item != null && item.getType().isFuel()) {
+                if (isSmeltable(item, true)) {
+                    // Any non-smeltable items should not land in the upper slot
+                    return new int[] { 0, 2 };
+                } else {
+                    return new int[] { 1, 2 };
+                }
+            } else {
+                return new int[] { 0, 1 };
+            }
+        } else if (inv instanceof BrewerInventory) {
+            if (isPotion(item)) {
+                // Slots for potions
+                return new int[] { 0, 3 };
+            } else if (item != null && item.getType() == Material.BLAZE_POWDER) {
+                // Blaze Powder slot
+                return new int[] { 4, 5 };
+            } else {
+                // Input slot
+                return new int[] { 3, 4 };
+            }
+        } else {
+            // Slot 0-size
+            return new int[] { 0, inv.getSize() };
+        }
+    }
+
+    static int[] getOutputSlotRange(Inventory inv) {
+        if (inv instanceof FurnaceInventory) {
+            // Slot 2-3
+            return new int[] { 2, 3 };
+        } else if (inv instanceof BrewerInventory) {
+            // Slot 0-3
+            return new int[] { 0, 3 };
+        } else {
+            // Slot 0-size
+            return new int[] { 0, inv.getSize() };
+        }
+    }
+
     static ItemStack withdraw(Map<Location, Inventory> inventories, Block node, Block target, ItemStack template) {
         DirtyChestMenu menu = getChestMenu(target);
 
@@ -93,7 +139,7 @@ final class CargoUtils {
                     return withdrawFromVanillaInventory(node, template, inventory);
                 }
 
-                BlockState state = target.getState();
+                BlockState state = PaperLib.getBlockState(target, false).getState();
 
                 if (state instanceof InventoryHolder) {
                     inventory = ((InventoryHolder) state).getInventory();
@@ -115,8 +161,7 @@ final class CargoUtils {
                     is.setAmount(is.getAmount() - template.getAmount());
                     menu.replaceExistingItem(slot, is.clone());
                     return template;
-                }
-                else {
+                } else {
                     menu.replaceExistingItem(slot, null);
                     return is;
                 }
@@ -128,16 +173,9 @@ final class CargoUtils {
 
     static ItemStack withdrawFromVanillaInventory(Block node, ItemStack template, Inventory inv) {
         ItemStack[] contents = inv.getContents();
-        int minSlot = 0;
-        int maxSlot = contents.length;
-
-        if (inv instanceof FurnaceInventory) {
-            minSlot = 2;
-            maxSlot = 3;
-        }
-        else if (inv instanceof BrewerInventory) {
-            maxSlot = 3;
-        }
+        int[] range = getOutputSlotRange(inv);
+        int minSlot = range[0];
+        int maxSlot = range[1];
 
         ItemStackWrapper wrapper = new ItemStackWrapper(template);
 
@@ -149,8 +187,7 @@ final class CargoUtils {
                 if (itemInSlot.getAmount() > template.getAmount()) {
                     itemInSlot.setAmount(itemInSlot.getAmount() - template.getAmount());
                     return template;
-                }
-                else {
+                } else {
                     ItemStack clone = itemInSlot.clone();
                     itemInSlot.setAmount(0);
                     return clone;
@@ -173,15 +210,14 @@ final class CargoUtils {
                     return new ItemStackAndInteger(is, slot);
                 }
             }
-        }
-        else if (hasInventory(target)) {
+        } else if (hasInventory(target)) {
             Inventory inventory = inventories.get(target.getLocation());
 
             if (inventory != null) {
                 return withdrawFromVanillaInventory(node, inventory);
             }
 
-            BlockState state = target.getState();
+            BlockState state = PaperLib.getBlockState(target, false).getState();
 
             if (state instanceof InventoryHolder) {
                 inventory = ((InventoryHolder) state).getInventory();
@@ -195,16 +231,9 @@ final class CargoUtils {
 
     private static ItemStackAndInteger withdrawFromVanillaInventory(Block node, Inventory inv) {
         ItemStack[] contents = inv.getContents();
-        int minSlot = 0;
-        int maxSlot = contents.length;
-
-        if (inv instanceof FurnaceInventory) {
-            minSlot = 2;
-            maxSlot = 3;
-        }
-        else if (inv instanceof BrewerInventory) {
-            maxSlot = 3;
-        }
+        int[] range = getOutputSlotRange(inv);
+        int minSlot = range[0];
+        int maxSlot = range[1];
 
         for (int slot = minSlot; slot < maxSlot; slot++) {
             ItemStack is = contents[slot];
@@ -233,7 +262,7 @@ final class CargoUtils {
                     return insertIntoVanillaInventory(stack, inventory);
                 }
 
-                BlockState state = target.getState();
+                BlockState state = PaperLib.getBlockState(target, false).getState();
 
                 if (state instanceof InventoryHolder) {
                     inventory = ((InventoryHolder) state).getInventory();
@@ -247,8 +276,9 @@ final class CargoUtils {
 
         ItemStackWrapper wrapper = new ItemStackWrapper(stack);
 
-        for (int slot : menu.getPreset().getSlotsAccessedByItemTransport(menu, ItemTransportFlow.INSERT, stack)) {
+        for (int slot : menu.getPreset().getSlotsAccessedByItemTransport(menu, ItemTransportFlow.INSERT, wrapper)) {
             ItemStack itemInSlot = menu.getItemInSlot(slot);
+
             if (itemInSlot == null) {
                 menu.replaceExistingItem(slot, stack);
                 return null;
@@ -263,8 +293,7 @@ final class CargoUtils {
                 itemInSlot.setAmount(Math.min(amount, maxStackSize));
                 if (amount > maxStackSize) {
                     stack.setAmount(amount - maxStackSize);
-                }
-                else {
+                } else {
                     stack = null;
                 }
 
@@ -278,40 +307,9 @@ final class CargoUtils {
 
     private static ItemStack insertIntoVanillaInventory(ItemStack stack, Inventory inv) {
         ItemStack[] contents = inv.getContents();
-        int minSlot = 0;
-        int maxSlot = contents.length;
-
-        // Check if it is a normal furnace
-        if (inv instanceof FurnaceInventory) {
-            // Check if it is fuel or not
-            if (stack.getType().isFuel()) {
-                maxSlot = 2;
-
-                // Any non-smeltable items should not land in the upper slot
-                if (!isSmeltable(stack, true)) {
-                    minSlot = 1;
-                }
-            }
-            else {
-                maxSlot = 1;
-            }
-        }
-        else if (inv instanceof BrewerInventory) {
-            if (stack.getType() == Material.POTION || stack.getType() == Material.LINGERING_POTION || stack.getType() == Material.SPLASH_POTION) {
-                // Potions slot
-                maxSlot = 3;
-            }
-            else if (stack.getType() == Material.BLAZE_POWDER) {
-                // Blaze Powder slot
-                minSlot = 4;
-                maxSlot = 5;
-            }
-            else {
-                // Input slot
-                minSlot = 3;
-                maxSlot = 4;
-            }
-        }
+        int[] range = getInputSlotRange(inv, stack);
+        int minSlot = range[0];
+        int maxSlot = range[1];
 
         ItemStackWrapper wrapper = new ItemStackWrapper(stack);
 
@@ -322,8 +320,7 @@ final class CargoUtils {
             if (itemInSlot == null) {
                 inv.setItem(slot, stack);
                 return null;
-            }
-            else {
+            } else {
                 int maxStackSize = itemInSlot.getType().getMaxStackSize();
 
                 if (SlimefunUtils.isItemSimilar(itemInSlot, wrapper, true, false) && itemInSlot.getAmount() < maxStackSize) {
@@ -331,21 +328,98 @@ final class CargoUtils {
 
                     if (amount > maxStackSize) {
                         stack.setAmount(amount - maxStackSize);
-                    }
-                    else {
+                    } else {
                         stack = null;
                     }
 
                     itemInSlot.setAmount(Math.min(amount, maxStackSize));
-                    // Setting item in inventory will clone the ItemStack
-                    inv.setItem(slot, itemInSlot);
-
                     return stack;
                 }
             }
         }
 
         return stack;
+    }
+
+    static DirtyChestMenu getChestMenu(@Nonnull Block block) {
+        if (BlockStorage.hasInventory(block)) {
+            return BlockStorage.getInventory(block);
+        }
+
+        return BlockStorage.getUniversalInventory(block);
+    }
+
+    static boolean matchesFilter(@Nonnull Block block, @Nullable ItemStack item) {
+        if (item == null || item.getType() == Material.AIR) {
+            return false;
+        }
+
+        // Store the returned Config instance to avoid heavy calls
+        Config blockData = BlockStorage.getLocationInfo(block.getLocation());
+        String id = blockData.getString("id");
+
+        if (id == null) {
+            // This should normally not happen but if it does...
+            // Don't accept any items.
+            return false;
+        } else if (id.equals("CARGO_NODE_OUTPUT")) {
+            // Cargo Output nodes have no filter actually
+            return true;
+        }
+
+        try {
+            BlockMenu menu = BlockStorage.getInventory(block.getLocation());
+
+            if (menu == null) {
+                return false;
+            }
+
+            boolean lore = "true".equals(blockData.getString("filter-lore"));
+            boolean allowByDefault = !"whitelist".equals(blockData.getString("filter-type"));
+            return matchesFilterList(item, menu, lore, allowByDefault);
+        } catch (Exception x) {
+            Slimefun.getLogger().log(Level.SEVERE, x, () -> "An Exception occurred while trying to filter items for a Cargo Node (" + id + ") at " + new BlockPosition(block));
+            return false;
+        }
+    }
+
+    private static boolean matchesFilterList(ItemStack item, BlockMenu menu, boolean respectLore, boolean defaultValue) {
+        // Little performance optimization:
+        // First check if there is more than one item to compare, if so
+        // then we know we should create an ItemStackWrapper, otherwise it would
+        // be of no benefit to us and just be redundant
+        int itemsToCompare = 0;
+
+        for (int slot : FILTER_SLOTS) {
+            ItemStack stack = menu.getItemInSlot(slot);
+
+            if (stack != null && stack.getType() != Material.AIR) {
+                itemsToCompare++;
+
+                if (itemsToCompare > 1) {
+                    break;
+                }
+            }
+        }
+
+        // Check if there are event non-air items
+        if (itemsToCompare > 0) {
+            // Only create the Wrapper if its worth it
+            if (itemsToCompare > 1) {
+                // Create an itemStackWrapper to save performance
+                item = new ItemStackWrapper(item);
+            }
+
+            for (int slot : FILTER_SLOTS) {
+                ItemStack stack = menu.getItemInSlot(slot);
+
+                if (SlimefunUtils.isItemSimilar(stack, item, respectLore, false)) {
+                    return !defaultValue;
+                }
+            }
+        }
+
+        return defaultValue;
     }
 
     /**
@@ -361,73 +435,16 @@ final class CargoUtils {
      * 
      * @return Whether the given {@link ItemStack} can be smelted or not
      */
-    private static boolean isSmeltable(ItemStack stack, boolean lazy) {
+    private static boolean isSmeltable(@Nullable ItemStack stack, boolean lazy) {
         if (lazy) {
             return stack != null && Tag.LOGS.isTagged(stack.getType());
-        }
-        else {
+        } else {
             return SlimefunPlugin.getMinecraftRecipeService().isSmeltable(stack);
         }
     }
 
-    static DirtyChestMenu getChestMenu(Block block) {
-        if (BlockStorage.hasInventory(block)) {
-            return BlockStorage.getInventory(block);
-        }
-
-        return BlockStorage.getUniversalInventory(block);
-    }
-
-    static boolean matchesFilter(Block block, ItemStack item) {
-        if (item == null || item.getType() == Material.AIR) {
-            return false;
-        }
-
-        // Store the returned Config instance to avoid heavy calls
-        Config blockData = BlockStorage.getLocationInfo(block.getLocation());
-        String id = blockData.getString("id");
-
-        // Cargo Output nodes have no filter actually
-        if (id.equals("CARGO_NODE_OUTPUT")) {
-            return true;
-        }
-
-        try {
-            BlockMenu menu = BlockStorage.getInventory(block.getLocation());
-
-            if (menu == null) {
-                return false;
-            }
-
-            boolean lore = "true".equals(blockData.getString("filter-lore"));
-            boolean allowByDefault = !"whitelist".equals(blockData.getString("filter-type"));
-            return matchesFilterList(item, menu, lore, allowByDefault);
-        }
-        catch (Exception x) {
-            Slimefun.getLogger().log(Level.SEVERE, x, () -> "An Exception occurred while trying to filter items for a Cargo Node (" + id + ") at " + new BlockPosition(block));
-            return false;
-        }
-    }
-
-    private static boolean matchesFilterList(ItemStack item, BlockMenu menu, boolean respectLore, boolean defaultValue) {
-        ItemStackWrapper wrapper = null;
-
-        for (int slot : FILTER_SLOTS) {
-            ItemStack stack = menu.getItemInSlot(slot);
-
-            if (stack != null) {
-                if (wrapper == null) {
-                    // Only create this as needed to save performance
-                    wrapper = new ItemStackWrapper(item);
-                }
-
-                if (SlimefunUtils.isItemSimilar(stack, wrapper, respectLore, false)) {
-                    return !defaultValue;
-                }
-            }
-        }
-
-        return defaultValue;
+    private static boolean isPotion(@Nullable ItemStack item) {
+        return item != null && (item.getType() == Material.POTION || item.getType() == Material.SPLASH_POTION || item.getType() == Material.LINGERING_POTION);
     }
 
     /**

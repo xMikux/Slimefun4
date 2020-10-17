@@ -40,27 +40,25 @@ class GuideLayoutOption implements SlimefunGuideOption<SlimefunGuideLayout> {
 
             if (layout == SlimefunGuideLayout.CHEST) {
                 item.setType(Material.CHEST);
-            }
-            else if (layout == SlimefunGuideLayout.BOOK) {
+            } else if (layout == SlimefunGuideLayout.BOOK) {
                 item.setType(Material.BOOK);
-            }
-            else {
+            } else {
                 item.setType(Material.COMMAND_BLOCK);
             }
 
             ItemMeta meta = item.getItemMeta();
-            meta.setDisplayName(ChatColor.GRAY + "Slimefun Guide Design: " + ChatColor.YELLOW + ChatUtils.humanize(layout.name()));
+            meta.setDisplayName(ChatColor.GRAY + "介面樣式: " + ChatColor.YELLOW + ChatUtils.humanize(layout.name()));
             List<String> lore = new ArrayList<>();
             lore.add("");
-            lore.add((layout == SlimefunGuideLayout.CHEST ? ChatColor.GREEN : ChatColor.GRAY) + "Chest");
-            lore.add((layout == SlimefunGuideLayout.BOOK ? ChatColor.GREEN : ChatColor.GRAY) + "Book");
+            lore.add((layout == SlimefunGuideLayout.CHEST ? ChatColor.GREEN : ChatColor.GRAY) + "箱子");
+            lore.add((layout == SlimefunGuideLayout.BOOK ? ChatColor.GREEN : ChatColor.GRAY) + "書本");
 
             if (p.hasPermission("slimefun.cheat.items")) {
-                lore.add((layout == SlimefunGuideLayout.CHEAT_SHEET ? ChatColor.GREEN : ChatColor.GRAY) + "Cheat Sheet");
+                lore.add((layout == SlimefunGuideLayout.CHEAT_SHEET ? ChatColor.GREEN : ChatColor.GRAY) + "作弊");
             }
 
             lore.add("");
-            lore.add(ChatColor.GRAY + "\u21E8 " + ChatColor.YELLOW + "Click to change your layout");
+            lore.add(ChatColor.GRAY + "\u21E8 " + ChatColor.YELLOW + "點擊切換介面樣式");
             meta.setLore(lore);
             item.setItemMeta(meta);
 
@@ -93,16 +91,15 @@ class GuideLayoutOption implements SlimefunGuideOption<SlimefunGuideLayout> {
             }
 
             return SlimefunGuideLayout.CHEST;
-        }
-        else {
+        } else {
             return layout == SlimefunGuideLayout.CHEST ? SlimefunGuideLayout.BOOK : SlimefunGuideLayout.CHEST;
         }
     }
 
     @Override
     public Optional<SlimefunGuideLayout> getSelectedOption(Player p, ItemStack guide) {
-        for (SlimefunGuideLayout layout : SlimefunGuideLayout.values()) {
-            if (SlimefunUtils.isItemSimilar(guide, SlimefunGuide.getItem(layout), true)) {
+        for (SlimefunGuideLayout layout : SlimefunGuideLayout.valuesCache) {
+            if (SlimefunUtils.isItemSimilar(guide, SlimefunGuide.getItem(layout), true, false)) {
                 return Optional.of(layout);
             }
         }

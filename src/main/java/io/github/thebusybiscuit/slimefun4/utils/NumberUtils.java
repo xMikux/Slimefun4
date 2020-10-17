@@ -6,6 +6,10 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Locale;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import org.apache.commons.lang.Validate;
 import org.bukkit.ChatColor;
 
 public final class NumberUtils {
@@ -18,32 +22,48 @@ public final class NumberUtils {
         return NumberFormat.getNumberInstance(Locale.US).format(i);
     }
 
-    public static LocalDateTime parseGitHubDate(String date) {
+    public static LocalDateTime parseGitHubDate(@Nonnull String date) {
+        Validate.notNull(date, "Provided date was null");
         return LocalDateTime.parse(date.substring(0, date.length() - 1));
     }
 
+    /**
+     * This will return a representative color for the given percentage.
+     * Lower levels will result in a darker tone of red, higher levels will
+     * result in more brighter shades of green.
+     * 
+     * @param percentage
+     *            The amount of percentage as a float
+     * 
+     * @return A representative {@link ChatColor}
+     */
     public static ChatColor getColorFromPercentage(float percentage) {
-        if (percentage < 16.0F) return ChatColor.DARK_RED;
-        else if (percentage < 32.0F) return ChatColor.RED;
-        else if (percentage < 48.0F) return ChatColor.GOLD;
-        else if (percentage < 64.0F) return ChatColor.YELLOW;
-        else if (percentage < 80.0F) return ChatColor.DARK_GREEN;
-        else return ChatColor.GREEN;
+        if (percentage < 16.0F) {
+            return ChatColor.DARK_RED;
+        } else if (percentage < 32.0F) {
+            return ChatColor.RED;
+        } else if (percentage < 48.0F) {
+            return ChatColor.GOLD;
+        } else if (percentage < 64.0F) {
+            return ChatColor.YELLOW;
+        } else if (percentage < 80.0F) {
+            return ChatColor.DARK_GREEN;
+        } else {
+            return ChatColor.GREEN;
+        }
     }
 
-    public static String getElapsedTime(LocalDateTime date) {
+    public static String getElapsedTime(@Nonnull LocalDateTime date) {
+        Validate.notNull(date, "Provided date was null");
         long hours = Duration.between(date, LocalDateTime.now()).toHours();
 
         if (hours == 0) {
             return "< 1h";
-        }
-        else if ((hours / 24) == 0) {
+        } else if ((hours / 24) == 0) {
             return (hours % 24) + "h";
-        }
-        else if (hours % 24 == 0) {
+        } else if (hours % 24 == 0) {
             return (hours / 24) + "d";
-        }
-        else {
+        } else {
             return (hours / 24) + "d " + (hours % 24) + "h";
         }
     }
@@ -74,12 +94,11 @@ public final class NumberUtils {
         }
 
         String number = roundDecimalNumber(nanoseconds / 1000000.0);
-        String[] parts = PatternUtils.NUMBER_SEPERATOR.split(number);
+        String[] parts = PatternUtils.NUMBER_SEPARATOR.split(number);
 
         if (parts.length == 1) {
             return parts[0] + "ms";
-        }
-        else {
+        } else {
             return parts[0] + '.' + parts[1] + "ms";
         }
     }
@@ -88,15 +107,36 @@ public final class NumberUtils {
         return DECIMAL_FORMAT.format(number);
     }
 
-    public static long getLong(Long value, long defaultValue) {
+    public static long getLong(@Nullable Long value, long defaultValue) {
         return value == null ? defaultValue : value;
     }
 
-    public static int getInt(Integer value, int defaultValue) {
+    public static int getInt(@Nullable Integer value, int defaultValue) {
         return value == null ? defaultValue : value;
     }
 
-    public static float getFloat(Float value, float defaultValue) {
+    public static float getFloat(@Nullable Float value, float defaultValue) {
         return value == null ? defaultValue : value;
+    }
+
+    /**
+     * This method is a combination of Math.min and Math.max, it clamps the given value
+     * between a minimum and a maximum.
+     * 
+     * @param min
+     *            The minimum value
+     * @param value
+     *            The value to clamp
+     * @param max
+     *            The maximum value
+     */
+    public static int clamp(int min, int value, int max) {
+        if (value < min) {
+            return min;
+        } else if (value > max) {
+            return max;
+        } else {
+            return value;
+        }
     }
 }

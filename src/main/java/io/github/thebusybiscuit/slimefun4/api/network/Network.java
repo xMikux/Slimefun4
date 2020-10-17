@@ -5,6 +5,9 @@ import java.util.HashSet;
 import java.util.Queue;
 import java.util.Set;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.apache.commons.lang.Validate;
 import org.bukkit.Color;
 import org.bukkit.Location;
@@ -13,8 +16,8 @@ import org.bukkit.Particle;
 import org.bukkit.Particle.DustOptions;
 
 import io.github.thebusybiscuit.slimefun4.core.networks.NetworkManager;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import io.github.thebusybiscuit.slimefun4.implementation.listeners.NetworkListener;
-import me.mrCookieSlime.Slimefun.api.Slimefun;
 
 /**
  * An abstract Network class to manage networks in a stateful way
@@ -29,7 +32,7 @@ public abstract class Network {
 
     private final NetworkManager manager;
     protected Location regulator;
-    private Queue<Location> nodeQueue = new ArrayDeque<>();
+    private final Queue<Location> nodeQueue = new ArrayDeque<>();
 
     protected final Set<Location> connectedLocations = new HashSet<>();
     protected final Set<Location> regulatorNodes = new HashSet<>();
@@ -44,7 +47,7 @@ public abstract class Network {
      * @param regulator
      *            The {@link Location} marking the regulator of this {@link Network}.
      */
-    protected Network(NetworkManager manager, Location regulator) {
+    protected Network(@Nonnull NetworkManager manager, @Nonnull Location regulator) {
         Validate.notNull(manager, "A NetworkManager must be provided");
         Validate.notNull(regulator, "No regulator was specified");
 
@@ -74,7 +77,8 @@ public abstract class Network {
      *            The {@link Location} to classify
      * @return The assigned type of {@link NetworkComponent} for this {@link Location}
      */
-    public abstract NetworkComponent classifyLocation(Location l);
+    @Nullable
+    public abstract NetworkComponent classifyLocation(@Nonnull Location l);
 
     /**
      * This method is called whenever a {@link Location} in this {@link Network} changes
@@ -99,7 +103,7 @@ public abstract class Network {
         return regulatorNodes.size() + connectorNodes.size() + terminusNodes.size();
     }
 
-    protected void addLocationToNetwork(Location l) {
+    protected void addLocationToNetwork(@Nonnull Location l) {
         if (connectedLocations.contains(l)) {
             return;
         }
@@ -115,11 +119,10 @@ public abstract class Network {
      * @param l
      *            The {@link Location} to update
      */
-    public void markDirty(Location l) {
+    public void markDirty(@Nonnull Location l) {
         if (regulator.equals(l)) {
             manager.unregisterNetwork(this);
-        }
-        else {
+        } else {
             nodeQueue.add(l.clone());
         }
     }
@@ -131,18 +134,17 @@ public abstract class Network {
      *            The {@link Location} to check for
      * @return Whether the given {@link Location} is part of this {@link Network}
      */
-    public boolean connectsTo(Location l) {
+    public boolean connectsTo(@Nonnull Location l) {
         return connectedLocations.contains(l);
     }
 
-    private NetworkComponent getCurrentClassification(Location l) {
+    @Nullable
+    private NetworkComponent getCurrentClassification(@Nonnull Location l) {
         if (regulatorNodes.contains(l)) {
             return NetworkComponent.REGULATOR;
-        }
-        else if (connectorNodes.contains(l)) {
+        } else if (connectorNodes.contains(l)) {
             return NetworkComponent.CONNECTOR;
-        }
-        else if (terminusNodes.contains(l)) {
+        } else if (terminusNodes.contains(l)) {
             return NetworkComponent.TERMINUS;
         }
 
@@ -163,20 +165,17 @@ public abstract class Network {
                     // Requires a complete rebuild of the network, so we just throw the current one away.
                     manager.unregisterNetwork(this);
                     return;
-                }
-                else if (currentAssignment == NetworkComponent.TERMINUS) {
+                } else if (currentAssignment == NetworkComponent.TERMINUS) {
                     terminusNodes.remove(l);
                 }
 
                 if (classification == NetworkComponent.REGULATOR) {
                     regulatorNodes.add(l);
                     discoverNeighbors(l);
-                }
-                else if (classification == NetworkComponent.CONNECTOR) {
+                } else if (classification == NetworkComponent.CONNECTOR) {
                     connectorNodes.add(l);
                     discoverNeighbors(l);
-                }
-                else if (classification == NetworkComponent.TERMINUS) {
+                } else if (classification == NetworkComponent.TERMINUS) {
                     terminusNodes.add(l);
                 }
 
@@ -191,14 +190,14 @@ public abstract class Network {
         }
     }
 
-    private void discoverNeighbors(Location l, double xDiff, double yDiff, double zDiff) {
+    private void discoverNeighbors(@Nonnull Location l, double xDiff, double yDiff, double zDiff) {
         for (int i = getRange() + 1; i > 0; i--) {
             Location newLocation = l.clone().add(i * xDiff, i * yDiff, i * zDiff);
             addLocationToNetwork(newLocation);
         }
     }
 
-    private void discoverNeighbors(Location l) {
+    private void discoverNeighbors(@Nonnull Location l) {
         discoverNeighbors(l, 1.0, 0.0, 0.0);
         discoverNeighbors(l, -1.0, 0.0, 0.0);
         discoverNeighbors(l, 0.0, 1.0, 0.0);
@@ -212,7 +211,7 @@ public abstract class Network {
      * every {@link Location} that this {@link Network} is connected to.
      */
     public void display() {
-        Slimefun.runSync(() -> {
+        SlimefunPlugin.runSync(() -> {
             DustOptions options = new DustOptions(Color.BLUE, 3F);
 
             for (Location l : connectedLocations) {
@@ -225,6 +224,12 @@ public abstract class Network {
         });
     }
 
+    /**
+     * This returns the {@link Location} of the regulator block for this {@link Network}
+     * 
+     * @return The {@link Location} of our regulator
+     */
+    @Nonnull
     public Location getRegulator() {
         return regulator;
     }

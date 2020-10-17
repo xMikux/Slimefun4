@@ -11,6 +11,7 @@ import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.BlockState;
 import org.bukkit.block.Chest;
 import org.bukkit.block.data.type.Piston;
 import org.bukkit.block.data.type.PistonHead;
@@ -24,6 +25,7 @@ import io.github.thebusybiscuit.cscorelib2.inventory.ItemUtils;
 import io.github.thebusybiscuit.cscorelib2.protection.ProtectableAction;
 import io.github.thebusybiscuit.cscorelib2.scheduling.TaskQueue;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
+import io.papermc.lib.PaperLib;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineFuel;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
 
@@ -189,14 +191,13 @@ class ActiveMiner implements Runnable {
                         ores++;
 
                         // Repeat the same column when we hit an ore.
-                        Slimefun.runSync(this, 4);
+                        SlimefunPlugin.runSync(this, 4);
                         return;
                     }
                 }
 
                 nextColumn();
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 Slimefun.getLogger().log(Level.SEVERE, e, () -> "An Error occurred while running an Industrial Miner at " + new BlockPosition(chest));
                 stop();
             }
@@ -211,12 +212,10 @@ class ActiveMiner implements Runnable {
     private void nextColumn() {
         if (x < end.getX()) {
             x++;
-        }
-        else if (z < end.getZ()) {
+        } else if (z < end.getZ()) {
             x = start.getX();
             z++;
-        }
-        else {
+        } else {
             // The Miner has finished
             stop();
 
@@ -230,7 +229,7 @@ class ActiveMiner implements Runnable {
             return;
         }
 
-        Slimefun.runSync(this, 5);
+        SlimefunPlugin.runSync(this, 5);
     }
 
     /**
@@ -251,22 +250,26 @@ class ActiveMiner implements Runnable {
         // Check if there is enough fuel to run
         if (fuel > 0) {
             if (chest.getType() == Material.CHEST) {
-                Inventory inv = ((Chest) chest.getState()).getBlockInventory();
+                BlockState state = PaperLib.getBlockState(chest, false).getState();
 
-                if (InvUtils.fits(inv, item)) {
-                    inv.addItem(item);
-                    return true;
+                if (state instanceof Chest) {
+                    Inventory inv = ((Chest) state).getBlockInventory();
+
+                    if (InvUtils.fits(inv, item)) {
+                        inv.addItem(item);
+                        return true;
+                    } else {
+                        stop("machines.INDUSTRIAL_MINER.chest-full");
+                    }
+                } else {
+                    // I won't question how this happened...
+                    stop("machines.INDUSTRIAL_MINER.destroyed");
                 }
-                else {
-                    stop("machines.INDUSTRIAL_MINER.chest-full");
-                }
-            }
-            else {
+            } else {
                 // The chest has been destroyed
                 stop("machines.INDUSTRIAL_MINER.destroyed");
             }
-        }
-        else {
+        } else {
             stop("machines.INDUSTRIAL_MINER.no-fuel");
         }
 
@@ -280,21 +283,30 @@ class ActiveMiner implements Runnable {
      */
     private int consumeFuel() {
         if (chest.getType() == Material.CHEST) {
-            Inventory inv = ((Chest) chest.getState()).getBlockInventory();
+            BlockState state = PaperLib.getBlockState(chest, false).getState();
 
-            for (int i = 0; i < inv.getSize(); i++) {
-                for (MachineFuel fuelType : miner.fuelTypes) {
-                    ItemStack item = inv.getContents()[i];
+            if (state instanceof Chest) {
+                Inventory inv = ((Chest) state).getBlockInventory();
+                return consumeFuel(inv);
+            }
+        }
 
-                    if (fuelType.test(item)) {
-                        ItemUtils.consumeItem(item, false);
+        return 0;
+    }
 
-                        if (miner instanceof AdvancedIndustrialMiner) {
-                            inv.addItem(new ItemStack(Material.BUCKET));
-                        }
+    private int consumeFuel(Inventory inv) {
+        for (int i = 0; i < inv.getSize(); i++) {
+            for (MachineFuel fuelType : miner.fuelTypes) {
+                ItemStack item = inv.getContents()[i];
 
-                        return fuelType.getTicks();
+                if (fuelType.test(item)) {
+                    ItemUtils.consumeItem(item, false);
+
+                    if (miner instanceof AdvancedIndustrialMiner) {
+                        inv.addItem(new ItemStack(Material.BUCKET));
                     }
+
+                    return fuelType.getTicks();
                 }
             }
         }
@@ -315,8 +327,7 @@ class ActiveMiner implements Runnable {
             if (block.getType() == Material.MOVING_PISTON) {
                 // Yeah it isn't really cool when this happens
                 block.getRelative(BlockFace.UP).setType(Material.AIR);
-            }
-            else if (block.getType() == Material.PISTON) {
+            } else if (block.getType() == Material.PISTON) {
                 Block above = block.getRelative(BlockFace.UP);
 
                 // Check if the above block is valid
@@ -326,23 +337,19 @@ class ActiveMiner implements Runnable {
                     // Check if the piston is actually facing upwards
                     if (piston.getFacing() == BlockFace.UP) {
                         setExtended(block, piston, extended);
-                    }
-                    else {
+                    } else {
                         // The pistons must be facing upwards
                         stop("machines.INDUSTRIAL_MINER.piston-facing");
                     }
-                }
-                else {
+                } else {
                     // The pistons must be facing upwards
                     stop("machines.INDUSTRIAL_MINER.piston-space");
                 }
-            }
-            else {
+            } else {
                 // The piston has been destroyed
                 stop("machines.INDUSTRIAL_MINER.destroyed");
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             Slimefun.getLogger().log(Level.SEVERE, e, () -> "An Error occurred while moving a Piston for an Industrial Miner at " + new BlockPosition(block));
             stop();
         }
@@ -358,8 +365,7 @@ class ActiveMiner implements Runnable {
             head.setFacing(BlockFace.UP);
 
             block.getRelative(BlockFace.UP).setBlockData(head, false);
-        }
-        else {
+        } else {
             block.getRelative(BlockFace.UP).setType(Material.AIR);
         }
 

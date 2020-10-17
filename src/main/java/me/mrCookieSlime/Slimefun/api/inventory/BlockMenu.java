@@ -7,6 +7,7 @@ import java.util.logging.Level;
 
 import org.bukkit.Location;
 import org.bukkit.block.Block;
+import org.bukkit.inventory.ItemStack;
 
 import io.github.thebusybiscuit.cscorelib2.config.Config;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
@@ -32,7 +33,9 @@ public class BlockMenu extends DirtyChestMenu {
         this.location = l;
 
         for (int i = 0; i < 54; i++) {
-            if (cfg.contains(String.valueOf(i))) addItem(i, cfg.getItem(String.valueOf(i)));
+            if (cfg.contains(String.valueOf(i))) {
+                addItem(i, cfg.getItem(String.valueOf(i)));
+            }
         }
 
         preset.clone(this);
@@ -80,11 +83,31 @@ public class BlockMenu extends DirtyChestMenu {
     }
 
     public Block getBlock() {
-        return this.location.getBlock();
+        return location.getBlock();
     }
 
     public Location getLocation() {
         return location;
+    }
+
+    /**
+     * This method drops the contents of this {@link BlockMenu} on the ground at the given
+     * {@link Location}.
+     * 
+     * @param l
+     *            Where to drop these items
+     * @param slots
+     *            The slots of items that should be dropped
+     */
+    public void dropItems(Location l, int... slots) {
+        for (int slot : slots) {
+            ItemStack item = getItemInSlot(slot);
+
+            if (item != null) {
+                l.getWorld().dropItemNaturally(l, item);
+                replaceExistingItem(slot, null);
+            }
+        }
     }
 
     public void delete(Location l) {
@@ -93,8 +116,7 @@ public class BlockMenu extends DirtyChestMenu {
         if (file.exists()) {
             try {
                 Files.delete(file.toPath());
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 Slimefun.getLogger().log(Level.WARNING, e, () -> "Could not delete file \"" + file.getName() + '"');
             }
         }

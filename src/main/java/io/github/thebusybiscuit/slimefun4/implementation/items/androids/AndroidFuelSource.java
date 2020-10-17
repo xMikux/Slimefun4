@@ -1,9 +1,11 @@
 package io.github.thebusybiscuit.slimefun4.implementation.items.androids;
 
+import javax.annotation.Nonnull;
+
 import org.bukkit.inventory.ItemStack;
 
 import io.github.thebusybiscuit.cscorelib2.item.CustomItem;
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
+import io.github.thebusybiscuit.slimefun4.utils.HeadTexture;
 
 /**
  * This enum covers all different fuel sources a {@link ProgrammableAndroid} can have.
@@ -16,21 +18,21 @@ public enum AndroidFuelSource {
     /**
      * This {@link ProgrammableAndroid} runs on solid fuel, e.g. Wood or coal
      */
-    SOLID("", "&rThis Android runs on solid Fuel", "&re.g. Coal, Wood, etc..."),
+    SOLID("", "&f這機器人需要固態燃料", "&f例如煤炭, 木頭, 等等..."),
 
     /**
      * This {@link ProgrammableAndroid} runs on liquid fuel, e.g. Fuel, Oil or Lava
      */
-    LIQUID("", "&rThis Android runs on liquid Fuel", "&re.g. Lava, Oil, Fuel, etc..."),
+    LIQUID("", "&f這機器人需要液態燃料", "&f例如岩漿, 石油, 燃油, 等等..."),
 
     /**
      * This {@link ProgrammableAndroid} runs on nuclear fuel, e.g. Uranium
      */
-    NUCLEAR("", "&rThis Android runs on radioactive Fuel", "&re.g. Uranium, Neptunium or Boosted Uranium");
+    NUCLEAR("", "&f這機器人需要", "&f例如 鈾, 錼或高純度鈾");
 
     private final String[] lore;
 
-    AndroidFuelSource(String... lore) {
+    AndroidFuelSource(@Nonnull String... lore) {
         this.lore = lore;
     }
 
@@ -39,8 +41,9 @@ public enum AndroidFuelSource {
      * 
      * @return An {@link ItemStack} to display
      */
+    @Nonnull
     public ItemStack getItem() {
-        return new CustomItem(SlimefunItems.COAL_GENERATOR, "&8\u21E9 &cFuel Input &8\u21E9", lore);
+        return new CustomItem(HeadTexture.GENERATOR.getAsItemStack(), "&8\u21E9 &c燃料輸入口 &8\u21E9", lore);
     }
 
 }

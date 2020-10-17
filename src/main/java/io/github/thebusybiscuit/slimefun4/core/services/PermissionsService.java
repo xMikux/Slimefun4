@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.apache.commons.lang.Validate;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.Permission;
@@ -29,21 +32,21 @@ public class PermissionsService {
     private final Map<String, String> permissions = new HashMap<>();
     private final Config config;
 
-    public PermissionsService(SlimefunPlugin plugin) {
+    public PermissionsService(@Nonnull SlimefunPlugin plugin) {
         config = new Config(plugin, "permissions.yml");
         config.getConfiguration().options().header("This file is used to assign permission nodes to items from Slimefun or any of its addons.\nTo assign an item a certain permission node you simply have to set the 'permission' attribute\nto your desired permission node. You can also customize the text that is displayed when a Player does not have that permission.");
         config.getConfiguration().options().copyHeader(true);
     }
 
-    public void register(Iterable<SlimefunItem> items, boolean save) {
+    public void register(@Nonnull Iterable<SlimefunItem> items, boolean save) {
         for (SlimefunItem item : items) {
-            if (item != null && item.getID() != null) {
-                String path = item.getID() + ".permission";
+            if (item != null) {
+                String path = item.getId() + ".permission";
 
                 config.setDefaultValue(path, "none");
-                config.setDefaultValue(item.getID() + ".lore", new String[] { "&rYou do not have the permission", "&rto access this item." });
+                config.setDefaultValue(item.getId() + ".lore", new String[] { "&rYou do not have the permission", "&rto access this item." });
 
-                permissions.put(item.getID(), config.getString(path));
+                permissions.put(item.getId(), config.getString(path));
             }
         }
 
@@ -69,7 +72,7 @@ public class PermissionsService {
             return true;
         }
 
-        String permission = permissions.get(item.getID());
+        String permission = permissions.get(item.getId());
         return permission == null || permission.equals("none") || p.hasPermission(permission);
     }
 
@@ -83,13 +86,14 @@ public class PermissionsService {
      * 
      * @return An {@link Optional} holding the {@link Permission} as a {@link String} or an empty {@link Optional}
      */
-    public Optional<String> getPermission(SlimefunItem item) {
-        String permission = permissions.get(item.getID());
+    @Nonnull
+    public Optional<String> getPermission(@Nonnull SlimefunItem item) {
+        Validate.notNull(item, "Cannot get permissions for null");
+        String permission = permissions.get(item.getId());
 
         if (permission == null || permission.equals("none")) {
             return Optional.empty();
-        }
-        else {
+        } else {
             return Optional.of(permission);
         }
     }
@@ -102,9 +106,9 @@ public class PermissionsService {
      * @param permission
      *            The {@link Permission} to set
      */
-    public void setPermission(SlimefunItem item, String permission) {
+    public void setPermission(@Nonnull SlimefunItem item, @Nullable String permission) {
         Validate.notNull(item, "You cannot set the permission for null");
-        permissions.put(item.getID(), permission != null ? permission : "none");
+        permissions.put(item.getId(), permission != null ? permission : "none");
     }
 
     /**
@@ -118,8 +122,9 @@ public class PermissionsService {
         config.save();
     }
 
-    public List<String> getLore(SlimefunItem item) {
-        List<String> lore = config.getStringList(item.getID() + ".lore");
+    @Nonnull
+    public List<String> getLore(@Nonnull SlimefunItem item) {
+        List<String> lore = config.getStringList(item.getId() + ".lore");
         return lore == null ? Arrays.asList("LORE NOT FOUND") : lore;
     }
 

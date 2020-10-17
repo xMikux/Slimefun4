@@ -1,5 +1,7 @@
 package io.github.thebusybiscuit.slimefun4.implementation.setup;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -13,9 +15,8 @@ import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
  * This static setup class is used to register all default implementations of
  * {@link Research} on startup.
  * 
- * @author TheBusyBiscuit
- * 
  * @see Research
+ * @see SlimefunItems
  *
  */
 public final class ResearchSetup {
@@ -100,17 +101,17 @@ public final class ResearchSetup {
         register("knight_talisman", 71, "Talisman of the Knight", 20, SlimefunItems.TALISMAN_KNIGHT);
         register("gilded_iron", 72, "Shiny Iron", 11, SlimefunItems.GILDED_IRON);
         register("synthetic_emerald", 73, "Fake Gem", 17, SlimefunItems.SYNTHETIC_EMERALD);
-        register("chainmail_armor", 74, "Chainmail Armor", 8, new ItemStack(Material.CHAINMAIL_HELMET), new ItemStack(Material.CHAINMAIL_CHESTPLATE), new ItemStack(Material.CHAINMAIL_LEGGINGS), new ItemStack(Material.CHAINMAIL_BOOTS));
+        register("chainmail_armor", 74, "Chainmail Armor", 8, SlimefunItems.CHAINMAIL_HELMET, SlimefunItems.CHAINMAIL_CHESTPLATE, SlimefunItems.CHAINMAIL_LEGGINGS, SlimefunItems.CHAINMAIL_BOOTS);
         register("whirlwind_talisman", 75, "Talisman of the Whirlwind", 19, SlimefunItems.TALISMAN_WHIRLWIND);
         register("wizard_talisman", 76, "Talisman of the Wizard", 22, SlimefunItems.TALISMAN_WIZARD);
         register("lumber_axe", 77, "Lumber Axe", 21, SlimefunItems.LUMBER_AXE);
-        register("hazmat_suit", 79, "Hazmat Suit", 21, SlimefunItems.SCUBA_HELMET, SlimefunItems.HAZMAT_CHESTPLATE, SlimefunItems.HAZMAT_LEGGINGS, SlimefunItems.RUBBER_BOOTS);
+        register("hazmat_suit", 79, "Hazmat Suit", 21, SlimefunItems.SCUBA_HELMET, SlimefunItems.HAZMAT_CHESTPLATE, SlimefunItems.HAZMAT_LEGGINGS, SlimefunItems.HAZMAT_BOOTS);
         register("uranium", 80, "Radioactive", 30, SlimefunItems.TINY_URANIUM, SlimefunItems.SMALL_URANIUM, SlimefunItems.URANIUM);
         register("crushed_ore", 81, "Ore Purification", 25, SlimefunItems.CRUSHED_ORE, SlimefunItems.PULVERIZED_ORE, SlimefunItems.PURE_ORE_CLUSTER);
         register("redstone_alloy", 84, "Redstone Alloy", 16, SlimefunItems.REDSTONE_ALLOY);
         register("carbonado_tools", 85, "Top Tier Machines", 24, SlimefunItems.CARBONADO_MULTI_TOOL, SlimefunItems.CARBONADO_JETPACK, SlimefunItems.CARBONADO_JETBOOTS);
         register("first_aid", 86, "First Aid", 2, SlimefunItems.CLOTH, SlimefunItems.RAG, SlimefunItems.BANDAGE, SlimefunItems.SPLINT, SlimefunItems.TIN_CAN, SlimefunItems.VITAMINS, SlimefunItems.MEDICINE);
-        register("gold_armor", 87, "Shiny Armor", 13, SlimefunItems.GOLD_HELMET, SlimefunItems.GOLD_CHESTPLATE, SlimefunItems.GOLD_LEGGINGS, SlimefunItems.GOLD_BOOTS);
+        register("gold_armor", 87, "Shiny Armor", 13, SlimefunItems.GOLDEN_HELMET_12K, SlimefunItems.GOLDEN_CHESTPLATE_12K, SlimefunItems.GOLDEN_LEGGINGS_12K, SlimefunItems.GOLDEN_BOOTS_12K);
         register("night_vision_googles", 89, "Night Vision Goggles", 10, SlimefunItems.NIGHT_VISION_GOGGLES);
         register("pickaxe_of_containment", 90, "Pickaxe of Containment", 14, SlimefunItems.PICKAXE_OF_CONTAINMENT, SlimefunItems.BROKEN_SPAWNER);
         register("hercules_pickaxe", 91, "Hercules Pickaxe", 28, SlimefunItems.HERCULES_PICKAXE);
@@ -267,8 +268,20 @@ public final class ResearchSetup {
         register("advanced_industrial_miner", 98, "Better Mining", 36, SlimefunItems.ADVANCED_INDUSTRIAL_MINER);
         register("magical_zombie_pills", 257, "De-Zombification", 22, SlimefunItems.MAGICAL_ZOMBIE_PILLS);
         register("auto_brewer", 258, "Industrial Brewery", 30, SlimefunItems.AUTO_BREWER);
+        register("enchantment_rune", 259, "Ancient Enchanting", 24, SlimefunItems.MAGICAL_GLASS, SlimefunItems.ENCHANTMENT_RUNE);
+        register("lead_clothing", 260, "Lead Clothing", 14, SlimefunItems.REINFORCED_CLOTH);
+        register("tape_measure", 261, "Tape Measure", 7, SlimefunItems.TAPE_MEASURE);
+        register("iron_golem_assembler", 262, "Automated Iron Golems", 30, SlimefunItems.IRON_GOLEM_ASSEMBLER);
+        register("shulker_shell", 263, "Synthetic Shulkers", 30, SlimefunItems.SYNTHETIC_SHULKER_SHELL);
+        register("villager_rune", 264, "Reset Villager Trades", 26, SlimefunItems.VILLAGER_RUNE, SlimefunItems.STRANGE_NETHER_GOO);
+        register("climbing_pick", 265, "Block Raider", 20, SlimefunItems.CLIMBING_PICK);
+        register("even_higher_tier_capacitors", 266, "Tier 3 Capacitors", 40, SlimefunItems.ENERGIZED_CAPACITOR);
+        register("caveman_talisman", 267, "Talisman of the Caveman", 20, SlimefunItems.TALISMAN_CAVEMAN);
+        register("elytra_cap", 268, "Crash Gear", 20, SlimefunItems.ELYTRA_CAP);
+        register("energy_connectors", 269, "Wired Connections", 12, SlimefunItems.ENERGY_CONNECTOR);
     }
 
+    @ParametersAreNonnullByDefault
     private static void register(String key, int id, String name, int defaultCost, ItemStack... items) {
         Research research = new Research(new NamespacedKey(SlimefunPlugin.instance(), key), id, name, defaultCost);
 

@@ -6,9 +6,15 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import org.apache.commons.lang.Validate;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -18,6 +24,7 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
 import io.github.thebusybiscuit.cscorelib2.item.ImmutableItemMeta;
+import io.github.thebusybiscuit.cscorelib2.skull.SkullBlock;
 import io.github.thebusybiscuit.cscorelib2.skull.SkullItem;
 import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
 import io.github.thebusybiscuit.slimefun4.api.exceptions.PrematureCodeException;
@@ -58,7 +65,7 @@ public final class SlimefunUtils {
      *            The {@link Item} to query
      * @return Whether the {@link Item} is excluded from being picked up
      */
-    public static boolean hasNoPickupFlag(Item item) {
+    public static boolean hasNoPickupFlag(@Nonnull Item item) {
         return item.hasMetadata(NO_PICKUP_METADATA);
     }
 
@@ -71,7 +78,7 @@ public final class SlimefunUtils {
      * @param context
      *            The context in which this {@link Item} was flagged
      */
-    public static void markAsNoPickup(Item item, String context) {
+    public static void markAsNoPickup(@Nonnull Item item, @Nonnull String context) {
         item.setMetadata(NO_PICKUP_METADATA, new FixedMetadataValue(SlimefunPlugin.instance(), context));
     }
 
@@ -82,19 +89,14 @@ public final class SlimefunUtils {
      *            The {@link ItemStack} to check for
      * @return Whether the given item is soulbound
      */
-    public static boolean isSoulbound(ItemStack item) {
+    public static boolean isSoulbound(@Nullable ItemStack item) {
         if (item == null || item.getType() == Material.AIR) {
             return false;
-        }
-        else {
+        } else {
             ItemMeta meta = item.hasItemMeta() ? item.getItemMeta() : null;
 
-            if (meta != null && SlimefunPlugin.getMinecraftVersion().isAtLeast(MinecraftVersion.MINECRAFT_1_14)) {
-                PersistentDataContainer container = meta.getPersistentDataContainer();
-
-                if (container.has(SOULBOUND_KEY, PersistentDataType.BYTE)) {
-                    return true;
-                }
+            if (hasSoulboundFlag(meta)) {
+                return true;
             }
 
             if (SlimefunPlugin.getThirdPartySupportService().isEmeraldEnchantsInstalled()) {
@@ -110,13 +112,24 @@ public final class SlimefunUtils {
 
             if (sfItem instanceof Soulbound) {
                 return !sfItem.isDisabled();
-            }
-            else if (meta != null) {
+            } else if (meta != null) {
                 return meta.hasLore() && meta.getLore().contains(SOULBOUND_LORE);
             }
 
             return false;
         }
+    }
+
+    private static boolean hasSoulboundFlag(@Nullable ItemMeta meta) {
+        if (meta != null && SlimefunPlugin.getMinecraftVersion().isAtLeast(MinecraftVersion.MINECRAFT_1_14)) {
+            PersistentDataContainer container = meta.getPersistentDataContainer();
+
+            if (container.has(SOULBOUND_KEY, PersistentDataType.BYTE)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -133,7 +146,7 @@ public final class SlimefunUtils {
      * 
      * @see #isSoulbound(ItemStack)
      */
-    public static void setSoulbound(ItemStack item, boolean makeSoulbound) {
+    public static void setSoulbound(@Nullable ItemStack item, boolean makeSoulbound) {
         if (item == null || item.getType() == Material.AIR) {
             throw new IllegalArgumentException("A soulbound item cannot be null or air!");
         }
@@ -175,7 +188,7 @@ public final class SlimefunUtils {
      * 
      * @return Whether this {@link ItemStack} is radioactive or not
      */
-    public static boolean isRadioactive(ItemStack item) {
+    public static boolean isRadioactive(@Nullable ItemStack item) {
         return SlimefunItem.getByItem(item) instanceof Radioactive;
     }
 
@@ -185,9 +198,12 @@ public final class SlimefunUtils {
      * 
      * @param texture
      *            The texture for this head (base64 or hash)
+     * 
      * @return An {@link ItemStack} with this Head texture
      */
-    public static ItemStack getCustomHead(String texture) {
+    public static ItemStack getCustomHead(@Nonnull String texture) {
+        Validate.notNull(texture, "The provided texture is null");
+
         if (SlimefunPlugin.instance() == null) {
             throw new PrematureCodeException("You cannot instantiate a custom head before Slimefun was loaded.");
         }
@@ -199,7 +215,7 @@ public final class SlimefunUtils {
 
         String base64 = texture;
 
-        if (PatternUtils.ALPHANUMERIC.matcher(texture).matches()) {
+        if (PatternUtils.HEXADECIMAL.matcher(texture).matches()) {
             base64 = Base64.getEncoder().encodeToString(("{\"textures\":{\"SKIN\":{\"url\":\"http://textures.minecraft.net/texture/" + texture + "\"}}}").getBytes(StandardCharsets.UTF_8));
         }
 
@@ -212,14 +228,16 @@ public final class SlimefunUtils {
         }
 
         // Performance optimization
-        ItemStackWrapper wrapper = new ItemStackWrapper(item);
+        if (!(item instanceof SlimefunItemStack)) {
+            item = new ItemStackWrapper(item);
+        }
 
         for (ItemStack stack : inventory.getStorageContents()) {
             if (stack == null || stack.getType() == Material.AIR) {
                 continue;
             }
 
-            if (isItemSimilar(stack, wrapper, checkLore)) {
+            if (isItemSimilar(stack, item, checkLore, false)) {
                 return true;
             }
         }
@@ -227,22 +245,22 @@ public final class SlimefunUtils {
         return false;
     }
 
-    public static boolean isItemSimilar(ItemStack item, ItemStack sfitem, boolean checkLore) {
+    public static boolean isItemSimilar(@Nullable ItemStack item, @Nullable ItemStack sfitem, boolean checkLore) {
         return isItemSimilar(item, sfitem, checkLore, true);
     }
 
-    public static boolean isItemSimilar(ItemStack item, ItemStack sfitem, boolean checkLore, boolean checkAmount) {
-        if (item == null) return sfitem == null;
-        if (sfitem == null) return false;
-        if (item.getType() != sfitem.getType()) return false;
-        if (checkAmount && item.getAmount() < sfitem.getAmount()) return false;
-
-        if (sfitem instanceof SlimefunItemStack && item instanceof SlimefunItemStack) {
+    public static boolean isItemSimilar(@Nullable ItemStack item, @Nullable ItemStack sfitem, boolean checkLore, boolean checkAmount) {
+        if (item == null) {
+            return sfitem == null;
+        } else if (sfitem == null) {
+            return false;
+        } else if (item.getType() != sfitem.getType()) {
+            return false;
+        } else if (checkAmount && item.getAmount() < sfitem.getAmount()) {
+            return false;
+        } else if (sfitem instanceof SlimefunItemStack && item instanceof SlimefunItemStack) {
             return ((SlimefunItemStack) item).getItemId().equals(((SlimefunItemStack) sfitem).getItemId());
-        }
-
-        boolean sfItemHasMeta = sfitem.hasItemMeta();
-        if (item.hasItemMeta()) {
+        } else if (item.hasItemMeta()) {
             ItemMeta itemMeta = item.getItemMeta();
 
             if (sfitem instanceof SlimefunItemStack) {
@@ -254,76 +272,51 @@ public final class SlimefunUtils {
 
                 ImmutableItemMeta meta = ((SlimefunItemStack) sfitem).getImmutableMeta();
                 return equalsItemMeta(itemMeta, meta, checkLore);
-            }
-
-            if (sfItemHasMeta) {
+            } else if (sfitem.hasItemMeta()) {
                 return equalsItemMeta(itemMeta, sfitem.getItemMeta(), checkLore);
+            } else {
+                return false;
             }
+        } else {
+            return !sfitem.hasItemMeta();
         }
-        else {
-            return !sfItemHasMeta;
-        }
-
-        return false;
     }
 
-    private static boolean equalsItemMeta(ItemMeta itemMeta, ImmutableItemMeta meta, boolean checkLore) {
+    private static boolean equalsItemMeta(@Nonnull ItemMeta itemMeta, @Nonnull ImmutableItemMeta meta, boolean checkLore) {
         Optional<String> displayName = meta.getDisplayName();
 
-        if (itemMeta.hasDisplayName() && displayName.isPresent()) {
-            if (itemMeta.getDisplayName().equals(displayName.get())) {
-                Optional<List<String>> itemLore = meta.getLore();
-
-                if (checkLore) {
-                    if (itemMeta.hasLore() && itemLore.isPresent()) {
-                        return equalsLore(itemMeta.getLore(), itemLore.get());
-                    }
-                    else return !itemMeta.hasLore() && !itemLore.isPresent();
-                }
-                else return true;
-            }
-            else return false;
-        }
-        else if (!itemMeta.hasDisplayName() && !displayName.isPresent()) {
+        if (itemMeta.hasDisplayName() != displayName.isPresent()) {
+            return false;
+        } else if (itemMeta.hasDisplayName() && displayName.isPresent() && !itemMeta.getDisplayName().equals(displayName.get())) {
+            return false;
+        } else if (!checkLore) {
+            return true;
+        } else {
             Optional<List<String>> itemLore = meta.getLore();
 
-            if (checkLore) {
-                if (itemMeta.hasLore() && itemLore.isPresent()) {
-                    return equalsLore(itemMeta.getLore(), itemLore.get());
-                }
-                else return !itemMeta.hasLore() && !itemLore.isPresent();
+            if (itemMeta.hasLore() && itemLore.isPresent()) {
+                return equalsLore(itemMeta.getLore(), itemLore.get());
+            } else {
+                return !itemMeta.hasLore() && !itemLore.isPresent();
             }
-            else return true;
         }
-        else return false;
     }
 
-    private static boolean equalsItemMeta(ItemMeta itemMeta, ItemMeta sfitemMeta, boolean checkLore) {
-        if (itemMeta.hasDisplayName() && sfitemMeta.hasDisplayName()) {
-            if (itemMeta.getDisplayName().equals(sfitemMeta.getDisplayName())) {
-                if (checkLore) {
-                    if (itemMeta.hasLore() && sfitemMeta.hasLore()) {
-                        return equalsLore(itemMeta.getLore(), sfitemMeta.getLore());
-                    }
-                    else return !itemMeta.hasLore() && !sfitemMeta.hasLore();
-                }
-                else return true;
-            }
-            else return false;
+    private static boolean equalsItemMeta(@Nonnull ItemMeta itemMeta, @Nonnull ItemMeta sfitemMeta, boolean checkLore) {
+        if (itemMeta.hasDisplayName() != sfitemMeta.hasDisplayName()) {
+            return false;
+        } else if (itemMeta.hasDisplayName() && sfitemMeta.hasDisplayName() && !itemMeta.getDisplayName().equals(sfitemMeta.getDisplayName())) {
+            return false;
+        } else if (!checkLore) {
+            return true;
+        } else if (itemMeta.hasLore() && sfitemMeta.hasLore()) {
+            return equalsLore(itemMeta.getLore(), sfitemMeta.getLore());
+        } else {
+            return !itemMeta.hasLore() && !sfitemMeta.hasLore();
         }
-        else if (!itemMeta.hasDisplayName() && !sfitemMeta.hasDisplayName()) {
-            if (checkLore) {
-                if (itemMeta.hasLore() && sfitemMeta.hasLore()) {
-                    return equalsLore(itemMeta.getLore(), sfitemMeta.getLore());
-                }
-                else return !itemMeta.hasLore() && !sfitemMeta.hasLore();
-            }
-            else return true;
-        }
-        else return false;
     }
 
-    private static boolean equalsLore(List<String> lore, List<String> lore2) {
+    private static boolean equalsLore(@Nonnull List<String> lore, @Nonnull List<String> lore2) {
         StringBuilder string1 = new StringBuilder();
         StringBuilder string2 = new StringBuilder();
 
@@ -340,6 +333,29 @@ public final class SlimefunUtils {
         }
 
         return string1.toString().equals(string2.toString());
+    }
+
+    public static void updateCapacitorTexture(@Nonnull Location l, int charge, int capacity) {
+        Validate.notNull(l, "Cannot update a texture for null");
+        Validate.isTrue(capacity > 0, "Capacity must be greater than zero!");
+
+        SlimefunPlugin.runSync(() -> {
+            Block b = l.getBlock();
+
+            if (b.getType() == Material.PLAYER_HEAD || b.getType() == Material.PLAYER_WALL_HEAD) {
+                double level = (double) charge / capacity;
+
+                if (level <= 0.25) {
+                    SkullBlock.setFromHash(b, HeadTexture.CAPACITOR_25.getTexture());
+                } else if (level <= 0.5) {
+                    SkullBlock.setFromHash(b, HeadTexture.CAPACITOR_50.getTexture());
+                } else if (level <= 0.75) {
+                    SkullBlock.setFromHash(b, HeadTexture.CAPACITOR_75.getTexture());
+                } else {
+                    SkullBlock.setFromHash(b, HeadTexture.CAPACITOR_100.getTexture());
+                }
+            }
+        });
     }
 
 }

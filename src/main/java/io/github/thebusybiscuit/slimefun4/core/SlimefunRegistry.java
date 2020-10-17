@@ -11,9 +11,13 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.bukkit.Location;
+import javax.annotation.Nonnull;
+
+import org.apache.commons.lang.Validate;
 import org.bukkit.Server;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Piglin;
 import org.bukkit.inventory.ItemStack;
 
 import io.github.thebusybiscuit.cscorelib2.collections.KeyMap;
@@ -21,7 +25,6 @@ import io.github.thebusybiscuit.cscorelib2.config.Config;
 import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
 import io.github.thebusybiscuit.slimefun4.api.geo.GEOResource;
 import io.github.thebusybiscuit.slimefun4.api.player.PlayerProfile;
-import io.github.thebusybiscuit.slimefun4.core.attributes.WitherProof;
 import io.github.thebusybiscuit.slimefun4.core.guide.SlimefunGuideImplementation;
 import io.github.thebusybiscuit.slimefun4.core.guide.SlimefunGuideLayout;
 import io.github.thebusybiscuit.slimefun4.core.multiblocks.MultiBlock;
@@ -30,6 +33,7 @@ import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import io.github.thebusybiscuit.slimefun4.implementation.guide.BookSlimefunGuide;
 import io.github.thebusybiscuit.slimefun4.implementation.guide.CheatSheetSlimefunGuide;
 import io.github.thebusybiscuit.slimefun4.implementation.guide.ChestSlimefunGuide;
+import io.github.thebusybiscuit.slimefun4.implementation.items.electric.machines.AutomatedCraftingChamber;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunBlockHandler;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
@@ -46,7 +50,7 @@ import me.mrCookieSlime.Slimefun.api.inventory.UniversalBlockMenu;
  * @author TheBusyBiscuit
  *
  */
-public class SlimefunRegistry {
+public final class SlimefunRegistry {
 
     private final Map<String, SlimefunItem> slimefunIds = new HashMap<>();
     private final List<SlimefunItem> slimefunItems = new ArrayList<>();
@@ -64,35 +68,30 @@ public class SlimefunRegistry {
     private boolean enableResearches;
     private boolean freeCreativeResearches;
     private boolean researchFireworks;
+    private boolean logDuplicateBlockEntries;
 
     private final Set<String> tickers = new HashSet<>();
     private final Set<SlimefunItem> radioactive = new HashSet<>();
-    private final Set<String> activeChunks = new HashSet<>();
+    private final Set<ItemStack> barterDrops = new HashSet<>();
 
     private final KeyMap<GEOResource> geoResources = new KeyMap<>();
-
-    private final Set<String> energyGenerators = new HashSet<>();
-    private final Set<String> energyCapacitors = new HashSet<>();
-    private final Set<String> energyConsumers = new HashSet<>();
-    private final Set<String> chargeableBlocks = new HashSet<>();
-    private final Map<String, WitherProof> witherProofBlocks = new HashMap<>();
 
     private final Map<UUID, PlayerProfile> profiles = new ConcurrentHashMap<>();
     private final Map<String, BlockStorage> worlds = new ConcurrentHashMap<>();
     private final Map<String, BlockInfoConfig> chunks = new HashMap<>();
     private final Map<SlimefunGuideLayout, SlimefunGuideImplementation> layouts = new EnumMap<>(SlimefunGuideLayout.class);
-    private final Map<EntityType, Set<ItemStack>> drops = new EnumMap<>(EntityType.class);
-    private final Map<String, Integer> capacities = new HashMap<>();
+    private final Map<EntityType, Set<ItemStack>> mobDrops = new EnumMap<>(EntityType.class);
+
     private final Map<String, BlockMenuPreset> blockMenuPresets = new HashMap<>();
     private final Map<String, UniversalBlockMenu> universalInventories = new HashMap<>();
-    private final Map<Class<? extends ItemHandler>, Set<ItemHandler>> itemHandlers = new HashMap<>();
+    private final Map<Class<? extends ItemHandler>, Set<ItemHandler>> globalItemHandlers = new HashMap<>();
     private final Map<String, SlimefunBlockHandler> blockHandlers = new HashMap<>();
-
-    private final Map<String, Set<Location>> activeTickers = new HashMap<>();
 
     private final Map<String, ItemStack> automatedCraftingChamberRecipes = new HashMap<>();
 
-    public void load(Config cfg) {
+    public void load(@Nonnull Config cfg) {
+        Validate.notNull(cfg, "The Config cannot be null!");
+
         boolean showVanillaRecipes = cfg.getBoolean("guide.show-vanilla-recipes");
 
         layouts.put(SlimefunGuideLayout.CHEST, new ChestSlimefunGuide(showVanillaRecipes));
@@ -104,6 +103,7 @@ public class SlimefunRegistry {
         backwardsCompatibility = cfg.getBoolean("options.backwards-compatibility") || SlimefunPlugin.getMinecraftVersion().isBefore(MinecraftVersion.MINECRAFT_1_14);
         freeCreativeResearches = cfg.getBoolean("researches.free-in-creative-mode");
         researchFireworks = cfg.getBoolean("researches.enable-fireworks");
+        logDuplicateBlockEntries = cfg.getBoolean("options.log-duplicate-block-entries");
     }
 
     /**
@@ -199,12 +199,24 @@ public class SlimefunRegistry {
         return layouts.get(layout);
     }
 
+    /**
+     * This returns a {@link Map} connecting the {@link EntityType} with a {@link Set}
+     * of {@link ItemStack ItemStacks} which would be dropped when an {@link Entity} of that type was killed.
+     * 
+     * @return The {@link Map} of custom mob drops
+     */
     public Map<EntityType, Set<ItemStack>> getMobDrops() {
-        return drops;
+        return mobDrops;
     }
 
-    public Set<ItemStack> getMobDrops(EntityType entity) {
-        return drops.get(entity);
+    /**
+     * This returns a {@link Set} of {@link ItemStack ItemStacks} which can be obtained by bartering
+     * with {@link Piglin Piglins}.
+     * 
+     * @return A {@link Set} of bartering drops
+     */
+    public Set<ItemStack> getBarteringDrops() {
+        return barterDrops;
     }
 
     public Set<SlimefunItem> getRadioactiveItems() {
@@ -215,16 +227,8 @@ public class SlimefunRegistry {
         return tickers;
     }
 
-    public Set<String> getActiveChunks() {
-        return activeChunks;
-    }
-
     public Map<String, SlimefunItem> getSlimefunItemIds() {
         return slimefunIds;
-    }
-
-    public Map<String, Integer> getEnergyCapacities() {
-        return capacities;
     }
 
     public Map<String, BlockMenuPreset> getMenuPresets() {
@@ -240,7 +244,7 @@ public class SlimefunRegistry {
     }
 
     public Map<Class<? extends ItemHandler>, Set<ItemHandler>> getPublicItemHandlers() {
-        return itemHandlers;
+        return globalItemHandlers;
     }
 
     public Map<String, SlimefunBlockHandler> getBlockHandlers() {
@@ -255,37 +259,24 @@ public class SlimefunRegistry {
         return chunks;
     }
 
-    public Map<String, Set<Location>> getActiveTickers() {
-        return activeTickers;
-    }
-
     public KeyMap<GEOResource> getGEOResources() {
         return geoResources;
     }
 
+    /**
+     * This method returns a list of recipes for the {@link AutomatedCraftingChamber}
+     * 
+     * @deprecated This just a really bad way to do this. Someone needs to rewrite this.
+     * 
+     * @return A list of recipes for the {@link AutomatedCraftingChamber}
+     */
     @Deprecated
     public Map<String, ItemStack> getAutomatedCraftingChamberRecipes() {
         return automatedCraftingChamberRecipes;
     }
 
-    public Set<String> getEnergyGenerators() {
-        return energyGenerators;
-    }
-
-    public Set<String> getEnergyCapacitors() {
-        return energyCapacitors;
-    }
-
-    public Set<String> getEnergyConsumers() {
-        return energyConsumers;
-    }
-
-    public Set<String> getChargeableBlocks() {
-        return chargeableBlocks;
-    }
-
-    public Map<String, WitherProof> getWitherProofBlocks() {
-        return witherProofBlocks;
+    public boolean logDuplicateBlockEntries() {
+        return logDuplicateBlockEntries;
     }
 
 }

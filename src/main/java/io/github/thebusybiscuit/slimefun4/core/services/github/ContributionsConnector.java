@@ -6,10 +6,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
+import kong.unirest.JsonNode;
+import kong.unirest.json.JSONArray;
+import kong.unirest.json.JSONObject;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
 
 class ContributionsConnector extends GitHubConnector {
@@ -31,6 +33,7 @@ class ContributionsConnector extends GitHubConnector {
         aliases.put("BurningBrimstone", "Bluedevil74");
         aliases.put("bverhoeven", "soczol");
         aliases.put("ramdon-person", "ramdon_person");
+        aliases.put("NCBPFluffyBear", "FluffyBear_");
     }
 
     private final String prefix;
@@ -39,6 +42,7 @@ class ContributionsConnector extends GitHubConnector {
 
     private boolean finished = false;
 
+    @ParametersAreNonnullByDefault
     ContributionsConnector(GitHubService github, String prefix, int page, String repository, String role) {
         super(github, repository);
 
@@ -57,13 +61,13 @@ class ContributionsConnector extends GitHubConnector {
     }
 
     @Override
-    public void onSuccess(JsonElement element) {
+    public void onSuccess(@Nonnull JsonNode response) {
         finished = true;
-        if (element.isJsonArray()) {
-            computeContributors(element.getAsJsonArray());
-        }
-        else {
-            Slimefun.getLogger().log(Level.WARNING, "Received an unusual answer from GitHub, possibly a timeout? ({0})", element);
+
+        if (response.isArray()) {
+            computeContributors(response.getArray());
+        } else {
+            Slimefun.getLogger().log(Level.WARNING, "Received an unusual answer from GitHub, possibly a timeout? ({0})", response);
         }
     }
 
@@ -82,16 +86,17 @@ class ContributionsConnector extends GitHubConnector {
         return "/contributors?per_page=100&page=" + page;
     }
 
-    private void computeContributors(JsonArray array) {
-        for (int i = 0; i < array.size(); i++) {
-            JsonObject object = array.get(i).getAsJsonObject();
+    private void computeContributors(@Nonnull JSONArray array) {
+        for (int i = 0; i < array.length(); i++) {
+            JSONObject object = array.getJSONObject(i);
 
-            String name = object.get("login").getAsString();
-            int commits = object.get("contributions").getAsInt();
-            String profile = object.get("html_url").getAsString();
+            String name = object.getString("login");
+            int commits = object.getInt("contributions");
+            String profile = object.getString("html_url");
 
             if (!blacklist.contains(name)) {
-                github.addContributor(aliases.getOrDefault(name, name), profile, role, commits);
+                String username = aliases.getOrDefault(name, name);
+                github.addContributor(username, profile, role, commits);
             }
         }
     }
