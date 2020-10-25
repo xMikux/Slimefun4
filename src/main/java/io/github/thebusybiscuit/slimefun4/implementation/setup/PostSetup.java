@@ -108,6 +108,7 @@ public final class PostSetup {
             sender.sendMessage("");
             sender.sendMessage(ChatColor.GREEN + " - 源代碼: https://github.com/xMikux/Slimefun4");
             sender.sendMessage(ChatColor.GREEN + " - 此為繁體翻譯版 - 無官方支持");
+            sender.sendMessage(ChatColor.RED + " - 請勿在黏液科技伺服器官方問!");
         }
 
         sender.sendMessage("");

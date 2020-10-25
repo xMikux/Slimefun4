@@ -534,12 +534,24 @@ public class ProgrammableAndroid extends SlimefunItem implements InventoryBlock,
     }
 
     @Nonnull
-    protected String getScript(@Nonnull Location l) {
+    public String getScript(@Nonnull Location l) {
+        Validate.notNull(l, "Location for android not specified");
         String script = BlockStorage.getLocationInfo(l, "script");
         return script != null ? script : DEFAULT_SCRIPT;
     }
 
-    protected void setScript(@Nonnull Location l, @Nonnull String script) {
+    public void setScript(@Nonnull Location l, @Nonnull String script) {
+        Validate.notNull(l, "Location for android not specified");
+        Validate.notNull(script, "No script given");
+
+        if (!script.startsWith(Instruction.START.name())) {
+            throw new IllegalArgumentException("A script must begin with a 'START' token.");
+        }
+
+        if (!script.startsWith(Instruction.REPEAT.name())) {
+            throw new IllegalArgumentException("A script must end with a 'REPEAT' token.");
+        }
+
         BlockStorage.addBlockInfo(l, "script", script);
     }
 
