@@ -26,6 +26,7 @@
 ## Release Candidate 18 (TBD)
 
 #### Additions
+* The Smelters Pick now also works on Ancient Debris
 
 #### Changes
 * Removed 1.13 support
@@ -48,6 +49,9 @@
 * Fixed #2469
 * Fixed #2509
 * Fixed #2499
+* Fixed #2527
+* Fixed #2519
+* Fixed #2517
 
 ## Release Candidate 17 (17 Oct 2020)
 
