@@ -64,7 +64,7 @@ public class TestResourceRegistration {
     @Test
     public void testOilResource() {
         NamespacedKey key = new NamespacedKey(plugin, "oil");
-        GEOResource resource = testResource(key, "Oil", SlimefunItems.OIL_BUCKET, false, 8);
+        GEOResource resource = testResource(key, "石油", SlimefunItems.OIL_BUCKET, false, 8);
 
         Assertions.assertEquals(0, resource.getDefaultSupply(Environment.NETHER, Biome.NETHER_WASTES));
 
@@ -81,7 +81,7 @@ public class TestResourceRegistration {
     @Test
     public void testNetherIceResource() {
         NamespacedKey key = new NamespacedKey(plugin, "nether_ice");
-        GEOResource resource = testResource(key, "Nether Ice", SlimefunItems.NETHER_ICE, true, 6);
+        GEOResource resource = testResource(key, "地獄冰", SlimefunItems.NETHER_ICE, true, 6);
 
         Assertions.assertNotEquals(0, resource.getDefaultSupply(Environment.NETHER, Biome.NETHER_WASTES));
         Assertions.assertEquals(0, resource.getDefaultSupply(Environment.NORMAL, Biome.DESERT));
@@ -90,7 +90,7 @@ public class TestResourceRegistration {
     @Test
     public void testUraniumResource() {
         NamespacedKey key = new NamespacedKey(plugin, "uranium");
-        GEOResource resource = testResource(key, "Small Chunks of Uranium", SlimefunItems.SMALL_URANIUM, true, 2);
+        GEOResource resource = testResource(key, "一小塊鈾", SlimefunItems.SMALL_URANIUM, true, 2);
 
         Assertions.assertNotEquals(0, resource.getDefaultSupply(Environment.NORMAL, Biome.MOUNTAINS));
         Assertions.assertEquals(0, resource.getDefaultSupply(Environment.NETHER, Biome.NETHER_WASTES));
@@ -100,7 +100,7 @@ public class TestResourceRegistration {
     @Test
     public void testSaltResource() {
         NamespacedKey key = new NamespacedKey(plugin, "salt");
-        GEOResource resource = testResource(key, "Salt", SlimefunItems.SALT, true, 18);
+        GEOResource resource = testResource(key, "鹽", SlimefunItems.SALT, true, 18);
 
         Assertions.assertEquals(0, resource.getDefaultSupply(Environment.NETHER, Biome.NETHER_WASTES));
         Assertions.assertEquals(0, resource.getDefaultSupply(Environment.THE_END, Biome.THE_END));

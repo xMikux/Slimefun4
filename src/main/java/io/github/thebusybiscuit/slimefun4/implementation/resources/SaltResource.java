@@ -8,7 +8,7 @@ import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 class SaltResource extends SlimefunResource {
 
     SaltResource() {
-        super("salt", "Salt", SlimefunItems.SALT, 18, true);
+        super("salt", "鹽", SlimefunItems.SALT, 18, true);
     }
 
     @Override

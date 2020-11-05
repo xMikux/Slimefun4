@@ -8,7 +8,7 @@ import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 class UraniumResource extends SlimefunResource {
 
     UraniumResource() {
-        super("uranium", "Small Chunks of Uranium", SlimefunItems.SMALL_URANIUM, 2, true);
+        super("uranium", "一小塊鈾", SlimefunItems.SMALL_URANIUM, 2, true);
     }
 
     @Override
