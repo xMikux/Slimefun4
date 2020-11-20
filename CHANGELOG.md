@@ -31,6 +31,7 @@
 * Added a config option to disable network visualizations
 * (API) Added CoolerFeedPlayerEvent
 * Added a config option to delete excess cargo network items
+* Added an item setting to configure the Wind Staff velocity
 
 #### Changes
 * Removed 1.13 support
@@ -41,6 +42,10 @@
 * Magnets can no longer be placed down
 * Electromagnets can no longer be placed down
 * Performance improvements to Cargo network visualizations
+* General performance improvements
+* Improved performance for radioactive items
+* Memory/GC improvements for the profiler
+* Performance improvements for the Fluid Pump
 
 #### Fixes
 * Fixed #2448
@@ -62,6 +67,11 @@
 * Fixed network visualizers spawning particles for other player heads
 * Fixed #2418
 * Fixed #2446
+* Fixed CoreProtect not recognizing Slimefun blocks getting broken
+* Fixed #2447
+* Fixed #2558
+* Fixed a duplication bug with the Block Placer
+* Fixed Slimefun Guide Settings showing "last activity" as a negative number
 
 ## Release Candidate 17 (17 Oct 2020)
 
