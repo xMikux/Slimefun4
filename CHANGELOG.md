@@ -32,6 +32,7 @@
 * (API) Added CoolerFeedPlayerEvent
 * Added a config option to delete excess cargo network items
 * Added an item setting to configure the Wind Staff velocity
+* Added an item setting to the Infused Hopper to toggle it with redstone
 
 #### Changes
 * Removed 1.13 support
@@ -74,6 +75,8 @@
 * Fixed Slimefun Guide Settings showing "last activity" as a negative number
 * Fixed Armor Stands getting damaged/pushed by Explosive Bow
 * Fixed Sword of Beheading dropping Zombie/Skeleton Skulls from Zombie/Skeleton subvariants
+* Fixed #2518
+* Fixed #2421
 
 ## Release Candidate 17 (17 Oct 2020)
 
