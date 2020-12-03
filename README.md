@@ -33,7 +33,7 @@ Looking for English Version? [**Click here!**](https://github.com/Slimefun/Slime
 
 | | 開發版 (最新) | "穩定版 (官方)" |
 | ------------------ | -------- | -------- |
-| **Minecraft 版本** | :video_game: **1.14.\* - 1.16.\*** | :video_game: **1.13.\* - 1.16.\*** |
+| **Minecraft 版本** | :video_game: **1.14.\* - 1.16.\*** | :video_game: **1.14.\* - 1.16.\*** |
 | **自動更新** | :heavy_check_mark: | :heavy_check_mark: |
 | **頻繁的更新** | :heavy_check_mark: | :x: |
 | **最新內容** | :heavy_check_mark: | :x: |
@@ -56,7 +56,7 @@ Looking for English Version? [**Click here!**](https://github.com/Slimefun/Slime
 | *截圖提供者 GalaxyKat11#3816* | *截圖提供者 TamThan#7987* | *截圖提供者 Kilaruna#4981* |
 
 ## Discord
-你可以在Discord找到Slimefun的官方社區,並與來自世界各地**兩千以上**的用戶使用此插件.<br>
+你可以在Discord找到Slimefun的官方社區,並與來自世界各地**三千以上**的用戶使用此插件.<br>
 點擊底下的徵標來加入伺服器,以獲取有關官方插件的建議/問題與其他討論.<br>
 官方也經常舉辦社區活動,請加入來了解更多訊息.<br>
 

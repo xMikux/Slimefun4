@@ -130,18 +130,19 @@ public final class Script {
     @Nonnull
     ItemStack getAsItemStack(@Nonnull ProgrammableAndroid android, @Nonnull Player p) {
         List<String> lore = new LinkedList<>();
-        lore.add("&7上傳者 &r" + getAuthor());
+        lore.add("&7上傳者 &f" + getAuthor());
         lore.add("");
-        lore.add("&7下載量: &r" + getDownloads());
+        lore.add("&7下載量: &f" + getDownloads());
         lore.add("&7評價: " + getScriptRatingPercentage());
         lore.add("&a" + getUpvotes() + " \u263A &7| &4\u2639 " + getDownvotes());
         lore.add("");
-        lore.add("&e左鍵 &r來下載此程式");
+        lore.add("&e左鍵 &f來下載此程式");
         lore.add("&4(這將會把目前的程式覆蓋掉!)");
 
         if (canRate(p)) {
-            lore.add("&eShift + 左鍵 &r留下正面評價");
-            lore.add("&eShift + 右鍵 &r留下負面評價");
+            lore.add("");
+            lore.add("&eShift + 左鍵 &f留下正面評價");
+            lore.add("&eShift + 右鍵 &f留下負面評價");
         }
 
         return new CustomItem(android.getItem(), "&b" + getName(), lore.toArray(new String[0]));
@@ -150,7 +151,7 @@ public final class Script {
     @Nonnull
     private String getScriptRatingPercentage() {
         float percentage = getRating();
-        return NumberUtils.getColorFromPercentage(percentage) + String.valueOf(percentage) + ChatColor.RESET + "% ";
+        return NumberUtils.getColorFromPercentage(percentage) + String.valueOf(percentage) + ChatColor.WHITE + "% ";
     }
 
     /**

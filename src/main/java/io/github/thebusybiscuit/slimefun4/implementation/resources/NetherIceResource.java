@@ -8,7 +8,7 @@ import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 class NetherIceResource extends SlimefunResource {
 
     NetherIceResource() {
-        super("nether_ice", "Nether Ice", SlimefunItems.NETHER_ICE, 6, true);
+        super("nether_ice", "地獄冰", SlimefunItems.NETHER_ICE, 6, true);
     }
 
     @Override

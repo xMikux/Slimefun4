@@ -8,7 +8,7 @@ import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 class OilResource extends SlimefunResource {
 
     OilResource() {
-        super("oil", "Oil", SlimefunItems.OIL_BUCKET, 8, false);
+        super("oil", "石油", SlimefunItems.OIL_BUCKET, 8, false);
     }
 
     @Override
