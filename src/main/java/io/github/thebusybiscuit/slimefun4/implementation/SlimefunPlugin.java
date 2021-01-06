@@ -27,7 +27,6 @@ import org.bukkit.plugin.java.JavaPluginLoader;
 import org.bukkit.scheduler.BukkitTask;
 
 import io.github.thebusybiscuit.cscorelib2.config.Config;
-import io.github.thebusybiscuit.cscorelib2.math.DoubleHandler;
 import io.github.thebusybiscuit.cscorelib2.protection.ProtectionManager;
 import io.github.thebusybiscuit.cscorelib2.reflection.ReflectionUtils;
 import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
@@ -113,6 +112,7 @@ import io.github.thebusybiscuit.slimefun4.implementation.tasks.ArmorTask;
 import io.github.thebusybiscuit.slimefun4.implementation.tasks.SlimefunStartupTask;
 import io.github.thebusybiscuit.slimefun4.implementation.tasks.TickerTask;
 import io.github.thebusybiscuit.slimefun4.integrations.IntegrationsManager;
+import io.github.thebusybiscuit.slimefun4.utils.NumberUtils;
 import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
 import io.papermc.lib.PaperLib;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.AContainer;
@@ -347,7 +347,6 @@ public final class SlimefunPlugin extends JavaPlugin implements SlimefunAddon {
 
         getLogger().log(Level.INFO, "載入第三方插件集成...");
         integrations.start();
-
         gitHubService.start(this);
 
         // Hooray!
@@ -425,7 +424,7 @@ public final class SlimefunPlugin extends JavaPlugin implements SlimefunAddon {
      * @param pluginInstance
      *            Our instance of {@link SlimefunPlugin} or null
      */
-    private static final void setInstance(@Nullable SlimefunPlugin pluginInstance) {
+    private static void setInstance(@Nullable SlimefunPlugin pluginInstance) {
         instance = pluginInstance;
     }
 
@@ -434,9 +433,9 @@ public final class SlimefunPlugin extends JavaPlugin implements SlimefunAddon {
         long ms = (System.nanoTime() - timestamp) / 1000000;
 
         if (ms > 1000) {
-            return DoubleHandler.fixDouble(ms / 1000.0) + "s";
+            return NumberUtils.roundDecimalNumber(ms / 1000.0) + "s";
         } else {
-            return DoubleHandler.fixDouble(ms) + "ms";
+            return NumberUtils.roundDecimalNumber(ms) + "ms";
         }
     }
 
@@ -446,7 +445,7 @@ public final class SlimefunPlugin extends JavaPlugin implements SlimefunAddon {
      * @deprecated These static Maps should really be removed at some point...
      */
     @Deprecated
-    private static final void cleanUp() {
+    private static void cleanUp() {
         AContainer.processing = null;
         AContainer.progress = null;
 
@@ -817,7 +816,15 @@ public final class SlimefunPlugin extends JavaPlugin implements SlimefunAddon {
      */
     @Nonnull
     public static Set<Plugin> getInstalledAddons() {
-        return Arrays.stream(instance.getServer().getPluginManager().getPlugins()).filter(plugin -> plugin.getDescription().getDepend().contains(instance.getName()) || plugin.getDescription().getSoftDepend().contains(instance.getName())).collect(Collectors.toSet());
+        String pluginName = instance.getName();
+
+        // @formatter:off
+        return Arrays.stream(instance.getServer().getPluginManager().getPlugins())
+                .filter(plugin -> {
+                    PluginDescriptionFile description = plugin.getDescription();
+                    return description.getDepend().contains(pluginName) || description.getSoftDepend().contains(pluginName);
+                }).collect(Collectors.toSet());
+        // @formatter:on
     }
 
     /**
