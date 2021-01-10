@@ -4,7 +4,6 @@ commands:
   cheat: 允許您以作弊取得物品
   give: 給其他玩家Slimefun物品
   guide: 給自己一個Slimefun指南
-  timings: 關於您的伺服器的卡頓信息
   teleporter: 查看其他玩家的位置標點
   versions: 列出所有已安裝的附屬插件
   search: 在指南中搜索輸入的字句
@@ -25,6 +24,11 @@ commands:
     description: 為你手中的物品充電
     charge-success: 此物品已充電完成！
     not-rechargeable: 此物品不可被充電！
+  timings:
+    description: Slimefun和附加的卡頓訊息
+    please-wait: '&e請稍等... 分析即將顯示!'
+    verbose-player: '&4玩家無法使用詳細標誌!'
+    unknown-flag: '&4未知標誌: &c%flag%'
 guide:
   search:
     message: "&c你要搜尋什麼？"
