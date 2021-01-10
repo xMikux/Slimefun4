@@ -32,8 +32,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonWriter;
 
-import io.github.thebusybiscuit.cscorelib2.math.DoubleHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
+import io.github.thebusybiscuit.slimefun4.utils.NumberUtils;
 import io.github.thebusybiscuit.slimefun4.utils.PatternUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
@@ -97,7 +97,7 @@ public class BlockStorage {
                 return new Location(w, Integer.parseInt(components[1]), Integer.parseInt(components[2]), Integer.parseInt(components[3]));
             }
         } catch (NumberFormatException x) {
-            Slimefun.getLogger().log(Level.WARNING, "Could not parse Number", x);
+            SlimefunPlugin.logger().log(Level.WARNING, "Could not parse Number", x);
         }
         return null;
     }
@@ -114,8 +114,8 @@ public class BlockStorage {
             return;
         }
 
-        Slimefun.getLogger().log(Level.INFO, "載入方塊給世界 \"{0}\"", w.getName());
-        Slimefun.getLogger().log(Level.INFO, "這可能需要一些時間...");
+        SlimefunPlugin.logger().log(Level.INFO, "載入方塊給世界 \"{0}\"", w.getName());
+        SlimefunPlugin.logger().log(Level.INFO, "這可能需要一些時間...");
 
         File dir = new File(PATH_BLOCKS + w.getName());
 
@@ -142,13 +142,13 @@ public class BlockStorage {
         try {
             for (File file : directory.listFiles()) {
                 if (file.getName().equals("null.sfb")) {
-                    Slimefun.getLogger().log(Level.WARNING, "檢測到方塊損毀檔案!");
-                    Slimefun.getLogger().log(Level.WARNING, "Slimefun 會跳過此檔案, 你應該檢查看看!");
-                    Slimefun.getLogger().log(Level.WARNING, file.getPath());
+                    SlimefunPlugin.logger().log(Level.WARNING, "檢測到方塊損毀檔案!");
+                    SlimefunPlugin.logger().log(Level.WARNING, "Slimefun 會跳過此檔案, 你應該檢查看看!");
+                    SlimefunPlugin.logger().log(Level.WARNING, file.getPath());
                 } else if (file.getName().endsWith(".sfb")) {
                     if (timestamp + delay < System.currentTimeMillis()) {
                         int progress = Math.round((((done * 100.0F) / total) * 100.0F) / 100.0F);
-                        Slimefun.getLogger().log(Level.INFO, "載入方塊... {0}% 完成 (\"{1}\")", new Object[] { progress, world.getName() });
+                        SlimefunPlugin.logger().log(Level.INFO, "載入方塊... {0}% 完成 (\"{1}\")", new Object[] { progress, world.getName() });
                         timestamp = System.currentTimeMillis();
                     }
 
@@ -164,11 +164,11 @@ public class BlockStorage {
             }
         } finally {
             long time = (System.currentTimeMillis() - start);
-            Slimefun.getLogger().log(Level.INFO, "載入方塊... 100% (已完成 - {0}毫秒)", time);
-            Slimefun.getLogger().log(Level.INFO, "總共載入{0}個方塊於世界 \"{1}\"", new Object[] { totalBlocks, world.getName() });
+            SlimefunPlugin.logger().log(Level.INFO, "載入方塊... 100% (已完成 - {0}毫秒)", time);
+            SlimefunPlugin.logger().log(Level.INFO, "總共載入{0}個方塊於世界 \"{1}\"", new Object[] { totalBlocks, world.getName() });
 
             if (totalBlocks > 0) {
-                Slimefun.getLogger().log(Level.INFO, "平均: {0}毫秒/方塊", DoubleHandler.fixDouble((double) time / (double) totalBlocks, 3));
+                SlimefunPlugin.logger().log(Level.INFO, "平均: {0}毫秒/方塊", NumberUtils.roundDecimalNumber((double) time / (double) totalBlocks));
             }
         }
     }
@@ -193,7 +193,7 @@ public class BlockStorage {
                      * error to the console (if enabled).
                      */
                     if (SlimefunPlugin.getRegistry().logDuplicateBlockEntries()) {
-                        Slimefun.getLogger().log(Level.INFO, "忽略重複方塊 @ {0}, {1}, {2} ({3} -> {4})", new Object[] { l.getBlockX(), l.getBlockY(), l.getBlockZ(), blockInfo.getString("id"), storage.get(l).getString("id") });
+                        SlimefunPlugin.logger().log(Level.INFO, "忽略重複方塊 @ {0}, {1}, {2} ({3} -> {4})", new Object[] { l.getBlockX(), l.getBlockY(), l.getBlockZ(), blockInfo.getString("id"), storage.get(l).getString("id") });
                     }
 
                     return;
@@ -206,7 +206,7 @@ public class BlockStorage {
                 }
             }
         } catch (Exception x) {
-            Slimefun.getLogger().log(Level.WARNING, x, () -> "載入失敗 " + file.getName() + '(' + key + ") 於Slimefun " + SlimefunPlugin.getVersion());
+            SlimefunPlugin.logger().log(Level.WARNING, x, () -> "載入失敗 " + file.getName() + '(' + key + ") 於Slimefun " + SlimefunPlugin.getVersion());
         }
     }
 
@@ -223,7 +223,7 @@ public class BlockStorage {
                         SlimefunPlugin.getRegistry().getChunks().put(key, data);
                     }
                 } catch (Exception x) {
-                    Slimefun.getLogger().log(Level.WARNING, x, () -> "載入失敗 " + chunks.getName() + " 在世界 " + world.getName() + '(' + key + ") 於Slimefun " + SlimefunPlugin.getVersion());
+                    SlimefunPlugin.logger().log(Level.WARNING, x, () -> "載入失敗 " + chunks.getName() + " 在世界 " + world.getName() + '(' + key + ") 於Slimefun " + SlimefunPlugin.getVersion());
                 }
             }
         }
@@ -245,7 +245,7 @@ public class BlockStorage {
                         inventories.put(l, new BlockMenu(preset, l, cfg));
                     }
                 } catch (Exception x) {
-                    Slimefun.getLogger().log(Level.SEVERE, x, () -> "An Error occurred while loading this Block Inventory: " + file.getName());
+                    SlimefunPlugin.logger().log(Level.SEVERE, x, () -> "An Error occurred while loading this Block Inventory: " + file.getName());
                 }
             }
         }
@@ -260,7 +260,7 @@ public class BlockStorage {
                         SlimefunPlugin.getRegistry().getUniversalInventories().put(preset.getID(), new UniversalBlockMenu(preset, cfg));
                     }
                 } catch (Exception x) {
-                    Slimefun.getLogger().log(Level.SEVERE, x, () -> "An Error occurred while loading this universal Inventory: " + file.getName());
+                    SlimefunPlugin.logger().log(Level.SEVERE, x, () -> "An Error occurred while loading this universal Inventory: " + file.getName());
                 }
             }
         }
@@ -291,7 +291,7 @@ public class BlockStorage {
             return;
         }
 
-        Slimefun.getLogger().log(Level.INFO, "保存世界方塊資料 \"{0}\" ({1}個變化已排隊)", new Object[] { world.getName(), changes });
+        SlimefunPlugin.logger().log(Level.INFO, "保存世界方塊資料 \"{0}\" ({1}個變化已排程)", new Object[] { world.getName(), changes });
         Map<String, Config> cache = new HashMap<>(blocksCache);
 
         for (Map.Entry<String, Config> entry : cache.entrySet()) {
@@ -305,7 +305,7 @@ public class BlockStorage {
                     try {
                         Files.delete(file.toPath());
                     } catch (IOException e) {
-                        Slimefun.getLogger().log(Level.WARNING, e, () -> "無法刪除此檔案 \"" + file.getName() + '"');
+                        SlimefunPlugin.logger().log(Level.WARNING, e, () -> "無法刪除此檔案 \"" + file.getName() + '"');
                     }
                 }
             } else {
@@ -315,7 +315,7 @@ public class BlockStorage {
                 try {
                     Files.move(tmpFile.toPath(), cfg.getFile().toPath(), StandardCopyOption.ATOMIC_MOVE);
                 } catch (IOException x) {
-                    Slimefun.getLogger().log(Level.SEVERE, x, () -> "An Error occurred while copying a temporary File for Slimefun " + SlimefunPlugin.getVersion());
+                    SlimefunPlugin.logger().log(Level.SEVERE, x, () -> "An Error occurred while copying a temporary File for Slimefun " + SlimefunPlugin.getVersion());
                 }
             }
         }
@@ -431,7 +431,7 @@ public class BlockStorage {
         try {
             return new BlockInfoConfig(parseJSON(json));
         } catch (Exception x) {
-            Logger logger = Slimefun.getLogger();
+            Logger logger = SlimefunPlugin.logger();
             logger.log(Level.WARNING, x.getClass().getName());
             logger.log(Level.WARNING, "Failed to parse BlockInfo for Block @ {0}, {1}, {2}", new Object[] { l.getBlockX(), l.getBlockY(), l.getBlockZ() });
             logger.log(Level.WARNING, json);
@@ -457,7 +457,7 @@ public class BlockStorage {
             writer.endObject();
             return string.toString();
         } catch (IOException x) {
-            Slimefun.getLogger().log(Level.SEVERE, "An error occurred while serializing BlockInfo", x);
+            SlimefunPlugin.logger().log(Level.SEVERE, "An error occurred while serializing BlockInfo", x);
             return null;
         }
     }
@@ -508,7 +508,7 @@ public class BlockStorage {
         BlockStorage storage = getStorage(l.getWorld());
 
         if (storage == null) {
-            Slimefun.getLogger().warning("Could not set Block info for non-registered World '" + l.getWorld().getName() + "'. Is some plugin trying to store data in a fake world?");
+            SlimefunPlugin.logger().warning("Could not set Block info for non-registered World '" + l.getWorld().getName() + "'. Is some plugin trying to store data in a fake world?");
             return;
         }
 
@@ -817,7 +817,7 @@ public class BlockStorage {
 
             return cfg;
         } catch (Exception e) {
-            Slimefun.getLogger().log(Level.SEVERE, e, () -> "Failed to parse ChunkInfo for Slimefun " + SlimefunPlugin.getVersion());
+            SlimefunPlugin.logger().log(Level.SEVERE, e, () -> "Failed to parse ChunkInfo for Slimefun " + SlimefunPlugin.getVersion());
             return emptyBlockData;
         }
     }

@@ -20,7 +20,6 @@ import javax.annotation.Nonnull;
 import org.apache.commons.lang.Validate;
 
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
-import me.mrCookieSlime.Slimefun.api.Slimefun;
 
 /**
  * This Service creates a Backup of your Slimefun world data on every server shutdown.
@@ -43,7 +42,7 @@ public class BackupService implements Runnable {
             try {
                 purgeBackups(backups);
             } catch (IOException e) {
-                Slimefun.getLogger().log(Level.WARNING, "無法刪除舊的備份資料", e);
+                SlimefunPlugin.logger().log(Level.WARNING, "無法刪除舊的備份資料", e);
             }
         }
 
@@ -56,12 +55,12 @@ public class BackupService implements Runnable {
                         createBackup(output);
                     }
 
-                    Slimefun.getLogger().log(Level.INFO, "備份Slimefun資料至: {0}", file.getName());
+                    SlimefunPlugin.logger().log(Level.INFO, "備份Slimefun資料至: {0}", file.getName());
                 } else {
-                    Slimefun.getLogger().log(Level.WARNING, "無法創建備份檔案: {0}", file.getName());
+                    SlimefunPlugin.logger().log(Level.WARNING, "無法創建備份檔案: {0}", file.getName());
                 }
             } catch (IOException x) {
-                Slimefun.getLogger().log(Level.SEVERE, x, () -> "An Error occurred while creating a backup for Slimefun " + SlimefunPlugin.getVersion());
+                SlimefunPlugin.logger().log(Level.SEVERE, x, () -> "An Error occurred while creating a backup for Slimefun " + SlimefunPlugin.getVersion());
             }
         }
     }
