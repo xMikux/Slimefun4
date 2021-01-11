@@ -15,7 +15,6 @@ import org.bukkit.entity.Player;
 import io.github.thebusybiscuit.slimefun4.api.player.PlayerProfile;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import me.mrCookieSlime.Slimefun.api.Slimefun;
 
 /**
  * This Service is responsible for automatically saving {@link Player} and {@link Block}
@@ -66,7 +65,7 @@ public class AutoSavingService {
         }
 
         if (players > 0) {
-            Slimefun.getLogger().log(Level.INFO, "自動保存所有玩家資料,已保存{0}位玩家!", players);
+            SlimefunPlugin.logger().log(Level.INFO, "自動保存所有玩家資料,已保存{0}位玩家!", players);
         }
     }
 
@@ -89,7 +88,7 @@ public class AutoSavingService {
         }
 
         if (!worlds.isEmpty()) {
-            Slimefun.getLogger().log(Level.INFO, "自動保存方塊資料... (下次運行自動保存: {0}分)", interval);
+            SlimefunPlugin.logger().log(Level.INFO, "自動保存方塊資料... (下次運行自動保存: {0}分)", interval);
 
             for (BlockStorage storage : worlds) {
                 storage.save();
