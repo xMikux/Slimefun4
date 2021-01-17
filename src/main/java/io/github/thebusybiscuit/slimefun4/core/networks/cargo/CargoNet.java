@@ -17,8 +17,8 @@ import org.bukkit.inventory.ItemStack;
 
 import io.github.thebusybiscuit.slimefun4.api.network.Network;
 import io.github.thebusybiscuit.slimefun4.api.network.NetworkComponent;
+import io.github.thebusybiscuit.slimefun4.core.attributes.HologramOwner;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
-import io.github.thebusybiscuit.slimefun4.utils.holograms.SimpleHologram;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 
 /**
@@ -36,7 +36,7 @@ import me.mrCookieSlime.Slimefun.api.BlockStorage;
  * @author DNx5
  *
  */
-public class CargoNet extends AbstractItemNetwork {
+public class CargoNet extends AbstractItemNetwork implements HologramOwner {
 
     private static final int RANGE = 5;
     private static final int TICK_DELAY = SlimefunPlugin.getCfg().getInt("networks.cargo-ticker-delay");
@@ -142,16 +142,16 @@ public class CargoNet extends AbstractItemNetwork {
 
     public void tick(Block b) {
         if (!regulator.equals(b.getLocation())) {
-            SimpleHologram.update(b, "&4連接了多個物流核心");
+            updateHologram(b, "&4連接了多個物流核心");
             return;
         }
 
         super.tick();
 
         if (connectorNodes.isEmpty() && terminusNodes.isEmpty()) {
-            SimpleHologram.update(b, "&c找不到物流節點");
+            updateHologram(b, "&c找不到物流節點");
         } else {
-            SimpleHologram.update(b, "&7狀態: &a&l在線");
+            updateHologram(b, "&7狀態: &a&l在線");
 
             // Skip ticking if the threshold is not reached. The delay is not same as minecraft tick,
             // but it's based on 'custom-ticker-delay' config.
