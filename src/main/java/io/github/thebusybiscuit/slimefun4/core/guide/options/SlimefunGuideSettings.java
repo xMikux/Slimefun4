@@ -81,7 +81,7 @@ public final class SlimefunGuideSettings {
             return false;
         });
 
-        menu.addItem(4, new CustomItem(Material.WRITABLE_BOOK, ChatColor.GREEN + SlimefunPlugin.getLocalization().getMessage(p, "guide.title.versions"), "&7&o" + SlimefunPlugin.getLocalization().getMessage(p, "guide.tooltips.versions-notice"), "", "&fMinecraft: &a" + Bukkit.getBukkitVersion(), "&fSlimefun: &a" + SlimefunPlugin.getVersion(), "&fCS-CoreLib: &a" + SlimefunPlugin.getCSCoreLibVersion()), ChestMenuUtils.getEmptyClickHandler());
+        menu.addItem(4, new CustomItem(Material.WRITABLE_BOOK, ChatColor.GREEN + SlimefunPlugin.getLocalization().getMessage(p, "guide.title.versions"), "&7&o" + SlimefunPlugin.getLocalization().getMessage(p, "guide.tooltips.versions-notice"), "", "&fMinecraft: &a" + Bukkit.getBukkitVersion(), "&fSlimefun: &a" + SlimefunPlugin.getVersion()), ChestMenuUtils.getEmptyClickHandler());
 
         menu.addItem(6,
                 new CustomItem(Material.COMPARATOR, "&e" + SlimefunPlugin.getLocalization().getMessage(p, "guide.title.source"), "", "&7最後修改: &a" + NumberUtils.getElapsedTime(SlimefunPlugin.getGitHubService().getLastUpdate()) + " ago", "&7專案分支數(Forks): &e" + SlimefunPlugin.getGitHubService().getForks(), "&7星星數: &e" + SlimefunPlugin.getGitHubService().getStars(), "", "&7&oSlimefun4是一個社群專案,", "&7&o原始碼可以在GitHub上取得", "&7&o如果你想保持此插件的生命力,", "&7&o可以考慮對其進行貢獻", "", "&7\u21E8 &e點擊進入GitHub"));
