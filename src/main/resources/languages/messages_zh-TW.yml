@@ -53,10 +53,10 @@ guide:
     selected-language: 當前選擇：
     change: 點擊以選取新語言
     description:
-      - "&7你現在可以選擇Slimefun"
-      - "&7介面的語言"
-      - "&7不過科技物品礙於技術"
-      - "&7暫時沒有辦法翻譯."
+    - "&7你現在可以選擇Slimefun"
+    - "&7介面的語言"
+    - "&7不過科技物品礙於技術"
+    - "&7暫時沒有辦法翻譯."
   title:
     main: Slimefun 指南
     settings: 設置及資訊
@@ -139,7 +139,8 @@ messages:
     knight: "&a&o你的護身符給了你5秒的回復時間"
     whirlwind: "&a&o你的護身符反射了投射物"
     wizard: "&a&o你的護身符為你升高了幸運等級，但也降低了其他附魔等級"
-    caveman: '&a&o你的護符給予你挖掘加速'
+    caveman: "&a&o你的護身符給予你挖掘加速"
+    wise: "&a&o你的護身符使你的獲得的經驗雙倍"
   soulbound-rune:
     fail: "&c你一次只能靈魂綁定一個物品。"
     success: "&a您已成功將此物品綁定靈魂！死後不會掉落。"
