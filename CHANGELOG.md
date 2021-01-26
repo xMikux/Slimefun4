@@ -31,6 +31,8 @@
 * Added a new language: Hebrew
 * (API) Added AsyncProfileLoadEvent
 * Added Talisman of the Wise
+* Added Book Binder
+* Added Tier 3 Electric Ore Grinder
 
 #### Changes
 * Massive performance improvements to holograms/armorstands
@@ -50,6 +52,8 @@
 * Fixed Infused Hopper picking up items with a max pickup delay
 * Fixed duplication issues related to holograms/armorstands
 * Fixed #2754
+* Fixed machines not respecting max size from inventories
+* Fixed #2761
 
 ## Release Candidate 19 (11 Jan 2021)
 

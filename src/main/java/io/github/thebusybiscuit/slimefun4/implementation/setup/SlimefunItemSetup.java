@@ -85,6 +85,7 @@ import io.github.thebusybiscuit.slimefun4.implementation.items.electric.machines
 import io.github.thebusybiscuit.slimefun4.implementation.items.electric.machines.AutoDrier;
 import io.github.thebusybiscuit.slimefun4.implementation.items.electric.machines.AutoEnchanter;
 import io.github.thebusybiscuit.slimefun4.implementation.items.electric.machines.AutomatedCraftingChamber;
+import io.github.thebusybiscuit.slimefun4.implementation.items.electric.machines.BookBinder;
 import io.github.thebusybiscuit.slimefun4.implementation.items.electric.machines.CarbonPress;
 import io.github.thebusybiscuit.slimefun4.implementation.items.electric.machines.ChargingBench;
 import io.github.thebusybiscuit.slimefun4.implementation.items.electric.machines.CropGrowthAccelerator;
@@ -1665,6 +1666,13 @@ public final class SlimefunItemSetup {
         .setProcessingSpeed(4)
         .register(plugin);
 
+        new ElectricOreGrinder(categories.electricity, SlimefunItems.ELECTRIC_ORE_GRINDER_3, RecipeType.ENHANCED_CRAFTING_TABLE,
+        new ItemStack[] {SlimefunItems.REINFORCED_PLATE, SlimefunItems.HEATING_COIL, SlimefunItems.REINFORCED_PLATE, null, SlimefunItems.ELECTRIC_ORE_GRINDER_2, null, SlimefunItems.REINFORCED_PLATE, SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.REINFORCED_PLATE})
+        .setCapacity(1024)
+        .setEnergyConsumption(45)
+        .setProcessingSpeed(10)
+        .register(plugin);
+
         new HeatedPressureChamber(categories.electricity, SlimefunItems.HEATED_PRESSURE_CHAMBER, RecipeType.ENHANCED_CRAFTING_TABLE,
         new ItemStack[] {SlimefunItems.LEAD_INGOT, SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.LEAD_INGOT, SlimefunItems.LEAD_INGOT, new ItemStack(Material.GLASS), SlimefunItems.LEAD_INGOT, SlimefunItems.LEAD_INGOT, SlimefunItems.HEATING_COIL, SlimefunItems.LEAD_INGOT})
         .setCapacity(128)
@@ -1765,6 +1773,13 @@ public final class SlimefunItemSetup {
 
         new AutoAnvil(categories.electricity, 25, SlimefunItems.AUTO_ANVIL_2, RecipeType.ENHANCED_CRAFTING_TABLE,
         new ItemStack[] {null, SlimefunItems.AUTO_ANVIL, null, SlimefunItems.STEEL_PLATE, SlimefunItems.HEATING_COIL, SlimefunItems.STEEL_PLATE, new ItemStack(Material.IRON_BLOCK), new ItemStack(Material.IRON_BLOCK), new ItemStack(Material.IRON_BLOCK)})
+        .setCapacity(256)
+        .setEnergyConsumption(16)
+        .setProcessingSpeed(1)
+        .register(plugin);
+
+        new BookBinder(categories.electricity, SlimefunItems.BOOK_BINDER, RecipeType.ENHANCED_CRAFTING_TABLE,
+        new ItemStack[] {null, new ItemStack(Material.ENCHANTING_TABLE), null, new ItemStack(Material.BOOKSHELF), SlimefunItems.HARDENED_METAL_INGOT, new ItemStack(Material.BOOKSHELF), SlimefunItems.SYNTHETIC_SAPPHIRE, SlimefunItems.SMALL_CAPACITOR, SlimefunItems.SYNTHETIC_SAPPHIRE})
         .setCapacity(256)
         .setEnergyConsumption(16)
         .setProcessingSpeed(1)
