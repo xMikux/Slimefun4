@@ -29,6 +29,8 @@ commands:
     please-wait: "&e請稍等⋯⋯結果快出來了！"
     verbose-player: "&4玩家不能使用「詳細資訊」標號！"
     unknown-flag: "&4未知標號：&c％flag％"
+placeholderapi:
+  profile-loading: '載入中...'
 guide:
   search:
     message: "&c你要搜尋什麼？"
