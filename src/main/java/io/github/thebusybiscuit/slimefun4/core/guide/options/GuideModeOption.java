@@ -32,7 +32,7 @@ class GuideModeOption implements SlimefunGuideOption<SlimefunGuideMode> {
     @Nonnull
     @Override
     public NamespacedKey getKey() {
-        return new NamespacedKey(SlimefunPlugin.instance(), "guide_layout");
+        return new NamespacedKey(SlimefunPlugin.instance(), "guide_mode");
     }
 
     @Nonnull
@@ -46,25 +46,24 @@ class GuideModeOption implements SlimefunGuideOption<SlimefunGuideMode> {
         Optional<SlimefunGuideMode> current = getSelectedOption(p, guide);
 
         if (current.isPresent()) {
-            SlimefunGuideMode layout = current.get();
+            SlimefunGuideMode selectedMode = current.get();
             ItemStack item = new ItemStack(Material.AIR);
 
-            if (layout == SlimefunGuideMode.SURVIVAL_MODE) {
+            if (selectedMode == SlimefunGuideMode.SURVIVAL_MODE) {
                 item.setType(Material.CHEST);
             } else {
                 item.setType(Material.COMMAND_BLOCK);
             }
 
             ItemMeta meta = item.getItemMeta();
-            meta.setDisplayName(ChatColor.GRAY + "介面樣式: " + ChatColor.YELLOW + ChatUtils.humanize(layout.name()));
+            meta.setDisplayName(ChatColor.GRAY + "介面類型: " + ChatColor.YELLOW + ChatUtils.humanize(selectedMode.name()));
             List<String> lore = new ArrayList<>();
             lore.add("");
-            lore.add((layout == SlimefunGuideMode.SURVIVAL_MODE ? ChatColor.GREEN : ChatColor.GRAY) + "箱子");
-
-            lore.add((layout == SlimefunGuideMode.CHEAT_MODE ? ChatColor.GREEN : ChatColor.GRAY) + "作弊");
+            lore.add((selectedMode == SlimefunGuideMode.SURVIVAL_MODE ? ChatColor.GREEN : ChatColor.GRAY) + "箱子");
+            lore.add((selectedMode == SlimefunGuideMode.CHEAT_MODE ? ChatColor.GREEN : ChatColor.GRAY) + "作弊");
 
             lore.add("");
-            lore.add(ChatColor.GRAY + "\u21E8 " + ChatColor.YELLOW + "點擊切換介面樣式");
+            lore.add(ChatColor.GRAY + "\u21E8 " + ChatColor.YELLOW + "點擊切換介面類型");
             meta.setLore(lore);
             item.setItemMeta(meta);
 

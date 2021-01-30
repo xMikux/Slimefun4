@@ -29,6 +29,8 @@ commands:
     please-wait: "&e請稍等⋯⋯結果快出來了！"
     verbose-player: "&4玩家不能使用「詳細資訊」標號！"
     unknown-flag: "&4未知標號：&c％flag％"
+placeholderapi:
+  profile-loading: '載入中...'
 guide:
   search:
     message: "&c你要搜尋什麼？"
@@ -53,10 +55,10 @@ guide:
     selected-language: 當前選擇：
     change: 點擊以選取新語言
     description:
-      - "&7你現在可以選擇Slimefun"
-      - "&7介面的語言"
-      - "&7不過科技物品礙於技術"
-      - "&7暫時沒有辦法翻譯."
+    - "&7你現在可以選擇Slimefun"
+    - "&7介面的語言"
+    - "&7不過科技物品礙於技術"
+    - "&7暫時沒有辦法翻譯."
   title:
     main: Slimefun 指南
     settings: 設置及資訊
@@ -139,7 +141,8 @@ messages:
     knight: "&a&o你的護身符給了你5秒的回復時間"
     whirlwind: "&a&o你的護身符反射了投射物"
     wizard: "&a&o你的護身符為你升高了幸運等級，但也降低了其他附魔等級"
-    caveman: '&a&o你的護符給予你挖掘加速'
+    caveman: "&a&o你的護身符給予你挖掘加速"
+    wise: "&a&o你的護身符使你的獲得的經驗雙倍"
   soulbound-rune:
     fail: "&c你一次只能靈魂綁定一個物品。"
     success: "&a您已成功將此物品綁定靈魂！死後不會掉落。"
@@ -323,6 +326,7 @@ android:
       own: "&4你不能評價自己的程式！"
       already: "&4你已經評價過此程式！"
     editor: 程式編輯器
+    too-long: "&c程式太長了，無法編輯！"
 
 languages:
   default: 預設
@@ -345,7 +349,7 @@ languages:
   zh-CN: 中文（簡體）
   el: 希臘語
   he: 希伯來語
-  pt: 葡萄牙文（葡萄牙）
+  pt-BR: 葡萄牙文（巴西）
   ar: 阿拉伯文
   af: 南非語
   da: 丹麥文
@@ -357,7 +361,7 @@ languages:
   fa: 波斯語
   th: 泰語
   ro: 羅馬尼亞語
-  pt-BR: 葡萄牙文（巴西）
+  pt: 葡萄牙文（葡萄牙）
   bg: 保加利亞語
   ko: 韓語
   tr: 土耳其
