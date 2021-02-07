@@ -29,10 +29,13 @@
 * /sf versions now shows the Java version and some useful tooltips
 
 #### Changes
+* Deprecated Automatic Crafting Chamber
 
 #### Fixes
 * Fixed #2794
 * Fixed #2793
+* Fixed #2809
+* Fixed a small exception which gets thrown when Slimefun is disabled due to an invalid environment
 
 ## Release Candidate 20 (30 Jan 2021)
 
