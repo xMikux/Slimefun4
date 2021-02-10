@@ -106,7 +106,7 @@ class VersionsCommand extends SubCommand {
             // @formatter:off
             builder.append("Java " + version).color(ChatColor.RED)
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(
-                    "你的Java版本已過時!\n!" +
+                    "你的Java版本已過時!\n" +
                     "你應該使用Java 11或更高的版本.\n" +
                     "隨著Minecraft 1.17的發布, Paper將不再支持舊版本."
                 )))

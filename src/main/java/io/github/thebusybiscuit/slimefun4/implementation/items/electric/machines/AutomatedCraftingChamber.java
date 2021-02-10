@@ -98,7 +98,7 @@ public abstract class AutomatedCraftingChamber extends SlimefunItem implements I
 
             @Override
             public boolean canOpen(Block b, Player p) {
-                p.sendMessage(ChatColor.DARK_RED + "This item has been deprecated. It will be removed soon!");
+                p.sendMessage(ChatColor.DARK_RED + "此物品已被棄用. 它將會很快被移除!");
                 return p.hasPermission("slimefun.inventory.bypass") || SlimefunPlugin.getProtectionManager().hasPermission(p, b.getLocation(), ProtectableAction.INTERACT_BLOCK);
             }
 
@@ -150,7 +150,7 @@ public abstract class AutomatedCraftingChamber extends SlimefunItem implements I
 
             @Override
             public void onPlayerPlace(BlockPlaceEvent e) {
-                e.getPlayer().sendMessage(ChatColor.DARK_RED + "This item has been deprecated. It will be removed soon!");
+                e.getPlayer().sendMessage(ChatColor.DARK_RED + "此物品已被棄用. 它將會很快被移除!");
                 BlockStorage.addBlockInfo(e.getBlock(), "enabled", String.valueOf(false));
             }
 
