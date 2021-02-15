@@ -48,7 +48,7 @@ import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 public final class SlimefunUtils {
 
     private static final String NO_PICKUP_METADATA = "no_pickup";
-    private static final String SOULBOUND_LORE = ChatColor.GRAY + "Soulbound";
+    private static final String SOULBOUND_LORE = ChatColor.GRAY + "靈魂綁定";
 
     private SlimefunUtils() {}
 

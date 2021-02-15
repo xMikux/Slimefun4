@@ -16,7 +16,7 @@ import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 
 class TestLoreComparison {
 
-    private static final String IGNORED_LINE = ChatColor.GRAY + "Soulbound";
+    private static final String IGNORED_LINE = ChatColor.GRAY + "靈魂綁定";
 
     @BeforeAll
     public static void load() {
