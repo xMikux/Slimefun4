@@ -30,6 +30,8 @@
 
 #### Changes
 * Deprecated Automatic Crafting Chamber
+* (API) Improvements to the BlockBreakHandler
+* (API) Deprecated SlimefunBlockHandler
 
 #### Fixes
 * Fixed #2794
@@ -41,6 +43,7 @@
 * Fixed #2817
 * Fixed exceptions with inventories not being printed using the logger of the addon that caused it
 * Fixed #2818
+* Fixed a duplication glitch with the Woodcutter Android
 
 ## Release Candidate 20 (30 Jan 2021)
 
@@ -53,7 +56,6 @@
 * Added Tier 3 Electric Ore Grinder
 
 #### Changes
-* (API) Improvements to the BlockBreakHandler
 * Massive performance improvements to holograms/armorstands
 * Slimefun no longer requires CS-CoreLib to be installed
 
