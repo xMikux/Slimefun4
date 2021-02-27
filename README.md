@@ -56,7 +56,7 @@ Looking for English Version? [**Click here!**](https://github.com/Slimefun/Slime
 | *截圖提供者 GalaxyKat11#3816* | *截圖提供者 TamThan#7987* | *截圖提供者 Kilaruna#4981* |
 
 ## Discord
-你可以在Discord找到Slimefun的官方社區,並與來自世界各地**三千以上**的用戶使用此插件.<br>
+你可以在Discord找到Slimefun的官方社區,並與來自世界各地**四千以上**的用戶使用此插件.<br>
 點擊底下的徵標來加入伺服器,以獲取有關官方插件的建議/問題與其他討論.<br>
 官方也經常舉辦社區活動,請加入來了解更多訊息.<br>
 
