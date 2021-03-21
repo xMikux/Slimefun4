@@ -166,6 +166,15 @@ messages:
     dual-wielding: "&4你需要雙手拿著攀岩鎬才能使用!"
     wrong-material: "&c你不能爬上這個平面. 查看Slimefun指南了解更多!"
 
+  auto-crafting:
+    select-a-recipe: '&e蹲下並右鍵點擊&7此方塊, 跟你想要製作的物品.'
+    recipe-set: '&a你已成功設置了此機器的配方.'
+    recipe-removed: '&e你已成功從此機器上刪除了配方. 你可以隨時在設置新的配方!'
+    no-recipes: '&c我們找不到你所持物品的有效配方.'
+    missing-chest: '&c缺失箱子! 自動合成機需要放置在箱子上方.'
+    select: '選擇此配方'
+    remove: '刪除此配方'
+
   fire-extinguish: "&7你熄滅身上的火"
   cannot-place: "&c那裡不能放方塊!"
   no-pvp: "&c這裡不准打架!"
