@@ -195,6 +195,7 @@ messages:
   invalid-research: "&4%research% &c不存在!"
   bee-suit-slow-fall: "&e你的蜂翅將會幫你緩慢且安全的回到地面"
   mode-change: "&b%device% 模式切換至: &9%mode%"
+  above-limit-level: '&c無法(退)附魔等級高於 %level%!'
 machines:
   pattern-not-found: "&e查無此合成表 請確認使用的機器或合成表的材料"
   unknown-material: "&e這個機器不能處理這個物品 請確認使用的機器或合成表的材料"
