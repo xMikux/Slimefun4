@@ -63,14 +63,14 @@ public class CargoInputNode extends AbstractFilterNode {
 
         String smartFillNode = BlockStorage.getLocationInfo(b.getLocation(), SMART_FILL_MODE);
         if (!BlockStorage.hasBlockInfo(b) || smartFillNode == null || smartFillNode.equals(String.valueOf(false))) {
-            menu.replaceExistingItem(16, new CustomItem(Material.WRITABLE_BOOK, "&7\"智慧填補\" 模式: &4\u2718", "", "&e> 點擊以啟用 \"智慧填補\" 模式", "", "&f在此模式下, 物流節點將嘗試", "&f保留固定的物品數量", "&f在物品欄中. 這不是完美的", "&f並且仍然會繼續填補空欄位那", "&f已設定物品之前就來的物品."));
+            menu.replaceExistingItem(16, new CustomItem(Material.WRITABLE_BOOK, "&7\"智慧填補\" 模式: &4\u2718", "", "&e> 點擊以啟用 \"智慧填補\" 模式", "", "&f在此模式下, 物流節點將嘗試", "&f在物品欄中保留固定的物品數量.", "&f這不是完美的, 並且仍然會繼續", "&f填補物流先前所運輸來的欄位."));
             menu.addMenuClickHandler(16, (p, slot, item, action) -> {
                 BlockStorage.addBlockInfo(b, SMART_FILL_MODE, String.valueOf(true));
                 updateBlockMenu(menu, b);
                 return false;
             });
         } else {
-            menu.replaceExistingItem(16, new CustomItem(Material.WRITTEN_BOOK, "&7\"智慧填補\" 模式: &2\u2714", "", "&e> 點擊以禁用 \"智慧填補\" 模式", "", "&f在此模式下, 物流節點將嘗試", "&f保留固定的物品數量", "&f在物品欄中. 這不是完美的", "&f並且仍然會繼續填補空欄位那", "&f已設定物品之前就來的物品."));
+            menu.replaceExistingItem(16, new CustomItem(Material.WRITTEN_BOOK, "&7\"智慧填補\" 模式: &2\u2714", "", "&e> 點擊以禁用 \"智慧填補\" 模式", "", "&f在此模式下, 物流節點將嘗試", "&f在物品欄中保留固定的物品數量.", "&f這不是完美的, 並且仍然會繼續", "&f填補物流先前所運輸來的欄位."));
             menu.addMenuClickHandler(16, (p, slot, item, action) -> {
                 BlockStorage.addBlockInfo(b, SMART_FILL_MODE, String.valueOf(false));
                 updateBlockMenu(menu, b);
