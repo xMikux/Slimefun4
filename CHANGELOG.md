@@ -29,6 +29,8 @@
 * Added Enhanced Auto Crafter
 * Added "Smart-Filling" mode to Cargo Input nodes
 * Added "Netherite Ingot -> Netherite Block" recipe to Electric Press
+* Added Armor Forge Auto Crafter
+* Auto-Crafters can now be turned on and off
 
 #### Changes
 * Removed all functionality from the old Automated Crafting Chamber
@@ -43,6 +45,9 @@
 * Fixed #2896
 * Fixed #2899
 * Fixed #2906
+* Fixed #2903
+* Fixed #2913
+* Fixed #2914
 
 ## Release Candidate 21 (14 Mar 2021)
 https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun4/stable/#21
