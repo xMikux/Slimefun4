@@ -226,6 +226,7 @@ machines:
   full-inventory: "&e發射器滿了!(請考慮使用基礎機械輸出箱)"
   in-use: "&c別人正在使用這台機器"
   ignition-chamber-no-flint: "&c點火系統沒有打火石"
+  inventory-empty: '&6你已成功建造此多重方塊. 將物品放入發射器, 並再次點擊我來製作你想製作的物品!'
   ANCIENT_ALTAR:
     not-enough-pedestals: "&4此祭壇需要更多基座&c(%pedestals% / 8)"
     unknown-catalyst: "&4未知中心物品！ &c請檢查合成表！"
