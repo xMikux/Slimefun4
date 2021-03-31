@@ -420,7 +420,7 @@ public final class SlimefunItems {
     public static final SlimefunItemStack HEATING_COIL = new SlimefunItemStack("HEATING_COIL", HeadTexture.HEATING_COIL, "&c加熱線圈");
     public static final SlimefunItemStack COOLING_UNIT = new SlimefunItemStack("COOLING_UNIT", HeadTexture.COOLING_UNIT, "&b冷卻單元");
     public static final SlimefunItemStack ELECTRIC_MOTOR = new SlimefunItemStack("ELECTRIC_MOTOR", HeadTexture.MOTOR, "&c電動馬達");
-    public static final SlimefunItemStack CARGO_MOTOR = new SlimefunItemStack("CARGO_MOTOR", HeadTexture.MOTOR, "&3物流機械");
+    public static final SlimefunItemStack CARGO_MOTOR = new SlimefunItemStack("CARGO_MOTOR", HeadTexture.CARGO_MOTOR, "&3物流機械", "", "&7與物流管理有關", "&7的重要組成材料");
     public static final SlimefunItemStack SCROLL_OF_DIMENSIONAL_TELEPOSITION = new SlimefunItemStack("SCROLL_OF_DIMENSIONAL_TELEPOSITION", Material.PAPER, "&6空間傳送卷軸", "", "&c這個卷軸能夠創造出一個臨時的黑洞", "&c將附近的實體拉入並傳送至另一個維度", "&c在那裡所有的東西都是被旋轉的", "", "&f換句話說:使實體旋轉180度");
     public static final SlimefunItemStack TOME_OF_KNOWLEDGE_SHARING = new SlimefunItemStack("TOME_OF_KNOWLEDGE_SHARING", Material.ENCHANTED_BOOK, "&6知識共享之書", "&7作者: &bNone", "", "&e右鍵點擊&7 將此書與自己綁定", "&e右鍵點擊&7 獲取本書作者的研究");
     public static final SlimefunItemStack HARDENED_GLASS = new SlimefunItemStack("HARDENED_GLASS", Material.LIGHT_GRAY_STAINED_GLASS, "&7硬化玻璃", "", "&f可以承受爆炸");
@@ -430,6 +430,7 @@ public final class SlimefunItems {
     public static final SlimefunItemStack ANCIENT_PEDESTAL = new SlimefunItemStack("ANCIENT_PEDESTAL", Material.DISPENSER, "&d古代祭壇基座", "", "&5古代祭壇的一部分");
     public static final SlimefunItemStack ANCIENT_ALTAR = new SlimefunItemStack("ANCIENT_ALTAR", Material.ENCHANTING_TABLE, "&d古代祭壇", "", "&5多重方塊結構", "&5需要 古代祭壇基座×8", "&5用來製作魔法物品");
     public static final SlimefunItemStack COPPER_WIRE = new SlimefunItemStack("COPPER_WIRE", Material.STRING, "&6銅線", "", "&6電力機械中的關鍵材料");
+    public static final SlimefunItemStack CRAFTING_MOTOR = new SlimefunItemStack("CRAFTING_MOTOR", HeadTexture.CRAFTING_MOTOR, "&6合成機械", "", "&7自動合成機的主要合成部件");
 
     /* Rainbow blocks */
     private static final String RAINBOW = "&d永遠循環彩虹的所有顏色!";
