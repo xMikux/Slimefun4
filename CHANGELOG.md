@@ -36,12 +36,14 @@
 * Added a new message when constructing a Multiblock successfully
 * Added Crafting Motor
 * Block Placers can now place down cake
+* Added configurable enchantment level limit for both auto enchanter and auto disenchanter
 
 #### Changes
+* Changed item order in guide for the Villager Rune and Nether Goo (All runes are now grouped together)
+* Ancient Pedestals can now be found under "Magical Gadgets"
 * Removed all functionality from the old Automated Crafting Chamber
 * Changed Cargo Motor texture
-* Ancient Pedestals can now be found under "Magical Gadgets"
-* Changed item order in guide for the Villager Rune and Nether Goo (All runes are now grouped together)
+* Small performance improvements
 
 #### Fixes
 * Fixed #1161
@@ -62,6 +64,7 @@
 * Fixed #2930
 * Fixed #2926
 * Fixed Grappling Hook vanishing in creative mode
+* Fixed #2944
 
 ## Release Candidate 21 (14 Mar 2021)
 https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun4/stable/#21
