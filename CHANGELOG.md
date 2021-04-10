@@ -40,6 +40,7 @@
 * Added "magma cream -> slime ball" recipe to the Freezer
 * Added "2 magma blocks -> slime block" recipe to the Freezer
 * Added configurable enchantment level limit for both auto enchanter and auto disenchanter
+* (API) Added AutoEnchantEvent
 
 #### Changes
 * Changed item order in guide for the Villager Rune and Nether Goo (All runes are now grouped together)
@@ -69,6 +70,7 @@
 * Fixed #2926
 * Fixed Grappling Hook vanishing in creative mode
 * Fixed #2944
+* Fixed #2837
 
 ## Release Candidate 21 (14 Mar 2021)
 https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun4/stable/#21
