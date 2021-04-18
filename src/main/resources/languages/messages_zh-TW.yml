@@ -166,6 +166,29 @@ messages:
     dual-wielding: "&4你需要雙手拿著攀岩鎬才能使用!"
     wrong-material: "&c你不能爬上這個平面. 查看Slimefun指南了解更多!"
 
+  auto-crafting:
+    select-a-recipe: '&e蹲下並右鍵點擊&7此方塊, 跟你想要製作的物品.'
+    recipe-set: '&a你已成功設置了此機器的配方.'
+    recipe-removed: '&e你已成功從此機器上刪除了配方. 你可以隨時在設置新的配方!'
+    no-recipes: '&c我們找不到你所持物品的有效配方.'
+    missing-chest: '&c缺失箱子! 自動合成機需要放置在箱子上方.'
+    select: '選擇此配方'
+    temporarily-disabled: '&e此自動合成機已被暫時停用. 你可以隨時重新啟用它!'
+    re-enabled: '&e此自動合成機已重新啟用!'
+
+    tooltips:
+      enabled:
+        - '&a此配方目前已啟用'
+        - ''
+        - '&e左鍵 &7來暫時停用此配方'
+        - '&e右鍵 &7來刪除此配方'
+      disabled:
+        - '&c此配方目前已停用'
+        - ''
+        - '&e左鍵 &7來重新啟用此配方'
+        - '&e右鍵 &7來刪除此配方'
+
+
   fire-extinguish: "&7你熄滅身上的火"
   cannot-place: "&c那裡不能放方塊!"
   no-pvp: "&c這裡不准打架!"
@@ -195,6 +218,7 @@ messages:
   invalid-research: "&4%research% &c不存在!"
   bee-suit-slow-fall: "&e你的蜂翅將會幫你緩慢且安全的回到地面"
   mode-change: "&b%device% 模式切換至: &9%mode%"
+  above-limit-level: '&c無法(退)附魔等級高於 %level%!'
 machines:
   pattern-not-found: "&e查無此合成表 請確認使用的機器或合成表的材料"
   unknown-material: "&e這個機器不能處理這個物品 請確認使用的機器或合成表的材料"
@@ -202,6 +226,7 @@ machines:
   full-inventory: "&e發射器滿了!(請考慮使用基礎機械輸出箱)"
   in-use: "&c別人正在使用這台機器"
   ignition-chamber-no-flint: "&c點火系統沒有打火石"
+  inventory-empty: '&6你已成功建造此多重方塊. 將物品放入發射器, 並再次點擊我來製作你想製作的物品!'
   ANCIENT_ALTAR:
     not-enough-pedestals: "&4此祭壇需要更多基座&c(%pedestals% / 8)"
     unknown-catalyst: "&4未知中心物品！ &c請檢查合成表！"

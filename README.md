@@ -18,7 +18,7 @@ Looking for English Version? [**Click here!**](https://github.com/Slimefun/Slime
 
 但它也帶來非常多的附加插件!<br>
 查看官方的 [附加插件](https://github.com/Slimefun/Slimefun4/wiki/Addons), 你可能會找到你想要的附加. <br>
-查看此專案翻譯者的繁體附加插件 **仍在翻譯中** 但你可以在[構建頁面](https://xmikux.github.io/builds/)上找已翻譯.<br>
+查看此專案翻譯者的繁體附加插件 **並不是每個附加都有** 你可以在[構建頁面](https://xmikux.github.io/builds/)上找已翻譯.<br>
 雖然有可能哪裡有翻譯錯誤 請多見諒.
 
 ### 快速導航
@@ -56,7 +56,7 @@ Looking for English Version? [**Click here!**](https://github.com/Slimefun/Slime
 | *截圖提供者 GalaxyKat11#3816* | *截圖提供者 TamThan#7987* | *截圖提供者 Kilaruna#4981* |
 
 ## Discord
-你可以在Discord找到Slimefun的官方社區,並與來自世界各地**三千以上**的用戶使用此插件.<br>
+你可以在Discord找到Slimefun的官方社區,並與來自世界各地**四千以上**的用戶使用此插件.<br>
 點擊底下的徵標來加入伺服器,以獲取有關官方插件的建議/問題與其他討論.<br>
 官方也經常舉辦社區活動,請加入來了解更多訊息.<br>
 
@@ -68,6 +68,33 @@ Looking for English Version? [**Click here!**](https://github.com/Slimefun/Slime
     <img src="https://discordapp.com/api/guilds/565557184348422174/widget.png?style=banner3" alt="Discord Invite"/>
   </a>
 </p>
+
+## Wiki
+Slimefun 為新玩家提供了 (詳細且維護良好 - *咳*) Wiki, 
+也許你也可以考慮擴展wiki來幫助我們發展社群並幫助此插件的用戶.
+[官方的Wiki](https://github.com/Slimefun/Slimefun4/wiki) | [非官方繁體Wiki](https://github.com/xMikux/Slimefun4/wiki)
+
+##### 重點文章
+* [甚麼是黏液科技?](https://github.com/xMikux/Slimefun4/wiki/Slimefun-in-a-nutshell)
+* [如何安裝黏液科技](https://github.com/xMikux/Slimefun4/wiki/Installing-Slimefun)
+* [Addons for Slimefun 4](https://github.com/xMikux/Slimefun4/wiki/Addons)
+* [How to create an Addon for Slimefun 4](https://github.com/xMikux/Slimefun4/wiki/Developer-Guide)
+* [入門](https://github.com/xMikux/Slimefun4/wiki/Getting-Started)
+* [Frequently Asked Questions](https://github.com/xMikux/Slimefun4/wiki/FAQ)
+* [Common issues](https://github.com/xMikux/Slimefun4/wiki/Common-Issues)
+* [Help us expand the Wiki!](https://github.com/xMikux/Slimefun4/wiki/Expanding-the-Wiki)
+* [Help us translate Slimefun!](https://github.com/xMikux/Slimefun4/wiki/Translating-Slimefun)
+
+(**請注意** 上方的Wiki連結都是非官方繁體! 且可能會時常更新)
+此Wiki是完全由社群維護, 因此如果你發現缺少的文章, 歡迎寫並與他人分享.
+
+## 為此專案做貢獻
+Slimefun 4 是一個開源的專案, 並基於 [GNU GPLv3](https://github.com/Slimefun/Slimefun4/blob/master/LICENSE).<br>
+已經有 150+ 個人為這個驚人的專案做出了貢獻.
+你們真棒.<br>
+請考慮也幫助我們維護該專案, 你的參與也將使該專案繼續活躍! <3.
+
+你可以在 [CONTRIBUTING.md](https://github.com/Slimefun/Slimefun4/blob/master/CONTRIBUTING.md) 中找如何為該專案做出更多貢獻的資訊.
 
 ## 免責聲明
 Slimefun4 使用各種系統來收集使用情況資訊或自動下載更新有關該專案的最新消息.我們不會從您那裡收集任何個人訊息,但有一些服務可能會收集或下載某種形式的資訊. <br>
