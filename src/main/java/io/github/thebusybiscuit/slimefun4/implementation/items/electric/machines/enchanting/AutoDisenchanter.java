@@ -140,14 +140,14 @@ public class AutoDisenchanter extends AbstractEnchantmentMachine {
     }
 
     private boolean isDisenchantable(@Nullable ItemStack item) {
-        if (item == null) {
+        if (item == null || item.getType().isAir()) {
             return false;
-        } else if (item.getType() != Material.BOOK) {
+        } else if (item.getType() != Material.BOOK && !hasIgnoredLore(item)) {
             // ^ This stops endless checks of getByItem for books
             SlimefunItem sfItem = SlimefunItem.getByItem(item);
             return sfItem == null || sfItem.isDisenchantable();
         } else {
-            return true;
+            return false;
         }
     }
 
