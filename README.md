@@ -22,7 +22,7 @@
 雖然有可能哪裡有翻譯錯誤 請多見諒.
 
 ### 快速導航
-* **[:floppy_disk: 下載黏液科技](#floppy_disk-下載黏液科技)**
+* **[:floppy_disk: 下載黏液科技](#floppy_disk-下載-黏液科技)**
 * **[:framed_picture: 截圖](#framed_picture-截圖)**
 * **[:headphones: Discord 支持伺服器 (官方)](#headphones-discord)**
 * **[:beetle: Bug 追蹤 (官方)](https://github.com/Slimefun/Slimefun4/issues)**
@@ -122,10 +122,10 @@ Slimefun4 使用各種系統來收集使用情況資訊或自動下載更新有�
 
 <details>
   <summary>自動更新</summary>
-  
-Slimefun4 繁體翻譯版使用GitHub API以檢查和下載更新<br>
-此設定默認是關閉的,但你可以開啟在`/plugins/Slimefun/config.yml`.<br>
-**在非官方版並未有此功能!**
+
+黏液科技使用連接至非官方構建頁面 https://xmikux.github.io/builds/ 來檢查與下載更新. <br>
+此設定在默認狀態下是關閉的, 但你可以在 `/plugins/Slimefun/config.yml` 內打開. <br>
+**目前尚未將自動更新功能放入非官方版中!**
 </details>
 
 <details>
