@@ -1,6 +1,6 @@
 # Slimefun 4
-*正在找下載連結? [**點擊此**](https://github.com/xMikux/Slimefun4/blob/master/README.md#floppy_disk-下載黏液科技)*
-*Looking for English Version? [**Click here!**](https://github.com/Slimefun/Slimefun4)*
+*正在找下載連結? [**點擊此**](https://github.com/xMikux/Slimefun4/blob/master/README.md#floppy_disk-下載-黏液科技)* <br>
+*Looking for English Official Version? [**Click here!**](https://github.com/Slimefun/Slimefun4)*
 
 下載此翻譯版? [**點此**](https://xmikux.github.io/builds/xMikux/Slimefun4/master/)
 
@@ -78,7 +78,7 @@
 你可以在Discord找到Slimefun的官方社區,並與來自世界各地**五千以上**的用戶使用此插件.<br>
 點擊底下的徵標來加入伺服器,以獲取有關官方插件的建議/問題與其他討論.<br>
 官方也經常舉辦社區活動,請加入來了解更多訊息.<br>
-**注意: 我們不接受在discord上的錯誤報告, 請使用我們[官方問題追蹤](https://github.com/Slimefun/Slimefun4/issues) 來提交錯誤報告!**
+**注意: 我們不接受在discord上的錯誤報告, 請使用我們 [官方問題追蹤](https://github.com/Slimefun/Slimefun4/issues) 來提交錯誤報告!**
 
 由於官方的Discord規模龐大,他們將執行一些[重要規則](https://github.com/Slimefun/Slimefun4/wiki/Discord-Rules).<br>
 不遵守這些規則將導致你會被踢除甚至封禁在官方Discord.
@@ -105,7 +105,7 @@ Slimefun 為新玩家提供了 (詳細且維護良好 - *咳*) Wiki,
 * [Help us expand the Wiki!](https://github.com/xMikux/Slimefun4/wiki/Expanding-the-Wiki)
 * [Help us translate Slimefun!](https://github.com/xMikux/Slimefun4/wiki/Translating-Slimefun)
 
-(**請注意** 上方的Wiki連結都是非官方繁體! 且可能會時常更新)
+(**請注意** 上方的Wiki連結都是非官方繁體! 且可能會時常更新) <br>
 此Wiki是完全由社群維護, 因此如果你發現缺少的文章, 歡迎寫並與他人分享.
 
 ## :handshake: 貢獻此專案
@@ -125,7 +125,7 @@ Slimefun4 使用各種系統來收集使用情況資訊或自動下載更新有�
   
 Slimefun4 繁體翻譯版使用GitHub API以檢查和下載更新<br>
 此設定默認是關閉的,但你可以開啟在`/plugins/Slimefun/config.yml`.<br>
-**此功能未完成**
+**在非官方版並未有此功能!**
 </details>
 
 <details>
