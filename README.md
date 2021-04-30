@@ -124,7 +124,7 @@ Slimefun4 使用各種系統來收集使用情況資訊或自動下載更新有�
   <summary>自動更新</summary>
 
 黏液科技使用連接至非官方構建頁面 https://xmikux.github.io/builds/ 來檢查與下載更新. <br>
-此設定在默認狀態下是關閉的, 但你可以在 `/plugins/Slimefun/config.yml` 內打開. <br>
+此設定在默認狀態下是開啟的, 你可以在 `/plugins/Slimefun/config.yml` 內關閉. <br>
 **目前尚未將自動更新功能放入非官方版中!**
 </details>
 
