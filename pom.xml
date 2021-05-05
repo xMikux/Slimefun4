@@ -160,7 +160,7 @@
                 <!-- Code Coverage Reports -->
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.6</version>
+                <version>0.8.7</version>
 
                 <executions>
                     <execution>
@@ -370,7 +370,7 @@
         <dependency>
             <groupId>com.github.TheBusyBiscuit</groupId>
             <artifactId>CS-CoreLib2</artifactId>
-            <version>0.30.4</version>
+            <version>0.31.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
