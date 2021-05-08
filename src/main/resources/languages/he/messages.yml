@@ -10,7 +10,7 @@ commands:
   open_guide: פתח את המדריך בלי להשתמש בספר
   stats: מציג כמה נתונים סטטיסטיים על שחקן
   research:
-    description: בטל נעילה /מחקרים עבור שחקן זה 
+    description: בטל נעילה /מחקרים עבור שחקן זה
     reset: '&c איפס את הידע של %שחקן% זה'
     reset-target: '&cהידע שלך אופס '
   backpack:

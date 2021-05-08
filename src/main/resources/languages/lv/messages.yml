@@ -7,7 +7,7 @@ commands:
   teleporter: Redzēt citu spēlētāju galamērķu punktus
   versions: Uzrāda uzstādītos paplašinājumus
   search: Meklē attiecīgo mantu recepšu grāmatā
-  open_guide: Atver recepšu izvēlni bez grāmatas 
+  open_guide: Atver recepšu izvēlni bez grāmatas
   stats: Rāda spēlētāja Slimefun statistiku
   research:
     description: Atvērt/Atiestatīt Slimefun atklājumus spēlētājam
@@ -35,7 +35,7 @@ guide:
     languages: 'Izvēlies savu vēlamo valodu,'
     credits: 'Slimefun4 Ieguldītāji'
   credits:
-    commit: "\\t\nIeguldījums"
+    commit: "Ieguldījums"
     commits: 'Ieguldījumi'
     profile-link: 'Spied, lai apmeklētu GitHub profilu'
     roles:

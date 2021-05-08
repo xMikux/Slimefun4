@@ -187,6 +187,7 @@ slimefun:
   cargo_basics: Cargo 101
   cargo_nodes: Cargo-Knotenpunkte
   electric_ingot_machines: Die Barrenfabrik
+  medium_tier_electric_ingot_machines: Schnelle Barrenfabrik
   high_tier_electric_ingot_machines: Schnelle Barren
   automated_crafting_chamber: Automatisches Craften
   better_food_fabricator: Essen vom Fließband
@@ -248,3 +249,8 @@ slimefun:
   elytra_cap: Harter Aufprall
   bee_armor: Bienen-Rüstung
   book_binder: Verzaubertes Bücherbinden
+  auto_crafting: Automatisierung vom Feinsten
+  produce_collector: Molkereibetrieb
+  improved_generators: Verbesserte Generatoren
+  ingredients_and_cheese: Eine Basis für jede Küche
+  medium_tier_auto_enchanting: Schnelle Verzauberungsmaschinen
