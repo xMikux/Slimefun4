@@ -35,6 +35,7 @@
 * Added "Ender Lump Tier 3 -> 4 Ender Lump Tier 2" recipe to Grind Stone
 * Added Tier 2 Auto-Enchanter
 * Added Tier 2 Auto-Disenchanter
+* (API) Added AsyncAutoEnchanterProcessEvent
 * (API) Added Category#setTier() to modify a category's position in the guide
 * Added the ability to disable auto (dis)enchanting with a lore - `use-ignored-lores` & `ignored-lores` in Items.yml
 
@@ -62,6 +63,7 @@
 * Fixed #3027
 * Fixed #2978
 * Fixed #3041
+* Fixed #3036
 * Possibly fixed #2927
 
 ## Release Candidate 22 (18 Apr 2021)
