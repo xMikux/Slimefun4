@@ -75,6 +75,24 @@ guide:
     translations:
       name: '&a缺少什麼嗎？'
       lore: '點擊增加您自己的翻譯'
+  options:
+    learning-animation:
+      enabled:
+        text:
+          - '&b研究動畫: &a開啟'
+          - ''
+          - '&7你現在可以開關'
+          - '&7在研究物品時顯示於聊天室'
+          - '&7的遠古之靈低語.'
+        click: '&e點擊關閉你的研究動畫'
+      disabled:
+        text:
+          - '&b研究動畫: &4關閉'
+          - ''
+          - '&7你現在可以開關'
+          - '&7在研究物品時顯示於聊天室'
+          - '&7的遠古之靈低語.'
+        click: '&e點擊開啟你的研究動畫'
   title:
     main: 'Slimefun 指南'
     settings: '設置及資訊'
