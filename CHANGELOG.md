@@ -27,11 +27,15 @@
 ## Release Candidate 24 (TBD)
 
 #### Additions
+* The speed of the Ancient Altar can now be configured in the `Items.yml` file
 
 #### Changes
 
 #### Fixes
 * Fixed #3064
+* Fixed #2964
+* Fixed #2979
+* Fixed a permissions issue with `/sf charge`
 
 ## Release Candidate 23 (19 May 2021)
 https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun4/stable/#23
