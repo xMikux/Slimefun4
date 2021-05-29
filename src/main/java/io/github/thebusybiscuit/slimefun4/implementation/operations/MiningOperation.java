@@ -27,7 +27,7 @@ public class MiningOperation implements MachineOperation {
 
     public MiningOperation(@Nonnull ItemStack result, int totalTicks) {
         Validate.notNull(result, "The result cannot be null");
-        Validate.isTrue(totalTicks > 0, "The amount of total ticks must be a positive integer");
+        Validate.isTrue(totalTicks >= 0, "The amount of total ticks must be a positive integer or zero, received: " + totalTicks);
 
         this.result = result;
         this.totalTicks = totalTicks;
@@ -39,8 +39,13 @@ public class MiningOperation implements MachineOperation {
         currentTicks += num;
     }
 
-    @Nonnull
-    public ItemStack getResult() {
+    /**
+     * This returns the result of this operation, the {@link ItemStack}
+     * that will be returned in the end.
+     * 
+     * @return The result of this operation
+     */
+    public @Nonnull ItemStack getResult() {
         return result;
     }
 
