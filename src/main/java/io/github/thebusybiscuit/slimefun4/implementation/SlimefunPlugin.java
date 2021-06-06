@@ -88,8 +88,8 @@ import io.github.thebusybiscuit.slimefun4.implementation.listeners.SeismicAxeLis
 import io.github.thebusybiscuit.slimefun4.implementation.listeners.SlimefunBootsListener;
 import io.github.thebusybiscuit.slimefun4.implementation.listeners.SlimefunBowListener;
 import io.github.thebusybiscuit.slimefun4.implementation.listeners.SlimefunGuideListener;
-import io.github.thebusybiscuit.slimefun4.implementation.listeners.SlimefunItemHitListener;
 import io.github.thebusybiscuit.slimefun4.implementation.listeners.SlimefunItemConsumeListener;
+import io.github.thebusybiscuit.slimefun4.implementation.listeners.SlimefunItemHitListener;
 import io.github.thebusybiscuit.slimefun4.implementation.listeners.SlimefunItemInteractListener;
 import io.github.thebusybiscuit.slimefun4.implementation.listeners.SoulboundListener;
 import io.github.thebusybiscuit.slimefun4.implementation.listeners.TalismanListener;
@@ -255,17 +255,26 @@ public final class SlimefunPlugin extends JavaPlugin implements SlimefunAddon {
             PaperLib.suggestPaper(this);
         }
 
+        // Check if CS-CoreLib is installed (it is no longer needed)
+        if (getServer().getPluginManager().getPlugin("CS-CoreLib") != null) {
+            StartupWarnings.discourageCSCoreLib(getLogger());
+        }
+
         // If the server has no "data-storage" folder, it's _probably_ a new install. So mark it for metrics.
         isNewlyInstalled = !new File("data-storage/Slimefun").exists();
 
         // Creating all necessary Folders
         getLogger().log(Level.INFO, "創建資料夾...");
         createDirectories();
+
+        // Load various config settings into our cache
         registry.load(this, config);
 
         // Set up localization
         getLogger().log(Level.INFO, "載入語言檔案...");
-        local = new LocalizationService(this, config.getString("options.chat-prefix"), config.getString("options.language"));
+        String chatPrefix = config.getString("options.chat-prefix");
+        String serverDefaultLanguage = config.getString("options.language");
+        local = new LocalizationService(this, chatPrefix, serverDefaultLanguage);
 
         int networkSize = config.getInt("networks.max-size");
 
@@ -473,15 +482,7 @@ public final class SlimefunPlugin extends JavaPlugin implements SlimefunAddon {
         try {
             // First check if they still use the unsupported CraftBukkit software.
             if (!PaperLib.isSpigot() && Bukkit.getName().equals("CraftBukkit")) {
-                getLogger().log(Level.SEVERE, "###############################################");
-                getLogger().log(Level.SEVERE, "### Slimefun 並未被正確安裝!");
-                getLogger().log(Level.SEVERE, "### CraftBukkit 不再受支持!");
-                getLogger().log(Level.SEVERE, "###");
-                getLogger().log(Level.SEVERE, "### Slimefun 要求你使用 Spigot, Paper 或");
-                getLogger().log(Level.SEVERE, "### 任何Spigot或Paper的受支持分支.");
-                getLogger().log(Level.SEVERE, "### (我們推薦Paper)");
-                getLogger().log(Level.SEVERE, "###############################################");
-
+                StartupWarnings.invalidServerSoftware(getLogger());
                 return true;
             }
 
@@ -498,14 +499,7 @@ public final class SlimefunPlugin extends JavaPlugin implements SlimefunAddon {
                 }
 
                 // Looks like you are using an unsupported Minecraft Version
-                getLogger().log(Level.SEVERE, "#############################################");
-                getLogger().log(Level.SEVERE, "### Slimefun 並未被正確安裝!");
-                getLogger().log(Level.SEVERE, "### 你正在使用不支持的Minecraft版本!");
-                getLogger().log(Level.SEVERE, "###");
-                getLogger().log(Level.SEVERE, "### 你正在使用Minecraft 1.{0}.x", version);
-                getLogger().log(Level.SEVERE, "### 但 Slimefun {0} 只支持", getDescription().getVersion());
-                getLogger().log(Level.SEVERE, "### Minecraft {0}", String.join(" / ", getSupportedVersions()));
-                getLogger().log(Level.SEVERE, "#############################################");
+                StartupWarnings.invalidMinecraftVersion(getLogger(), version, getDescription().getVersion());
                 return true;
             } else {
                 getLogger().log(Level.WARNING, "We could not determine the version of Minecraft you were using? ({0})", Bukkit.getVersion());
@@ -538,7 +532,7 @@ public final class SlimefunPlugin extends JavaPlugin implements SlimefunAddon {
      * 
      * @return A {@link Collection} of all compatible minecraft versions as strings
      */
-    private @Nonnull Collection<String> getSupportedVersions() {
+    static final @Nonnull Collection<String> getSupportedVersions() {
         List<String> list = new ArrayList<>();
 
         for (MinecraftVersion version : MinecraftVersion.values()) {
