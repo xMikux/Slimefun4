@@ -118,6 +118,7 @@ import io.github.thebusybiscuit.slimefun4.integrations.IntegrationsManager;
 import io.github.thebusybiscuit.slimefun4.utils.NumberUtils;
 import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
 import io.papermc.lib.PaperLib;
+
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.MenuListener;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
@@ -247,31 +248,37 @@ public final class SlimefunPlugin extends JavaPlugin implements SlimefunAddon {
      */
     private void onPluginStart() {
         long timestamp = System.nanoTime();
+        Logger logger = getLogger();
 
         // Check if Paper (<3) is installed
         if (PaperLib.isPaper()) {
-            getLogger().log(Level.INFO, "已檢測到 Paper! 性能優化已啟用.");
+            logger.log(Level.INFO, "已檢測到 Paper! 性能優化已啟用.");
         } else {
             PaperLib.suggestPaper(this);
         }
 
         // Check if CS-CoreLib is installed (it is no longer needed)
         if (getServer().getPluginManager().getPlugin("CS-CoreLib") != null) {
-            StartupWarnings.discourageCSCoreLib(getLogger());
+            StartupWarnings.discourageCSCoreLib(logger);
+        }
+
+        // Encourage Java 16
+        if (NumberUtils.getJavaVersion() < 16) {
+            StartupWarnings.oldJavaVersion(logger);
         }
 
         // If the server has no "data-storage" folder, it's _probably_ a new install. So mark it for metrics.
         isNewlyInstalled = !new File("data-storage/Slimefun").exists();
 
         // Creating all necessary Folders
-        getLogger().log(Level.INFO, "創建資料夾...");
+        logger.log(Level.INFO, "創建資料夾...");
         createDirectories();
 
         // Load various config settings into our cache
         registry.load(this, config);
 
         // Set up localization
-        getLogger().log(Level.INFO, "載入語言檔案...");
+        logger.log(Level.INFO, "載入語言檔案...");
         String chatPrefix = config.getString("options.chat-prefix");
         String serverDefaultLanguage = config.getString("options.language");
         local = new LocalizationService(this, chatPrefix, serverDefaultLanguage);
@@ -280,7 +287,7 @@ public final class SlimefunPlugin extends JavaPlugin implements SlimefunAddon {
 
         // Make sure that the network size is a valid input
         if (networkSize < 1) {
-            getLogger().log(Level.WARNING, "你的 'networks.max-size' 設定配置錯誤! 必須大於1, 目前設置: {0}", networkSize);
+            logger.log(Level.WARNING, "你的 'networks.max-size' 設定配置錯誤! 必須大於1, 目前設置: {0}", networkSize);
             networkSize = 1;
         }
 
@@ -291,29 +298,29 @@ public final class SlimefunPlugin extends JavaPlugin implements SlimefunAddon {
 
         // Starting the Auto-Updater
         if (config.getBoolean("options.auto-update")) {
-            getLogger().log(Level.INFO, "Starting Auto-Updater...");
+            logger.log(Level.INFO, "Starting Auto-Updater...");
             updaterService.start();
         } else {
             updaterService.disable();
         }
 
         // Registering all GEO Resources
-        getLogger().log(Level.INFO, "載入GEO-資源...");
+        logger.log(Level.INFO, "載入GEO-資源...");
         GEOResourcesSetup.setup();
 
-        getLogger().log(Level.INFO, "載入標籤...");
+        logger.log(Level.INFO, "載入標籤...");
         loadTags();
 
-        getLogger().log(Level.INFO, "載入物品...");
+        logger.log(Level.INFO, "載入物品...");
         loadItems();
 
-        getLogger().log(Level.INFO, "載入研究...");
+        logger.log(Level.INFO, "載入研究...");
         loadResearches();
 
         registry.setResearchingEnabled(getResearchCfg().getBoolean("enable-researching"));
         PostSetup.setupWiki();
 
-        getLogger().log(Level.INFO, "註冊監聽器...");
+        logger.log(Level.INFO, "註冊監聽器...");
         registerListeners();
 
         // Initiating various Stuff and all items with a slight delay (0ms after the Server finished loading)
@@ -325,7 +332,7 @@ public final class SlimefunPlugin extends JavaPlugin implements SlimefunAddon {
             try {
                 recipeService.refresh();
             } catch (Exception | LinkageError x) {
-                getLogger().log(Level.SEVERE, x, () -> "An Exception occurred while iterating through the Recipe list on Minecraft Version " + minecraftVersion.getName() + " (Slimefun v" + getVersion() + ")");
+                logger.log(Level.SEVERE, x, () -> "An Exception occurred while iterating through the Recipe list on Minecraft Version " + minecraftVersion.getName() + " (Slimefun v" + getVersion() + ")");
             }
 
         }), 0);
@@ -334,7 +341,7 @@ public final class SlimefunPlugin extends JavaPlugin implements SlimefunAddon {
         try {
             command.register();
         } catch (Exception | LinkageError x) {
-            getLogger().log(Level.SEVERE, "An Exception occurred while registering the /slimefun command", x);
+            logger.log(Level.SEVERE, "An Exception occurred while registering the /slimefun command", x);
         }
 
         // Armor Update Task
@@ -349,12 +356,12 @@ public final class SlimefunPlugin extends JavaPlugin implements SlimefunAddon {
         ticker.start(this);
 
         // Loading integrations
-        getLogger().log(Level.INFO, "載入第三方插件集成...");
+        logger.log(Level.INFO, "載入第三方插件集成...");
         integrations.start();
         gitHubService.start(this);
 
         // Hooray!
-        getLogger().log(Level.INFO, "Slimefun 完成載入在 {0}", getStartupTime(timestamp));
+        logger.log(Level.INFO, "Slimefun 完成載入在 {0}", getStartupTime(timestamp));
     }
 
     @Override
