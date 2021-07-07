@@ -152,6 +152,9 @@ messages:
     select: '選擇此配方'
     temporarily-disabled: '&e此自動合成機已被暫時停用. 你可以隨時重新啟用它!'
     re-enabled: '&e此自動合成機已重新啟用!'
+    recipe-unavailable: |
+      &c這個物品在你所在的伺服器上被禁用, 或者你尚未解鎖.
+      &7如果你之前還沒有做過, 可嘗試製作該物品以解鎖配方.
     tooltips:
       enabled:
         - '&a此配方目前已啟用'
