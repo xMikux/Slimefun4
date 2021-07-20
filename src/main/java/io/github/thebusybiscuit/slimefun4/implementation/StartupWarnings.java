@@ -5,6 +5,8 @@ import java.util.logging.Logger;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import io.github.thebusybiscuit.slimefun4.utils.NumberUtils;
+
 /**
  * This class stores some startup warnings we occasionally need to print.
  * If you setup your server the recommended way, you are never going to see
@@ -54,6 +56,22 @@ final class StartupWarnings {
         logger.log(Level.SEVERE, PREFIX + "任何Spigot或Paper的受支持分支.");
         logger.log(Level.SEVERE, PREFIX + "(我們推薦Paper)");
         logger.log(Level.SEVERE, BORDER);
+    }
+
+    @ParametersAreNonnullByDefault
+    static void oldJavaVersion(Logger logger) {
+        int javaVersion = NumberUtils.getJavaVersion();
+
+        logger.log(Level.WARNING, BORDER);
+        logger.log(Level.WARNING, PREFIX + "你的 Java 版本 (Java {0}) 已過期.", javaVersion);
+        logger.log(Level.WARNING, PREFIX);
+        logger.log(Level.WARNING, PREFIX + "我們建議你更新到 Java 16.");
+        logger.log(Level.WARNING, PREFIX + "從 Minecraft 1.17開始,");
+        logger.log(Level.WARNING, PREFIX + "將需要使用 Java 16, 我們希望");
+        logger.log(Level.WARNING, PREFIX + "盡快利用它所帶來的所有新功能.");
+        logger.log(Level.WARNING, PREFIX + "在可預見的未來, Slimefun也將需要");
+        logger.log(Level.WARNING, PREFIX + "Java 16, 所以請更新!");
+        logger.log(Level.WARNING, BORDER);
     }
 
 }
