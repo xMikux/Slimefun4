@@ -2,7 +2,7 @@ extends: default
 locale: en_US.UTF-8
 
 yaml-files:
-  - '*.yml'
+- '*.yml'
 
 rules:
 
