@@ -634,7 +634,7 @@ public class SurvivalSlimefunGuide implements SlimefunGuideImplementation {
                 return item;
             }
 
-            String lore = hasPermission(p, slimefunItem) ? "&f需要在其他地方解鎖" : "&f沒有權限";
+            String lore = hasPermission(p, slimefunItem) ? "&f需要在 " + slimefunItem.getCategory().getDisplayName(p) + " 中解鎖" : "&f沒有權限";
             return slimefunItem.canUse(p, false) ? item : new CustomItem(Material.BARRIER, ItemUtils.getItemName(item), "&4&l" + SlimefunPlugin.getLocalization().getMessage(p, "guide.locked"), "", lore);
         } else {
             return item;
