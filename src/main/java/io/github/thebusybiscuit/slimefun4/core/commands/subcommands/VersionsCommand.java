@@ -13,9 +13,10 @@ import org.bukkit.plugin.Plugin;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.core.commands.SlimefunCommand;
 import io.github.thebusybiscuit.slimefun4.core.commands.SubCommand;
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.utils.NumberUtils;
 import io.papermc.lib.PaperLib;
+
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -44,7 +45,7 @@ class VersionsCommand extends SubCommand {
     private static final String JAVA_VERSION_NOTICE = "從Minecraft 1.17開始, 將需要使用Java 16!";
 
     @ParametersAreNonnullByDefault
-    VersionsCommand(SlimefunPlugin plugin, SlimefunCommand cmd) {
+    VersionsCommand(Slimefun plugin, SlimefunCommand cmd) {
         super(plugin, cmd, "versions", false);
     }
 
@@ -67,22 +68,22 @@ class VersionsCommand extends SubCommand {
                 .color(ChatColor.DARK_GREEN)
                 .append("Slimefun ")
                 .color(ChatColor.GREEN)
-                .append(SlimefunPlugin.getVersion() + '\n')
+                .append(Slimefun.getVersion() + '\n')
                 .color(ChatColor.DARK_GREEN);
             // @formatter:on
 
-            if (SlimefunPlugin.getMetricsService().getVersion() != null) {
+            if (Slimefun.getMetricsService().getVersion() != null) {
                 // @formatter:off
                 builder.append("Metrics-模塊 ")
                     .color(ChatColor.GREEN)
-                    .append("#" + SlimefunPlugin.getMetricsService().getVersion() + '\n')
+                    .append("#" + Slimefun.getMetricsService().getVersion() + '\n')
                     .color(ChatColor.DARK_GREEN);
                 // @formatter:on
             }
 
             addJavaVersion(builder);
 
-            if (SlimefunPlugin.getRegistry().isBackwardsCompatible()) {
+            if (Slimefun.getRegistry().isBackwardsCompatible()) {
                 // @formatter:off
                 HoverEvent hoverEvent = new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(
                     "向後兼容會對效能產生負面影響!\n" +
@@ -99,7 +100,7 @@ class VersionsCommand extends SubCommand {
 
             sender.spigot().sendMessage(builder.create());
         } else {
-            SlimefunPlugin.getLocalization().sendMessage(sender, "messages.no-permission", true);
+            Slimefun.getLocalization().sendMessage(sender, "messages.no-permission", true);
         }
     }
 
@@ -123,7 +124,7 @@ class VersionsCommand extends SubCommand {
     }
 
     private void addPluginVersions(@Nonnull ComponentBuilder builder) {
-        Collection<Plugin> addons = SlimefunPlugin.getInstalledAddons();
+        Collection<Plugin> addons = Slimefun.getInstalledAddons();
 
         if (addons.isEmpty()) {
             builder.append("無附加安裝").color(ChatColor.GRAY).italic(true);

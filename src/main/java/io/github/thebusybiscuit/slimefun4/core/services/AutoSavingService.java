@@ -13,7 +13,8 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 import io.github.thebusybiscuit.slimefun4.api.player.PlayerProfile;
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 
 /**
@@ -35,7 +36,7 @@ public class AutoSavingService {
      * @param interval
      *            The interval in which to run this task
      */
-    public void start(@Nonnull SlimefunPlugin plugin, int interval) {
+    public void start(@Nonnull Slimefun plugin, int interval) {
         this.interval = interval;
 
         plugin.getServer().getScheduler().runTaskTimer(plugin, this::saveAllPlayers, 2000L, interval * 60L * 20L);
@@ -65,7 +66,7 @@ public class AutoSavingService {
         }
 
         if (players > 0) {
-            SlimefunPlugin.logger().log(Level.INFO, "自動保存所有玩家資料,已保存{0}位玩家!", players);
+            Slimefun.logger().log(Level.INFO, "自動保存所有玩家資料,已保存{0}位玩家!!", players);
         }
     }
 
@@ -88,7 +89,7 @@ public class AutoSavingService {
         }
 
         if (!worlds.isEmpty()) {
-            SlimefunPlugin.logger().log(Level.INFO, "自動保存方塊資料... (下次運行自動保存: {0}分)", interval);
+            Slimefun.logger().log(Level.INFO, "自動保存方塊資料... (下次運行自動保存: {0}分)", interval);
 
             for (BlockStorage storage : worlds) {
                 storage.save();

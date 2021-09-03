@@ -6,11 +6,11 @@ import java.util.Locale;
 
 import javax.annotation.Nonnull;
 
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.core.attributes.MachineTier;
 import io.github.thebusybiscuit.slimefun4.core.attributes.MachineType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Radioactivity;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
-import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 
 /**
  * This utility class provides a few handy methods and constants to build the lore of any
@@ -74,7 +74,7 @@ public final class LoreBuilder {
     }
 
     public static @Nonnull String usesLeft(int usesLeft) {
-        return "&e" + (usesLeft > 1 ? "剩餘次數" : "使用") + ' ' + usesLeft + "&7次";
+        return "&e" + (usesLeft > 1 ? "剩餘次數" : "使用") + " &7" + usesLeft + "次";
     }
 
 }
