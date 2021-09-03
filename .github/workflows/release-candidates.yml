@@ -24,7 +24,7 @@ jobs:
         ref: 'stable'
 
     - name: Merge latest commits into 'stable'
-      uses: devmasx/merge-branch@v1.3.1
+      uses: devmasx/merge-branch@1.4.0
       with:
         type: now
         from_branch: 'master'
@@ -42,7 +42,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       with:
         tag_name: RC-${{ github.event.inputs.number }}
-        release_name: Release Candidate ${{ github.event.inputs.number }} (git ${{ steps.latest.outputs.sha_short }})
+        release_name: 非官方穩定版 ${{ github.event.inputs.number }} (git ${{ steps.latest.outputs.sha_short }})
         draft: false
         prerelease: false
         body: |
