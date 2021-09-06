@@ -42,8 +42,8 @@ public class OreCrusher extends MultiBlockMachine {
     private final DoubleOreSetting doubleOres = new DoubleOreSetting(this);
 
     @ParametersAreNonnullByDefault
-    public OreCrusher(ItemGroup category, SlimefunItemStack item) {
-        super(category, item, new ItemStack[] { null, null, null, null, new ItemStack(Material.NETHER_BRICK_FENCE), null, new ItemStack(Material.IRON_BARS), new CustomItemStack(Material.DISPENSER, "發射器 (朝上)"), new ItemStack(Material.IRON_BARS) }, BlockFace.SELF);
+    public OreCrusher(ItemGroup itemGroup, SlimefunItemStack item) {
+        super(itemGroup, item, new ItemStack[] { null, null, null, null, new ItemStack(Material.NETHER_BRICK_FENCE), null, new ItemStack(Material.IRON_BARS), new CustomItemStack(Material.DISPENSER, "發射器 (朝上)"), new ItemStack(Material.IRON_BARS) }, BlockFace.SELF);
 
         addItemSetting(doubleOres);
     }

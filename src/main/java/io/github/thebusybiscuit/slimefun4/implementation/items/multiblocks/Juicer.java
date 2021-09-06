@@ -39,8 +39,8 @@ import io.papermc.lib.PaperLib;
 public class Juicer extends MultiBlockMachine {
 
     @ParametersAreNonnullByDefault
-    public Juicer(ItemGroup category, SlimefunItemStack item) {
-        super(category, item, new ItemStack[] { null, new ItemStack(Material.GLASS), null, null, new ItemStack(Material.NETHER_BRICK_FENCE), null, null, new CustomItemStack(Material.DISPENSER, "發射器 (朝上)"), null }, BlockFace.SELF);
+    public Juicer(ItemGroup itemGroup, SlimefunItemStack item) {
+        super(itemGroup, item, new ItemStack[] { null, new ItemStack(Material.GLASS), null, null, new ItemStack(Material.NETHER_BRICK_FENCE), null, null, new CustomItemStack(Material.DISPENSER, "發射器 (朝上)"), null }, BlockFace.SELF);
     }
 
     @Override
