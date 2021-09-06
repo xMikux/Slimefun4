@@ -41,9 +41,14 @@ public class MetricsService {
     private static final String API_URL = "https://api.github.com/";
 
     /**
-     * The Name of our repository
+     * The Name of our repository - Version 2 of this repo (due to big breaking changes)
      */
-    private static final String REPO_NAME = "MetricsModule";
+    private static final String REPO_NAME = "MetricsModule2";
+    
+    /**
+     * The name of the metrics jar file.
+     */
+    private static final String JAR_NAME = "MetricsModule";
 
     /**
      * The URL pointing towards the /releases/ endpoint of our
@@ -90,7 +95,7 @@ public class MetricsService {
             parentFolder.mkdirs();
         }
 
-        this.metricsModuleFile = new File(parentFolder, REPO_NAME + ".jar");
+        this.metricsModuleFile = new File(parentFolder, JAR_NAME + ".jar");
     }
 
     /**
@@ -98,7 +103,7 @@ public class MetricsService {
      */
     public void start() {
         if (!metricsModuleFile.exists()) {
-            plugin.getLogger().info(REPO_NAME + " 並不存在, 下載中...");
+            plugin.getLogger().info(JAR_NAME + " 並不存在, 下載中...");
 
             if (!download(getLatestVersion())) {
                 plugin.getLogger().warning("由於無法下載檔案,因此不會啟動metrics.");
@@ -228,7 +233,7 @@ public class MetricsService {
             }
 
             AtomicInteger lastPercentPosted = new AtomicInteger();
-            GetRequest request = Unirest.get(DOWNLOAD_URL + "/" + version + "/" + REPO_NAME + ".jar");
+            GetRequest request = Unirest.get(DOWNLOAD_URL + "/" + version + "/" + JAR_NAME + ".jar");
 
             HttpResponse<File> response = request.downloadMonitor((b, fileName, bytesWritten, totalBytes) -> {
                 int percent = (int) (20 * (Math.round((((double) bytesWritten / totalBytes) * 100) / 20)));
@@ -240,7 +245,7 @@ public class MetricsService {
             }).asFile(file.getPath());
 
             if (response.isSuccess()) {
-                plugin.getLogger().log(Level.INFO, "成功下載 {0} 構建: #{1}", new Object[] { REPO_NAME, version });
+                plugin.getLogger().log(Level.INFO, "成功下載 {0} 構建: #{1}", new Object[] { JAR_NAME, version });
 
                 // Replace the metric file with the new one
                 cleanUp();
