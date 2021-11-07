@@ -28,6 +28,12 @@ commands:
     please-wait: '&e請稍等⋯⋯結果快出來了！'
     verbose-player: '&4玩家不能使用「詳細資訊」標號！'
     unknown-flag: '&4未知標號：&c％flag％'
+  debug:
+    description: '為開發者運行除錯日誌'
+    current: '&7目前的測試事件: &6%test_case%'
+    none-running: '&7目前沒有正在運行的測試事件!'
+    running: '&7正在運行除錯測試: &6%test%'
+    disabled: '&7停用除錯模式.'
 placeholderapi:
   profile-loading: '載入中...'
 guide:
@@ -282,6 +288,8 @@ brewing_stand:
   not-working: '&4你不能用Slimefun物品釀造!'
 cartography_table:
   not-working: '&4你不能用Slimefun物品在製圖台上!'
+smithing_table:
+  not-working: '&4你不能將Slimefun物品當作鍛造材料!'
 villagers:
   no-trading: '&4你不能用Slimefun的物品和村民交易!'
 backpack:
