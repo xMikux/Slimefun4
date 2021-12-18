@@ -41,7 +41,7 @@
 
 | | 開發版 (最新) | "穩定版 (官方)" |
 | ------------------ | -------- | -------- |
-| **Minecraft 版本** | :video_game: **1.14.\* - 1.17.\*** | :video_game: **1.14.\* - 1.17.\*** |
+| **Minecraft 版本** | :video_game: **1.14.\* - 1.18.\*** | :video_game: **1.14.\* - 1.17.\*** |
 | **自動更新** | :heavy_check_mark: | :heavy_check_mark: |
 | **頻繁的更新** | :heavy_check_mark: | :x: |
 | **最新內容** | :heavy_check_mark: | :x: |
@@ -66,7 +66,7 @@
 
 ## :framed_picture: 截圖
 所以黏液科技看起來像是甚麼?<br>
-好吧, 我們請求了在 [黏液科技官方Discord](#discord) 上的用戶提供了一些螢幕截圖,看看吧!
+好吧, 我們請求了在 [黏液科技官方Discord](#headphones-discord) 上的用戶提供了一些螢幕截圖,看看吧!
 |                 反應堆和電力                  |            非常棒的工廠             |          魔法祭壇           |
 | :-------------------------------------------: | :--------------------------------------: | :----------------------------------------: |
 | ![](https://raw.githubusercontent.com/Slimefun/Slimefun-Wiki/master/images/showcase1.png) | ![](https://raw.githubusercontent.com/Slimefun/Slimefun-Wiki/master/images/showcase6.png) | ![](https://raw.githubusercontent.com/Slimefun/Slimefun-Wiki/master/images/showcase5.png) |
