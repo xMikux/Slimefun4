@@ -554,6 +554,7 @@ public final class SlimefunItems {
 
     public static final SlimefunItemStack TALISMAN_ANVIL = new SlimefunItemStack("ANVIL_TALISMAN", Material.EMERALD, "&a鐵砧護身符", "", "&f每個護身符可以防止", "&e1個工具因耐久不足而損壞","&c會消耗此護身符", "", "&4&l警告:", "&4由於強大的工具非常複雜", "&4所以此護身符不能在", "&4強大的工具上使用");
     public static final SlimefunItemStack TALISMAN_MINER = new SlimefunItemStack("MINER_TALISMAN", Material.EMERALD, "&a礦工護身符", "", "&f當你的欄位有這個護身符時", "&e將有20%的機率雙倍掉落", "&e你挖出的礦物");
+    public static final SlimefunItemStack TALISMAN_FARMER = new SlimefunItemStack("FARMER_TALISMAN", Material.EMERALD, "&a農夫護身符", "", "&f當你的欄位有這個護身符時", "&f將有20%的機率雙倍掉落", "&f你採收的農作物");
     public static final SlimefunItemStack TALISMAN_HUNTER = new SlimefunItemStack("HUNTER_TALISMAN", Material.EMERALD, "&a獵人護身符", "", "&f當你的欄位有這個護身符時", "&e將有20%的機率雙倍掉落", "&e你殺死怪物的掉落物");
     public static final SlimefunItemStack TALISMAN_LAVA = new SlimefunItemStack("LAVA_TALISMAN", Material.EMERALD, "&a岩漿行者護身符", "", "&f當你的欄位有這個護身符時", "&e可以在你碰到「岩漿」的時候", "&e給予「抗火 V」的效果", "&c會消耗此護身符");
     public static final SlimefunItemStack TALISMAN_WATER = new SlimefunItemStack("WATER_TALISMAN", Material.EMERALD, "&a潛水者護身符", "", "&f當你的欄位有這個護身符時", "&e可以在你「溺水」的時候", "&e給予「水下呼吸V」效果", "&c會消耗此護身符");
