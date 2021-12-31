@@ -59,18 +59,18 @@ final class StartupWarnings {
     }
 
     @ParametersAreNonnullByDefault
-    static void oldJavaVersion(Logger logger) {
+    static void oldJavaVersion(Logger logger, int recommendedJavaVersion) {
         int javaVersion = NumberUtils.getJavaVersion();
 
         logger.log(Level.WARNING, BORDER);
-        logger.log(Level.WARNING, PREFIX + "你的 Java 版本 (Java {0}) 已過期.", javaVersion);
+        logger.log(Level.WARNING, PREFIX + "你的 Java 版本 (Java {0}) 已過時.", javaVersion);
         logger.log(Level.WARNING, PREFIX);
-        logger.log(Level.WARNING, PREFIX + "我們建議你更新到 Java 16.");
-        logger.log(Level.WARNING, PREFIX + "從 Minecraft 1.17開始,");
-        logger.log(Level.WARNING, PREFIX + "將需要使用 Java 16, 我們希望");
-        logger.log(Level.WARNING, PREFIX + "盡快利用它所帶來的所有新功能.");
-        logger.log(Level.WARNING, PREFIX + "在可預見的未來, Slimefun也將需要");
-        logger.log(Level.WARNING, PREFIX + "Java 16, 所以請更新!");
+        logger.log(Level.WARNING, PREFIX + "我們推薦你升級至 Java {0}.", recommendedJavaVersion);
+        logger.log(Level.WARNING, PREFIX + "在新版本 Minecraft 中將需要使用 Java {0}", recommendedJavaVersion);
+        logger.log(Level.WARNING, PREFIX + "我們希望能盡快利用");
+        logger.log(Level.WARNING, PREFIX + "它所帶來的新功能.");
+        logger.log(Level.WARNING, PREFIX + "在可預見的未來, Slimefun 也將需要 Java {0}", recommendedJavaVersion);
+        logger.log(Level.WARNING, PREFIX + "所以請更新!");
         logger.log(Level.WARNING, BORDER);
     }
 

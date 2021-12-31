@@ -41,7 +41,7 @@
 
 | | 開發版 (最新) | "穩定版 (官方)" |
 | ------------------ | -------- | -------- |
-| **Minecraft 版本** | :video_game: **1.14.\* - 1.17.\*** | :video_game: **1.14.\* - 1.17.\*** |
+| **Minecraft 版本** | :video_game: **1.14.\* - 1.18.\*** | :video_game: **1.14.\* - 1.17.\*** |
 | **自動更新** | :heavy_check_mark: | :heavy_check_mark: |
 | **頻繁的更新** | :heavy_check_mark: | :x: |
 | **最新內容** | :heavy_check_mark: | :x: |
@@ -66,7 +66,7 @@
 
 ## :framed_picture: 截圖
 所以黏液科技看起來像是甚麼?<br>
-好吧, 我們請求了在 [黏液科技官方Discord](#discord) 上的用戶提供了一些螢幕截圖,看看吧!
+好吧, 我們請求了在 [黏液科技官方Discord](#headphones-discord) 上的用戶提供了一些螢幕截圖,看看吧!
 |                 反應堆和電力                  |            非常棒的工廠             |          魔法祭壇           |
 | :-------------------------------------------: | :--------------------------------------: | :----------------------------------------: |
 | ![](https://raw.githubusercontent.com/Slimefun/Slimefun-Wiki/master/images/showcase1.png) | ![](https://raw.githubusercontent.com/Slimefun/Slimefun-Wiki/master/images/showcase6.png) | ![](https://raw.githubusercontent.com/Slimefun/Slimefun-Wiki/master/images/showcase5.png) |
@@ -75,7 +75,7 @@
 | *截圖提供者 GalaxyKat11#3816* | *截圖提供者 TamThan#7987* | *截圖提供者 Kilaruna#4981* |
 
 ## :headphones: Discord
-你可以在Discord找到Slimefun的官方社區,並與來自世界各地**六千以上**的用戶使用此插件.<br>
+你可以在Discord找到Slimefun的官方社區,並與來自世界各地**七千以上**的用戶使用此插件.<br>
 點擊底下的徵標來加入伺服器,以獲取有關官方插件的建議/問題與其他討論.<br>
 官方也經常舉辦社區活動,請加入來了解更多訊息.<br>
 **注意: 我們不接受在discord上的錯誤報告, 請使用我們 [官方問題追蹤](https://github.com/Slimefun/Slimefun4/issues) 來提交錯誤報告!**
