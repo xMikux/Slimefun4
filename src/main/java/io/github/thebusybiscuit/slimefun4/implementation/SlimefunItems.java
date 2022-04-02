@@ -183,7 +183,7 @@ public final class SlimefunItems {
     /* Weapons */
     public static final SlimefunItemStack GRANDMAS_WALKING_STICK = new SlimefunItemStack("GRANDMAS_WALKING_STICK", Material.STICK, "&7奶奶的拐杖");
     public static final SlimefunItemStack GRANDPAS_WALKING_STICK = new SlimefunItemStack("GRANDPAS_WALKING_STICK", Material.STICK, "&7爺爺的枴杖");
-    public static final SlimefunItemStack SWORD_OF_BEHEADING = new SlimefunItemStack("SWORD_OF_BEHEADING", Material.IRON_SWORD, "&6斬首巨劍", "&7斬首 II", "", "&f有機率斬首怪物", "&f(「凋靈骷髏」的機率更高)");
+    public static final SlimefunItemStack SWORD_OF_BEHEADING = new SlimefunItemStack("SWORD_OF_BEHEADING", Material.IRON_SWORD, "&6斬首巨劍", "&7斬首 II", "", "&f有機率斬首怪物", "&f(「凋零骷髏」的機率更高)");
     public static final SlimefunItemStack BLADE_OF_VAMPIRES = new SlimefunItemStack("BLADE_OF_VAMPIRES", Material.GOLDEN_SWORD, "&c吸血鬼之劍", "&7生命吸取 I", "", "&f每當你攻擊某物", "&f你有45%的機率", "&f恢復2顆心");
     public static final SlimefunItemStack SEISMIC_AXE = new SlimefunItemStack("SEISMIC_AXE", Material.IRON_AXE, "&a地震斧", "", "&7&o隨時都有地震...", "", LoreBuilder.RIGHT_CLICK_TO_USE);
 

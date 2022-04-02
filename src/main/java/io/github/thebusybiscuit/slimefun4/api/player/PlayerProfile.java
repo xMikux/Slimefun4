@@ -341,11 +341,11 @@ public class PlayerProfile {
         float progress = Math.round(((unlockedResearches.size() * 100.0F) / allResearches) * 100.0F) / 100.0F;
 
         sender.sendMessage("");
-        sender.sendMessage(ChatColors.color("&7Statistics for Player: &b" + name));
+        sender.sendMessage(ChatColors.color("&7玩家的統計資料: &b" + name));
         sender.sendMessage("");
-        sender.sendMessage(ChatColors.color("&7Title: " + ChatColor.AQUA + getTitle()));
-        sender.sendMessage(ChatColors.color("&7Research Progress: " + NumberUtils.getColorFromPercentage(progress) + progress + " &r% " + ChatColor.YELLOW + '(' + unlockedResearches.size() + " / " + allResearches + ')'));
-        sender.sendMessage(ChatColors.color("&7Total XP Levels spent: " + ChatColor.AQUA + levels));
+        sender.sendMessage(ChatColors.color("&7稱號: " + ChatColor.AQUA + getTitle()));
+        sender.sendMessage(ChatColors.color("&7研究進度: " + NumberUtils.getColorFromPercentage(progress) + progress + " &r% " + ChatColor.YELLOW + '(' + unlockedResearches.size() + " / " + allResearches + ')'));
+        sender.sendMessage(ChatColors.color("&7總花費經驗等級: " + ChatColor.AQUA + levels));
     }
 
     /**
