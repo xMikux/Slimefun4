@@ -235,7 +235,7 @@
                 <!-- Javadocs -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.3.2</version>
+                <version>3.4.0</version>
 
                 <configuration>
                     <reportOutputDirectory>${project.basedir}</reportOutputDirectory>
@@ -384,7 +384,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>4.5.0</version>
+            <version>4.5.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
