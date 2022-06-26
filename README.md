@@ -41,7 +41,7 @@
 
 | | 開發版 (最新) | "穩定版 (官方)" |
 | ------------------ | -------- | -------- |
-| **Minecraft 版本** | :video_game: **1.14.\* - 1.18.\*** | :video_game: **1.14.\* - 1.18.\*** |
+| **Minecraft 版本** | :video_game: **1.14.\* - 1.19.\*** | :video_game: **1.14.\* - 1.19.\*** |
 | **自動更新** | :heavy_check_mark: | :heavy_check_mark: |
 | **頻繁的更新** | :heavy_check_mark: | :x: |
 | **最新內容** | :heavy_check_mark: | :x: |
