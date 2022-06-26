@@ -501,7 +501,7 @@ public final class SlimefunItems {
     public static final SlimefunItemStack FERROSILICON = new SlimefunItemStack("FERROSILICON", Material.IRON_INGOT, "&b矽鐵");
     /* Alloy (Iron + Gold) */
     public static final SlimefunItemStack GILDED_IRON = new SlimefunItemStack("GILDED_IRON", Material.GOLD_INGOT, "&6&l鍍金鐵錠");
-    /* Alloy (Redston + Ferrosilicon) */
+    /* Alloy (Redstone + Ferrosilicon) */
     public static final SlimefunItemStack REDSTONE_ALLOY = new SlimefunItemStack("REDSTONE_ALLOY", Material.BRICK, "&c紅石合金錠");
     /* Alloy (Iron + Copper) */
     public static final SlimefunItemStack NICKEL_INGOT = new SlimefunItemStack("NICKEL_INGOT", Material.IRON_INGOT, "&b鎳錠");
