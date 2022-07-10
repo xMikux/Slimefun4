@@ -204,7 +204,7 @@ public final class SlimefunItems {
     public static final SlimefunItemStack SMELTERS_PICKAXE = new SlimefunItemStack("SMELTERS_PICKAXE", Material.DIAMOND_PICKAXE, "&6熔爐鎬", "&c&l自動熔煉", "", "&9伴隨著一堆財富");
     public static final SlimefunItemStack LUMBER_AXE = new SlimefunItemStack("LUMBER_AXE", Material.DIAMOND_AXE, "&6伐木斧", "&a&o砍倒整棵樹...");
     public static final SlimefunItemStack PICKAXE_OF_CONTAINMENT = new SlimefunItemStack("PICKAXE_OF_CONTAINMENT", Material.IRON_PICKAXE, "&c生怪磚之鎬", "", "&9可以挖起生怪磚");
-    public static final SlimefunItemStack HERCULES_PICKAXE = new SlimefunItemStack("HERCULES_PICKAXE", Material.IRON_PICKAXE, "&9粉碎鎬", "", "&f它如此強大以至於", "&f把所有開採的礦石", "&f都粉碎成了塵土...");
+    public static final SlimefunItemStack HERCULES_PICKAXE = new SlimefunItemStack("HERCULES_PICKAXE", Material.IRON_PICKAXE, "&9粉碎鎬", "", "&4已棄用已棄用 - 將在不久後移除", "", "&f它如此強大以至於", "&f把所有開採的礦石", "&f都粉碎成了塵土...");
     public static final SlimefunItemStack EXPLOSIVE_PICKAXE = new SlimefunItemStack("EXPLOSIVE_PICKAXE", Material.DIAMOND_PICKAXE, "&e爆炸鎬", "", "&f可以讓你更好地挖掘", "&f大量的方塊...", "", "&9伴隨著一堆財富");
     public static final SlimefunItemStack EXPLOSIVE_SHOVEL = new SlimefunItemStack("EXPLOSIVE_SHOVEL", Material.DIAMOND_SHOVEL, "&e爆炸鏟", "", "&f可以讓你更好地挖掘", "&f一次可挖大量的方塊...");
     public static final SlimefunItemStack PICKAXE_OF_THE_SEEKER = new SlimefunItemStack("PICKAXE_OF_THE_SEEKER", Material.DIAMOND_PICKAXE, "&a尋礦鎬", "&f總是將你指向最近的礦石", "&f但會消耗耐久度", "", "&7&e右鍵點擊&7 指向最近的礦石");
