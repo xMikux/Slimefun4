@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
@@ -57,6 +58,7 @@ public class GPSNetwork {
 
     private final Map<UUID, Set<Location>> transmitters = new HashMap<>();
     private final TeleportationManager teleportation = new TeleportationManager();
+
     private final ResourceManager resourceManager;
 
     /**
@@ -155,7 +157,7 @@ public class GPSNetwork {
         menu.addMenuClickHandler(2, ChestMenuUtils.getEmptyClickHandler());
 
         int complexity = getNetworkComplexity(p.getUniqueId());
-        menu.addItem(4, new CustomItemStack(SlimefunItems.GPS_CONTROL_PANEL, "&7GPS網路訊息", "", "&8\u21E8 &7狀態: " + (complexity > 0 ? "&2&l在線" : "&4&l離線"), "&8\u21E8 &7總訊號強度: &f" + complexity));
+        menu.addItem(4, new CustomItemStack(SlimefunItems.GPS_CONTROL_PANEL, "&7GPS網路訊息", "", "&8\u21E8 &7狀態: " + getStatusText(p, complexity), "&8\u21E8 &7總訊號強度: &f" + complexity));
         menu.addMenuClickHandler(4, ChestMenuUtils.getEmptyClickHandler());
 
         menu.addItem(6, new CustomItemStack(HeadTexture.GLOBE_OVERWORLD.getAsItemStack(), "&7" + Slimefun.getLocalization().getMessage(p, "machines.GPS_CONTROL_PANEL.waypoints"), "", ChatColor.GRAY + "\u21E8 " + Slimefun.getLocalization().getMessage(p, "guide.tooltips.open-itemgroup")));
@@ -200,8 +202,8 @@ public class GPSNetwork {
      * 
      * @return An icon for this waypoint
      */
-    @Nonnull
-    public ItemStack getIcon(@Nonnull String name, @Nonnull Environment environment) {
+    @ParametersAreNonnullByDefault
+    public @Nonnull ItemStack getIcon(String name, Environment environment) {
         if (name.startsWith("player:death ")) {
             return HeadTexture.DEATHPOINT.getAsItemStack();
         } else if (environment == Environment.NETHER) {
@@ -210,6 +212,15 @@ public class GPSNetwork {
             return HeadTexture.GLOBE_THE_END.getAsItemStack();
         } else {
             return HeadTexture.GLOBE_OVERWORLD.getAsItemStack();
+        }
+    }
+
+    @ParametersAreNonnullByDefault
+    private @Nonnull String getStatusText(Player player, int complexity) {
+        if (complexity > 0) {
+            return "&2&l" + Slimefun.getLocalization().getMessage(player, "gps.status-online");
+        } else {
+            return "&4&l" + Slimefun.getLocalization().getMessage(player, "gps.status-offline");
         }
     }
 

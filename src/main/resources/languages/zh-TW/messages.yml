@@ -147,6 +147,7 @@ messages:
   piglin-barter: '&4你不能用Slimefun物品和豬布林交易'
   bee-suit-slow-fall: '&e你的蜂翅將會幫你緩慢且安全的回到地面'
   deprecated-item: '&4這個物品已被棄用，將在不久後從 Slimefun 中移除。'
+  researching-is-disabled: '&c研究已在此伺服器停用。預設所有研究解鎖！'
   multi-tool:
     mode-change: '&b%device% 模式切換成: &9%mode%'
     not-shears: '&c多功能工具 (Multi Tool) 不能當作剪刀來使用!'
@@ -257,8 +258,9 @@ machines:
     pick-a-floor: '&3- 選擇樓層 -'
     current-floor: '&e這是你現在的樓層：'
     click-to-teleport: '&e按這 &7來傳送到該樓層：'
-    enter-name: '&7請輸入你的樓層名稱&r（可以輸入顏色代碼）'
-    named: '&2成功命名此樓層為 ：&r%floor%'
+    enter-name: '&7請輸入你的樓層名稱&f（可以輸入顏色代碼）'
+    named: '&2成功命名此樓層為：&f%floor%'
+    editor-title: '設定此電梯'
   TELEPORTER:
     teleporting: '&3傳送中...'
     teleported: '&3傳送成功！'
@@ -274,6 +276,8 @@ machines:
     waypoints: '傳送點總覽'
   CARGO_NODES:
     must-be-placed: '&4必須連接在箱子或機器側邊！'
+    connected: '&2連接！'
+    not-connected: '&4未連接！'
   INDUSTRIAL_MINER:
     no-fuel: '&c你的工業挖礦機沒燃料了！將燃料放置到上方的箱子。'
     piston-facing: '&c工業挖礦機的活塞需要朝上！'
@@ -303,6 +307,8 @@ cauldron:
   no-discoloring: '&4你無法將Slimefun的盔甲褪色'
 gps:
   deathpoint: '&4死亡點&7%date%'
+  status-online: '線上'
+  status-offline: '離線'
   waypoint:
     new: '&e請輸入傳送點名稱。 &7（可使用顏色代碼）'
     added: '&a成功新增傳送點'
