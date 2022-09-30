@@ -366,7 +366,7 @@
         <dependency>
             <groupId>com.konghq</groupId>
             <artifactId>unirest-java</artifactId>
-            <version>3.13.10</version>
+            <version>3.13.11</version>
             <scope>compile</scope>
 
             <exclusions>
@@ -382,7 +382,7 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>5.9.0</version>
+            <version>5.9.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -481,7 +481,7 @@
         <dependency>
             <groupId>com.github.LoneDev6</groupId>
             <artifactId>itemsadder-api</artifactId>
-            <version>3.2.3c</version>
+            <version>3.2.3-r8</version>
             <scope>provided</scope>
 
             <exclusions>
