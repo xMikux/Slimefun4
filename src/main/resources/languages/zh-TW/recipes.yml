@@ -1,7 +1,7 @@
 ---
 slimefun:
   multiblock:
-    name: '多重方塊'
+    name: '多方塊結構'
     lore:
       - '在世界中蓋出該結構'
       - '這不是一個可合成的物品'
@@ -155,14 +155,14 @@ minecraft:
     name: '營火合成表'
     lore:
       - '加熱燒一燒'
-      - '\\t\n成品出來了!'
+      - '成品出來了!'
   stonecutting:
     name: '切石機合成表'
     lore:
       - '上去磨一磨'
-      - '\\t\n成品出來了!'
+      - '成品出來了!'
   smithing:
     name: '鍛造台合成表'
     lore:
       - '鍛造一下下'
-      - '成品出來了'
+      - '成品出來了!'

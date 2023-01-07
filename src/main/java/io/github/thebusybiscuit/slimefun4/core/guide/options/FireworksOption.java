@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import io.github.bakedlibs.dough.data.persistent.PersistentDataAPI;
 import io.github.bakedlibs.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
+import io.github.thebusybiscuit.slimefun4.core.SlimefunRegistry;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 
 class FireworksOption implements SlimefunGuideOption<Boolean> {
@@ -26,7 +27,9 @@ class FireworksOption implements SlimefunGuideOption<Boolean> {
 
     @Override
     public Optional<ItemStack> getDisplayItem(Player p, ItemStack guide) {
-        if (Slimefun.getRegistry().isResearchFireworkEnabled()) {
+        SlimefunRegistry registry = Slimefun.getRegistry();
+
+        if (registry.isResearchingEnabled() && registry.isResearchFireworkEnabled()) {
             boolean enabled = getSelectedOption(p, guide).orElse(true);
             ItemStack item = new CustomItemStack(Material.FIREWORK_ROCKET, "&b煙火: &" + (enabled ? "a開啟" : "4關閉"), "", "&7研究物品時是否顯示煙火", "", "&7\u21E8 &e點擊 " + (enabled ? "關閉" : "開啟") + " 煙火顯示");
             return Optional.of(item);
