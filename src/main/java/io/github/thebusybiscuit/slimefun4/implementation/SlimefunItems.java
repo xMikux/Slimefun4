@@ -14,7 +14,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.core.attributes.MachineTier;
 import io.github.thebusybiscuit.slimefun4.core.attributes.MachineType;
@@ -259,10 +258,7 @@ public final class SlimefunItems {
         hazmatLore.add("");
         hazmatLore.add(ChatColor.GOLD + "全套效果:");
         hazmatLore.add(ChatColor.YELLOW + "- 防輻射");
-
-        if (Slimefun.getMinecraftVersion().isAtLeast(MinecraftVersion.MINECRAFT_1_15)) {
-            hazmatLore.add(ChatColor.YELLOW + "- 防蜜蜂螫");
-        }
+        hazmatLore.add(ChatColor.YELLOW + "- 防蜜蜂螫");
     }
 
     public static final SlimefunItemStack SCUBA_HELMET = new SlimefunItemStack("SCUBA_HELMET", Material.LEATHER_HELMET, Color.ORANGE, "&c潛水頭盔", "", "&7讓你在水下呼吸");
