@@ -41,16 +41,16 @@
 
 | | 開發版 (最新) | "穩定版 (官方)" |
 | ------------------ | -------- | -------- |
-| **Minecraft 版本** | :video_game: **1.14.\* - 1.19.\*** | :video_game: **1.14.\* - 1.19.\*** |
-| **Java 版本** | :computer: **Java 16 (或更高)** | :computer: **Java 8 (或更高)** |
+| **Minecraft 版本** | :video_game: **1.16.\* - 1.19.\*** | :video_game: **1.14.\* - 1.19.\*** |
+| **Java 版本** | :computer: **Java 16 (或以上)** | :computer: **Java 16 (或以上)** |
 | **自動更新** | :heavy_check_mark: | :heavy_check_mark: |
-| **頻繁的更新** | :heavy_check_mark: | :x: |
+| **頻繁更新** | :heavy_check_mark: | :x: |
 | **最新內容** | :heavy_check_mark: | :x: |
-| **Discord 支持** | :heavy_check_mark: | :x: |
-| **Bug 回報** | :heavy_check_mark: | :x: |
+| **Discord 支援** | :heavy_check_mark: | :x: |
+| **錯誤回報** | :heavy_check_mark: | :x: |
 | **發布前測試** | :x: | :heavy_check_mark: |
-| **更新日誌** | :x: | :memo: **[更新日誌](https://github.com/Slimefun/Slimefun4/blob/master/CHANGELOG.md)** |
-| **下載連結** | :floppy_disk: **[下載最新](https://xmikux.github.io/builds/xMikux/Slimefun4/master)** | :floppy_disk: **[下載穩定版](https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun4/stable/)** |
+| **更新日誌** | :x: | :memo: **[change log](https://github.com/Slimefun/Slimefun4/blob/master/CHANGELOG.md)** |
+| **下載連結** | :floppy_disk: **[下載最新](https://xmikux.github.io/builds/xMikux/Slimefun4/master/)** | :floppy_disk: **[下載「穩定版」](https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun4/stable/)** |
 
 **:exclamation: 我們竭誠建議你使用 _開發版_, 它們是黏液科技的最新版本, 並且更新頻率最高! 實際上, "穩定" 版已經過於過時, 所以我們不會接受它們的錯誤報告.**
 <details>
