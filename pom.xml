@@ -146,7 +146,7 @@
                 <!-- Plugin for Unit Tests -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M8</version>
+                <version>3.0.0-M9</version>
 
                 <configuration>
                     <junitArtifactName>org.junit.jupiter:junit-jupiter</junitArtifactName>
@@ -239,7 +239,7 @@
                 <!-- Javadocs -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.4.1</version>
+                <version>3.5.0</version>
 
                 <configuration>
                     <reportOutputDirectory>${project.basedir}</reportOutputDirectory>
@@ -388,7 +388,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>5.1.0</version>
+            <version>5.1.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
