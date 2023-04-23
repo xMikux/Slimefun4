@@ -28,7 +28,7 @@ public enum AndroidFuelSource {
     /**
      * This {@link ProgrammableAndroid} runs on nuclear fuel, e.g. Uranium
      */
-    NUCLEAR("", "&f這機器人需要", "&f例如 鈾, 錼或高純度鈾");
+    NUCLEAR("", "&f這機器人需要放射性燃料", "&f例如 鈾, 錼或高純度鈾");
 
     private final String[] lore;
 
