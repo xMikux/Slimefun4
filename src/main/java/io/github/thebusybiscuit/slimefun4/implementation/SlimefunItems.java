@@ -740,8 +740,8 @@ public final class SlimefunItems {
 
     public static final SlimefunItemStack GPS_TELEPORTER_PYLON = new SlimefunItemStack("GPS_TELEPORTER_PYLON", Material.PURPLE_STAINED_GLASS, "&5GPS傳送裝置(組件)", "", "&7傳送裝置的一部分");
     public static final SlimefunItemStack GPS_TELEPORTATION_MATRIX = new SlimefunItemStack("GPS_TELEPORTATION_MATRIX", Material.IRON_BLOCK, "&bGPS傳送裝置(核心)", "", "&f傳送裝置的核心", "&f將傳送選單設置為放置此裝置的玩家");
-    public static final SlimefunItemStack GPS_ACTIVATION_DEVICE_SHARED = new SlimefunItemStack("GPS_ACTIVATION_DEVICE_SHARED", Material.STONE_PRESSURE_PLATE, "&fGPS激活裝置 &3(公共)", "", "&f放置在傳送裝置上", "&f踩在該板上以打開傳送選單", "&f任何人都可以使用");
-    public static final SlimefunItemStack GPS_ACTIVATION_DEVICE_PERSONAL = new SlimefunItemStack("GPS_ACTIVATION_DEVICE_PERSONAL", Material.STONE_PRESSURE_PLATE, "&fGPS激活裝置 &a(私人)", "", "&f放置在傳送裝置上", "&f踩在該板上以打開傳送選單", "&f只允許放置的人使用");
+    public static final SlimefunItemStack GPS_ACTIVATION_DEVICE_SHARED = new SlimefunItemStack("GPS_ACTIVATION_DEVICE_SHARED", Material.STONE_PRESSURE_PLATE, "&fGPS啟動裝置 &3(公共)", "", "&f放置在傳送裝置上", "&f踩在該板上以打開傳送選單", "&f任何人都可以使用");
+    public static final SlimefunItemStack GPS_ACTIVATION_DEVICE_PERSONAL = new SlimefunItemStack("GPS_ACTIVATION_DEVICE_PERSONAL", Material.STONE_PRESSURE_PLATE, "&fGPS啟動裝置 &a(私人)", "", "&f放置在傳送裝置上", "&f踩在該板上以打開傳送選單", "&f只允許放置的人使用");
     public static final SlimefunItemStack PORTABLE_TELEPORTER = new SlimefunItemStack("PORTABLE_TELEPORTER", Material.COMPASS, "&b隨身傳送器", "", "&f此裝置可讓你傳送", "&f至任何你的傳送點", "", LoreBuilder.powerCharged(0, 50), "", "&e右鍵點擊&7 使用");
 
     public static final SlimefunItemStack ELEVATOR_PLATE = new SlimefunItemStack("ELEVATOR_PLATE", Material.STONE_PRESSURE_PLATE, "&b電梯板", "", "&f在每個樓層上放置一個電梯板", "&f你將可以在各樓層之間傳送", "", "&e右鍵點擊壓力板 &7來命名");
