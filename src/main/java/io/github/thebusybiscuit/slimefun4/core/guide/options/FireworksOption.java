@@ -31,7 +31,7 @@ class FireworksOption implements SlimefunGuideOption<Boolean> {
 
         if (registry.isResearchingEnabled() && registry.isResearchFireworkEnabled()) {
             boolean enabled = getSelectedOption(p, guide).orElse(true);
-            ItemStack item = new CustomItemStack(Material.FIREWORK_ROCKET, "&b煙火: &" + (enabled ? "a開啟" : "4關閉"), "", "&7研究物品時是否顯示煙火", "", "&7\u21E8 &e點擊 " + (enabled ? "關閉" : "開啟") + " 煙火顯示");
+            ItemStack item = new CustomItemStack(Material.FIREWORK_ROCKET, "&b煙火：&" + (enabled ? "a開啟" : "4關閉"), "", "&7研究物品時是否顯示煙火動畫", "", "&7\u21E8 &e點擊 " + (enabled ? "關閉" : "開啟") + " 煙火動畫顯示");
             return Optional.of(item);
         } else {
             return Optional.empty();

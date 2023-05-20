@@ -57,7 +57,7 @@ public enum Radioactivity {
 
     @Nonnull
     public String getLore() {
-        return ChatColor.GREEN + "\u2622" + ChatColor.GRAY + " 輻射等級: " + color + alias;
+        return ChatColor.GREEN + "\u2622" + ChatColor.GRAY + " 輻射等級：" + color + alias;
     }
 
     /**
