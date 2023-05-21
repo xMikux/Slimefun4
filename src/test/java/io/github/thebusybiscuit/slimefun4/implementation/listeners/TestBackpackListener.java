@@ -80,7 +80,7 @@ class TestBackpackListener {
     }
 
     private PlayerBackpack openMockBackpack(Player player, String id, int size) throws InterruptedException {
-        SlimefunItemStack item = new SlimefunItemStack(id, Material.CHEST, "&4Mock Backpack", "", "&7Size: &e" + BACKPACK_SIZE, "&7ID: <ID>", "", "&7&eRight Click&7 to open");
+        SlimefunItemStack item = new SlimefunItemStack(id, Material.CHEST, "&4Mock Backpack", "", "&7Size: &e" + BACKPACK_SIZE, "&7ID：<ID>", "", "&7&eRight Click&7 to open");
         PlayerProfile profile = TestUtilities.awaitProfile(player);
 
         PlayerBackpack backpack = profile.createBackpack(size);
@@ -110,13 +110,13 @@ class TestBackpackListener {
     @DisplayName("Test if backpack id is properly applied to the lore")
     void testSetId() throws InterruptedException {
         Player player = server.addPlayer();
-        ItemStack item = new CustomItemStack(Material.CHEST, "&cA mocked Backpack", "", "&7Size: &e" + BACKPACK_SIZE, "&7ID: <ID>", "", "&7&eRight Click&7 to open");
+        ItemStack item = new CustomItemStack(Material.CHEST, "&cA mocked Backpack", "", "&7Size: &e" + BACKPACK_SIZE, "&7ID：<ID>", "", "&7&eRight Click&7 to open");
 
         PlayerProfile profile = TestUtilities.awaitProfile(player);
         int id = profile.createBackpack(BACKPACK_SIZE).getId();
 
         listener.setBackpackId(player, item, 2, id);
-        Assertions.assertEquals(ChatColor.GRAY + "ID: " + player.getUniqueId() + "#" + id, item.getItemMeta().getLore().get(2));
+        Assertions.assertEquals(ChatColor.GRAY + "ID：" + player.getUniqueId() + "#" + id, item.getItemMeta().getLore().get(2));
 
         PlayerBackpack backpack = awaitBackpack(item);
         Assertions.assertEquals(player.getUniqueId(), backpack.getOwner().getUUID());

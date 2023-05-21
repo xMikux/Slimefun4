@@ -149,7 +149,7 @@ public class BackpackListener implements Listener {
         List<String> lore = item.getItemMeta().getLore();
 
         for (int line = 0; line < lore.size(); line++) {
-            if (lore.get(line).equals(ChatColor.GRAY + "ID: <ID>")) {
+            if (lore.get(line).equals(ChatColor.GRAY + "ID：<ID>")) {
                 setBackpackId(p, item, line, profile.createBackpack(size).getId());
                 break;
             }
