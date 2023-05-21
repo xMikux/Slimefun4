@@ -23,7 +23,7 @@ import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
  */
 public final class LoreBuilder {
 
-    public static final String HAZMAT_SUIT_REQUIRED = "&8\u21E8 &4需要穿上防護套裝!";
+    public static final String HAZMAT_SUIT_REQUIRED = "&8\u21E8 &4需要穿上防護套裝！";
 
     public static final String RIGHT_CLICK_TO_USE = "&e右鍵點擊&7 使用";
     public static final String RIGHT_CLICK_TO_OPEN = "&e右鍵點擊&7 打開";
@@ -42,7 +42,7 @@ public final class LoreBuilder {
     }
 
     public static @Nonnull String speed(float speed) {
-        return "&8\u21E8 &b\u26A1 &7速度: &b" + speed + 'x';
+        return "&8\u21E8 &b\u26A1 &7速度：&b" + speed + 'x';
     }
 
     public static @Nonnull String powerBuffer(int power) {
@@ -62,7 +62,7 @@ public final class LoreBuilder {
     }
 
     public static @Nonnull String material(@Nonnull String material) {
-        return "&8\u21E8 &7材料: &b" + material;
+        return "&8\u21E8 &7材料：&b" + material;
     }
 
     public static @Nonnull String hunger(double value) {
@@ -70,11 +70,37 @@ public final class LoreBuilder {
     }
 
     public static @Nonnull String range(int blocks) {
-        return "&7範圍: &c" + blocks + " 格方塊";
+        return "&7範圍：&c" + blocks + " 格方塊";
     }
 
     public static @Nonnull String usesLeft(int usesLeft) {
-        return "&e" + (usesLeft > 1 ? "剩餘次數" : "使用") + " &7" + usesLeft + "次";
+        return "&7剩餘次數 &e" + usesLeft + " 次";
+    }
+
+    public static @Nonnull String thrust(float thrust) {
+        return "&8\u21E8 &7推力：&c" + thrust;
+    }
+
+    public static @Nonnull String accuracy(int accuracy) {
+        String color;
+
+        if (accuracy >= 80) {
+            color = "&c";
+        } else if (accuracy >= 75) {
+            color = "&a";
+        } else if (accuracy >= 70) {
+            color = "&e";
+        } else if (accuracy >= 60) {
+            color = "&6";
+        } else {
+            color = "&c";
+        }
+
+        return "&8\u21E8 &7穩定性：" + color + accuracy + "%";
+    }
+
+    public static @Nonnull String accuracy(float accuracy) {
+        return "&8\u21E8 &7穩定性：&c" + accuracy + "%";
     }
 
 }
