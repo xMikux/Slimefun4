@@ -104,10 +104,10 @@ public class MetricsService {
      */
     public void start() {
         if (!metricsModuleFile.exists()) {
-            plugin.getLogger().info(JAR_NAME + " 並不存在, 下載中...");
+            plugin.getLogger().info(JAR_NAME + " 並不存在，下載中...");
 
             if (!download(getLatestVersion())) {
-                plugin.getLogger().warning("由於無法下載檔案,因此不會啟動metrics.");
+                plugin.getLogger().warning("由於無法下載檔案，因此不會啟動指標收集。");
                 return;
             }
         }
@@ -127,7 +127,7 @@ public class MetricsService {
              * AND there's a new version then cleanup, download and start
              */
             if (!hasDownloadedUpdate && hasAutoUpdates() && checkForUpdate(metricVersion)) {
-                plugin.getLogger().info("清理完畢, 現在重新加載Metrics-Module!");
+                plugin.getLogger().info("清理完畢，現在重新載入指標模組！");
                 start();
                 return;
             }
@@ -140,15 +140,15 @@ public class MetricsService {
             Slimefun.runSync(() -> {
                 try {
                     start.invoke(null);
-                    plugin.getLogger().info("Metrics構建 #" + version + " 啟動.");
+                    plugin.getLogger().info("指標建構 #" + version + " 啟動。");
                 } catch (InvocationTargetException e) {
                     plugin.getLogger().log(Level.WARNING, "An exception was thrown while starting the metrics module", e.getCause());
                 } catch (Exception | LinkageError e) {
-                    plugin.getLogger().log(Level.WARNING, "無法啟動metrics.", e);
+                    plugin.getLogger().log(Level.WARNING, "無法啟動指標模組。", e);
                 }
             });
         } catch (Exception | LinkageError e) {
-            plugin.getLogger().log(Level.WARNING, "無法加載metrics模塊. 可能jar損壞了?", e);
+            plugin.getLogger().log(Level.WARNING, "無法載入指標模組。可能 Jar 損壞了？", e);
         }
     }
 
@@ -162,7 +162,7 @@ public class MetricsService {
                 moduleClassLoader.close();
             }
         } catch (IOException e) {
-            plugin.getLogger().log(Level.WARNING, "無法清理模塊加載. 有些記憶體可能已洩漏.");
+            plugin.getLogger().log(Level.WARNING, "無法清理模組載入。可能發生了記憶體洩漏問題。");
         }
     }
 
@@ -213,7 +213,7 @@ public class MetricsService {
 
             return node.getObject().getInt("tag_name");
         } catch (UnirestException e) {
-            plugin.getLogger().log(Level.WARNING, "無法獲取Metrics最新構建: {0}", e.getMessage());
+            plugin.getLogger().log(Level.WARNING, "無法獲取指標模組的最新建構：{0}", e.getMessage());
             return -1;
         }
     }
@@ -228,7 +228,7 @@ public class MetricsService {
         File file = new File(parentFolder, "Metrics-" + version + ".jar");
 
         try {
-            plugin.getLogger().log(Level.INFO, "# 開始下載MetricsModule構建: #{0}", version);
+            plugin.getLogger().log(Level.INFO, "# 開始下載指標模組建構：#{0}", version);
 
             if (file.exists()) {
                 // Delete the file in case we accidentally downloaded it before
@@ -248,7 +248,7 @@ public class MetricsService {
             }).asFile(file.getPath());
 
             if (response.isSuccess()) {
-                plugin.getLogger().log(Level.INFO, "成功下載 {0} 構建: #{1}", new Object[] { JAR_NAME, version });
+                plugin.getLogger().log(Level.INFO, "成功下載 {0} 建構：#{1}", new Object[] { JAR_NAME, version });
 
                 // Replace the metric file with the new one
                 cleanUp();
@@ -259,9 +259,9 @@ public class MetricsService {
                 return true;
             }
         } catch (UnirestException e) {
-            plugin.getLogger().log(Level.WARNING, "無法從構建頁面獲取最新的jar檔案. 也許GitHub服務中斷? 回應: {0}", e.getMessage());
+            plugin.getLogger().log(Level.WARNING, "無法從建構頁面獲取最新的 Jar 檔案。也許 GitHub 服務中斷？回應：{0}", e.getMessage());
         } catch (IOException e) {
-            plugin.getLogger().log(Level.WARNING, "無法將舊的metric檔案替換為新的. 請手動執行此操作! 錯誤: {0}", e.getMessage());
+            plugin.getLogger().log(Level.WARNING, "無法將舊的指標模組檔案替換為新的。請手動執行此操作！錯誤：{0}", e.getMessage());
         }
 
         return false;
