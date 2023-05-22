@@ -2,7 +2,7 @@ package io.github.thebusybiscuit.slimefun4.utils;
 
 import java.util.regex.Pattern;
 
-import org.bukkit.ChatColor;
+import io.github.bakedlibs.dough.common.ChatColors;
 
 /**
  * This class is created for common-use patterns used in things such as {@link String#split(String)}. <br>
@@ -27,6 +27,6 @@ public final class PatternUtils {
     public static final Pattern MINECRAFT_TAG = Pattern.compile("#minecraft:[a-z_]+");
     public static final Pattern SLIMEFUN_TAG = Pattern.compile("#slimefun:[a-z_]+");
 
-    public static final Pattern USES_LEFT_LORE = Pattern.compile(ChatColor.YELLOW + "剩餘次數? " + ChatColor.GRAY + "+[0-9]次");
+    public static final Pattern USES_LEFT_LORE = Pattern.compile(ChatColors.color("&7剩餘次數 &e[0-9] 次"));
 
 }
