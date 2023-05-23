@@ -92,14 +92,14 @@ abstract class AbstractFilterNode extends AbstractCargoNode {
         String filterType = BlockStorage.getLocationInfo(loc, FILTER_TYPE);
 
         if (!BlockStorage.hasBlockInfo(b) || filterType == null || filterType.equals("whitelist")) {
-            menu.replaceExistingItem(15, new CustomItemStack(Material.WHITE_WOOL, "&7模式: &r白名單", "", "&e> 點擊更改為黑名單"));
+            menu.replaceExistingItem(15, new CustomItemStack(Material.WHITE_WOOL, "&7模式：&r白名單", "", "&e> 點擊更改為黑名單"));
             menu.addMenuClickHandler(15, (p, slot, item, action) -> {
                 BlockStorage.addBlockInfo(b, FILTER_TYPE, "blacklist");
                 updateBlockMenu(menu, b);
                 return false;
             });
         } else {
-            menu.replaceExistingItem(15, new CustomItemStack(Material.BLACK_WOOL, "&7模式: &8黑名單", "", "&e> 點擊更改為白名單"));
+            menu.replaceExistingItem(15, new CustomItemStack(Material.BLACK_WOOL, "&7模式：&8黑名單", "", "&e> 點擊更改為白名單"));
             menu.addMenuClickHandler(15, (p, slot, item, action) -> {
                 BlockStorage.addBlockInfo(b, FILTER_TYPE, "whitelist");
                 updateBlockMenu(menu, b);
@@ -110,14 +110,14 @@ abstract class AbstractFilterNode extends AbstractCargoNode {
         String lore = BlockStorage.getLocationInfo(b.getLocation(), FILTER_LORE);
 
         if (!BlockStorage.hasBlockInfo(b) || lore == null || lore.equals(String.valueOf(true))) {
-            menu.replaceExistingItem(25, new CustomItemStack(Material.MAP, "&7包括 Lore: &2\u2714", "", "&e> 點擊以切換是否包含Lore"));
+            menu.replaceExistingItem(25, new CustomItemStack(Material.MAP, "&7包括物品敘述：&2\u2714", "", "&e> 點擊以切換是否比對物品敘述"));
             menu.addMenuClickHandler(25, (p, slot, item, action) -> {
                 BlockStorage.addBlockInfo(b, FILTER_LORE, String.valueOf(false));
                 updateBlockMenu(menu, b);
                 return false;
             });
         } else {
-            menu.replaceExistingItem(25, new CustomItemStack(Material.MAP, "&7包括 Lore: &4\u2718", "", "&e> 點擊以切換是否包含Lore"));
+            menu.replaceExistingItem(25, new CustomItemStack(Material.MAP, "&7包括物品敘述：&4\u2718", "", "&e> 點擊以切換是否比對物品敘述"));
             menu.addMenuClickHandler(25, (p, slot, item, action) -> {
                 BlockStorage.addBlockInfo(b, FILTER_LORE, String.valueOf(true));
                 updateBlockMenu(menu, b);
