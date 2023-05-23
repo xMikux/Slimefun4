@@ -159,14 +159,14 @@ public abstract class AbstractEntityAssembler<T extends Entity> extends SimpleSl
 
     private void updateBlockInventory(BlockMenu menu, Block b) {
         if (!BlockStorage.hasBlockInfo(b) || BlockStorage.getLocationInfo(b.getLocation(), KEY_ENABLED) == null || BlockStorage.getLocationInfo(b.getLocation(), KEY_ENABLED).equals(String.valueOf(false))) {
-            menu.replaceExistingItem(22, new CustomItemStack(Material.GUNPOWDER, "&7是否啟用: &4\u2718", "", "&e> 點擊啟動機器"));
+            menu.replaceExistingItem(22, new CustomItemStack(Material.GUNPOWDER, "&7是否啟用：&4\u2718", "", "&e> 點擊啟動機器"));
             menu.addMenuClickHandler(22, (p, slot, item, action) -> {
                 BlockStorage.addBlockInfo(b, KEY_ENABLED, String.valueOf(true));
                 updateBlockInventory(menu, b);
                 return false;
             });
         } else {
-            menu.replaceExistingItem(22, new CustomItemStack(Material.REDSTONE, "&7是否啟用: &2\u2714", "", "&e> 點擊關閉機器"));
+            menu.replaceExistingItem(22, new CustomItemStack(Material.REDSTONE, "&7是否啟用：&2\u2714", "", "&e> 點擊關閉機器"));
             menu.addMenuClickHandler(22, (p, slot, item, action) -> {
                 BlockStorage.addBlockInfo(b, KEY_ENABLED, String.valueOf(false));
                 updateBlockInventory(menu, b);
@@ -176,7 +176,7 @@ public abstract class AbstractEntityAssembler<T extends Entity> extends SimpleSl
 
         double offset = (!BlockStorage.hasBlockInfo(b) || BlockStorage.getLocationInfo(b.getLocation(), KEY_OFFSET) == null) ? 3.0F : Double.valueOf(BlockStorage.getLocationInfo(b.getLocation(), KEY_OFFSET));
 
-        menu.replaceExistingItem(31, new CustomItemStack(Material.PISTON, "&7生成位置(上方): &3" + offset + " 格", "", "&f左鍵點擊: &7+0.1", "&f右鍵點擊: &7-0.1"));
+        menu.replaceExistingItem(31, new CustomItemStack(Material.PISTON, "&7生成位置（上方）：&3" + offset + " 格", "", "&f左鍵點擊：&7+0.1", "&f右鍵點擊：&7-0.1"));
         menu.addMenuClickHandler(31, (p, slot, item, action) -> {
             double offsetv = NumberUtils.reparseDouble(Double.valueOf(BlockStorage.getLocationInfo(b.getLocation(), KEY_OFFSET)) + (action.isRightClicked() ? -0.1F : 0.1F));
             BlockStorage.addBlockInfo(b, KEY_OFFSET, String.valueOf(offsetv));
@@ -279,9 +279,9 @@ public abstract class AbstractEntityAssembler<T extends Entity> extends SimpleSl
     }
 
     protected void constructMenu(BlockMenuPreset preset) {
-        preset.addItem(1, new CustomItemStack(getHead(), "&7Head Slot", "", "&fThis Slot accepts the head type"), ChestMenuUtils.getEmptyClickHandler());
-        preset.addItem(7, new CustomItemStack(getBody(), "&7Body Slot", "", "&fThis Slot accepts the body type"), ChestMenuUtils.getEmptyClickHandler());
-        preset.addItem(13, new CustomItemStack(Material.CLOCK, "&7Cooldown: &b30 Seconds", "", "&fThis Machine takes up to half a Minute to operate", "&fso give it some Time!"), ChestMenuUtils.getEmptyClickHandler());
+        preset.addItem(1, new CustomItemStack(getHead(), "&7頭顱欄", "", "&f這個欄位接受頭顱類型的物品"), ChestMenuUtils.getEmptyClickHandler());
+        preset.addItem(7, new CustomItemStack(getBody(), "&7身體欄", "", "&f這個欄位接受身體類型的物品"), ChestMenuUtils.getEmptyClickHandler());
+        preset.addItem(13, new CustomItemStack(Material.CLOCK, "&7冷卻時間：&b30 秒", "", "&f這台機器需要半分鐘來暖機", "&f所以請給它點時間吧！"), ChestMenuUtils.getEmptyClickHandler());
     }
 
     @Override
