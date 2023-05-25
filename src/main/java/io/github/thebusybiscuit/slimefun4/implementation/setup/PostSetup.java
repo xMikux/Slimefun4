@@ -89,7 +89,7 @@ public final class PostSetup {
         sender.sendMessage(ChatColor.GREEN + "######################### - Slimefun v" + Slimefun.getVersion() + " - #########################");
         sender.sendMessage("");
         sender.sendMessage(ChatColor.GREEN + "成功載入 " + total + " 個物品和 " + Slimefun.getRegistry().getResearches().size() + " 個研究");
-        sender.sendMessage(ChatColor.GREEN + "( " + slimefunOnly + " 物品來自Slimefun, " + (total - slimefunOnly) + " 個物品來自 " + Slimefun.getInstalledAddons().size() + " 附加 )");
+        sender.sendMessage(ChatColor.GREEN + "( " + slimefunOnly + " 物品來自 Slimefun、" + (total - slimefunOnly) + " 個物品來自 " + Slimefun.getInstalledAddons().size() + " 附加 )");
         sender.sendMessage("");
         sender.sendMessage(ChatColor.GREEN + "Slimefun 是一個開源專案,由活躍的大型社區.");
         sender.sendMessage(ChatColor.GREEN + "通過GitHub上進行貢獻來維護此專案!");
