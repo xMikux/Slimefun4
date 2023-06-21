@@ -67,7 +67,7 @@ public final class SlimefunItems {
     public static final SlimefunItemStack FILLED_FLASK_OF_KNOWLEDGE = new SlimefunItemStack("FILLED_FLASK_OF_KNOWLEDGE", Material.EXPERIENCE_BOTTLE, "&a學識之瓶");
 
     /* Backpacks */
-    private static final String BACKPACK_ID = "&7ID：<ID>";
+    private static final String BACKPACK_ID = "&7ID: <ID>";
     public static final SlimefunItemStack BACKPACK_SMALL = new SlimefunItemStack("SMALL_BACKPACK", HeadTexture.BACKPACK, "&e小背包", "", "&7大小：&e9 格", BACKPACK_ID, "", LoreBuilder.RIGHT_CLICK_TO_OPEN);
     public static final SlimefunItemStack BACKPACK_MEDIUM = new SlimefunItemStack("MEDIUM_BACKPACK", HeadTexture.BACKPACK, "&e背包", "", "&7大小：&e18 格", BACKPACK_ID, "", LoreBuilder.RIGHT_CLICK_TO_OPEN);
     public static final SlimefunItemStack BACKPACK_LARGE = new SlimefunItemStack("LARGE_BACKPACK", HeadTexture.BACKPACK, "&e大背包", "", "&7大小：&e27 格", BACKPACK_ID, "", LoreBuilder.RIGHT_CLICK_TO_OPEN);

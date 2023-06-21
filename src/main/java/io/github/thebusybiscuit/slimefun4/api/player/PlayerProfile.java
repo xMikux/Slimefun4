@@ -456,12 +456,12 @@ public class PlayerProfile {
         String uuid = "";
 
         for (String line : item.getItemMeta().getLore()) {
-            if (line.startsWith(ChatColors.color("&7ID：")) && line.indexOf('#') != -1) {
+            if (line.startsWith(ChatColors.color("&7ID: ")) && line.indexOf('#') != -1) {
                 String[] splitLine = CommonPatterns.HASH.split(line);
 
                 if (CommonPatterns.NUMERIC.matcher(splitLine[1]).matches()) {
                     id = OptionalInt.of(Integer.parseInt(splitLine[1]));
-                    uuid = splitLine[0].replace(ChatColors.color("&7ID："), "");
+                    uuid = splitLine[0].replace(ChatColors.color("&7ID: "), "");
                 }
             }
         }

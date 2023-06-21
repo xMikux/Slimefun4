@@ -44,7 +44,7 @@ class TestBackpackCommand {
             if (SlimefunUtils.isItemSimilar(item, SlimefunItems.RESTORED_BACKPACK, false)) {
                 List<String> lore = item.getItemMeta().getLore();
 
-                if (lore.get(2).equals(ChatColor.GRAY + "ID：" + player.getUniqueId() + "#" + id)) {
+                if (lore.get(2).equals(ChatColor.GRAY + "ID: " + player.getUniqueId() + "#" + id)) {
                     return true;
                 }
             }

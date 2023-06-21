@@ -90,7 +90,7 @@ abstract class AbstractCraftingTable extends MultiBlockMachine {
 
         if (id.isPresent()) {
             for (int line = 0; line < output.getItemMeta().getLore().size(); line++) {
-                if (output.getItemMeta().getLore().get(line).equals(ChatColors.color("&7ID：<ID>"))) {
+                if (output.getItemMeta().getLore().get(line).equals(ChatColors.color("&7ID: <ID>"))) {
                     ItemMeta im = output.getItemMeta();
                     List<String> lore = im.getLore();
                     lore.set(line, lore.get(line).replace("<ID>", id.get()));
@@ -101,7 +101,7 @@ abstract class AbstractCraftingTable extends MultiBlockMachine {
             }
         } else {
             for (int line = 0; line < output.getItemMeta().getLore().size(); line++) {
-                if (output.getItemMeta().getLore().get(line).equals(ChatColors.color("&7ID：<ID>"))) {
+                if (output.getItemMeta().getLore().get(line).equals(ChatColors.color("&7ID: <ID>"))) {
                     int target = line;
 
                     PlayerProfile.get(p, profile -> {
@@ -118,8 +118,8 @@ abstract class AbstractCraftingTable extends MultiBlockMachine {
     private @Nonnull Optional<String> retrieveID(@Nullable ItemStack backpack, int size) {
         if (backpack != null) {
             for (String line : backpack.getItemMeta().getLore()) {
-                if (line.startsWith(ChatColors.color("&7ID：")) && line.contains("#")) {
-                    String id = line.replace(ChatColors.color("&7ID："), "");
+                if (line.startsWith(ChatColors.color("&7ID: ")) && line.contains("#")) {
+                    String id = line.replace(ChatColors.color("&7ID: "), "");
                     String[] idSplit = CommonPatterns.HASH.split(id);
 
                     PlayerProfile.fromUUID(UUID.fromString(idSplit[0]), profile -> {
