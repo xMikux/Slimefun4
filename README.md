@@ -41,7 +41,7 @@
 
 | | 開發版 (最新) | "穩定版 (官方)" |
 | ------------------ | -------- | -------- |
-| **Minecraft 版本** | :video_game: **1.16.\* - 1.20.\*** | :video_game: **1.14.\* - 1.19.\*** |
+| **Minecraft 版本** | :video_game: **1.16.\* - 1.20.\*** | :video_game: **1.14.\* - 1.20.\*** |
 | **Java 版本** | :computer: **Java 16 (或以上)** | :computer: **Java 16 (或以上)** |
 | **自動更新** | :heavy_check_mark: | :heavy_check_mark: |
 | **頻繁更新** | :heavy_check_mark: | :x: |
