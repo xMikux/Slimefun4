@@ -26,7 +26,7 @@
         <maven.compiler.target>16</maven.compiler.target>
 
         <!-- Spigot properties -->
-        <spigot.version>1.19</spigot.version>
+        <spigot.version>1.20</spigot.version>
         <spigot.javadocs>https://hub.spigotmc.org/javadocs/spigot/</spigot.javadocs>
 
         <!-- Default settings for sonarcloud.io -->
@@ -191,7 +191,7 @@
                 <!-- Dependency shading -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.4.1</version>
+                <version>3.5.0</version>
 
                 <configuration>
                     <!-- Relocate these to avoid clashes and conflicts -->
@@ -351,10 +351,11 @@
         </dependency>
 
         <!-- Shaded packages -->
+        <!-- TODO: Revert changes back to maven when dough 1.3 released -->
         <dependency>
-            <groupId>io.github.baked-libs</groupId>
+            <groupId>com.github.baked-libs.dough</groupId>
             <artifactId>dough-api</artifactId>
-            <version>1.2.0</version>
+            <version>39856a32c4</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -392,6 +393,12 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>2.0.7</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>com.github.seeseemelk</groupId>
             <artifactId>MockBukkit-v1.18</artifactId>
             <version>2.0.0</version>
@@ -411,7 +418,7 @@
         <dependency>
             <groupId>com.sk89q.worldedit</groupId>
             <artifactId>worldedit-core</artifactId>
-            <version>7.2.14</version>
+            <version>7.2.15</version>
             <scope>provided</scope>
 
             <exclusions>
@@ -425,7 +432,7 @@
         <dependency>
             <groupId>com.sk89q.worldedit</groupId>
             <artifactId>worldedit-bukkit</artifactId>
-            <version>7.2.14</version>
+            <version>7.2.15</version>
             <scope>provided</scope>
 
             <exclusions>
