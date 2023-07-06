@@ -42,7 +42,7 @@ abstract class AbstractEnchantmentMachine extends AContainer {
     private final ItemSetting<Integer> maxEnchants = new IntRangeSetting(this, "max-enchants", 0, 10, Short.MAX_VALUE);
     private final ItemSetting<Boolean> useMaxEnchants= new ItemSetting<>(this, "use-max-enchants", false);
     private final ItemSetting<Boolean> useIgnoredLores = new ItemSetting<>(this, "use-ignored-lores", false);
-    private final ItemSetting<List<String>> ignoredLores = new ItemSetting<>(this, "ignored-lores", Collections.singletonList("&7- &cCan't be used in " + this.getItemName()));
+    private final ItemSetting<List<String>> ignoredLores = new ItemSetting<>(this, "ignored-lores", Collections.singletonList("&7- &c無法被使用在" + this.getItemName()));
 
     @ParametersAreNonnullByDefault
     protected AbstractEnchantmentMachine(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {

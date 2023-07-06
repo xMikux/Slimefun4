@@ -66,7 +66,7 @@ public class AutoSavingService {
         }
 
         if (players > 0) {
-            Slimefun.logger().log(Level.INFO, "自動保存所有玩家資料,已保存{0}位玩家!!", players);
+            Slimefun.logger().log(Level.INFO, "自動儲存所有玩家資料，已儲存 {0} 位玩家資料！", players);
         }
     }
 
@@ -89,7 +89,7 @@ public class AutoSavingService {
         }
 
         if (!worlds.isEmpty()) {
-            Slimefun.logger().log(Level.INFO, "自動保存方塊資料... (下次運行自動保存: {0}分)", interval);
+            Slimefun.logger().log(Level.INFO, "自動儲存方塊資料...（下次執行自動儲存：{0} 分）", interval);
 
             for (BlockStorage storage : worlds) {
                 storage.save();

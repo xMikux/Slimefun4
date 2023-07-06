@@ -264,7 +264,7 @@ public final class Slimefun extends JavaPlugin implements SlimefunAddon {
 
         // Check if Paper (<3) is installed
         if (PaperLib.isPaper()) {
-            logger.log(Level.INFO, "已檢測到 Paper! 性能優化已啟用.");
+            logger.log(Level.INFO, "已偵測到 Paper 伺服器端！效能最佳化已套用。");
         } else {
             PaperLib.suggestPaper(this);
         }
@@ -285,7 +285,7 @@ public final class Slimefun extends JavaPlugin implements SlimefunAddon {
         isNewlyInstalled = !new File("data-storage/Slimefun").exists();
 
         // Creating all necessary Folders
-        logger.log(Level.INFO, "創建資料夾...");
+        logger.log(Level.INFO, "正在建立目錄...");
         createDirectories();
 
         // Load various config settings into our cache
@@ -301,7 +301,7 @@ public final class Slimefun extends JavaPlugin implements SlimefunAddon {
 
         // Make sure that the network size is a valid input
         if (networkSize < 1) {
-            logger.log(Level.WARNING, "你的 'networks.max-size' 設定配置錯誤! 必須大於1, 目前設置: {0}", networkSize);
+            logger.log(Level.WARNING, "你的「networks.max-size」設定錯誤！必須大於 1，目前設定：{0}", networkSize);
             networkSize = 1;
         }
 
@@ -319,7 +319,7 @@ public final class Slimefun extends JavaPlugin implements SlimefunAddon {
         }
 
         // Registering all GEO Resources
-        logger.log(Level.INFO, "載入GEO-資源...");
+        logger.log(Level.INFO, "載入 GEO-資源...");
         GEOResourcesSetup.setup();
 
         logger.log(Level.INFO, "載入標籤...");
@@ -334,7 +334,7 @@ public final class Slimefun extends JavaPlugin implements SlimefunAddon {
         registry.setResearchingEnabled(getResearchCfg().getBoolean("enable-researching"));
         PostSetup.setupWiki();
 
-        logger.log(Level.INFO, "註冊監聽器...");
+        logger.log(Level.INFO, "註冊接聽器...");
         registerListeners();
 
         // Initiating various Stuff and all items with a slight delay (0ms after the Server finished loading)
@@ -371,12 +371,12 @@ public final class Slimefun extends JavaPlugin implements SlimefunAddon {
         ticker.start(this);
 
         // Loading integrations
-        logger.log(Level.INFO, "載入第三方插件集成...");
+        logger.log(Level.INFO, "載入第三方插件整合...");
         integrations.start();
         gitHubService.start(this);
 
         // Hooray!
-        logger.log(Level.INFO, "Slimefun 完成載入在 {0}", getStartupTime(timestamp));
+        logger.log(Level.INFO, "Slimefun 已完成載入，耗時 {0}", getStartupTime(timestamp));
     }
 
     @Override
@@ -526,7 +526,7 @@ public final class Slimefun extends JavaPlugin implements SlimefunAddon {
                 StartupWarnings.invalidMinecraftVersion(getLogger(), version, getDescription().getVersion());
                 return true;
             } else {
-                getLogger().log(Level.WARNING, "We could not determine the version of Minecraft you were using? ({0})", Bukkit.getVersion());
+                getLogger().log(Level.WARNING, "我們無法判斷你所使用的 Minecraft 版本？（{0}）", Bukkit.getVersion());
 
                 /*
                  * If we are unsure about it, we will assume "supported".
@@ -537,7 +537,7 @@ public final class Slimefun extends JavaPlugin implements SlimefunAddon {
                 return false;
             }
         } catch (Exception | LinkageError x) {
-            getLogger().log(Level.SEVERE, x, () -> "Error: Could not determine Environment or version of Minecraft for Slimefun v" + getDescription().getVersion());
+            getLogger().log(Level.SEVERE, x, () -> "錯誤：無法判斷環境或 Minecraft 的版本，Slimefun v" + getDescription().getVersion());
 
             // We assume "unsupported" if something went wrong.
             return true;

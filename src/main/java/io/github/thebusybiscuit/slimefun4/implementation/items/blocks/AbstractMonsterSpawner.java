@@ -56,8 +56,8 @@ public abstract class AbstractMonsterSpawner extends SlimefunItem {
 
         // We may want to update this in the future to also make use of the BlockStateMeta
         for (String line : meta.getLore()) {
-            if (ChatColor.stripColor(line).startsWith("類型: ") && !line.contains("<Type>")) {
-                EntityType type = EntityType.valueOf(ChatColor.stripColor(line).replace("類型: ", "").replace(' ', '_').toUpperCase(Locale.ROOT));
+            if (ChatColor.stripColor(line).startsWith("類型：") && !line.contains("<Type>")) {
+                EntityType type = EntityType.valueOf(ChatColor.stripColor(line).replace("類型：", "").replace(' ', '_').toUpperCase(Locale.ROOT));
                 return Optional.of(type);
             }
         }

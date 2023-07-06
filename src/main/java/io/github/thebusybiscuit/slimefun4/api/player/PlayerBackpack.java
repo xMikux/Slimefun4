@@ -174,7 +174,7 @@ public class PlayerBackpack {
         this.size = size;
         cfg.setValue(CONFIG_PREFIX + id + ".size", size);
 
-        Inventory inv = Bukkit.createInventory(null, size, "Backpack [" + size + " Slots]");
+        Inventory inv = Bukkit.createInventory(null, size, "背包 [" + size + "格]");
 
         for (int slot = 0; slot < this.inventory.getSize(); slot++) {
             inv.setItem(slot, this.inventory.getItem(slot));

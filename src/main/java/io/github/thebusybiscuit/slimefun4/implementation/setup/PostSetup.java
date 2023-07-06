@@ -89,7 +89,7 @@ public final class PostSetup {
         sender.sendMessage(ChatColor.GREEN + "######################### - Slimefun v" + Slimefun.getVersion() + " - #########################");
         sender.sendMessage("");
         sender.sendMessage(ChatColor.GREEN + "成功載入 " + total + " 個物品和 " + Slimefun.getRegistry().getResearches().size() + " 個研究");
-        sender.sendMessage(ChatColor.GREEN + "( " + slimefunOnly + " 物品來自Slimefun, " + (total - slimefunOnly) + " 個物品來自 " + Slimefun.getInstalledAddons().size() + " 附加 )");
+        sender.sendMessage(ChatColor.GREEN + "( " + slimefunOnly + " 物品來自 Slimefun、" + (total - slimefunOnly) + " 個物品來自 " + Slimefun.getInstalledAddons().size() + " 附加 )");
         sender.sendMessage("");
         sender.sendMessage(ChatColor.GREEN + "Slimefun 是一個開源專案,由活躍的大型社區.");
         sender.sendMessage(ChatColor.GREEN + "通過GitHub上進行貢獻來維護此專案!");
@@ -103,9 +103,9 @@ public final class PostSetup {
             sender.sendMessage(ChatColor.GREEN + " - Discord:      https://discord.gg/slimefun");
         } else {
             sender.sendMessage("");
-            sender.sendMessage(ChatColor.GREEN + " - 源代碼: https://github.com/xMikux/Slimefun4");
-            sender.sendMessage(ChatColor.GREEN + " - 此為繁體翻譯版 - 無官方支持");
-            sender.sendMessage(ChatColor.RED + " - 請勿在黏液科技伺服器官方問!");
+            sender.sendMessage(ChatColor.GREEN + " - 原始程式碼：https://github.com/xMikux/Slimefun4");
+            sender.sendMessage(ChatColor.GREEN + " - 此為繁體翻譯版 - 無官方支援");
+            sender.sendMessage(ChatColor.RED + " - 請勿在黏液科技伺服器官方問！");
         }
 
         sender.sendMessage("");

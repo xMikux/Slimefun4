@@ -36,7 +36,7 @@ public class CheatSheetSlimefunGuide extends SurvivalSlimefunGuide {
     public CheatSheetSlimefunGuide() {
         super(false, true);
 
-        item = new SlimefunGuideItem(this, "&cSlimefun指南 &4(作弊介面)");
+        item = new SlimefunGuideItem(this, "&cSlimefun 指南&4（作弊模式）");
     }
 
     /**

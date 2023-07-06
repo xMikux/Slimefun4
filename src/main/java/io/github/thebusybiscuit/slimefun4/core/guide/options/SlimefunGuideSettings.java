@@ -115,8 +115,8 @@ public final class SlimefunGuideSettings {
             ChatColor.GREEN + locale.getMessage(p, "guide.title.versions"),
             "&7&o" + locale.getMessage(p, "guide.tooltips.versions-notice"),
             "",
-            "&fMinecraft: &a" + Bukkit.getBukkitVersion(),
-            "&fSlimefun: &a" + Slimefun.getVersion()),
+            "&fMinecraft：&a" + Bukkit.getBukkitVersion(),
+            "&fSlimefun：&a" + Slimefun.getVersion()),
             ChestMenuUtils.getEmptyClickHandler()
         );
         // @formatter:on
@@ -124,16 +124,16 @@ public final class SlimefunGuideSettings {
         // @formatter:off
         menu.addItem(6, new CustomItemStack(Material.COMPARATOR, 
            "&e" + locale.getMessage(p, "guide.title.source"),
-           "", "&7最後修改: &a" + NumberUtils.getElapsedTime(github.getLastUpdate()) + " 前",
-           "&7專案分支數(Forks): &e" + github.getForks(),
-           "&7星星數: &e" + github.getStars(),
+           "", "&7最近活動於：&a" + NumberUtils.getElapsedTime(github.getLastUpdate()) + " 前",
+           "&7專案分支數（Fork）：&e" + github.getForks(),
+           "&7星星數：&e" + github.getStars(),
            "",
-           "&7&oSlimefun4是一個社群專案,",
-           "&7&o原始碼可以在GitHub上取得",
-           "&7&o如果你想保持此插件的生命力,",
+           "&7&oSlimefun4 是一個社群專案，",
+           "&7&o原始程式碼可以在 GitHub 上找到",
+           "&7&o如果你想保持此插件的生命力，",
            "&7&o可以考慮對其進行貢獻",
            "",
-           "&7\u21E8 &e點擊進入GitHub"
+           "&7\u21E8 &e點擊進入 GitHub"
         ));
         // @formatter:on
 
@@ -147,11 +147,11 @@ public final class SlimefunGuideSettings {
         menu.addItem(8, new CustomItemStack(Material.KNOWLEDGE_BOOK,
             "&3" + locale.getMessage(p, "guide.title.wiki"),
             "", "&7你需要有關物品或機器的幫助嗎？",
-            "&7你不知道該怎麼辦？",
-            "&7查看我們由社群維護的Wiki",
-            "&7並成為我們的編輯之一!",
+            "&7你不知道該做什麼？",
+            "&7查看由我們社群所維護的 Wiki",
+            "&7並成為我們的編輯之一！",
             "",
-            "&7\u21E8 &e點擊進入官方Slimefun Wiki"
+            "&7\u21E8 &e點擊查看官方的 Slimefun Wiki"
         ));
         // @formatter:on
 
@@ -165,12 +165,12 @@ public final class SlimefunGuideSettings {
         menu.addItem(47, new CustomItemStack(Material.BOOKSHELF,
             "&3" + locale.getMessage(p, "guide.title.addons"),
             "",
-            "&7附加插件才是使Slimefun發揮到極致的方法",
-            "&7去看看吧,其中可能有你錯過的!",
+            "&7附加插件才是使 Slimefun 發揮到極致的方法",
+            "&7去看看吧，其中可能有你錯過的！",
             "",
-            "&7安裝在伺服器上的數量: &b" + Slimefun.getInstalledAddons().size(),
+            "&7安裝在伺服器上的數量：&b" + Slimefun.getInstalledAddons().size(),
             "",
-            "&7\u21E8 &e點擊查看所有Slimefun4的附加插件"
+            "&7\u21E8 &e點擊查看所有 Slimefun4 的附加"
         ));
         // @formatter:on
 
@@ -185,18 +185,18 @@ public final class SlimefunGuideSettings {
             menu.addItem(49, new CustomItemStack(Material.REDSTONE_TORCH,
                 "&4" + locale.getMessage(p, "guide.title.bugs"),
                 "",
-                "&7&o錯誤回報必須使用英文!",
+                "&7&o錯誤回報必須使用英文！",
                 "",
-                "&7打開的問題: &a" + github.getOpenIssues(),
-                "&7待處理的拉取請求: &a" + github.getPendingPullRequests(),
+                "&7開啟的問題：&a" + github.getOpenIssues(),
+                "&7待處理的合併請求：&a" + github.getPendingPullRequests(),
                 "",
-                "&7\u21E8 &e點擊查看Slimefun4的錯誤追蹤"
+                "&7\u21E8 &e點擊查看 Slimefun4 的問題追蹤"
             ));
             // @formatter:on
 
             menu.addMenuClickHandler(49, (pl, slot, item, action) -> {
                 pl.closeInventory();
-                ChatUtils.sendURL(pl, "https://github.com/Slimefun/Slimefun4/issues");
+                ChatUtils.sendURL(pl, "https://github.com/xMikux/Slimefun4/issues");
                 return false;
             });
         } else {
