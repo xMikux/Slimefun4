@@ -124,6 +124,8 @@ guide:
       wiki: '&3Wiki 編輯人員'
       resourcepack: '&7資源包製作人員'
       translator: '&9翻譯人員'
+actionbar:
+  radiation: '&6輻射暴露等級：&c%level%&7/&e100'
 messages:
   not-researched: '&4你沒有足夠的學識來理解它。&c你需要研究解鎖&f「%item%&f」'
   not-enough-xp: '&4你沒有足夠的經驗值來解鎖該研究'

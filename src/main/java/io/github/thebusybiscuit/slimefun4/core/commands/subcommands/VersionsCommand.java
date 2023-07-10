@@ -83,24 +83,6 @@ class VersionsCommand extends SubCommand {
 
             addJavaVersion(builder);
 
-            if (Slimefun.getRegistry().isBackwardsCompatible()) {
-                // @formatter:off
-                HoverEvent hoverEvent = new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(
-                    "向後相容會對效能產生極大的負面影響！\n" +
-                    "我們建議你關閉此設定，除非你的伺服器\n" +
-                    "仍有在流通舊版的 Slimefun 物品（來自 2019 夏季之前）。"
-                ));
-                // @formatter:on
-
-                builder.append("\n向後相容已啟用！\n").color(ChatColor.RED).event(hoverEvent);
-            }
-
-            builder.append("\n由 芒果綠茶 翻譯").color(ChatColor.WHITE)
-                    .append(
-                            "\n請不要將此版本資訊截圖到官方的 Discord/GitHub 回報 Bug" +
-                            "\n請優先到翻譯專案回報" + "\n"
-                    ).color(ChatColor.RED);
-
             builder.append("\n").event((HoverEvent) null);
             addPluginVersions(builder);
 

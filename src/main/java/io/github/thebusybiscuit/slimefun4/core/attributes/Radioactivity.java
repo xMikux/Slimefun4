@@ -2,6 +2,8 @@ package io.github.thebusybiscuit.slimefun4.core.attributes;
 
 import javax.annotation.Nonnull;
 
+import io.github.thebusybiscuit.slimefun4.implementation.tasks.armor.RadiationTask;
+
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -20,43 +22,56 @@ public enum Radioactivity {
      * This represents a low level of radiation.
      * It will still cause damage but will take a while before it becomes deadly.
      */
-    LOW(ChatColor.YELLOW, "低"),
+    LOW(ChatColor.YELLOW, 1, "低"),
 
     /**
      * This represents a medium level of radiation.
      * This can be considered the default.
      */
-    MODERATE(ChatColor.YELLOW, "中"),
+    MODERATE(ChatColor.YELLOW, 2, "中"),
 
     /**
      * This is a high level of radiation.
      * It will cause death if the {@link Player} does not act quickly.
      */
-    HIGH(ChatColor.DARK_GREEN, "高"),
+    HIGH(ChatColor.GOLD, 3, "高"),
 
     /**
      * A very high level of radiation will be deadly.
      * The {@link Player} should not take this too lightly...
      */
-    VERY_HIGH(ChatColor.RED, "極高"),
+    VERY_HIGH(ChatColor.RED, 5, "極高"),
 
     /**
-     * This is the deadlies level of radiation.
+     * This is the deadliest level of radiation.
      * The {@link Player} has basically no chance to protect themselves in time.
      * It will cause certain death.
      */
-    VERY_DEADLY(ChatColor.DARK_RED, "致死");
+    VERY_DEADLY(ChatColor.DARK_RED, 10, "致死");
 
     private final ChatColor color;
+    private final int exposureModifier;
+
     private final String alias;
 
-    Radioactivity(@Nonnull ChatColor color, String alias) {
+    Radioactivity(@Nonnull ChatColor color, int exposureModifier, String alias) {
         this.color = color;
+        this.exposureModifier = exposureModifier;
         this.alias = alias;
     }
 
-    @Nonnull
-    public String getLore() {
+    /**
+     * This method returns the amount of exposure applied
+     * to a player every run of the {@link RadiationTask}
+     * for this radiation level.
+     *
+     * @return The exposure amount applied per run.
+     */
+    public int getExposureModifier() {
+        return exposureModifier;
+    }
+
+    public @Nonnull String getLore() {
         return ChatColor.GREEN + "\u2622" + ChatColor.GRAY + " 輻射等級：" + color + alias;
     }
 
