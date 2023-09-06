@@ -111,7 +111,7 @@ public class BlockStorage {
         this.world = w;
 
         if (world.getName().indexOf('.') != -1) {
-            throw new IllegalArgumentException("Slimefun 無法處理世界名稱包含點: " + w.getName());
+            throw new IllegalArgumentException("Slimefun 無法處理世界名稱包含點：" + w.getName());
         }
 
         if (Slimefun.getRegistry().getWorlds().containsKey(w.getName())) {
@@ -119,7 +119,7 @@ public class BlockStorage {
             return;
         }
 
-        Slimefun.logger().log(Level.INFO, "載入方塊給世界 \"{0}\"", w.getName());
+        Slimefun.logger().log(Level.INFO, "載入方塊給世界「{0}」", w.getName());
         Slimefun.logger().log(Level.INFO, "這可能需要一些時間...");
 
         File dir = new File(PATH_BLOCKS + w.getName());
@@ -150,13 +150,13 @@ public class BlockStorage {
         try {
             for (File file : directory.listFiles()) {
                 if (file.getName().equals("null.sfb")) {
-                    Slimefun.logger().log(Level.WARNING, "檢測到方塊損毀檔案!");
-                    Slimefun.logger().log(Level.WARNING, "Slimefun 會跳過此檔案, 你應該檢查看看!");
+                    Slimefun.logger().log(Level.WARNING, "偵測到方塊損毀檔案！");
+                    Slimefun.logger().log(Level.WARNING, "Slimefun 會跳過此檔案，你應該檢查看看！");
                     Slimefun.logger().log(Level.WARNING, file.getPath());
                 } else if (file.getName().endsWith(".sfb")) {
                     if (timestamp + delay < System.currentTimeMillis()) {
                         int progress = Math.round((((done * 100.0F) / total) * 100.0F) / 100.0F);
-                        Slimefun.logger().log(Level.INFO, "載入方塊... {0}% 完成 (\"{1}\")", new Object[] { progress, world.getName() });
+                        Slimefun.logger().log(Level.INFO, "載入方塊... {0}% 完成（{1}）", new Object[] { progress, world.getName() });
                         timestamp = System.currentTimeMillis();
                     }
 
@@ -172,11 +172,11 @@ public class BlockStorage {
             }
         } finally {
             long time = (System.currentTimeMillis() - start);
-            Slimefun.logger().log(Level.INFO, "載入方塊... 100% (已完成 - {0}毫秒)", time);
-            Slimefun.logger().log(Level.INFO, "總共載入{0}個方塊於世界 \"{1}\"", new Object[] { totalBlocks, world.getName() });
+            Slimefun.logger().log(Level.INFO, "載入方塊... 100%（已完成 - {0} 毫秒）", time);
+            Slimefun.logger().log(Level.INFO, "總共載入 {0} 個方塊於世界「{1}」", new Object[] { totalBlocks, world.getName() });
 
             if (totalBlocks > 0) {
-                Slimefun.logger().log(Level.INFO, "平均: {0}毫秒/方塊", NumberUtils.roundDecimalNumber((double) time / (double) totalBlocks));
+                Slimefun.logger().log(Level.INFO, "平均：{0} 毫秒/方塊", NumberUtils.roundDecimalNumber((double) time / (double) totalBlocks));
             }
         }
     }
@@ -214,7 +214,7 @@ public class BlockStorage {
                 }
             }
         } catch (Exception x) {
-            Slimefun.logger().log(Level.WARNING, x, () -> "載入失敗 " + file.getName() + '(' + key + ") 於Slimefun " + Slimefun.getVersion());
+            Slimefun.logger().log(Level.WARNING, x, () -> "載入失敗 " + file.getName() + '(' + key + ") 於 Slimefun " + Slimefun.getVersion());
         }
     }
 
@@ -231,7 +231,7 @@ public class BlockStorage {
                         Slimefun.getRegistry().getChunks().put(key, data);
                     }
                 } catch (Exception x) {
-                    Slimefun.logger().log(Level.WARNING, x, () -> "載入失敗 " + chunks.getName() + " 在世界 " + world.getName() + '(' + key + ") 於Slimefun " + Slimefun.getVersion());
+                    Slimefun.logger().log(Level.WARNING, x, () -> "載入失敗 " + chunks.getName() + " 在世界 " + world.getName() + '(' + key + ") 於 Slimefun " + Slimefun.getVersion());
                 }
             }
         }
@@ -311,7 +311,7 @@ public class BlockStorage {
             return;
         }
 
-        Slimefun.logger().log(Level.INFO, "保存世界方塊資料 \"{0}\" ({1}個變化已排程)", new Object[] { world.getName(), changes });
+        Slimefun.logger().log(Level.INFO, "儲存世界方塊資料「{0}」（{1} 個變化已排程)", new Object[] { world.getName(), changes });
         Map<String, Config> cache = new HashMap<>(blocksCache);
 
         for (Map.Entry<String, Config> entry : cache.entrySet()) {
