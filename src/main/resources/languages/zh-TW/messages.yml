@@ -150,6 +150,7 @@ messages:
   bee-suit-slow-fall: '&e你的蜂翅將會幫你緩慢且安全的回到地面'
   deprecated-item: '&4這個物品已被棄用，將在不久後從 Slimefun 中移除。'
   researching-is-disabled: '&c研究已在此伺服器停用。預設所有研究解鎖！'
+  await-deletion: '&c你不能在破壞後不久內將 Slimefun 方塊放回來。請稍後再試。'
   multi-tool:
     mode-change: '&b%device%模式切換成：&9%mode%'
     not-shears: '&c多功能工具不能當作剪刀來使用！'

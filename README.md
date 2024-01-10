@@ -50,7 +50,7 @@
 | **錯誤回報** | :heavy_check_mark: | :x: |
 | **發布前測試** | :x: | :heavy_check_mark: |
 | **更新日誌** | :x: | :memo: **[change log](https://github.com/Slimefun/Slimefun4/blob/master/CHANGELOG.md)** |
-| **下載連結** | :floppy_disk: **[下載最新](https://xmikux.github.io/builds/xMikux/Slimefun4/master/)** | :floppy_disk: **[下載「穩定版」](https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun4/stable/)** |
+| **下載連結** | :floppy_disk: **[下載最新](https://xmikux.github.io/builds/xMikux/Slimefun4/master/)** | :floppy_disk: **[下載「穩定版」](https://blob.build/project/Slimefun4/RC)** |
 
 **:exclamation: 我們竭誠建議你使用 _開發版_, 它們是黏液科技的最新版本, 並且更新頻率最高! 實際上, "穩定" 版已經過於過時, 所以我們不會接受它們的錯誤報告.**
 <details>
