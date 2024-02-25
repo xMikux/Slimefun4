@@ -143,6 +143,14 @@ Slimefun4 使用[bStats](https://bstats.org/plugin/bukkit/Slimefun/4574)來收�
 安裝此插件時,會自動下載我們的[bStats 模塊](https://github.com/Slimefun/MetricsModule),該模塊將用於伺服器自動更新,與主插件無關.這樣,在出現嚴重性能問題的情況下,即時數據和對影響性能的洞察可能至關重要,我們可以自動向bStats模塊推出更新.
 這些更新可以關閉在於 `/plugins/Slimefun/config.yml`.要關閉整個指標收集,請參見上面的段落
 
+---
+
+Slimefun 同時使用自己的分析系統以匿名方式來收集有關此插件的效能資訊。<br>
+這僅用於統計目的，因為我們對所有伺服器的效能運作有興趣。<br>
+所有資料均為匿名，我們決不會查看到個別伺服器的資訊。<br>
+
+你可以在 `/plugins/Slimefun/config.yml` 下停用。<br>
+
 </details>
 
 <details>
