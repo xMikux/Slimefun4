@@ -65,11 +65,25 @@ class VersionsCommand extends SubCommand {
                 .append(serverSoftware)
                 .color(ChatColor.GREEN)
                 .append(" " + Bukkit.getVersion() + '\n')
-                .color(ChatColor.DARK_GREEN)
+                .color(ChatColor.DARK_GREEN);
+
+            builder
                 .append("Slimefun ")
                 .color(ChatColor.GREEN)
-                .append(Slimefun.getVersion() + '\n')
+                .append(Slimefun.getVersion())
                 .color(ChatColor.DARK_GREEN);
+            if (!Slimefun.getUpdater().isLatestVersion()) {
+                builder
+                    .append(" (").color(ChatColor.GRAY)
+                    .append("Update available").color(ChatColor.RED).event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(
+                        "你的黏液科技已過時！\n" +
+                        "請更新來獲得最新的錯誤修正與效能提升。\n" +
+                        "請勿在更新到最新之前回報任何錯誤。"
+                    )))
+                    .append(")").color(ChatColor.GRAY);
+            }
+
+            builder.append("\n");
             // @formatter:on
 
             if (Slimefun.getMetricsService().getVersion() != null) {
