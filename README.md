@@ -145,11 +145,11 @@ Slimefun4 使用[bStats](https://bstats.org/plugin/bukkit/Slimefun/4574)來收�
 
 ---
 
-Slimefun also uses its own analytics system to collect anonymous information about the performance of this plugin.<br>
-This is solely for statistical purposes, as we are interested in how it's performing for all servers.<br>
-All available data is anonymous and aggregated, at no point can we see individual server information.<br>
+Slimefun 同時使用自己的分析系統以匿名方式來收集有關此插件的效能資訊。<br>
+這僅用於統計目的，因為我們對所有伺服器的效能運作有興趣。<br>
+所有資料均為匿名，我們決不會查看到個別伺服器的資訊。<br>
 
-You can also disable this behaviour under `/plugins/Slimefun/config.yml`.<br>
+你可以在 `/plugins/Slimefun/config.yml` 下停用。<br>
 
 </details>
 
