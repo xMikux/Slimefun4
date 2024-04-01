@@ -50,7 +50,7 @@ jobs:
           Slimefun4的穩定版本可以在這裡下載:
 
           **官方英文版**
-          https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun4/stable/Slimefun4-${{ github.event.inputs.number }}.jar
+          https://blob.build/project/Slimefun4/RC
 
           **非官方繁體中文版**
           尚未支持 如果有需要可在非官方Discord內進行建議!
